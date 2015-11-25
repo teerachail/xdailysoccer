@@ -59,9 +59,62 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                 controller: 'PlaylistCtrl'
             }
         }
+    })
+        .state('account', {
+        url: '/account',
+        abstract: true,
+        templateUrl: 'templates/_fullpageTemplate.html',
+    })
+        .state('account.login', {
+        url: '/login',
+        views: {
+            'MainContent': {
+                templateUrl: 'templates/Accounts/Login.html',
+            }
+        }
+    })
+        .state('matches', {
+        url: '/matches',
+        abstract: true,
+        templateUrl: 'templates/_matchTemplate.html',
+    })
+        .state('matches.todaymatches', {
+        url: '/todaymatches',
+        views: {
+            'MainContent': {
+                templateUrl: 'templates/Matches/TodayMatches.html',
+            }
+        }
+    })
+        .state('rewards', {
+        url: '/rewards',
+        abstract: true,
+        templateUrl: 'templates/_rewardTemplate.html',
+    })
+        .state('rewards.rewards', {
+        url: '/rewards',
+        views: {
+            'MainContent': {
+                templateUrl: 'templates/Rewards/Rewards.html',
+            }
+        }
+    })
+        .state('history', {
+        url: '/history',
+        abstract: true,
+        templateUrl: 'templates/_basicTemplate.html',
+    })
+        .state('history.historybymonth', {
+        url: '/historybymonth',
+        views: {
+            'MainContent': {
+                templateUrl: 'templates/Matches/HistoryByMonth.html',
+            }
+        }
     });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/playlists');
+    //$urlRouterProvider.otherwise('/app/playlists');
+    $urlRouterProvider.otherwise('/account/login');
 });
 angular.module('starter.controllers', [])
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
