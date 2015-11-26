@@ -1,4 +1,17 @@
-﻿<h1>Login</h1>
+﻿<ion-view class="bg-main">
+    <ion-content class="text-center">
+        <div class="space-top">
+            <img class="col-67" src="../../img/Logos/LogoLogin.png" />
+        </div>
+        <br />
 
-<div ng-click="accountCtrl.LoginWithFacebook()" class="button">Facebook</div>
-<div ng-click="accountCtrl.SkipLogin()" class="button">Guest</div>
+        <button ng-click="loginWithFacebook()" class="button col-80 button-calm">เข้าใช้งานผ่าน Facebook</button>
+    </ion-content>
+    <ion-footer-bar align-title="left" class="bar-balanced">
+        <h1 class="title text-right">
+            <a menu-close="" ng-click="skipLogin()" href="#">
+                เริ่มต้นใช้งาน >>>
+            </a>
+        </h1>
+    </ion-footer-bar>
+</ion-view>

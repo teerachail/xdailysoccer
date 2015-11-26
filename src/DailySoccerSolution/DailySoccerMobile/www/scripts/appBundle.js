@@ -3,7 +3,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.account'])
     .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -64,6 +64,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         url: '/account',
         abstract: true,
         templateUrl: 'templates/_fullpageTemplate.html',
+        controller: 'AccountCtrl'
     })
         .state('account.login', {
         url: '/login',
@@ -161,5 +162,23 @@ angular.module('starter.controllers', [])
     ];
 })
     .controller('PlaylistCtrl', function ($scope, $stateParams) {
+});
+angular
+    .module('starter.account', [])
+    .controller('AccountCtrl', function ($scope, $location, $timeout) {
+    $scope.skipLogin = function () {
+        // TODO: Login with guest
+        console.log('Doing Register new guest account');
+        $timeout(function () {
+            $location.path('/matches/todaymatches');
+        }, 1000);
+    };
+    $scope.loginWithFacebook = function () {
+        // TODO: Login with facebook
+        console.log('Doing connecting to facebook');
+        $timeout(function () {
+            $location.path('/matches/todaymatches');
+        }, 1000);
+    };
 });
 //# sourceMappingURL=appBundle.js.map
