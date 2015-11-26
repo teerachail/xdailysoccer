@@ -1,25 +1,81 @@
 ﻿<ion-side-menu side="right">
-    <ion-header-bar class="bar-stable">
-        <h1 class="title">Side menu</h1>
-    </ion-header-bar>
-    <ion-content>
-        <ion-list>
-            <ion-item menu-close href="#/matches/todaymatches">
-                <i class="icon ion-home"></i>
-                ตารางแข่งขัน
-            </ion-item>
-            <ion-item menu-close href="#/rewards/rewards">
-                <i class="icon ion-home"></i>
+    <ion-header-bar class="bar-dark row">
+        <div class="col col-10 col-center">
+            <i>
+                <img src="../img/Icons/StarWhite.png" height="20" />
+            </i>
+        </div>
+        <div class="col col-center">
+            แต้มสะสม 7500
+        </div>
+        <div class="col col-center">
+            <button class="button-small button bg-yellow">
                 แลกของรางวัล
+            </button>
+        </div>
+    </ion-header-bar>
+    <ion-content  class="padding">
+        <ion-list>
+            <ion-item menu-close href="#/matches/todaymatches" class="item-royal ">
+                <div class="">
+                    <i >
+                        <img  src="../img/Icons/MenuIcon1.png" />
+                    </i>
+                    <span >
+                        ตารางแข่งขัน
+                    </span>
+                </div>          
             </ion-item>
-            <ion-item menu-close href="#/history/historybymonth">
-                <i class="icon ion-home"></i>
-                สถิติการทายผล
+            <ion-item menu-close href="#/rewards/rewards" class="item-royal">
+                <div class="">
+                    <i >
+                        <img src="../img/Icons/MenuIcon2.png" />
+                    </i>
+                    <span>
+                        ทีมและลีค
+                    </span>
+                </div>     
             </ion-item>
-            <ion-item menu-close ng-click="login()">
-                <i class="icon ion-home"></i>
-                เข้าสู่ระบบ
+            <ion-item menu-close href="#/history/historybymonth" class="item-royal">
+                <div class="">
+                    <i >
+                        <img src="../img/Icons/MenuIcon3.png" />
+                    </i>
+                    <span >
+                        สถิติการทายผล
+                    </span>
+                </div>
             </ion-item>
+            <ion-item menu-close ng-click="login()" class="item-royal">
+                <div class="">
+                    <i >
+                        <img src="../img/Icons/MenuIcon4.png" />
+                    </i>
+                    <span>
+                        ตั้งค่า
+                    </span>
+                </div>
+                
+            </ion-item>
+            <ion-item menu-close href="#" class="item-royal">
+                <div class="">
+                    <i class="">
+                        <img src="../img/Icons/MenuIcon5.png" />
+                    </i>
+                    <span>
+                        ออกจากระบบ
+                    </span>
+                </div>                
+            </ion-item>
+            <button class="button button-block bg-gray " href="#">เข้าสู่ระบบ</button>
+            <button class="button button-block button-balanced ">
+                <div class="padding">
+                    <h2 >
+                        <img height="40" src="../img/Icons/Playgame.png" />
+                        เล่นเกมส์
+                    </h2>
+                </div>             
+            </button>
         </ion-list>
     </ion-content>
 </ion-side-menu>

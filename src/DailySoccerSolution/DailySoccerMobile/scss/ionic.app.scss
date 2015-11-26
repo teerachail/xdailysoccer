@@ -19,7 +19,7 @@ $positive:                        #233b83 ;
 $calm:                            #4F629c ;
 $balanced:                        #00b95c ;
 $energized:                       #ffc547 ;
-$dark:                            #3d3d3d ;
+$dark:                            #282828 ;
 $royal:                           #4d4d4d   ; 
 
 $border-radius-large:             6px ;
@@ -27,6 +27,7 @@ $button-energized-text:           #000000 ;
 $bar-height:                      60px;
 $button-dark-text:                #ffffff ;
 $tabs-dark-text:                  $button-dark-text !default;
+$menu-bg:                         $royal;
 
 
 // The path for our ionicons font files, relative to the built CSS in www/css
@@ -44,7 +45,7 @@ background: -moz-linear-gradient(top,  #ffef44 0%, #ffc547 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top,  #ffef44 0%,#ffc547 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom,  #ffef44 0%,#ffc547 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffef44', endColorstr='#ffc547',GradientType=0 ); /* IE6-9 */
-color:#000000;
+color:#000000 !important;
 }
 .bg-gray{
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f1f1f1+1,c4c4c4+100 */
@@ -118,4 +119,22 @@ a {
 }
 .tabs-striped.tabs-dark .tab-item {
     color: rgba(255, 255, 255, 1);
+}
+.item.item-royal{
+    border:0px;
+    margin:0px;
+}
+.button.bg-yellow{
+    line-height:26px;
+}
+button.button-balanced{
+    h1{
+        color:#fff !important;
+    }
+    h2{
+        color:#fff !important;
+    }
+    h3{
+        color:#fff !important;
+    }
 }
