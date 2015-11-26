@@ -1,21 +1,29 @@
-﻿angular
-    .module('starter.account', [])
-    .controller('AccountCtrl', function ($scope, $location, $timeout) {
+﻿module starter.account {
+    'use strict';
 
-        $scope.skipLogin = function (): void {
+    class AccountController {
+        static $inject = ['$scope', '$timeout', '$location'];
+        constructor(private $scope: ng.IScope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService) {
+        }
+
+        public SkipLogin(): void {
             // TODO: Login with guest
             console.log('Doing Register new guest account');
-            $timeout(function () {
-                $location.path('/matches/todaymatches')
-            }, 1000);
+            this.$timeout(1000).then(() => {
+                this.$location.path('/matches/todaymatches');
+            });
         };
 
-        $scope.loginWithFacebook = function (): void {
+        public LoginWithFacebook(): void {
             // TODO: Login with facebook
             console.log('Doing connecting to facebook');
-            $timeout(function () {
-                $location.path('/matches/todaymatches')
-            }, 1000);
+            this.$timeout(1000).then(() => {
+                this.$location.path('/matches/todaymatches');
+            });
         };
+    }
 
-    });
+    angular
+        .module('starter.account', [])
+        .controller('starter.account.AccountController', AccountController);
+}

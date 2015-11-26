@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.account'])
+angular.module('starter', ['ionic', 'starter.shared', 'starter.controllers', 'starter.account', 'starter.match'])
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -68,7 +68,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.account'])
                 url: '/account',
                 abstract: true,
                 templateUrl: 'templates/_fullpageTemplate.html',
-                controller: 'AccountCtrl'
+                controller: 'starter.account.AccountController as accountCtrl'
             })
             .state('account.login', {
                 url: '/login',
@@ -84,7 +84,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.account'])
                 url: '/matches',
                 abstract: true,
                 templateUrl: 'templates/_matchTemplate.html',
-                //controller: 'AppCtrl'
+                controller: 'starter.match.MatchController as matchCtrl'
             })
             .state('matches.todaymatches', {
                 url: '/todaymatches',
