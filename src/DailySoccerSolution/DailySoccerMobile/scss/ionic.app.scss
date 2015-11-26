@@ -25,6 +25,8 @@ $royal:                           #4d4d4d   ;
 $border-radius-large:             6px ;
 $button-energized-text:           #000000 ;
 $bar-height:                      60px;
+$button-dark-text:                #ffffff ;
+$tabs-dark-text:                  $button-dark-text !default;
 
 
 // The path for our ionicons font files, relative to the built CSS in www/css
@@ -57,6 +59,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1f1f1', end
     border:0px;
     border-radius:$border-radius-large;
 }
+
+ .header-item{
+       text-align:center !important;
+       font-weight:bold !important;
+ }
 .text-right{
     text-align:right !important;
 }
@@ -79,4 +86,36 @@ a {
     color: -webkit-link;
     text-decoration: none !important;
     cursor: auto;
+}
+.bar .buttons-left span {
+    margin-right: 0px;
+    display: inherit;
+}
+.bar .buttons-right span {
+    margin-right: 0px;
+    display: inherit;
+}
+.bar .button {
+    padding: 8px 8px;
+}
+.soccer-number{
+    @extend .bg-yellow;
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    display: block;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+.tabs-dark.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-dark.tabs-top.tabs-striped .tab-item.active, .tabs-dark.tabs-top.tabs-striped .tab-item.activated{
+    background:$royal;
+}
+.tabs-striped.tabs-dark .tab-item {
+    color: rgba(255, 255, 255, 1);
 }

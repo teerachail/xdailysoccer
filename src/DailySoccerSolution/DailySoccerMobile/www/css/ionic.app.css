@@ -3970,9 +3970,9 @@ a.subdued {
     border-color: #111;
     background-color: #3d3d3d;
     background-image: linear-gradient(0deg, #111, #111 50%, transparent 50%);
-    color: #fff; }
+    color: #ffffff; }
     .bar.bar-dark .title {
-      color: #fff; }
+      color: #ffffff; }
     .bar.bar-dark.bar-footer {
       background-image: linear-gradient(180deg, #111, #111 50%, transparent 50%); }
   .bar .title {
@@ -4243,9 +4243,9 @@ a.subdued {
 .bar-dark .button {
   border-color: #111;
   background-color: #3d3d3d;
-  color: #fff; }
+  color: #ffffff; }
   .bar-dark .button:hover {
-    color: #fff;
+    color: #ffffff;
     text-decoration: none; }
   .bar-dark .button.active, .bar-dark .button.activated {
     border-color: #000;
@@ -4453,10 +4453,10 @@ a.subdued {
   border-color: #111;
   background-color: #3d3d3d;
   background-image: linear-gradient(0deg, #111, #111 50%, transparent 50%);
-  color: #fff; }
+  color: #ffffff; }
   .tabs-dark > .tabs .tab-item .badge,
   .tabs.tabs-dark .tab-item .badge {
-    background-color: #fff;
+    background-color: #ffffff;
     color: #3d3d3d; }
 
 .tabs-striped .tabs {
@@ -5720,7 +5720,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   .item.item-dark {
     border-color: #111;
     background-color: #3d3d3d;
-    color: #fff; }
+    color: #ffffff; }
   .item[ng-click]:hover {
     cursor: pointer; }
 
@@ -5961,7 +5961,7 @@ a.item-content {
 .item-complex.item-dark > .item-content {
   border-color: #111;
   background-color: #3d3d3d;
-  color: #fff; }
+  color: #ffffff; }
   .item-complex.item-dark > .item-content.active, .item-complex.item-dark > .item-content:active {
     border-color: #000;
     background-color: #262626; }
@@ -6595,7 +6595,7 @@ button.item.item-button-right {
 .tabs .tab-item .badge.badge-dark,
 .badge.badge-dark {
   background-color: #3d3d3d;
-  color: #fff; }
+  color: #ffffff; }
 
 .button .badge {
   position: relative;
@@ -7855,9 +7855,9 @@ input:checked + .checkbox-icon:after {
     color: #fff; }
   .item-select.item-dark select {
     background: #3d3d3d;
-    color: #fff; }
+    color: #ffffff; }
   .item-select.item-dark:after, .item-select.item-dark .input-label {
-    color: #fff; }
+    color: #ffffff; }
 
 select[multiple], select[size] {
   height: auto; }
@@ -8148,9 +8148,9 @@ progress {
   .button.button-dark {
     border-color: #111;
     background-color: #3d3d3d;
-    color: #fff; }
+    color: #ffffff; }
     .button.button-dark:hover {
-      color: #fff;
+      color: #ffffff;
       text-decoration: none; }
     .button.button-dark.active, .button.button-dark.activated {
       border-color: #000;
@@ -9092,7 +9092,7 @@ a.button {
 .bg-main {
   background: #233b83; }
 
-.bg-yellow {
+.bg-yellow, .soccer-number {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffef44+0,ffc547+100 */
   background: #ffef44;
   /* Old browsers */
@@ -9123,6 +9123,10 @@ a.button {
   border: 0px;
   border-radius: 6px; }
 
+.header-item {
+  text-align: center !important;
+  font-weight: bold !important; }
+
 .text-right {
   text-align: right !important; }
 
@@ -9145,3 +9149,34 @@ a {
   color: -webkit-link;
   text-decoration: none !important;
   cursor: auto; }
+
+.bar .buttons-left span {
+  margin-right: 0px;
+  display: inherit; }
+
+.bar .buttons-right span {
+  margin-right: 0px;
+  display: inherit; }
+
+.bar .button {
+  padding: 8px 8px; }
+
+.soccer-number {
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+  display: block;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 50%;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold; }
+
+.tabs-dark.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-dark.tabs-top.tabs-striped .tab-item.active, .tabs-dark.tabs-top.tabs-striped .tab-item.activated {
+  background: #4d4d4d; }
+
+.tabs-striped.tabs-dark .tab-item {
+  color: white; }
