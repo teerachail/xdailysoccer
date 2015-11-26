@@ -9140,3 +9140,8 @@ a.button {
 
 .space-top {
   padding-top: 20%; }
+
+a {
+  color: -webkit-link;
+  text-decoration: none !important;
+  cursor: auto; }
