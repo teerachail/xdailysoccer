@@ -29,10 +29,11 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
             // if the user doesn't have an id, you'll need to give it one.
             if (!user.id) {
                 user.id = Ionic.User.anonymousId();
-            }
-            user.set('name', 'Jokerstudio 1990');
+                user.save();
+            } 
+                     
             //persist the user
-            user.save();
+            
         });
     })
     .config(function ($stateProvider, $urlRouterProvider) {

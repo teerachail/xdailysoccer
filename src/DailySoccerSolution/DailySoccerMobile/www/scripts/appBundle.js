@@ -25,10 +25,10 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
         // if the user doesn't have an id, you'll need to give it one.
         if (!user.id) {
             user.id = Ionic.User.anonymousId();
+            user.set('name', 'olduser');
+            user.save();
         }
-        user.set('name', 'Jokerstudio 1990');
         //persist the user
-        user.save();
     });
 })
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -167,8 +167,6 @@ angular.module('starter.controllers', [])
     };
 })
     .controller('PlaylistsCtrl', function ($scope, Azureservice) {
-    var user = Ionic.User.current();
-    alert(user.get('name'));
     //Azureservice.invokeApi('Account/CreateNewGuess', {
     //        method: 'get'
     //})
@@ -203,6 +201,11 @@ var starter;
             AccountController.prototype.SkipLogin = function () {
                 var _this = this;
                 // TODO: Login with guest
+                var user = Ionic.User.current();
+                alert(user.get('name'));
+                user.set('name', 'newdata');
+                user.save();
+                alert(user.get('name'));
                 console.log('Doing Register new guest account');
                 this.$timeout(1000).then(function () {
                     _this.$location.path('/matches/todaymatches');
