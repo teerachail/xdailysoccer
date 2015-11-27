@@ -20,16 +20,16 @@ $calm:                            #4F629c ;
 $balanced:                        #00b95c ;
 $energized:                       #ffc547 ;
 $dark:                            #282828 ;
-$royal:                           #4d4d4d   ; 
-$font-size-large:                 20px !default;
+$royal:                           #4d4d4d ; 
 
 
-$border-radius-large:             6px ;
-$button-energized-text:           #000000 ;
-$bar-height:                      60px;
-$button-dark-text:                #ffffff ;
+$font-size-large:                 20px !default; // font-large
+$border-radius-large:             6px ; // button-radius
+$button-energized-text:           #000000 ; //text-black
+$bar-height:                      60px; 
+$button-dark-text:                #ffffff ; //text-white
 $tabs-dark-text:                  $button-dark-text !default;
-$menu-bg:                         $royal;
+$menu-bg:                         $royal; //bg side menu
 
 
 // The path for our ionicons font files, relative to the built CSS in www/css
@@ -37,10 +37,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+
+
+// --------------------------------------------- Background color
+
 .bg-main{
     background:$positive;
 }
 .bg-yellow{
+
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffef44+0,ffc547+100 */
 background: #ffef44; /* Old browsers */
 background: -moz-linear-gradient(top,  #ffef44 0%, #ffc547 100%); /* FF3.6-15 */
@@ -58,16 +63,15 @@ background: linear-gradient(to bottom,  #f1f1f1 1%,#c4c4c4 100%); /* W3C, IE10+,
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1f1f1', endColorstr='#c4c4c4',GradientType=0 ); /* IE6-9 */
 
 }
-.button{
-    border:0px;
-    border-radius:$border-radius-large;
-}
 
+// --------------------------------------------- End Background
+
+// --------------------------------------------- Text editing
  .header-item{
        text-align:center !important;
        font-weight:bold !important;
  }
-.text-right{
+ .text-right{
     text-align:right !important;
 }
 .text-center{
@@ -82,24 +86,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1f1f1', end
     float:none;
     display:inline-block
 }
-.space-top{
-    padding-top:20%;
-}
 a {
     color: -webkit-link;
     text-decoration: none !important;
     cursor: auto;
-}
-.bar .buttons-left span {
-    margin-right: 0px;
-    display: inherit;
-}
-.bar .buttons-right span {
-    margin-right: 0px;
-    display: inherit;
-}
-.bar .button {
-    padding: 8px 8px;
 }
 .soccer-number{
     @extend .bg-yellow;
@@ -116,6 +106,47 @@ a {
     font-size: 14px;
     font-weight: bold;
 }
+.text-white{
+    color:$button-dark-text;
+}
+.text-dark{
+    color:$button-energized-text;
+}
+.font-large{
+    font-size:$font-size-large;
+}
+.vertical-middle{    
+    position: relative;
+    display: inline-block;
+    vertical-align: 
+    -webkit-baseline-middle;
+
+}
+// --------------------------------------------- End Text color $ size
+
+.button{
+    border:0px;
+    border-radius:$border-radius-large;
+}
+
+
+
+.space-top{
+    padding-top:20%;
+}
+
+.bar .buttons-left span {
+    margin-right: 0px;
+    display: inherit;
+}
+.bar .buttons-right span {
+    margin-right: 0px;
+    display: inherit;
+}
+.bar .button {
+    padding: 8px 8px;
+}
+
 .tabs-dark.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-dark.tabs-top.tabs-striped .tab-item.active, .tabs-dark.tabs-top.tabs-striped .tab-item.activated{
     background:$royal;
 }
@@ -128,24 +159,6 @@ a {
 }
 .button.bg-yellow{
     line-height:26px;
-}
-button.button-balanced{
-    h1{
-        color:#fff !important;
-    }
-    h2{
-        color:#fff !important;
-    }
-    h3{
-        color:#fff !important;
-    }
-}
-
-i {
-    width:20%
-}
-.font-large{
-    font-size:$font-size-large;
 }
 .no-padding{
     padding:0px !important;

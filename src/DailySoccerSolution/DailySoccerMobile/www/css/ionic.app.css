@@ -9119,10 +9119,6 @@ a.button {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1f1f1', endColorstr='#c4c4c4',GradientType=0 );
   /* IE6-9 */ }
 
-.button {
-  border: 0px;
-  border-radius: 6px; }
-
 .header-item {
   text-align: center !important;
   font-weight: bold !important; }
@@ -9142,24 +9138,10 @@ a.button {
   float: none;
   display: inline-block; }
 
-.space-top {
-  padding-top: 20%; }
-
 a {
   color: -webkit-link;
   text-decoration: none !important;
   cursor: auto; }
-
-.bar .buttons-left span {
-  margin-right: 0px;
-  display: inherit; }
-
-.bar .buttons-right span {
-  margin-right: 0px;
-  display: inherit; }
-
-.bar .button {
-  padding: 8px 8px; }
 
 .soccer-number {
   position: absolute;
@@ -9175,6 +9157,38 @@ a {
   font-size: 14px;
   font-weight: bold; }
 
+.text-white {
+  color: #ffffff; }
+
+.text-dark {
+  color: #000000; }
+
+.font-large {
+  font-size: 20px; }
+
+.vertical-middle {
+  position: relative;
+  display: inline-block;
+  vertical-align: -webkit-baseline-middle; }
+
+.button {
+  border: 0px;
+  border-radius: 6px; }
+
+.space-top {
+  padding-top: 20%; }
+
+.bar .buttons-left span {
+  margin-right: 0px;
+  display: inherit; }
+
+.bar .buttons-right span {
+  margin-right: 0px;
+  display: inherit; }
+
+.bar .button {
+  padding: 8px 8px; }
+
 .tabs-dark.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-dark.tabs-top.tabs-striped .tab-item.active, .tabs-dark.tabs-top.tabs-striped .tab-item.activated {
   background: #4d4d4d; }
 
@@ -9187,21 +9201,6 @@ a {
 
 .button.bg-yellow, .button.soccer-number {
   line-height: 26px; }
-
-button.button-balanced h1 {
-  color: #fff !important; }
-
-button.button-balanced h2 {
-  color: #fff !important; }
-
-button.button-balanced h3 {
-  color: #fff !important; }
-
-i {
-  width: 20%; }
-
-.font-large {
-  font-size: 20px; }
 
 .no-padding {
   padding: 0px !important; }
