@@ -12,29 +12,27 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
-            if (window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-                cordova.plugins.Keyboard.disableScroll(true);
-
-            }
+            //if (window.cordova && window.cordova.plugins.Keyboard) {
+            //    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            //    cordova.plugins.Keyboard.disableScroll(true);
+            //}
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
                 window.StatusBar.styleDefault();
             }  
           
-            //// kick off the platform web client
-            //Ionic.io();
-            //// this will give you a fresh user or the previously saved 'current user'
-            //var user = Ionic.User.current();
+            // kick off the platform web client
+            Ionic.io();
+            // this will give you a fresh user or the previously saved 'current user'
+            var user = Ionic.User.current();
 
-            //// if the user doesn't have an id, you'll need to give it one.
-            //if (!user.id) {
-            //    //user.id = Ionic.User.anonymousId();
-            //    user.id = 'jokerstudio';
-            //}
-            //user.set('name', 'Jokerstudio');
-            ////persist the user
-            //user.save();
+            // if the user doesn't have an id, you'll need to give it one.
+            if (!user.id) {
+                user.id = Ionic.User.anonymousId();
+            }
+            user.set('name', 'Jokerstudio 1990');
+            //persist the user
+            user.save();
         });
     })
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -92,7 +90,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Accounts/Login.html',
-                        //controller: 'PlaylistsCtrl'
+                        controller: 'PlaylistsCtrl'
                     }
                 }
             })
