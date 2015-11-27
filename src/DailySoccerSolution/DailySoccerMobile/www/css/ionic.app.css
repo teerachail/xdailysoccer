@@ -9158,10 +9158,10 @@ a {
   font-weight: bold; }
 
 .text-white {
-  color: #ffffff; }
+  color: #ffffff !important; }
 
 .text-dark {
-  color: #000000; }
+  color: #000000 !important; }
 
 .font-large {
   font-size: 20px; }
@@ -9174,6 +9174,9 @@ a {
 .button {
   border: 0px;
   border-radius: 6px; }
+
+.view-container {
+  top: 0; }
 
 .space-top {
   padding-top: 20%; }

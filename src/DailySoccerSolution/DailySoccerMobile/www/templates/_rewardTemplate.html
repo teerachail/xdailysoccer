@@ -1,6 +1,15 @@
-﻿<ion-side-menus enable-menu-with-back-views="true">
+﻿<ion-side-menus enable-menu-with-back-views="false">
     <ion-side-menu-content>
-        <ion-nav-bar class="bar-stable">
+        <ion-nav-bar class="bar-balanced">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="right">
+                <button class="button button-icon ion-navicon" menu-toggle="right"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+
+
+        <!--<ion-nav-bar class="bar-stable">
             <ion-nav-back-button>
             </ion-nav-back-button>
             <ion-nav-buttons side="right">
@@ -19,8 +28,38 @@
                     </a>
                 </div>
             </div>
-        </ion-nav-bar>
-        <ion-nav-view name="MainContent"></ion-nav-view>
+        </ion-nav-bar>-->
+        <!--<ion-nav-view name="MainContent"></ion-nav-view>-->
+
+        <ion-tabs class="tabs-stable tabs-top bg-gray text-dark">
+            <ion-tab title="ของรางวัล" class="text-dark">
+                <!-- Tab 1 content -->
+                <ion-nav-view name="MainContent"></ion-nav-view>
+            </ion-tab>
+            <ion-tab title="รายชื่อผู้โชคดี" class="text-dark">
+                <!-- Tab 2 content -->
+                <ion-view>
+                    <ion-content>
+                        <div ng-include src="'/templates/Matches/_matchHeader.html'"></div>
+                        <h1>
+                            Tab 2
+                        </h1>
+                    </ion-content>
+                </ion-view>
+
+            </ion-tab>
+            <ion-tab title="ติดต่อรับของ" class="text-dark">
+                <!-- Tab 3 content -->
+                <ion-view>
+                    <ion-content>
+                        <div ng-include src="'/templates/Matches/_matchHeader.html'"></div>
+                        <h1>
+                            Tab 3
+                        </h1>
+                    </ion-content>
+                </ion-view>
+            </ion-tab>
+        </ion-tabs>
     </ion-side-menu-content>
     <div ng-include src="'/templates/SideMenu.html'"></div>
 </ion-side-menus>

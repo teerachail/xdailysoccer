@@ -107,10 +107,10 @@ a {
     font-weight: bold;
 }
 .text-white{
-    color:$button-dark-text;
+    color:$button-dark-text !important;
 }
 .text-dark{
-    color:$button-energized-text;
+    color:$button-energized-text !important;
 }
 .font-large{
     font-size:$font-size-large;
