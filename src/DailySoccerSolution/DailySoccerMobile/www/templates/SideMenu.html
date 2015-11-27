@@ -1,4 +1,4 @@
-﻿<ion-side-menu side="right">
+﻿<ion-side-menu side="right" class="side-menu">
     <ion-header-bar class="bar-dark row">
         <div class="col col-10 col-center">
             <i>
@@ -15,9 +15,9 @@
         </div>
     </ion-header-bar>
     <ion-content  class="padding">
-        <ion-list>
+        <ion-list >
             <ion-item menu-close href="#/matches/todaymatches" class="item-royal ">
-                <div class="">
+                <div class="text-gray">
                     <i>
                         <img class="vertical-middle"  src="img/Icons/MenuIcon1.png" />
                     </i>
@@ -27,7 +27,7 @@
                 </div>          
             </ion-item>
             <ion-item menu-close href="#" class="item-royal">
-                <div class="">
+                <div class="text-gray">
                     <i >
                         <img class="vertical-middle" src="img/Icons/MenuIcon2.png" />
                     </i>
@@ -37,7 +37,7 @@
                 </div>     
             </ion-item>
             <ion-item menu-close href="#/history/historybymonth" class="item-royal">
-                <div class="">
+                <div class="text-gray">
                     <i >
                         <img class="vertical-middle" src="img/Icons/MenuIcon3.png" />
                     </i>
@@ -47,7 +47,7 @@
                 </div>
             </ion-item>
             <ion-item menu-close ng-click="login()" class="item-royal">
-                <div class="">
+                <div class="text-gray">
                     <i >
                         <img class="vertical-middle" src="img/Icons/MenuIcon4.png" />
                     </i>
@@ -58,8 +58,8 @@
                 
             </ion-item>
             <ion-item menu-close href="#" class="item-royal">
-                <div class="">
-                    <i class="">
+                <div class="text-gray">
+                    <i>
                         <img class="vertical-middle" src="img/Icons/MenuIcon5.png" />
                     </i>
                     <span class="vertical-middle">
@@ -67,7 +67,9 @@
                     </span>
                 </div>                
             </ion-item>
-            <a class="button button-block bg-gray " href="#">เข้าสู่ระบบ</a>
+
+            <a class="button button-block bg-gray text-dark" href="#">เข้าสู่ระบบ</a>
+
             <div class="space-top">
                 <a class="button button-block button-balanced ">
                     <div class="padding">
@@ -78,7 +80,6 @@
                     </div>
                 </a>
             </div>
-
         </ion-list>
     </ion-content>
 </ion-side-menu>
