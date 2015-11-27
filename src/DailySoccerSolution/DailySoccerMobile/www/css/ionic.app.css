@@ -9196,3 +9196,15 @@ button.button-balanced h2 {
 
 button.button-balanced h3 {
   color: #fff !important; }
+
+i {
+  width: 20%; }
+
+.font-large {
+  font-size: 20px; }
+
+.no-padding {
+  padding: 0px !important; }
+
+.tabs-top > .tabs, .tabs.tabs-top {
+  border-bottom-width: 0px; }

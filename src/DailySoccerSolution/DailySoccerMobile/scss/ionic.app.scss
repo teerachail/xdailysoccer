@@ -21,6 +21,8 @@ $balanced:                        #00b95c ;
 $energized:                       #ffc547 ;
 $dark:                            #282828 ;
 $royal:                           #4d4d4d   ; 
+$font-size-large:                 20px !default;
+
 
 $border-radius-large:             6px ;
 $button-energized-text:           #000000 ;
@@ -137,4 +139,17 @@ button.button-balanced{
     h3{
         color:#fff !important;
     }
+}
+
+i {
+    width:20%
+}
+.font-large{
+    font-size:$font-size-large;
+}
+.no-padding{
+    padding:0px !important;
+}
+.tabs-top > .tabs, .tabs.tabs-top {
+    border-bottom-width: 0px;
 }
