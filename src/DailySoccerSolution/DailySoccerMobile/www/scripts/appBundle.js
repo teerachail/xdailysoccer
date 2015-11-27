@@ -1,9 +1,11 @@
-// Ionic Starter App
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.shared', 'starter.controllers', 'starter.account', 'starter.match'])
+angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'starter.account', 'azure-mobile-service.module'])
+    .constant('AzureMobileServiceClient', {
+    API_URL: 'https://dailysoccer.azurewebsites.net'
+})
     .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -16,6 +18,18 @@ angular.module('starter', ['ionic', 'starter.shared', 'starter.controllers', 'st
             // org.apache.cordova.statusbar required
             window.StatusBar.styleDefault();
         }
+        // kick off the platform web client
+        Ionic.io();
+        // this will give you a fresh user or the previously saved 'current user'
+        var user = Ionic.User.current();
+        // if the user doesn't have an id, you'll need to give it one.
+        if (!user.id) {
+            //user.id = Ionic.User.anonymousId();
+            user.id = 'jokerstudio';
+        }
+        user.set('name', 'Jokerstudio');
+        //persist the user
+        user.save();
     });
 })
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -64,13 +78,14 @@ angular.module('starter', ['ionic', 'starter.shared', 'starter.controllers', 'st
         url: '/account',
         abstract: true,
         templateUrl: 'templates/_fullpageTemplate.html',
-        controller: 'starter.account.AccountController as accountCtrl'
+        controller: 'AccountCtrl'
     })
         .state('account.login', {
         url: '/login',
         views: {
             'MainContent': {
                 templateUrl: 'templates/Accounts/Login.html',
+                controller: 'PlaylistsCtrl'
             }
         }
     })
@@ -78,7 +93,6 @@ angular.module('starter', ['ionic', 'starter.shared', 'starter.controllers', 'st
         url: '/matches',
         abstract: true,
         templateUrl: 'templates/_matchTemplate.html',
-        controller: 'starter.match.MatchController as matchCtrl'
     })
         .state('matches.todaymatches', {
         url: '/todaymatches',
@@ -152,7 +166,18 @@ angular.module('starter.controllers', [])
         }, 1000);
     };
 })
-    .controller('PlaylistsCtrl', function ($scope) {
+    .controller('PlaylistsCtrl', function ($scope, Azureservice) {
+    var user = Ionic.User.current();
+    alert(user.get('name'));
+    //Azureservice.invokeApi('Account/CreateNewGuess', {
+    //        method: 'get'
+    //})
+    //.then(function (response) {
+    //    console.log('Here is my response object');
+    //    alert(response.userId)
+    //}, function (err) {
+    //    console.error('Azure Error: ' + err);
+    //});
     $scope.playlists = [
         { title: 'Reggae', id: 1 },
         { title: 'Chill', id: 2 },
@@ -164,150 +189,22 @@ angular.module('starter.controllers', [])
 })
     .controller('PlaylistCtrl', function ($scope, $stateParams) {
 });
-var starter;
-(function (starter) {
-    var account;
-    (function (account) {
-        'use strict';
-        var AccountController = (function () {
-            function AccountController($scope, $timeout, $location) {
-                this.$scope = $scope;
-                this.$timeout = $timeout;
-                this.$location = $location;
-            }
-            AccountController.prototype.SkipLogin = function () {
-                var _this = this;
-                // TODO: Login with guest
-                console.log('Doing Register new guest account');
-                this.$timeout(1000).then(function () {
-                    _this.$location.path('/matches/todaymatches');
-                });
-            };
-            ;
-            AccountController.prototype.LoginWithFacebook = function () {
-                var _this = this;
-                // TODO: Login with facebook
-                console.log('Doing connecting to facebook');
-                this.$timeout(1000).then(function () {
-                    _this.$location.path('/matches/todaymatches');
-                });
-            };
-            ;
-            AccountController.$inject = ['$scope', '$timeout', '$location'];
-            return AccountController;
-        })();
-        angular
-            .module('starter.account', [])
-            .controller('starter.account.AccountController', AccountController);
-    })(account = starter.account || (starter.account = {}));
-})(starter || (starter = {}));
-var starter;
-(function (starter) {
-    var account;
-    (function (account) {
-        var AccountInformation = (function () {
-            function AccountInformation() {
-            }
-            return AccountInformation;
-        })();
-        account.AccountInformation = AccountInformation;
-    })(account = starter.account || (starter.account = {}));
-})(starter || (starter = {}));
-var starter;
-(function (starter) {
-    var match;
-    (function (match) {
-        'use strict';
-        var MatchController = (function () {
-            function MatchController($scope, matchSvc) {
-                this.$scope = $scope;
-                this.matchSvc = matchSvc;
-            }
-            MatchController.prototype.GetTodayMatches = function () {
-                this.matchSvc.GetToDayMatches(null)
-                    .then(function (respond) {
-                    // TODO: GetTodayMatches
-                });
-            };
-            MatchController.$inject = ['$scope', 'starter.match.MatchServices'];
-            return MatchController;
-        })();
-        angular
-            .module('starter.match', [])
-            .controller('starter.match.MatchController', MatchController);
-    })(match = starter.match || (starter.match = {}));
-})(starter || (starter = {}));
-var starter;
-(function (starter) {
-    var match;
-    (function (match) {
-        var MatchInformation = (function () {
-            function MatchInformation() {
-            }
-            return MatchInformation;
-        })();
-        match.MatchInformation = MatchInformation;
-        var GetToDayMatchesRequest = (function () {
-            function GetToDayMatchesRequest() {
-            }
-            return GetToDayMatchesRequest;
-        })();
-        match.GetToDayMatchesRequest = GetToDayMatchesRequest;
-        var GetToDayMatchesRespond = (function () {
-            function GetToDayMatchesRespond() {
-            }
-            return GetToDayMatchesRespond;
-        })();
-        match.GetToDayMatchesRespond = GetToDayMatchesRespond;
-    })(match = starter.match || (starter.match = {}));
-})(starter || (starter = {}));
-var starter;
-(function (starter) {
-    var match;
-    (function (match) {
-        'use strict';
-        var MatchServices = (function () {
-            function MatchServices(queryRemoteSvc) {
-                this.queryRemoteSvc = queryRemoteSvc;
-            }
-            MatchServices.prototype.GetToDayMatches = function (req) {
-                var requestUrl = ""; // HACK: GetTodayMatches
-                return this.queryRemoteSvc.RemoteQuery(requestUrl);
-            };
-            MatchServices.$inject = ['starter.shared.QueryRemoteDataService'];
-            return MatchServices;
-        })();
-        match.MatchServices = MatchServices;
-        angular
-            .module('starter.match')
-            .service('starter.match.MatchServices', MatchServices);
-    })(match = starter.match || (starter.match = {}));
-})(starter || (starter = {}));
-(function () {
-    'use strict';
-    angular
-        .module('starter.shared', []);
-})();
-var starter;
-(function (starter) {
-    var shared;
-    (function (shared) {
-        'use strict';
-        var QueryRemoteDataService = (function () {
-            function QueryRemoteDataService($http) {
-                this.$http = $http;
-            }
-            QueryRemoteDataService.prototype.RemoteQuery = function (baseUrl) {
-                return this.$http.get(baseUrl)
-                    .then(function (respond) { return respond.data; });
-            };
-            QueryRemoteDataService.$inject = ['$http'];
-            return QueryRemoteDataService;
-        })();
-        shared.QueryRemoteDataService = QueryRemoteDataService;
-        angular
-            .module('starter.shared')
-            .service('starter.shared.QueryRemoteDataService', QueryRemoteDataService);
-    })(shared = starter.shared || (starter.shared = {}));
-})(starter || (starter = {}));
+angular
+    .module('starter.account', [])
+    .controller('AccountCtrl', function ($scope, $location, $timeout) {
+    $scope.skipLogin = function () {
+        // TODO: Login with guest
+        console.log('Doing Register new guest account');
+        $timeout(function () {
+            $location.path('/matches/todaymatches');
+        }, 1000);
+    };
+    $scope.loginWithFacebook = function () {
+        // TODO: Login with facebook
+        console.log('Doing connecting to facebook');
+        $timeout(function () {
+            $location.path('/matches/todaymatches');
+        }, 1000);
+    };
+});
 //# sourceMappingURL=appBundle.js.map

@@ -1,10 +1,13 @@
 // Ionic Starter App
-
+declare var Ionic: any; 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.shared', 'starter.controllers', 'starter.account', 'starter.match'])
+angular.module('starter', ['ionic', 'ionic.service.core','starter.controllers', 'starter.account', 'azure-mobile-service.module'])
+    .constant('AzureMobileServiceClient', {
+        API_URL: 'https://dailysoccer.azurewebsites.net'
+    })
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -17,7 +20,21 @@ angular.module('starter', ['ionic', 'starter.shared', 'starter.controllers', 'st
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
                 window.StatusBar.styleDefault();
-            }
+            }  
+          
+            //// kick off the platform web client
+            //Ionic.io();
+            //// this will give you a fresh user or the previously saved 'current user'
+            //var user = Ionic.User.current();
+
+            //// if the user doesn't have an id, you'll need to give it one.
+            //if (!user.id) {
+            //    //user.id = Ionic.User.anonymousId();
+            //    user.id = 'jokerstudio';
+            //}
+            //user.set('name', 'Jokerstudio');
+            ////persist the user
+            //user.save();
         });
     })
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -68,14 +85,14 @@ angular.module('starter', ['ionic', 'starter.shared', 'starter.controllers', 'st
                 url: '/account',
                 abstract: true,
                 templateUrl: 'templates/_fullpageTemplate.html',
-                controller: 'starter.account.AccountController as accountCtrl'
+                controller: 'AccountCtrl'
             })
             .state('account.login', {
                 url: '/login',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Accounts/Login.html',
-                        //controller: 'PlaylistsCtrl'
+                        controller: 'PlaylistsCtrl'
                     }
                 }
             })
@@ -84,7 +101,7 @@ angular.module('starter', ['ionic', 'starter.shared', 'starter.controllers', 'st
                 url: '/matches',
                 abstract: true,
                 templateUrl: 'templates/_matchTemplate.html',
-                controller: 'starter.match.MatchController as matchCtrl'
+                //controller: 'AppCtrl'
             })
             .state('matches.todaymatches', {
                 url: '/todaymatches',

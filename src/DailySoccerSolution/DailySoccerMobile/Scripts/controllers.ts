@@ -41,7 +41,21 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
+.controller('PlaylistsCtrl', function ($scope, Azureservice) {
+
+    //var user = Ionic.User.current();
+    //alert(user.get('name'));
+
+    //Azureservice.invokeApi('Account/CreateNewGuess', {
+    //        method: 'get'
+    //})
+    //.then(function (response) {
+    //    console.log('Here is my response object');
+    //    alert(response.userId)
+    //}, function (err) {
+    //    console.error('Azure Error: ' + err);
+    //});
+
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
     { title: 'Chill', id: 2 },
