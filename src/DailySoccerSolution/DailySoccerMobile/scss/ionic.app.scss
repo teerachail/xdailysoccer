@@ -164,7 +164,7 @@ a {
     color:#cdcdcd;
 }
 .font-large{
-    font-size:$font-size-large;
+    font-size:$font-size-large !important;
 }
 .vertical-middle{    
     position: relative;
@@ -251,7 +251,9 @@ i {
 .no-padding {
     padding: 0px !important;
 }
-
+.no-border{
+    border:0px !important;
+}
 .tabs-top > .tabs, .tabs.tabs-top {
     border-bottom-width: 0px;
 }

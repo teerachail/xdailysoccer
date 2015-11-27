@@ -9119,6 +9119,27 @@ a.button {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1f1f1', endColorstr='#c4c4c4',GradientType=0 );
   /* IE6-9 */ }
 
+.bg-red {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e3051a+0,bf0516+100 */
+  background: #e3051a;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #e3051a 0%, #bf0516 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #e3051a 0%, #bf0516 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #e3051a 0%, #bf0516 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e3051a', endColorstr='#bf0516',GradientType=0 );
+  /* IE6-9 */ }
+
+.header-item {
+  text-align: center !important;
+  font-weight: bold !important; }
+
+.button {
+  border: 0px;
+  border-radius: 6px; }
+
 .header-item {
   text-align: center !important;
   font-weight: bold !important; }
@@ -9138,10 +9159,24 @@ a.button {
   float: none;
   display: inline-block; }
 
+.space-top {
+  padding-top: 20%; }
+
 a {
   color: -webkit-link;
   text-decoration: none !important;
   cursor: auto; }
+
+.bar .buttons-left span {
+  margin-right: 0px;
+  display: inherit; }
+
+.bar .buttons-right span {
+  margin-right: 0px;
+  display: inherit; }
+
+.bar .button {
+  padding: 8px 8px; }
 
 .soccer-number {
   position: absolute;
@@ -9167,7 +9202,7 @@ a {
   color: #cdcdcd; }
 
 .font-large {
-  font-size: 18px; }
+  font-size: 18px !important; }
 
 .vertical-middle {
   position: relative;
@@ -9216,8 +9251,51 @@ a {
 .button.bg-yellow, .button.soccer-number {
   line-height: 26px; }
 
+button.button-balanced h1 {
+  color: #fff !important; }
+
+button.button-balanced h2 {
+  color: #fff !important; }
+
+button.button-balanced h3 {
+  color: #fff !important; }
+
+i {
+  width: 20%; }
+
+.font-large {
+  font-size: 18px; }
+
 .no-padding {
   padding: 0px !important; }
 
+.no-border {
+  border: 0px !important; }
+
 .tabs-top > .tabs, .tabs.tabs-top {
   border-bottom-width: 0px; }
+
+.status {
+  position: absolute;
+  font-size: 11px;
+  min-width: 20px;
+  text-align: center; }
+
+.status-left {
+  top: 0;
+  left: 0;
+  padding: 0 3px; }
+
+.status-right {
+  right: 0;
+  top: 0;
+  padding: 0 3px; }
+
+.item.item-draw-status {
+  background-color: #d0e3dd; }
+
+.item.col.col-40 {
+  height: 52px;
+  border: none; }
+  .item.col.col-40 span {
+    font-size: 12px; }
