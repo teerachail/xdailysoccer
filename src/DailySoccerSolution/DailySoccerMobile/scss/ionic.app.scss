@@ -14,7 +14,7 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
-<<<<<<< HEAD
+
 $stable:                          #dedede ;
 $positive:                        #233b83 ;
 $calm:                            #4F629c ;
@@ -31,27 +31,8 @@ $bar-height:                      60px;
 $button-dark-text:                #ffffff ; //text-white
 $tabs-dark-text:                  $button-dark-text !default;
 $menu-bg:                         $royal; //bg side menu
-
-=======
-$stable: #dedede;
-$positive: #233b83;
-$calm: #4F629c;
-$balanced: #00b95c;
-$energized: #ffc547;
-$dark: #282828;
-$royal: #4d4d4d;
-$font-size-large: 20px !default;
-
-
-$border-radius-large: 6px;
-$item-border-width: 0px;
-$button-energized-text: #000000;
-$bar-height: 60px;
-$button-dark-text: #ffffff;
-$tabs-dark-text: $button-dark-text !default;
-$menu-bg: $royal;
 $draw-status: #d0e3dd;
->>>>>>> b2e6239... today match
+
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -59,22 +40,16 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-<<<<<<< HEAD
+
 
 // --------------------------------------------- Background color
 
-.bg-main{
-    background:$positive;
-}
-.bg-yellow{
 
-=======
 .bg-main {
     background: $positive;
 }
 
 .bg-yellow {
->>>>>>> b2e6239... today match
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffef44+0,ffc547+100 */
     background: #ffef44; /* Old browsers */
     background: -moz-linear-gradient(top, #ffef44 0%, #ffc547 100%); /* FF3.6-15 */
@@ -101,7 +76,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     background: linear-gradient(to bottom, #e3051a 0%,#bf0516 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e3051a', endColorstr='#bf0516',GradientType=0 ); /* IE6-9 */
 }
-<<<<<<< HEAD
 
 // --------------------------------------------- End Background
 
@@ -110,9 +84,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
        text-align:center !important;
        font-weight:bold !important;
  }
- .text-right{
-    text-align:right !important;
-=======
 
 .button {
     border: 0px;
@@ -122,7 +93,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .header-item {
     text-align: center !important;
     font-weight: bold !important;
->>>>>>> b2e6239... today match
 }
 
 .text-right {
@@ -143,22 +113,16 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     float: none;
     display: inline-block;
 }
-<<<<<<< HEAD
-=======
 
 .space-top {
     padding-top: 20%;
 }
 
->>>>>>> b2e6239... today match
 a {
     color: -webkit-link;
     text-decoration: none !important;
     cursor: auto;
 }
-<<<<<<< HEAD
-.soccer-number{
-=======
 
 .bar .buttons-left span {
     margin-right: 0px;
@@ -175,7 +139,6 @@ a {
 }
 
 .soccer-number {
->>>>>>> b2e6239... today match
     @extend .bg-yellow;
     position: absolute;
     right: 0;
@@ -190,7 +153,6 @@ a {
     font-size: 14px;
     font-weight: bold;
 }
-<<<<<<< HEAD
 .text-white{
     color:$button-dark-text !important;
 }
@@ -244,12 +206,6 @@ a {
 .tabs-stable.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-stable.tabs-top.tabs-striped .tab-item.active, .tabs-stable.tabs-top.tabs-striped .tab-item.activated{
     background:$stable ;
 }
-=======
-
-.tabs-dark.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-dark.tabs-top.tabs-striped .tab-item.active, .tabs-dark.tabs-top.tabs-striped .tab-item.activated {
-    background: $royal;
-}
->>>>>>> b2e6239... today match
 
 .tabs-striped.tabs-dark .tab-item {
     color: rgba(255, 255, 255, 1);
@@ -263,10 +219,6 @@ a {
 .button.bg-yellow {
     line-height: 26px;
 }
-<<<<<<< HEAD
-.no-padding{
-    padding:0px !important;
-=======
 
 button.button-balanced {
     h1 {
@@ -292,7 +244,6 @@ i {
 
 .no-padding {
     padding: 0px !important;
->>>>>>> b2e6239... today match
 }
 
 .tabs-top > .tabs, .tabs.tabs-top {
@@ -323,7 +274,8 @@ i {
 }
 
 .item.col.col-40 {
-    height:50px;
+    height:52px;
+    border:none;
     span {
         font-size: 12px;
     }
