@@ -4,7 +4,7 @@ declare var Ionic: any;
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'starter.account', 'azure-mobile-service.module', 'starter.shared', 'starter.match' ])
+angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'azure-mobile-service.module', 'starter.shared', 'starter.account', 'starter.match'])
     .constant('AzureMobileServiceClient', {
         API_URL: 'https://dailysoccer.azurewebsites.net'
     })
@@ -85,14 +85,14 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 url: '/account',
                 abstract: true,
                 templateUrl: 'templates/_fullpageTemplate.html',
-                controller: 'AccountCtrl'
+                controller: 'starter.account.AccountController as accountCtrl'
             })
             .state('account.login', {
                 url: '/login',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Accounts/Login.html',
-                        controller: 'PlaylistsCtrl'
+                        //controller: 'PlaylistsCtrl'
                     }
                 }
             })
@@ -101,7 +101,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 url: '/matches',
                 abstract: true,
                 templateUrl: 'templates/_matchTemplate.html',
-                //controller: 'AppCtrl'
+                controller: 'starter.match.MatchController as matchCtrl'
             })
             .state('matches.todaymatches', {
                 url: '/todaymatches',
