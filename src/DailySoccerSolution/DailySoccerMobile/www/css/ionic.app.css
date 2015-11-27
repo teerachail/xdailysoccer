@@ -9299,3 +9299,16 @@ i {
   border: none; }
   .item.col.col-40 span {
     font-size: 12px; }
+<<<<<<< HEAD
+=======
+
+.login .scroll-content {
+  display: table !important;
+  width: 100% !important;
+  height: 100% !important; }
+
+.login .scroll {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center; }
+>>>>>>> 35dda38... login mid content

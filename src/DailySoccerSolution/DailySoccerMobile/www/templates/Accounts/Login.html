@@ -1,12 +1,27 @@
-﻿<ion-view class="bg-main">
-    <ion-content class="text-center">
-        <div class="space-top">
-            <img class="col-67" src="img/Logos/LogoLogin.png" />
-        </div>
-        <br />
-
-        <button ng-click="accountCtrl.LoginWithFacebook()" class="button col-80 button-calm">เข้าใช้งานผ่าน Facebook</button>
-    </ion-content>
+﻿<ion-view class="bg-main login">
+        <!--<div class="row row-center">
+            <div class="col col-center">
+                <div class="space-top">
+                    <img class="col-67" src="img/Logos/LogoLogin.png" />
+                </div>
+                <br />
+                <button ng-click="accountCtrl.LoginWithFacebook()" class="button col col-80 block-center button-calm">เข้าใช้งานผ่าน Facebook</button>
+            </div>
+        </div>-->
+        <ion-content has-header="true" padding="true">
+            <div class="row row-center">
+                <div class="col col-center">
+                    <div class="">
+                        <img class="col-67" src="img/Logos/LogoLogin.png" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button ng-click="accountCtrl.LoginWithFacebook()" class="button button-large col col-80 block-center button-calm">เข้าใช้งานผ่าน Facebook</button>
+                </div>
+            </div>
+        </ion-content>
     <ion-footer-bar align-title="left" class="bar-balanced">
         <h1 class="title text-right">
             <a menu-close ng-click="accountCtrl.SkipLogin()" href="#">
