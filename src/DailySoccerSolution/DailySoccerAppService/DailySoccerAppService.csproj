@@ -269,6 +269,16 @@
     <None Include="Properties\PublishProfiles\dailysoccer - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\dailysoccer - Web Deploy.pubxml" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DailySoccer.DAC\DailySoccer.DAC.csproj">
+      <Project>{d4361e1e-ea6b-4e55-b3f7-0bf0744c3493}</Project>
+      <Name>DailySoccer.DAC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DailySoccer.Shared\DailySoccer.Shared.csproj">
+      <Project>{c20dfc54-0e35-49dc-8f84-8914cb426761}</Project>
+      <Name>DailySoccer.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
