@@ -22,8 +22,8 @@ $energized:                       #ffc547 ;
 $dark:                            #282828 ;
 $royal:                           #4d4d4d ; 
 
-
-$font-size-large:                 20px !default; // font-large
+$button-stable-active-bg:         #e5e5e5 ;
+$font-size-large:                 20px ; // font-large
 $border-radius-large:             6px ; // button-radius
 $button-energized-text:           #000000 ; //text-black
 $bar-height:                      60px; 
@@ -152,6 +152,14 @@ a {
 .tabs-dark.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-dark.tabs-top.tabs-striped .tab-item.active, .tabs-dark.tabs-top.tabs-striped .tab-item.activated{
     background:$royal;
 }
+.tabs-striped.tabs-stable .tabs{
+    background:darken($button-stable-active-bg,10%);
+}
+
+.tabs-stable.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-stable.tabs-top.tabs-striped .tab-item.active, .tabs-stable.tabs-top.tabs-striped .tab-item.activated{
+    background:$stable ;
+}
+
 .tabs-striped.tabs-dark .tab-item {
     color: rgba(255, 255, 255, 1);
 }

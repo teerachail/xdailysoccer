@@ -9195,6 +9195,12 @@ a {
 .tabs-dark.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-dark.tabs-top.tabs-striped .tab-item.active, .tabs-dark.tabs-top.tabs-striped .tab-item.activated {
   background: #4d4d4d; }
 
+.tabs-striped.tabs-stable .tabs {
+  background: #cccccc; }
+
+.tabs-stable.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-stable.tabs-top.tabs-striped .tab-item.active, .tabs-stable.tabs-top.tabs-striped .tab-item.activated {
+  background: #dedede; }
+
 .tabs-striped.tabs-dark .tab-item {
   color: white; }
 
