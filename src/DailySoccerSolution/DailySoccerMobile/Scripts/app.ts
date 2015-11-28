@@ -1,5 +1,5 @@
 // Ionic Starter App
-declare var Ionic: any; 
+declare var Ionic: any;
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
@@ -23,16 +23,6 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
           
             // kick off the platform web client
             Ionic.io();
-            // this will give you a fresh user or the previously saved 'current user'
-            var user = Ionic.User.current();
-
-            // if the user doesn't have an id, you'll need to give it one.
-            if (!user.id) {
-                user.id = Ionic.User.anonymousId();
-                user.save();
-            } 
-                     
-            //persist the user
             
         });
     })
@@ -91,6 +81,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Accounts/Login.html',
+                        //controller: 'PlaylistsCtrl'
                     }
                 }
             })

@@ -3,8 +3,8 @@
 
     class MatchController {
 
-        static $inject = ['$scope', 'starter.match.MatchServices'];
-        constructor(private $scope: ng.IScope, private matchSvc: starter.match.MatchServices) {
+        static $inject = ['$scope', 'starter.match.MatchServices', '$location'];
+        constructor(private $scope: ng.IScope, private matchSvc: starter.match.MatchServices, private $location: ng.ILocationService) {
         }
 
         public GetTodayMatches(): void {
@@ -12,6 +12,13 @@
                 .then((respond: GetToDayMatchesRespond): void => {
                     // TODO: GetTodayMatches
                 });
+        }
+
+        public Logout(): void {
+            var user = Ionic.User.current();
+            user.id = '';
+
+            this.$location.path('/account/login');
         }
 
     }

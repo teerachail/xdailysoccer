@@ -20,14 +20,6 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
         }
         // kick off the platform web client
         Ionic.io();
-        // this will give you a fresh user or the previously saved 'current user'
-        var user = Ionic.User.current();
-        // if the user doesn't have an id, you'll need to give it one.
-        if (!user.id) {
-            user.id = Ionic.User.anonymousId();
-            user.save();
-        }
-        //persist the user
     });
 })
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -83,7 +75,6 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
         views: {
             'MainContent': {
                 templateUrl: 'templates/Accounts/Login.html',
-                controller: 'PlaylistsCtrl'
             }
         }
     })
@@ -198,10 +189,32 @@ var starter;
                 this.$scope = $scope;
                 this.$timeout = $timeout;
                 this.$location = $location;
+                this.checkIonicUserData();
             }
+            AccountController.prototype.checkIonicUserData = function () {
+                var user = Ionic.User.current();
+                if (user.id) {
+                    this.$location.path('/matches/todaymatches');
+                }
+                else {
+                    var isSkiped = user.get('isSkiped');
+                    alert(isSkiped);
+                    if (isSkiped) {
+                    }
+                }
+            };
+            AccountController.prototype.createIonicUserData = function () {
+                var user = Ionic.User.current();
+                if (!user.id) {
+                    user.id = Ionic.User.anonymousId();
+                    user.set('isSkiped', 'true');
+                    user.save();
+                }
+            };
             AccountController.prototype.SkipLogin = function () {
                 var _this = this;
                 // TODO: Login with guest
+                this.createIonicUserData();
                 console.log('Doing Register new guest account');
                 this.$timeout(1000).then(function () {
                     _this.$location.path('/matches/todaymatches');
@@ -211,6 +224,7 @@ var starter;
             AccountController.prototype.LoginWithFacebook = function () {
                 var _this = this;
                 // TODO: Login with facebook
+                this.createIonicUserData();
                 console.log('Doing connecting to facebook');
                 this.$timeout(1000).then(function () {
                     _this.$location.path('/matches/todaymatches');
@@ -243,9 +257,10 @@ var starter;
     (function (match) {
         'use strict';
         var MatchController = (function () {
-            function MatchController($scope, matchSvc) {
+            function MatchController($scope, matchSvc, $location) {
                 this.$scope = $scope;
                 this.matchSvc = matchSvc;
+                this.$location = $location;
             }
             MatchController.prototype.GetTodayMatches = function () {
                 this.matchSvc.GetToDayMatches(null)
@@ -253,7 +268,12 @@ var starter;
                     // TODO: GetTodayMatches
                 });
             };
-            MatchController.$inject = ['$scope', 'starter.match.MatchServices'];
+            MatchController.prototype.Logout = function () {
+                var user = Ionic.User.current();
+                user.id = '';
+                this.$location.path('/account/login');
+            };
+            MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location'];
             return MatchController;
         })();
         angular

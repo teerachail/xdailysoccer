@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+
+    <Compile Include="Shared\Models\Account.cs" />
     <Compile Include="Shared\Facades\AccountFacade.cs" />
     <Compile Include="Shared\Models\AccountInformation.cs" />
     <Compile Include="Shared\Models\GetMatchesRequest.cs" />
