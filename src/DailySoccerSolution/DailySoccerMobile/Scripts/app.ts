@@ -122,7 +122,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 url: '/history',
                 abstract: true,
                 templateUrl: 'templates/_basicTemplate.html',
-                //controller: 'AppCtrl'
+                controller: 'AppCtrl'
             })
             .state('history.historybymonth', {
                 url: '/historybymonth',

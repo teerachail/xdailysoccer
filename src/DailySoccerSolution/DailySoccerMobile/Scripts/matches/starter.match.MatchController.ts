@@ -4,7 +4,7 @@
     class MatchController {
 
         static $inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal'];
-        constructor(private $scope: ng.IScope, private matchSvc: starter.match.MatchServices, private $location: ng.ILocationService, private $ionicModal) {
+        constructor(private $scope, private matchSvc: starter.match.MatchServices, private $location: ng.ILocationService, private $ionicModal) {
 
             $ionicModal.fromTemplateUrl('templates/Matches/modal.html', {
                 scope: $scope
