@@ -117,6 +117,19 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 templateUrl: 'templates/Matches/HistoryByMonth.html',
             }
         }
+    })
+        .state('ticket', {
+        url: '/ticket',
+        abstract: true,
+        templateUrl: 'templates/_basicTemplate.html',
+    })
+        .state('ticket.buyticket', {
+        url: '/buyticket',
+        views: {
+            'MainContent': {
+                templateUrl: 'templates/Rewards/BuyTicket.html',
+            }
+        }
     });
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/app/playlists');

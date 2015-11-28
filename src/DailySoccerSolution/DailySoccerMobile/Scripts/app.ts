@@ -132,6 +132,21 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                         //controller: 'PlaylistsCtrl'
                     }
                 }
+            })
+
+            .state('ticket', {
+                url: '/ticket',
+                abstract: true,
+                templateUrl: 'templates/_basicTemplate.html',
+                //controller: 'AppCtrl'
+            })
+            .state('ticket.buyticket', {
+                url: '/buyticket',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/Rewards/BuyTicket.html',
+                    }
+                }
             });
 
 
