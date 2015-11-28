@@ -111,12 +111,30 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
             .state('rewards.rewards', {
                 url: '/rewards',
                 views: {
-                    'MainContent': {
+                    'tab-rewards': {
                         templateUrl: 'templates/Rewards/Rewards.html',
                         //controller: 'PlaylistsCtrl'
                     }
                 }
             })
+            .state('rewards.myrewards', {
+                url: '/myrewards',
+                views: {
+                    'tab-myrewards': {
+                        templateUrl: 'templates/Rewards/MyRewards.html',
+                    }
+                }
+            })
+            .state('rewards.rewardwinner', {
+                url: '/rewardwinner',
+                views: {
+                    'tab-rewardwinner': {
+                        templateUrl: 'templates/Rewards/RewardWinner.html',
+                    }
+                }
+            })
+
+
 
             .state('history', {
                 url: '/history',

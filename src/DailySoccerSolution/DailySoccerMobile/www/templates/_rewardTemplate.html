@@ -8,30 +8,17 @@
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-tabs class="tabs-stable tabs-top text-dark">
-            <ion-tab title="ของรางวัล" class="text-dark">
+            <ion-tab title="ของรางวัล" href="#/rewards/rewards" class="text-dark">
                 <!-- Tab 1 content -->
-                <ion-nav-view name="MainContent"></ion-nav-view>
+                <ion-nav-view name="tab-rewards"></ion-nav-view>
             </ion-tab>
-            <ion-tab title="รายชื่อผู้โชคดี" class="text-dark">
+            <ion-tab title="รายชื่อผู้โชคดี" href="#/rewards/rewardwinner" class="text-dark" >
                 <!-- Tab 2 content -->
-                <ion-view>
-                    <ion-content>
-                        <h1>
-                            Tab 2
-                        </h1>
-                    </ion-content>
-                </ion-view>
-
+                <ion-nav-view name="tab-rewardwinner"></ion-nav-view>
             </ion-tab>
-            <ion-tab title="ติดต่อรับของ" class="text-dark">
+            <ion-tab title="ติดต่อรับของ" href="#/rewards/myrewards"   class="text-dark" >
                 <!-- Tab 3 content -->
-                <ion-view>
-                    <ion-content>
-                        <h1>
-                            Tab 3
-                        </h1>
-                    </ion-content>
-                </ion-view>
+                <ion-nav-view name="tab-myrewards"></ion-nav-view>
             </ion-tab>
         </ion-tabs>
     </ion-side-menu-content>

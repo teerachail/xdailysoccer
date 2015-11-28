@@ -9267,7 +9267,7 @@ button.button-balanced h3 {
   color: #fff !important; }
 
 i {
-  width: 20%; }
+  font-style: italic !important; }
 
 .font-large {
   font-size: 18px; }
