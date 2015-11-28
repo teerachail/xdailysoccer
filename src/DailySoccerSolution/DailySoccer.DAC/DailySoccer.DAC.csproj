@@ -51,10 +51,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAC\DailySoccerDataModels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailySoccerDataModels.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="DAC\DailySoccerDataModels.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DailySoccerDataModels.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DAC\DailySoccerDataModels.edmx.diagram">
+      <DependentUpon>DailySoccerDataModels.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

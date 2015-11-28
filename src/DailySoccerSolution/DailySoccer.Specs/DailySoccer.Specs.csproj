@@ -60,6 +60,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Specs\Hooks.cs" />
+    <Compile Include="Specs\MatchesServices.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MatchesServices.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Specs\Steps\MatchesServicesSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DailySoccer.Shared\DailySoccer.Shared.csproj">
@@ -70,10 +76,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Specs\MatchesServices.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MatchesServices.feature.cs</LastGenOutput>
+    </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Specs\Steps\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
