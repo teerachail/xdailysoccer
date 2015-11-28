@@ -147,7 +147,24 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                         templateUrl: 'templates/Rewards/BuyTicket.html',
                     }
                 }
-            });
+            })
+            .state('buyticketcompleted', {
+                url: '/buyticketcompleted',
+                abstract: true,
+                templateUrl: 'templates/_fullpageTemplate.html',
+                //controller: 'AppCtrl'
+            })
+            .state('buyticketcompleted.buyticketcompleted', {
+                url: '/buyticketcompleted',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/Rewards/BuyTicketCompleted.html',
+                    }
+                }
+            })
+
+
+        ;
 
 
         // if none of the above states are matched, use this as the fallback
