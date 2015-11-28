@@ -91,7 +91,6 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Accounts/Login.html',
-                        controller: 'PlaylistsCtrl'
                     }
                 }
             })
