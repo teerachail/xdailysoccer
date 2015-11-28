@@ -3,9 +3,20 @@
 
     class MatchController {
 
-        static $inject = ['$scope', 'starter.match.MatchServices', '$location'];
-        constructor(private $scope: ng.IScope, private matchSvc: starter.match.MatchServices, private $location: ng.ILocationService) {
+        static $inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal'];
+        constructor(private $scope: ng.IScope, private matchSvc: starter.match.MatchServices, private $location: ng.ILocationService, private $ionicModal) {
+
+            $ionicModal.fromTemplateUrl('templates/Matches/modal.html', {
+                scope: $scope
+            }).then(function (modal) {
+                $scope.modal = modal;
+                });
+
+            $scope.openModal = function () {
+                $scope.modal.show();
+            };
         }
+
 
         public GetTodayMatches(): void {
             this.matchSvc.GetToDayMatches(null)

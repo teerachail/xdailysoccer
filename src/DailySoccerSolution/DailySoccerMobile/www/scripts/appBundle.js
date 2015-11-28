@@ -257,10 +257,25 @@ var starter;
     (function (match) {
         'use strict';
         var MatchController = (function () {
+<<<<<<< HEAD
             function MatchController($scope, matchSvc, $location) {
                 this.$scope = $scope;
                 this.matchSvc = matchSvc;
                 this.$location = $location;
+=======
+            function MatchController($scope, matchSvc, $ionicModal) {
+                this.$scope = $scope;
+                this.matchSvc = matchSvc;
+                this.$ionicModal = $ionicModal;
+                $ionicModal.fromTemplateUrl('templates/Matches/modal.html', {
+                    scope: $scope
+                }).then(function (modal) {
+                    $scope.modal = modal;
+                });
+                $scope.openModal = function () {
+                    $scope.modal.show();
+                };
+>>>>>>> da67b5f... modal
             }
             MatchController.prototype.GetTodayMatches = function () {
                 this.matchSvc.GetToDayMatches(null)
@@ -268,12 +283,16 @@ var starter;
                     // TODO: GetTodayMatches
                 });
             };
+<<<<<<< HEAD
             MatchController.prototype.Logout = function () {
                 var user = Ionic.User.current();
                 user.id = '';
                 this.$location.path('/account/login');
             };
             MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location'];
+=======
+            MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$ionicModal'];
+>>>>>>> da67b5f... modal
             return MatchController;
         })();
         angular

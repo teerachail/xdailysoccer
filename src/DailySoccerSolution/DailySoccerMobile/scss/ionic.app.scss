@@ -34,6 +34,18 @@ $tabs-dark-text:                  $button-dark-text !default;
 $menu-bg:                         $royal; //bg side menu
 $draw-status: #d0e3dd;
 
+$modal-bg-color:                  #fff !default;
+$modal-backdrop-bg-active:        #000 !default;
+$modal-backdrop-bg-inactive:      rgba(0,0,0,0) !default;
+
+$modal-inset-mode-break-point:    200px !default;  // @media min-width
+$modal-inset-mode-top:            40% !default;
+$modal-inset-mode-right:          10% !default;
+$modal-inset-mode-bottom:         35% !default;
+$modal-inset-mode-left:           10% !default;
+$modal-inset-mode-min-height:     100px !default;
+$modal-inset-mode-min-width:     80% !default;
+
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -297,4 +309,8 @@ i {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
+}
+
+ion-modal-view{
+    border-radius:  20px;
 }
