@@ -221,11 +221,13 @@ a {
 
 .tabs-stable.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-stable.tabs-top.tabs-striped .tab-item.active, .tabs-stable.tabs-top.tabs-striped .tab-item.activated{
     background:$stable ;
-    border-width: 0 0 0 0 !important;
-    margin-top: 0 !important;
 }
 
-
+.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-top.tabs-striped .tab-item.active, .tabs-top.tabs-striped .tab-item.activated {
+    margin-top: 0px !important;
+    border-width: 0px 0px 0px 0px !important;
+    border-style: solid;
+}
 .tabs-striped.tabs-dark .tab-item {
     color: rgba(255, 255, 255, 1);
 }
