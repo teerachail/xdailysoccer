@@ -51,30 +51,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAC\DailySoccerDataModels.Designer.cs">
+    <Compile Include="DAC\EF\Account.cs">
+      <DependentUpon>DailySoccerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAC\EF\DailySoccerModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DailySoccerDataModels.edmx</DependentUpon>
+      <DependentUpon>DailySoccerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAC\EF\DailySoccerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailySoccerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAC\EF\DailySoccerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DailySoccerModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="DAC\DailySoccerDataModels.edmx">
+    <EntityDeploy Include="DAC\EF\DailySoccerModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DailySoccerDataModels.Designer.cs</LastGenOutput>
+      <LastGenOutput>DailySoccerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DAC\DailySoccerDataModels.edmx.diagram">
-      <DependentUpon>DailySoccerDataModels.edmx</DependentUpon>
+    <None Include="DAC\EF\DailySoccerModel.edmx.diagram">
+      <DependentUpon>DailySoccerModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="DAC\" />
+    <Content Include="DAC\EF\DailySoccerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DailySoccerModel.Context.cs</LastGenOutput>
+      <DependentUpon>DailySoccerModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="DAC\EF\DailySoccerModel.edmx.sql" />
+    <Content Include="DAC\EF\DailySoccerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DailySoccerModel.cs</LastGenOutput>
+      <DependentUpon>DailySoccerModel.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
