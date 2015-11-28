@@ -50,10 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\Facades\AccountFacade.cs" />
+    <Compile Include="Shared\Models\AccountInformation.cs" />
+    <Compile Include="Shared\Models\GetMatchesRequest.cs" />
+    <Compile Include="Shared\Models\GetMatchesRespond.cs" />
+    <Compile Include="Shared\Models\MatchInformation.cs" />
+    <Compile Include="Shared\Models\TeamInformation.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Shared\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DailySoccer.DAC\DailySoccer.DAC.csproj">
       <Project>{d4361e1e-ea6b-4e55-b3f7-0bf0744c3493}</Project>

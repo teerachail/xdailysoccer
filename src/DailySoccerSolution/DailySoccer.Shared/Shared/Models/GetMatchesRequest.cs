@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DailySoccer.Shared.Models
 {
-    class Account
+    public class GetMatchesRequest
     {
+        public string UserId { get; set; }
     }
 }
