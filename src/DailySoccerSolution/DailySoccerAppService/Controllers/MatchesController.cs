@@ -13,7 +13,20 @@ namespace DailySoccerAppService.Controllers
     {
         public ApiServices Services { get; set; }
 
+        // GET: api/Matches
         [HttpGet]
+        public string Get()
+        {
+            return "Respond by GET method";
+        }
+
+        [HttpPost]
+        public string Post(int id)
+        {
+            return "Respond by POST method, your ID: " + id;
+        }
+
+        [HttpPost]
         public GetMatchesRespond GetMatches(GetMatchesRequest request)
         {
             var now = DateTime.Now;
@@ -54,6 +67,5 @@ namespace DailySoccerAppService.Controllers
                 Matches = matches
             };
         }
-
     }
 }
