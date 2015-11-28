@@ -231,6 +231,9 @@ var starter;
                 });
             };
             ;
+            AccountController.prototype.Hi = function () {
+                console.log('Hi');
+            };
             AccountController.$inject = ['$scope', '$timeout', '$location'];
             return AccountController;
         })();
@@ -335,7 +338,7 @@ var starter;
             }
             MatchServices.prototype.GetToDayMatches = function (req) {
                 var requestUrl = ""; // HACK: GetTodayMatches
-                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+                return this.queryRemoteSvc.PostRemoteQuery(requestUrl);
             };
             MatchServices.$inject = ['starter.shared.QueryRemoteDataService'];
             return MatchServices;
@@ -360,8 +363,12 @@ var starter;
             function QueryRemoteDataService($http) {
                 this.$http = $http;
             }
-            QueryRemoteDataService.prototype.RemoteQuery = function (baseUrl) {
-                return this.$http.get(baseUrl)
+            QueryRemoteDataService.prototype.GetRemoteQuery = function (baseUrl) {
+                return this.$http({ method: 'GET', url: baseUrl })
+                    .then(function (respond) { return respond.data; });
+            };
+            QueryRemoteDataService.prototype.PostRemoteQuery = function (baseUrl) {
+                return this.$http({ method: 'POST', url: baseUrl })
                     .then(function (respond) { return respond.data; });
             };
             QueryRemoteDataService.$inject = ['$http'];
