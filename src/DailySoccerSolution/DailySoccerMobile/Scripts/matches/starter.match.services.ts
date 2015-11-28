@@ -9,7 +9,7 @@
 
         public GetToDayMatches(req: GetToDayMatchesRequest): ng.IPromise<GetToDayMatchesRespond> {
             var requestUrl = ""; // HACK: GetTodayMatches
-            return this.queryRemoteSvc.RemoteQuery<GetToDayMatchesRespond>(requestUrl);
+            return this.queryRemoteSvc.PostRemoteQuery<GetToDayMatchesRespond>(requestUrl);
         }
 
     }
