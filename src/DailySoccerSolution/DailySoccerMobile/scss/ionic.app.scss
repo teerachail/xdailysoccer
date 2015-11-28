@@ -321,3 +321,8 @@ ion-modal-view{
     border-radius: 6px !important;
     text-align:center!important;
 }
+.match-template .bar-balanced .button.active,.match-template .bar-balanced .button.activated {
+    border:none;
+    background-color: initial;
+    box-shadow: none;
+}

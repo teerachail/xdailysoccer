@@ -15,9 +15,6 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
-ion-modal-view {
-  border-radius: 20px; }
-
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -9157,10 +9154,10 @@ a.button {
   text-align: left !important; }
 
 .block-center {
-  margin-left: auto;
-  margin-right: auto;
-  float: none;
-  display: inline-block; }
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+  display: inline-block !important; }
 
 .space-top {
   padding-top: 20%; }
@@ -9315,3 +9312,16 @@ i {
   display: table-cell;
   vertical-align: middle;
   text-align: center; }
+
+ion-modal-view {
+  border-radius: 20px; }
+
+.input-number {
+  border: 1px solid !important;
+  border-radius: 6px !important;
+  text-align: center !important; }
+
+.bar-balanced .button.active, .bar-balanced .button.activated {
+  border: none;
+  background-color: initial;
+  box-shadow: none; }
