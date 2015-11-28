@@ -5,12 +5,12 @@
     }
 
     export interface IMatchService {
-        GetToDayMatches(req: GetToDayMatchesRequest): ng.IPromise<GetToDayMatchesRespond>;
+        GetMatches(req: GetMatchesRequest): ng.IPromise<GetMatchesRespond>;
     }
-    export class GetToDayMatchesRequest {
+    export class GetMatchesRequest {
         public UserId: string;
     }
-    export class GetToDayMatchesRespond {
+    export class GetMatchesRespond {
         public AccountInfo: account.AccountInformation;
         public Matches: MatchInformation[];
     }

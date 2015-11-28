@@ -3,14 +3,23 @@
 
     class MatchController {
 
+        public Matches: MatchInformation[];
+        public AccountInfo: account.AccountInformation;
+
         static $inject = ['$scope', 'starter.match.MatchServices', '$location'];
         constructor(private $scope: ng.IScope, private matchSvc: starter.match.MatchServices, private $location: ng.ILocationService) {
+            this.GetTodayMatches();
         }
 
         public GetTodayMatches(): void {
-            this.matchSvc.GetToDayMatches(null)
-                .then((respond: GetToDayMatchesRespond): void => {
-                    // TODO: GetTodayMatches
+            var user = Ionic.User.current();
+            var data = new GetMatchesRequest();
+            data.UserId = user.id;
+            this.matchSvc.GetMatches(data)
+                .then((respond: GetMatchesRespond): void => {
+                    this.Matches = respond.Matches;
+                    this.AccountInfo = respond.AccountInfo;
+                    console.log('Get all matches completed.');
                 });
         }
 

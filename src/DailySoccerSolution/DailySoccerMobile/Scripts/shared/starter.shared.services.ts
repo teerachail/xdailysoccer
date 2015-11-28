@@ -2,21 +2,16 @@
     'use strict';
 
     export interface IQueryRemoteDataService {
-        GetRemoteQuery<TRespond>(baseUrl: string): ng.IPromise<TRespond>;
-        PostRemoteQuery<TRespond>(baseUrl: string): ng.IPromise<TRespond>;
+        RemoteQuery<TRespond>(baseUrl: string): ng.IPromise<TRespond>;
     }
 
     export class QueryRemoteDataService implements IQueryRemoteDataService {
+        private serviceURL = 'http://sampledailysoccer.azurewebsites.net/api/'
         static $inject = ['$http'];
         constructor(protected $http: ng.IHttpService) { }
 
-        public GetRemoteQuery<TRespond>(baseUrl: string): ng.IPromise<TRespond> {
-            return this.$http({ method: 'GET', url: baseUrl })
-                .then((respond: ng.IHttpPromiseCallbackArg<TRespond>): TRespond => respond.data);
-        }
-
-        public PostRemoteQuery<TRespond>(baseUrl: string): ng.IPromise<TRespond> {
-            return this.$http({ method: 'POST', url: baseUrl })
+        public RemoteQuery<TRespond>(baseUrl: string): ng.IPromise<TRespond> {
+            return this.$http({ method: 'GET', url: this.serviceURL + baseUrl })
                 .then((respond: ng.IHttpPromiseCallbackArg<TRespond>): TRespond => respond.data);
         }
     }

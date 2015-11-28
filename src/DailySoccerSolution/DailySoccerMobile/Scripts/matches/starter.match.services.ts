@@ -7,9 +7,9 @@
         constructor(private queryRemoteSvc: starter.shared.QueryRemoteDataService) {
         }
 
-        public GetToDayMatches(req: GetToDayMatchesRequest): ng.IPromise<GetToDayMatchesRespond> {
-            var requestUrl = ""; // HACK: GetTodayMatches
-            return this.queryRemoteSvc.PostRemoteQuery<GetToDayMatchesRespond>(requestUrl);
+        public GetMatches(req: GetMatchesRequest): ng.IPromise<GetMatchesRespond> {
+            var requestUrl = "Matches?UserId=" + req.UserId;
+            return this.queryRemoteSvc.RemoteQuery<GetMatchesRespond>(requestUrl);
         }
 
     }

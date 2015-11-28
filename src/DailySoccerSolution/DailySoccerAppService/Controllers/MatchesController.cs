@@ -26,8 +26,8 @@ namespace DailySoccerAppService.Controllers
             return "Respond by POST method, your ID: " + id;
         }
 
-        [HttpPost]
-        public GetMatchesRespond GetMatches(GetMatchesRequest request)
+        [HttpGet]
+        public GetMatchesRespond GetMatches(string userId)
         {
             var now = DateTime.Now;
             var matches = new List<MatchInformation>
