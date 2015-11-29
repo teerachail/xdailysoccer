@@ -29,28 +29,225 @@ namespace DailySoccerAppService.Controllers
         [HttpGet]
         public GetMatchesRespond GetMatches(string userId)
         {
+            // HACK: Mocking GetMatches' data
             var now = DateTime.Now;
+            var matchId = 1;
+            var teamId = 100;
             var matches = new List<MatchInformation>
             {
+                // ยังไม่แข่ง + ยังไม่เลือก
                 new MatchInformation
                 {
-                    Id = 1,
+                    Id = matchId++,
                     BeginDate = now,
                     LeagueName = "Premier League",
                     TeamHome = new TeamInformation
                     {
-                        Id = 1,
+                        Id = teamId++,
                         Name = "FC Astana",
-                        CurrentScore = 1,
                         CurrentPredictionPoints = 7,
-                        WinningPredictionPoints = 5
                     },
                     TeamAway = new TeamInformation
                     {
-                        Id = 2,
+                        Id = teamId++,
                         Name = "Atletico Madrid",
-                        CurrentScore = 0,
                         CurrentPredictionPoints = 3,
+                    },
+                },
+                // ยังไม่แข่ง + เลือกแล้ว
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now,
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Real Madrid",
+                        CurrentPredictionPoints = 7,
+                        WinningPredictionPoints = 7,
+                        IsSelected = true
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Paris Saint-Germain ",
+                        CurrentPredictionPoints = 3,
+                    },
+                },
+                // แข่งอยู่ + ยังไม่เลือก
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now,
+                    StartedDate = now,
+                    Status = "15",
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Shakhtar Donetsk",
+                        CurrentScore = 2,
+                        CurrentPredictionPoints = 7,
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Malmo",
+                        CurrentScore = 4,
+                        CurrentPredictionPoints = 3,
+                    },
+                },
+                // แข่งอยู่ + เลือกแล้ว
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now,
+                    StartedDate = now,
+                    Status = "15",
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Manchester United",
+                        CurrentScore = 3,
+                        CurrentPredictionPoints = 7,
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "CSKA Moscow",
+                        CurrentScore = 5,
+                        CurrentPredictionPoints = 3,
+                        IsSelected = true,
+                        WinningPredictionPoints = 3
+                    },
+                },
+                // แข่งอยู่ + เลือกแล้ว + คะแนนเปลี่ยน
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now,
+                    StartedDate = now,
+                    Status = "15",
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "PSV Eindhoven",
+                        CurrentScore = 4,
+                        CurrentPredictionPoints = 7,
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "VfL Wolfsburg",
+                        CurrentScore = 6,
+                        CurrentPredictionPoints = 3,
+                        IsSelected = true,
+                        WinningPredictionPoints = 9
+                    },
+                },
+                // จบแล้ว + ยังไม่เลือก
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now,
+                    StartedDate = now,
+                    CompletedDate = now,
+                    Status = "FT",
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Benfica",
+                        CurrentScore = 5,
+                        CurrentPredictionPoints = 7,
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Galatasaray",
+                        CurrentScore = 7,
+                        CurrentPredictionPoints = 3,
+                    },
+                },
+                // จบแล้ว + เลือกแล้ว + ทายผิด
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now,
+                    StartedDate = now,
+                    CompletedDate = now,
+                    Status = "FT",
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Borussia Monchengladbach",
+                        CurrentScore = 5,
+                        CurrentPredictionPoints = 7,
+                        IsSelected = true,
+                        WinningPredictionPoints = 0
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Juventus",
+                        CurrentScore = 7,
+                        CurrentPredictionPoints = 3,
+                    },
+                },
+                // จบแล้ว + เลือกแล้ว + ทายถูก
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now,
+                    StartedDate = now,
+                    CompletedDate = now,
+                    Status = "FT",
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Sevilla FC",
+                        CurrentScore = 5,
+                        CurrentPredictionPoints = 7,
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Manchester City",
+                        CurrentScore = 7,
+                        CurrentPredictionPoints = 3,
+                        IsSelected = true,
+                        WinningPredictionPoints = 3
+                    },
+                },
+                // จบแล้ว + เลือกแล้ว + ทายถูกแต่เสมอ
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now,
+                    StartedDate = now,
+                    CompletedDate = now,
+                    Status = "FT",
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Birmingham City",
+                        CurrentScore = 1,
+                        CurrentPredictionPoints = 7,
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Blackburn Rovers",
+                        CurrentScore = 1,
+                        CurrentPredictionPoints = 3,
+                        IsSelected = true,
+                        WinningPredictionPoints = 3
                     },
                 },
             };
