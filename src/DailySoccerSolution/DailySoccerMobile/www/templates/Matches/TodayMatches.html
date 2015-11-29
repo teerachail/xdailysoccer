@@ -1,19 +1,18 @@
 ﻿<ion-view view-title="DAILY SOCCER">
     <ion-content>
         <div ng-include src="'/templates/Matches/_matchHeader.html'"></div>
-        <ion-list ng-repeat="match in matchCtrl.Matches">
-
-            <div class="row padding-bottom">
-                <div class="col col-40 item item-stable ">
-                    <span class="status status-left bg-yellow">+{{ match.TeamHome.WinningPredictionPoints }}</span>
+        <ion-list>
+            <div class="row padding-bottom" ng-repeat="match in matchCtrl.Matches">
+                <div class="col col-40 item item-stable" ng-click="matchCtrl.SelectTeam(match, match.TeamHome.Id)">
+                    <span class="status status-left bg-yellow" ng-show="match.StartedDate">+{{ match.TeamHome.WinningPredictionPoints }}</span>
                     <div class="text-right padding-vertical">
-                        <span class="">
+                        <span ng-show="match.StartedDate" >
                             (+{{ match.TeamHome.WinningPredictionPoints }})
                         </span>
                         <span class="team-name">
                             {{ match.TeamHome.Name }}
                         </span>
-                        <span class="">
+                        <span>
                             {{ match.TeamHome.CurrentPredictionPoints }}
                         </span>
                     </div>
@@ -21,41 +20,41 @@
                 <div class="col col-20 col-center item item-dark ">
                     <div class="col-center">
                         <span class="status status-left stable">{{ match.Status }}</span>
-                        <div class="text-center padding">
+                        <div class="text-center padding" ng-show="!match.StartedDate">
+                            <span>{{ match.BeginDate | date :  'hh:mm'}}</span>
+                        </div>
+                        <div class="text-center padding" ng-show="match.StartedDate">
                             <span>{{ match.TeamHome.CurrentScore }}</span>
                             <span> - </span>
                             <span>{{ match.TeamAway.CurrentScore }}</span>
                         </div>
                     </div>
                 </div>
-                <div class="col col-40 item item-stable">
-                    <span class="status status-right bg-yellow">+{{ match.TeamAway.WinningPredictionPoints }}</span>
+                <div class="col col-40 item item-stable" ng-click="matchCtrl.SelectTeam(match, match.TeamAway.Id)">
+                    <span class="status status-right bg-yellow" ng-show="match.StartedDate">+{{ match.TeamAway.WinningPredictionPoints }}</span>
                     <div class="text-left padding-vertical">
-                        <span class="">
+                        <span>
                             {{ match.TeamAway.CurrentPredictionPoints }}
                         </span>
                         <span class="team-name">
                             {{ match.TeamAway.Name }}
                         </span>
-                        <span class="">
+                        <span ng-show="match.StartedDate">
                             (+{{ match.TeamAway.WinningPredictionPoints }})
                         </span>
                     </div>
                 </div>
             </div>
 
-
-
-
-
             <div class="row padding-bottom">
-                <div class="col col-40 item item-stable "><!------------status color item-stable------------>
+                <div class="col col-40 item item-stable ">
+                    <!------------status color item-stable------------>
                     <span class="status status-left bg-yellow">+6</span><!------------result color bg-yellow------------>
-                <div class="text-right padding-vertical">
-                    <span class="">
-                        (+5)
-                    </span>
-                    <span class="team-name">
+                    <div class="text-right padding-vertical">
+                        <span class="">
+                            (+5)
+                        </span>
+                        <span class="team-name">
                             Newcastle Utd
                         </span>
                         <span class="">
@@ -74,7 +73,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="item item-balanced col col-40"><!------------status color item-balanced------------>
+                <div class="item item-balanced col col-40">
+                    <!------------status color item-balanced------------>
                     <span class="status status-right bg-yellow">+6</span><!------------result color bg-yellow------------>
                     <div class="text-left padding-vertical">
                         <span class="">
@@ -91,7 +91,8 @@
             </div>
             <!---------------------------------------------------->
             <div class="row padding-bottom">
-                <div class="col col-40 item item-stable "><!------------status color item-stable------------>
+                <div class="col col-40 item item-stable ">
+                    <!------------status color item-stable------------>
                     <span class="status status-left bg-yellow">+6</span><!------------result color bg-yellow------------>
                     <div class="text-right padding-vertical">
                         <span class="">
@@ -116,7 +117,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="item item-royal col col-40"> <!------------status color item-royal------------>
+                <div class="item item-royal col col-40">
+                    <!------------status color item-royal------------>
                     <span class="status status-right bg-red">L</span><!------------result color bg-red------------>
                     <div class="text-left padding-vertical">
                         <span class="">
@@ -133,7 +135,8 @@
             </div>
             <!---------------------------------------------------->
             <div class="row padding-bottom">
-                <div class="col col-40 item item-stable "><!------------status color item-stable------------>
+                <div class="col col-40 item item-stable ">
+                    <!------------status color item-stable------------>
                     <span class="status status-left bg-yellow">+6</span><!------------result color bg-yellow------------>
                     <div class="text-right padding-vertical">
                         <span class="">
@@ -158,7 +161,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="item item-draw-status col col-40"><!------------status color draw-status------------>
+                <div class="item item-draw-status col col-40">
+                    <!------------status color draw-status------------>
                     <span class="status status-right background-positive bg-yellow">+6</span><!------------result color bg-yellow------------>
                     <div class="text-left padding-vertical">
                         <span class="">
@@ -175,7 +179,8 @@
             </div>
             <!---------------------------------------------------->
             <div class="row padding-bottom">
-                <div class="col col-40 item item-stable "><!------------status color item-stable------------>
+                <div class="col col-40 item item-stable ">
+                    <!------------status color item-stable------------>
                     <span class="status status-left bg-yellow">+6</span><!------------result color bg-yellow------------>
                     <div class="text-right padding-vertical">
                         <span class="">
@@ -200,7 +205,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="item item-stable col col-40"><!------------status color draw-status------------>
+                <div class="item item-stable col col-40">
+                    <!------------status color draw-status------------>
                     <span class="status status-right background-positive bg-yellow">+6</span><!------------result color bg-yellow------------>
                     <div class="text-left padding-vertical">
                         <span class="">

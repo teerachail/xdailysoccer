@@ -30,6 +30,10 @@
             this.$location.path('/account/login');
         }
 
+        public SelectTeam(selectedMatch: MatchInformation, selectedTeamId: number) {
+            var x = 3;
+        }
+
     }
 
     angular
