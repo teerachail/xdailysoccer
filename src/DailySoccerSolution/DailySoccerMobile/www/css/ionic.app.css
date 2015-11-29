@@ -9321,7 +9321,11 @@ ion-modal-view {
   border-radius: 6px !important;
   text-align: center !important; }
 
-.bar-balanced .button.active, .bar-balanced .button.activated {
+.match-template .bar-balanced .button.active, .match-template .bar-balanced .button.activated {
   border: none;
   background-color: initial;
   box-shadow: none; }
+
+.verify-phone-number .row + .row {
+  margin-top: initial;
+  padding-top: initial; }

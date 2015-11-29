@@ -182,6 +182,28 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 }
             })
 
+            .state('verify', {
+                url: '/verify',
+                abstract: true,
+                templateUrl: 'templates/_basicTemplate.html',
+                //controller: 'AppCtrl'
+            })
+            .state('verify.verifyphonenumber', {
+                url: '/verifyphonenumber',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/Accounts/VerifyPhoneNumber.html',
+                    }
+                }
+            })
+            .state('verify.verifycode', {
+                url: '/verifycode',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/Accounts/VerifyCode.html',
+                    }
+                }
+            })
 
         ;
 

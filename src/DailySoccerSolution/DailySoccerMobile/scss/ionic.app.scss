@@ -326,3 +326,7 @@ ion-modal-view{
     background-color: initial;
     box-shadow: none;
 }
+.verify-phone-number .row + .row {
+    margin-top: initial;
+    padding-top: initial;
+}
