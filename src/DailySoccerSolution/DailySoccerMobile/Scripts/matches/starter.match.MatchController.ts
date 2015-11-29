@@ -31,7 +31,12 @@
         }
 
         public SelectTeam(selectedMatch: MatchInformation, selectedTeamId: number) {
-            var x = 3;
+            var isSelectedTeamHome = selectedMatch.TeamHome.Id == selectedTeamId;
+            var selectedTeam = isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
+            var unselectedTeam = !isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
+            selectedTeam.IsSelected = !selectedTeam.IsSelected;
+            unselectedTeam.IsSelected = false;
+            console.log('Select team: ' + selectedTeam.Name);
         }
 
     }
