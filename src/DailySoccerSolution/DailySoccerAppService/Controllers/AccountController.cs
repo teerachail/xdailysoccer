@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Azure.Mobile.Server;
-using DailySoccerAppService.Models;
+using DailySoccer.Shared.Models;
 
 namespace DailySoccerAppService.Controllers
 {
@@ -14,12 +14,18 @@ namespace DailySoccerAppService.Controllers
         public ApiServices Services { get; set; }
 
         [HttpGet]
-        public CreateNewGuessRespond CreateNewGuess()
+        public CreateNewGuestRespond CreateNewGuest()
         {
-            var UserId = Guid.NewGuid();
-            return new CreateNewGuessRespond()
+            var SecrectCode = Guid.NewGuid().ToString();
+            return new CreateNewGuestRespond()
             {
-                UserId = UserId.ToString(),
+                AccountInfo = new AccountInformation()
+                {
+                     SecrectCode = SecrectCode,
+                     CurrentOrderedCoupon = 10,
+                     Points = 200,
+                     RemainingGuessAmount = 5,
+                },
                 IsSuccessed = true
             };
         }

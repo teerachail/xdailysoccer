@@ -5,8 +5,8 @@
 
         public isHideSkipButton: Boolean;
 
-        static $inject = ['$scope', '$timeout', '$location'];
-        constructor(private $scope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService) {
+        static $inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices'];
+        constructor(private $scope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private accountSvc: starter.account.AccountServices){
             this.checkIonicUserData();
         }
 
@@ -18,7 +18,7 @@
                 var isSkiped = user.get('isSkiped');
                 alert(isSkiped);
                 if (isSkiped) {
-                    //this.isHideSkipButton = isSkiped;
+                    // TODO: Hidden skip button
                 }
             }
         }
@@ -26,9 +26,13 @@
         private createIonicUserData() {
             var user = Ionic.User.current();
             if (!user.id) {
-                user.id = Ionic.User.anonymousId();
-                user.set('isSkiped', 'true');
-                user.save();
+                this.accountSvc.CreateNewGuest()
+                    .then((respond: CreateNewGuestRespond): void => {
+                        user.id = respond.AccountInfo.SecrectCode;
+                        user.set('isSkiped', 'true');
+                        user.save();
+                        console.log('Create new guest complete.');
+                    });              
             } 
         }
 

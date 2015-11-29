@@ -8,6 +8,7 @@ namespace DailySoccer.Shared.Models
 {
     public class AccountInformation
     {
+        public string SecrectCode { get; set; }
         public int Points { get; set; }
         public int RemainingGuessAmount { get; set; }
         public int CurrentOrderedCoupon { get; set; }

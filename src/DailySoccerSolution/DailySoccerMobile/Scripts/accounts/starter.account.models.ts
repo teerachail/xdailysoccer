@@ -1,9 +1,19 @@
 ﻿module starter.account {
 
+    export interface IAccountService {
+        CreateNewGuest(): ng.IPromise<CreateNewGuestRespond>;
+    }
+
     export class AccountInformation {
-        public Point: number;
+        public SecrectCode: string;
+        public Points: number;
         public RemainingGuessAmount: number;
         public CurrentOrderedCoupon: number;
+    }
+
+    export class CreateNewGuestRespond {
+        public AccountInfo: AccountInformation;
+        public IsSuccessed: Boolean;
     }
 
 }

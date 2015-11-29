@@ -228,11 +228,17 @@ var starter;
     (function (account) {
         'use strict';
         var AccountController = (function () {
-            function AccountController($scope, $timeout, $location) {
+            function AccountController($scope, $timeout, $location, accountSvc) {
+                //this.checkIonicUserData();
                 this.$scope = $scope;
                 this.$timeout = $timeout;
                 this.$location = $location;
-                this.checkIonicUserData();
+                this.accountSvc = accountSvc;
+                this.accountSvc.CreateNewGuest()
+                    .then(function (respond) {
+                    alert(respond.AccountInfo.Points);
+                    console.log('Create new guest complete.');
+                });
             }
             AccountController.prototype.checkIonicUserData = function () {
                 var user = Ionic.User.current();
@@ -274,10 +280,7 @@ var starter;
                 });
             };
             ;
-            AccountController.prototype.Hi = function () {
-                console.log('Hi');
-            };
-            AccountController.$inject = ['$scope', '$timeout', '$location'];
+            AccountController.$inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices'];
             return AccountController;
         })();
         angular
@@ -295,6 +298,34 @@ var starter;
             return AccountInformation;
         })();
         account.AccountInformation = AccountInformation;
+        var CreateNewGuestRespond = (function () {
+            function CreateNewGuestRespond() {
+            }
+            return CreateNewGuestRespond;
+        })();
+        account.CreateNewGuestRespond = CreateNewGuestRespond;
+    })(account = starter.account || (starter.account = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var account;
+    (function (account) {
+        'use strict';
+        var AccountServices = (function () {
+            function AccountServices(queryRemoteSvc) {
+                this.queryRemoteSvc = queryRemoteSvc;
+            }
+            AccountServices.prototype.CreateNewGuest = function () {
+                var requestUrl = "Account/CreateNewGuest";
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            AccountServices.$inject = ['starter.shared.QueryRemoteDataService'];
+            return AccountServices;
+        })();
+        account.AccountServices = AccountServices;
+        angular
+            .module('starter.account')
+            .service('starter.account.AccountServices', AccountServices);
     })(account = starter.account || (starter.account = {}));
 })(starter || (starter = {}));
 var starter;
@@ -303,24 +334,22 @@ var starter;
     (function (match) {
         'use strict';
         var MatchController = (function () {
-            function MatchController($scope, matchSvc, $location, $ionicModal) {
+            function MatchController($scope, matchSvc, $location) {
                 this.$scope = $scope;
                 this.matchSvc = matchSvc;
                 this.$location = $location;
-                this.$ionicModal = $ionicModal;
-                $ionicModal.fromTemplateUrl('templates/Matches/modal.html', {
-                    scope: $scope
-                }).then(function (modal) {
-                    $scope.modal = modal;
-                });
-                $scope.openModal = function () {
-                    $scope.modal.show();
-                };
+                this.GetTodayMatches();
             }
             MatchController.prototype.GetTodayMatches = function () {
-                this.matchSvc.GetToDayMatches(null)
+                var _this = this;
+                var user = Ionic.User.current();
+                var data = new match.GetMatchesRequest();
+                data.UserId = user.id;
+                this.matchSvc.GetMatches(data)
                     .then(function (respond) {
-                    // TODO: GetTodayMatches
+                    _this.Matches = respond.Matches;
+                    _this.AccountInfo = respond.AccountInfo;
+                    console.log('Get all matches completed.');
                 });
             };
             MatchController.prototype.Logout = function () {
@@ -328,7 +357,7 @@ var starter;
                 user.id = '';
                 this.$location.path('/account/login');
             };
-            MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal'];
+            MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location'];
             return MatchController;
         })();
         angular
@@ -346,18 +375,18 @@ var starter;
             return MatchInformation;
         })();
         match.MatchInformation = MatchInformation;
-        var GetToDayMatchesRequest = (function () {
-            function GetToDayMatchesRequest() {
+        var GetMatchesRequest = (function () {
+            function GetMatchesRequest() {
             }
-            return GetToDayMatchesRequest;
+            return GetMatchesRequest;
         })();
-        match.GetToDayMatchesRequest = GetToDayMatchesRequest;
-        var GetToDayMatchesRespond = (function () {
-            function GetToDayMatchesRespond() {
+        match.GetMatchesRequest = GetMatchesRequest;
+        var GetMatchesRespond = (function () {
+            function GetMatchesRespond() {
             }
-            return GetToDayMatchesRespond;
+            return GetMatchesRespond;
         })();
-        match.GetToDayMatchesRespond = GetToDayMatchesRespond;
+        match.GetMatchesRespond = GetMatchesRespond;
     })(match = starter.match || (starter.match = {}));
 })(starter || (starter = {}));
 var starter;
@@ -369,9 +398,9 @@ var starter;
             function MatchServices(queryRemoteSvc) {
                 this.queryRemoteSvc = queryRemoteSvc;
             }
-            MatchServices.prototype.GetToDayMatches = function (req) {
-                var requestUrl = ""; // HACK: GetTodayMatches
-                return this.queryRemoteSvc.PostRemoteQuery(requestUrl);
+            MatchServices.prototype.GetMatches = function (req) {
+                var requestUrl = "Matches?UserId=" + req.UserId;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
             MatchServices.$inject = ['starter.shared.QueryRemoteDataService'];
             return MatchServices;
@@ -395,13 +424,10 @@ var starter;
         var QueryRemoteDataService = (function () {
             function QueryRemoteDataService($http) {
                 this.$http = $http;
+                this.serviceURL = 'https://dailysoccer.azurewebsites.net/api/';
             }
-            QueryRemoteDataService.prototype.GetRemoteQuery = function (baseUrl) {
-                return this.$http({ method: 'GET', url: baseUrl })
-                    .then(function (respond) { return respond.data; });
-            };
-            QueryRemoteDataService.prototype.PostRemoteQuery = function (baseUrl) {
-                return this.$http({ method: 'POST', url: baseUrl })
+            QueryRemoteDataService.prototype.RemoteQuery = function (baseUrl) {
+                return this.$http({ method: 'GET', url: this.serviceURL + baseUrl })
                     .then(function (respond) { return respond.data; });
             };
             QueryRemoteDataService.$inject = ['$http'];
