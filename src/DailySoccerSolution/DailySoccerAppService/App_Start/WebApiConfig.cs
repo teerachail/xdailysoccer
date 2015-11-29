@@ -7,6 +7,7 @@ using DailySoccerAppService.DataObjects;
 using DailySoccerAppService.Models;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
+using Newtonsoft.Json.Serialization;
 
 namespace DailySoccerAppService
 {
@@ -19,6 +20,8 @@ namespace DailySoccerAppService
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()
                 .ApplyTo(config);
+
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver();
 
             // To display errors in the browser during development, uncomment the following
             // line. Comment it out again when you deploy your service for production use.
