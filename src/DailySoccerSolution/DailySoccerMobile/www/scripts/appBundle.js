@@ -67,6 +67,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
         .state('account', {
         url: '/account',
         abstract: true,
+        cache: false,
         templateUrl: 'templates/_fullpageTemplate.html',
         controller: 'starter.account.AccountController as accountCtrl'
     })
@@ -243,23 +244,21 @@ var starter;
                 else {
                     var isSkiped = user.get('isSkiped');
                     if (isSkiped) {
-                        alert('olduser');
+                        this.isHideSkipButton = true;
                     }
                 }
             };
             AccountController.prototype.createIonicUserData = function () {
                 var _this = this;
                 var user = Ionic.User.current();
-                if (!user.id) {
-                    this.accountSvc.CreateNewGuest()
-                        .then(function (respond) {
-                        user.id = respond.AccountInfo.SecrectCode;
-                        user.set('isSkiped', 'true');
-                        user.save();
-                        console.log('Create new guest complete.');
-                        _this.$location.path('/matches/todaymatches');
-                    });
-                }
+                this.accountSvc.CreateNewGuest()
+                    .then(function (respond) {
+                    user.id = respond.AccountInfo.SecrectCode;
+                    user.set('isSkiped', 'true');
+                    user.save();
+                    console.log('Create new guest complete.');
+                    _this.$location.path('/matches/todaymatches');
+                });
             };
             AccountController.prototype.SkipLogin = function () {
                 // TODO: Login with guest
@@ -334,6 +333,7 @@ var starter;
                 this.$scope = $scope;
                 this.matchSvc = matchSvc;
                 this.$location = $location;
+                this.Matches = [];
                 this.GetTodayMatches();
             }
             MatchController.prototype.GetTodayMatches = function () {
@@ -372,6 +372,12 @@ var starter;
             return MatchInformation;
         })();
         match.MatchInformation = MatchInformation;
+        var TeamInformation = (function () {
+            function TeamInformation() {
+            }
+            return TeamInformation;
+        })();
+        match.TeamInformation = TeamInformation;
         var GetMatchesRequest = (function () {
             function GetMatchesRequest() {
             }

@@ -73,6 +73,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
             .state('account', {
                 url: '/account',
                 abstract: true,
+                cache: false,
                 templateUrl: 'templates/_fullpageTemplate.html',
                 controller: 'starter.account.AccountController as accountCtrl'
             })

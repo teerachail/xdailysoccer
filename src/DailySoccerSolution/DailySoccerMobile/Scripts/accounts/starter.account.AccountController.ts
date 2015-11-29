@@ -7,7 +7,7 @@
 
         static $inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices'];
         constructor(private $scope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private accountSvc: starter.account.AccountServices){
-            this.checkIonicUserData();    
+            this.checkIonicUserData();
         }
 
         private checkIonicUserData() {
@@ -17,14 +17,13 @@
             } else {
                 var isSkiped = user.get('isSkiped');
                 if (isSkiped) {
-                    // TODO: Hidden skip button
-                }
+                    this.isHideSkipButton = true;
+                } 
             }
         }
 
         private createIonicUserData() {
             var user = Ionic.User.current();
-            if (!user.id) {
                 this.accountSvc.CreateNewGuest()
                     .then((respond: CreateNewGuestRespond): void => {
                         user.id = respond.AccountInfo.SecrectCode;
@@ -33,8 +32,7 @@
                         console.log('Create new guest complete.');
 
                         this.$location.path('/matches/todaymatches');
-                    });           
-            } 
+                    });
         }
 
         public SkipLogin(): void {
