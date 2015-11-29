@@ -17,8 +17,8 @@
             data.UserId = user.id;
             this.matchSvc.GetMatches(data)
                 .then((respond: GetMatchesRespond): void => {
-                    this.Matches = respond.matches;
-                    this.AccountInfo = respond.accountInfo;
+                    this.Matches = respond.Matches;
+                    this.AccountInfo = respond.AccountInfo;
                     console.log('Get all matches completed.');
                 });
         }
