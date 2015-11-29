@@ -6,9 +6,9 @@
 
     export class AccountInformation {
         public SecrectCode: string;
-        public point: number;
-        public remainingGuessAmount: number;
-        public currentOrderedCoupon: number;
+        public Point: number;
+        public RemainingGuessAmount: number;
+        public CurrentOrderedCoupon: number;
     }
 
     export class CreateNewGuestRespond {
