@@ -238,6 +238,7 @@ var starter;
             }
             AccountController.prototype.checkIonicUserData = function () {
                 var user = Ionic.User.current();
+                alert(user.id);
                 if (user.id && user.id != 'empty') {
                     this.$location.path('/matches/todaymatches');
                 }
@@ -257,6 +258,7 @@ var starter;
                     user.set('isSkiped', 'true');
                     user.save();
                     console.log('Create new guest complete.');
+                    alert(user.id);
                     _this.$location.path('/matches/todaymatches');
                 });
             };
@@ -266,13 +268,8 @@ var starter;
             };
             ;
             AccountController.prototype.LoginWithFacebook = function () {
-                var _this = this;
                 // TODO: Login with facebook
                 this.createIonicUserData();
-                console.log('Doing connecting to facebook');
-                this.$timeout(1000).then(function () {
-                    _this.$location.path('/matches/todaymatches');
-                });
             };
             ;
             AccountController.$inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices'];
@@ -427,7 +424,7 @@ var starter;
         var QueryRemoteDataService = (function () {
             function QueryRemoteDataService($http) {
                 this.$http = $http;
-                this.serviceURL = 'https://dailysoccer.azurewebsites.net/api/';
+                this.serviceURL = 'http://localhost:3728/api/';
             }
             QueryRemoteDataService.prototype.RemoteQuery = function (baseUrl) {
                 return this.$http({ method: 'GET', url: this.serviceURL + baseUrl })

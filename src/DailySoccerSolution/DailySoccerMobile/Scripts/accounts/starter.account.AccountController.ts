@@ -12,6 +12,7 @@
 
         private checkIonicUserData() {
             var user = Ionic.User.current();
+            alert(user.id);
             if (user.id && user.id != 'empty') {
                 this.$location.path('/matches/todaymatches');
             } else {
@@ -43,11 +44,6 @@
         public LoginWithFacebook(): void {
             // TODO: Login with facebook
             this.createIonicUserData();
-
-            console.log('Doing connecting to facebook');
-            this.$timeout(1000).then(() => {
-                this.$location.path('/matches/todaymatches');
-            });
         };
     }
 

@@ -6,7 +6,7 @@
     }
 
     export class QueryRemoteDataService implements IQueryRemoteDataService {
-        private serviceURL = 'https://dailysoccer.azurewebsites.net/api/'
+        private serviceURL = 'http://localhost:3728/api/'
         static $inject = ['$http'];
         constructor(protected $http: ng.IHttpService) { }
 
