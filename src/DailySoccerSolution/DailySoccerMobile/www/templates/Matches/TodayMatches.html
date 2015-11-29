@@ -1,7 +1,53 @@
 ﻿<ion-view view-title="DAILY SOCCER">
     <ion-content>
         <div ng-include src="'/templates/Matches/_matchHeader.html'"></div>
-        <ion-list>
+        <ion-list ng-repeat="match in matchCtrl.Matches">
+
+            <div class="row padding-bottom">
+                <div class="col col-40 item item-stable ">
+                    <span class="status status-left bg-yellow">+{{ match.teamHome.winningPredictionPoints }}</span>
+                    <div class="text-right padding-vertical">
+                        <span class="">
+                            (+{{ match.teamHome.winningPredictionPoints }})
+                        </span>
+                        <span class="team-name">
+                            {{ match.teamHome.name }}
+                        </span>
+                        <span class="">
+                            {{ match.teamHome.currentPredictionPoints }}
+                        </span>
+                    </div>
+                </div>
+                <div class="col col-20 col-center item item-dark ">
+                    <div class="col-center">
+                        <span class="status status-left stable">{{ match.status }}</span>
+                        <div class="text-center padding">
+                            <span>{{ match.teamHome.currentScore }}</span>
+                            <span> - </span>
+                            <span>{{ match.teamAway.currentScore }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-40 item item-stable">
+                    <span class="status status-right bg-yellow">+{{ match.teamAway.winningPredictionPoints }}</span>
+                    <div class="text-left padding-vertical">
+                        <span class="">
+                            {{ match.teamAway.currentPredictionPoints }}
+                        </span>
+                        <span class="team-name">
+                            {{ match.teamAway.name }}
+                        </span>
+                        <span class="">
+                            (+{{ match.teamAway.winningPredictionPoints }})
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
             <div class="row padding-bottom">
                 <div class="col col-40 item item-stable "><!------------status color item-stable------------>
                     <span class="status status-left bg-yellow">+6</span><!------------result color bg-yellow------------>
@@ -213,9 +259,6 @@
                     </div>
                 </div>
             </div>
-           
-
         </ion-list>
-
     </ion-content>
 </ion-view>

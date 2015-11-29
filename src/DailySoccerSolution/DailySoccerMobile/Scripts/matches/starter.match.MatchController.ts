@@ -3,7 +3,7 @@
 
     class MatchController {
 
-        public Matches: MatchInformation[];
+        public Matches: MatchInformation[] = [];
         public AccountInfo: account.AccountInformation;
 
         static $inject = ['$scope', 'starter.match.MatchServices', '$location'];
@@ -17,8 +17,8 @@
             data.UserId = user.id;
             this.matchSvc.GetMatches(data)
                 .then((respond: GetMatchesRespond): void => {
-                    this.Matches = respond.Matches;
-                    this.AccountInfo = respond.AccountInfo;
+                    this.Matches = respond.matches;
+                    this.AccountInfo = respond.accountInfo;
                     console.log('Get all matches completed.');
                 });
         }
