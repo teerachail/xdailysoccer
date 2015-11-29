@@ -8,8 +8,13 @@
         }
 
         public GetMatches(req: GetMatchesRequest): ng.IPromise<GetMatchesRespond> {
-            var requestUrl = "Matches?UserId=" + req.UserId;
+            var requestUrl = 'Matches/GetMatches?UserId=' + req.UserId;
             return this.queryRemoteSvc.RemoteQuery<GetMatchesRespond>(requestUrl);
+        }
+
+        public GuessMatch(req: GuessMatchRequest): ng.IPromise<GuessMatchRespond> {
+            var requestUrl = 'Matches/GuessMatch?userId=' + req.UserId + '&matchId=' + req.MatchId + '&isHome=' + req.IsHome;
+            return this.queryRemoteSvc.RemoteQuery<GuessMatchRespond>(requestUrl);
         }
 
     }

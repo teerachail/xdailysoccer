@@ -22,6 +22,7 @@
 
     export interface IMatchService {
         GetMatches(req: GetMatchesRequest): ng.IPromise<GetMatchesRespond>;
+        GuessMatch(req: GuessMatchRequest): ng.IPromise<GuessMatchRespond>;
     }
     export class GetMatchesRequest {
         public UserId: string;
@@ -30,6 +31,16 @@
         public CurrentDate: Date;
         public AccountInfo: account.AccountInformation;
         public Matches: MatchInformation[];
+    }
+    export class GuessMatchRequest {
+        public UserId: string;
+        public MatchId: number;
+        public IsHome: boolean;
+    }
+    export class GuessMatchRespond {
+        public AccountInfo: account.AccountInformation;
+        public Matches: MatchInformation[];
+        public IsSuccessed: boolean;
     }
 
 }
