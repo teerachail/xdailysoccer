@@ -25,8 +25,8 @@
 
         public Logout(): void {
             var user = Ionic.User.current();
-            user.id = '';
-
+            user.id = 'empty';
+            user.save();
             this.$location.path('/account/login');
         }
 

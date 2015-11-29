@@ -15,7 +15,9 @@ namespace DailySoccer.DAC.EF
     public partial class Account
     {
         public int Id { get; set; }
+        public Nullable<int> Points { get; set; }
         public string SecrectCode { get; set; }
-        public int Point { get; set; }
+        public Nullable<int> RemainingGuessAmount { get; set; }
+        public Nullable<int> CurrentOrderedCoupon { get; set; }
     }
 }

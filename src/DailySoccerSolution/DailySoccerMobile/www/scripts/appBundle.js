@@ -229,45 +229,41 @@ var starter;
         'use strict';
         var AccountController = (function () {
             function AccountController($scope, $timeout, $location, accountSvc) {
-                //this.checkIonicUserData();
                 this.$scope = $scope;
                 this.$timeout = $timeout;
                 this.$location = $location;
                 this.accountSvc = accountSvc;
-                this.accountSvc.CreateNewGuest()
-                    .then(function (respond) {
-                    alert(respond.AccountInfo.Points);
-                    console.log('Create new guest complete.');
-                });
+                this.checkIonicUserData();
             }
             AccountController.prototype.checkIonicUserData = function () {
                 var user = Ionic.User.current();
-                if (user.id) {
+                if (user.id && user.id != 'empty') {
                     this.$location.path('/matches/todaymatches');
                 }
                 else {
                     var isSkiped = user.get('isSkiped');
-                    alert(isSkiped);
                     if (isSkiped) {
+                        alert('olduser');
                     }
                 }
             };
             AccountController.prototype.createIonicUserData = function () {
+                var _this = this;
                 var user = Ionic.User.current();
                 if (!user.id) {
-                    user.id = Ionic.User.anonymousId();
-                    user.set('isSkiped', 'true');
-                    user.save();
+                    this.accountSvc.CreateNewGuest()
+                        .then(function (respond) {
+                        user.id = respond.AccountInfo.SecrectCode;
+                        user.set('isSkiped', 'true');
+                        user.save();
+                        console.log('Create new guest complete.');
+                        _this.$location.path('/matches/todaymatches');
+                    });
                 }
             };
             AccountController.prototype.SkipLogin = function () {
-                var _this = this;
                 // TODO: Login with guest
                 this.createIonicUserData();
-                console.log('Doing Register new guest account');
-                this.$timeout(1000).then(function () {
-                    _this.$location.path('/matches/todaymatches');
-                });
             };
             ;
             AccountController.prototype.LoginWithFacebook = function () {
@@ -354,7 +350,8 @@ var starter;
             };
             MatchController.prototype.Logout = function () {
                 var user = Ionic.User.current();
-                user.id = '';
+                user.id = 'empty';
+                user.save();
                 this.$location.path('/account/login');
             };
             MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location'];
