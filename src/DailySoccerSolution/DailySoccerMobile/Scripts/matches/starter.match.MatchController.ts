@@ -6,9 +6,16 @@
         public Matches: MatchInformation[] = [];
         public AccountInfo: account.AccountInformation;
 
-        static $inject = ['$scope', 'starter.match.MatchServices', '$location'];
-        constructor(private $scope: ng.IScope, private matchSvc: starter.match.MatchServices, private $location: ng.ILocationService) {
+        static $inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal'];
+        constructor(private $scope, private matchSvc: starter.match.MatchServices, private $location: ng.ILocationService,private $ionicModal) {
             this.GetTodayMatches();
+
+            this.$ionicModal.fromTemplateUrl('templates/Matches/MatchPopup.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.MatchPopup = modal;
+            });
         }
 
         public GetTodayMatches(): void {

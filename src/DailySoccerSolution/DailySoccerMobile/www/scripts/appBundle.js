@@ -82,6 +82,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
         .state('matches', {
         url: '/matches',
         abstract: true,
+        cache: false,
         templateUrl: 'templates/_matchTemplate.html',
         controller: 'starter.match.MatchController as matchCtrl'
     })
@@ -352,6 +353,7 @@ var starter;
                 this.$ionicModal = $ionicModal;
                 this.Matches = [];
                 this.GetTodayMatches();
+<<<<<<< HEAD
                 this.$ionicModal.fromTemplateUrl('/Matches/modal.html', {
                     scope: $scope,
                     animation: 'slide-in-up'
@@ -361,7 +363,19 @@ var starter;
                 this.$scope.openModal = function () {
                     $scope.modal.show();
                 };
+=======
+                this.$ionicModal.fromTemplateUrl('templates/Matches/modal.html', {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                }).then(function (modal) {
+                    $scope.popup = modal;
+                });
+>>>>>>> c9883e8... - Add example modal
             }
+            MatchController.prototype.openModal = function () {
+                this.$scope.popup.show();
+            };
+            ;
             MatchController.prototype.GetTodayMatches = function () {
                 var _this = this;
                 var user = Ionic.User.current();
@@ -477,7 +491,7 @@ var starter;
         var QueryRemoteDataService = (function () {
             function QueryRemoteDataService($http) {
                 this.$http = $http;
-                this.serviceURL = 'http://localhost:3728/api/';
+                this.serviceURL = 'https://dailysoccer.azurewebsites.net/api/';
             }
             QueryRemoteDataService.prototype.RemoteQuery = function (baseUrl) {
                 return this.$http({ method: 'GET', url: this.serviceURL + baseUrl })

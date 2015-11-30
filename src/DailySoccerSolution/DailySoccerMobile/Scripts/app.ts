@@ -90,6 +90,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
             .state('matches', {
                 url: '/matches',
                 abstract: true,
+                cache: false,
                 templateUrl: 'templates/_matchTemplate.html',
                 controller: 'starter.match.MatchController as matchCtrl'
             })
