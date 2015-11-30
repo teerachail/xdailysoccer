@@ -10,7 +10,7 @@ namespace DailySoccer.Shared.Models
     {
         public string SecrectCode { get; set; }
         public int Points { get; set; }
-        public int RemainingGuessAmount { get; set; }
+        public int MaximumGuessAmount { get; set; }
         public int CurrentOrderedCoupon { get; set; }
     }
 }

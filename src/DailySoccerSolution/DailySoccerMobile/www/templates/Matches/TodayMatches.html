@@ -2,7 +2,7 @@
     <ion-content>
         <div ng-include src="'/templates/Matches/_matchHeader.html'"></div>
         <ion-list>
-            <div class="row padding-bottom" ng-repeat="match in matchCtrl.Matches">
+            <div class="row padding-bottom" ng-repeat="match in matchCtrl.TodayMatches">
                 <div class="col col-40 item" 
                      ng-class="{'item-stable': !match.TeamHome.IsSelected,
                      'item-calm': match.TeamHome.IsSelected && !match.CompletedDate,
@@ -28,7 +28,7 @@
                     <div class="col-center">
                         <span class="status status-left" ng-class="{'energized': !match.CompletedDate, 'stable': match.CompletedDate}" >{{ match.Status }}</span>
                         <div class="text-center padding" ng-show="!match.StartedDate">
-                            <span>{{ match.BeginDate | date :  'hh:mm'}}</span>
+                            <span>{{ match.BeginDate | date : 'hh:mm'}}</span>
                         </div>
                         <div class="text-center padding" ng-show="match.StartedDate">
                             <span>{{ match.TeamHome.CurrentScore }}</span>

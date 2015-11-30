@@ -25,7 +25,7 @@ namespace DailySoccer.Shared.Facades
                 SecrectCode = SecrectCode,
                 CurrentOrderedCoupon = 0,
                 Points = 0,
-                RemainingGuessAmount = 5,
+                MaximumGuessAmount = 5,
             };
 
             dbContext.Accounts.Add(new Account

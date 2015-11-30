@@ -7,7 +7,7 @@
     export class AccountInformation {
         public SecrectCode: string;
         public Point: number;
-        public RemainingGuessAmount: number;
+        public MaximumGuessAmount: number;
         public CurrentOrderedCoupon: number;
     }
 

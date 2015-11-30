@@ -250,6 +250,97 @@ namespace DailySoccerAppService.Controllers
                         WinningPredictionPoints = 3
                     },
                 },
+
+                // +1 Future
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now.AddDays(1),
+                    Status = "FT",
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Future A",
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Future B",
+                    },
+                },
+                // +2 Future
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now.AddDays(2),
+                    Status = "FT",
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Future C",
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Future D",
+                    },
+                },
+
+                // -1 Past
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now.AddDays(-1),
+                    StartedDate = now.AddDays(-1),
+                    CompletedDate = now.AddDays(-1),
+                    Status = "FT",
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Past 1",
+                        CurrentScore = 1,
+                        CurrentPredictionPoints = 7,
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Past 2",
+                        CurrentScore = 1,
+                        CurrentPredictionPoints = 3,
+                        IsSelected = true,
+                        WinningPredictionPoints = 3
+                    },
+                },
+                // -2 Past
+                new MatchInformation
+                {
+                    Id = matchId++,
+                    BeginDate = now.AddDays(-2),
+                    StartedDate = now.AddDays(-2),
+                    CompletedDate = now.AddDays(-2),
+                    Status = "FT",
+                    LeagueName = "Premier League",
+                    TeamHome = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Past 3",
+                        CurrentScore = 1,
+                        CurrentPredictionPoints = 7,
+                    },
+                    TeamAway = new TeamInformation
+                    {
+                        Id = teamId++,
+                        Name = "Past 4",
+                        CurrentScore = 1,
+                        CurrentPredictionPoints = 3,
+                        IsSelected = true,
+                        WinningPredictionPoints = 3
+                    },
+                },
+
             };
 
             return new GetMatchesRespond
@@ -258,7 +349,7 @@ namespace DailySoccerAppService.Controllers
                 AccountInfo = new AccountInformation
                 {
                     Points = 255,
-                    RemainingGuessAmount = 5,
+                    MaximumGuessAmount = 5,
                     CurrentOrderedCoupon = 15
                 },
                 Matches = matches
