@@ -65,7 +65,7 @@
             request.IsHome = isSelectedTeamHome;
 
             this.matchSvc.GuessMatch(request)
-                .then((respond: GuessMatchRespond) => {
+                .then((respond: GuessMatchRespond): void => {
                     this.AccountInfo = respond.AccountInfo;
                     this.updateDisplayMatches(respond.Matches);
                     this.updateRemainingGuessAmount();
