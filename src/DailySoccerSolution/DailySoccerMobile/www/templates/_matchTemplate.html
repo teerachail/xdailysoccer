@@ -13,7 +13,7 @@
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-tabs class="tabs-dark tabs-top">
-            <ion-tab title="1">
+            <ion-tab title="จ<br>1">
                 <ion-view view-title="Welcome">
                     <ion-content>
                         <div ng-include src="'templates/Matches/_matchHeader.html'"></div>
@@ -23,13 +23,13 @@
                     </ion-content>
                 </ion-view>
             </ion-tab>
-            <ion-tab title="2">
+            <ion-tab title="อ<br>2">
                 <!-- Tab 2 content -->
                 <ion-view view-title="Welcome">
                     <ion-content>
                         <div ng-include src="'templates/Matches/_matchHeader.html'"></div>
                         <div class="buttons">
-                            <button class="button button-dark" ng-click="openModal()">Modal</button>
+                            <button class="button button-dark" ng-click="matchCtrl.openModal()">Modal</button>
                         </div>
                         <h1>
                             Tab 2
@@ -38,10 +38,10 @@
                 </ion-view>
 
             </ion-tab>
-            <ion-tab title="3">
+            <ion-tab title="พ<br>3">
                 <ion-nav-view name="MainContent"></ion-nav-view>
             </ion-tab>
-            <ion-tab title="4">
+            <ion-tab title="พฤ<br>4">
                 <ion-view view-title="Welcome">
                     <ion-content>
                         <div ng-include src="'templates/Matches/_matchHeader.html'"></div>
@@ -51,7 +51,7 @@
                     </ion-content>
                 </ion-view>
             </ion-tab>
-            <ion-tab title="5">
+            <ion-tab title="ศ<br>5">
                 <ion-view view-title="Welcome">
                     <ion-content>
                         <div ng-include src="'templates/Matches/_matchHeader.html'"></div>

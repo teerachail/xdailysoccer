@@ -9329,3 +9329,8 @@ ion-modal-view {
 .verify-phone-number .row + .row {
   margin-top: initial;
   padding-top: initial; }
+
+.match-template span.tab-title.ng-binding {
+  margin-top: 4px !important;
+  line-height: 20px !important;
+  display: block !important; }

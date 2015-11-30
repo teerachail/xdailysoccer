@@ -161,6 +161,27 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 templateUrl: 'templates/Rewards/BuyTicketCompleted.html',
             }
         }
+    })
+        .state('verify', {
+        url: '/verify',
+        abstract: true,
+        templateUrl: 'templates/_basicTemplate.html',
+    })
+        .state('verify.verifyphonenumber', {
+        url: '/verifyphonenumber',
+        views: {
+            'MainContent': {
+                templateUrl: 'templates/Accounts/VerifyPhoneNumber.html',
+            }
+        }
+    })
+        .state('verify.verifycode', {
+        url: '/verifycode',
+        views: {
+            'MainContent': {
+                templateUrl: 'templates/Accounts/VerifyCode.html',
+            }
+        }
     });
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/app/playlists');
@@ -238,7 +259,6 @@ var starter;
             }
             AccountController.prototype.checkIonicUserData = function () {
                 var user = Ionic.User.current();
-                alert(user.id);
                 if (user.id && user.id != 'empty') {
                     this.$location.path('/matches/todaymatches');
                 }
@@ -258,7 +278,6 @@ var starter;
                     user.set('isSkiped', 'true');
                     user.save();
                     console.log('Create new guest complete.');
-                    alert(user.id);
                     _this.$location.path('/matches/todaymatches');
                 });
             };
@@ -326,12 +345,22 @@ var starter;
     (function (match) {
         'use strict';
         var MatchController = (function () {
-            function MatchController($scope, matchSvc, $location) {
+            function MatchController($scope, matchSvc, $location, $ionicModal) {
                 this.$scope = $scope;
                 this.matchSvc = matchSvc;
                 this.$location = $location;
+                this.$ionicModal = $ionicModal;
                 this.Matches = [];
                 this.GetTodayMatches();
+                this.$ionicModal.fromTemplateUrl('/Matches/modal.html', {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                }).then(function (modal) {
+                    $scope.modal = modal;
+                });
+                this.$scope.openModal = function () {
+                    $scope.modal.show();
+                };
             }
             MatchController.prototype.GetTodayMatches = function () {
                 var _this = this;
@@ -351,7 +380,15 @@ var starter;
                 user.save();
                 this.$location.path('/account/login');
             };
-            MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location'];
+            MatchController.prototype.SelectTeam = function (selectedMatch, selectedTeamId) {
+                var isSelectedTeamHome = selectedMatch.TeamHome.Id == selectedTeamId;
+                var selectedTeam = isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
+                var unselectedTeam = !isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
+                selectedTeam.IsSelected = !selectedTeam.IsSelected;
+                unselectedTeam.IsSelected = false;
+                console.log('Select team: ' + selectedTeam.Name);
+            };
+            MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal'];
             return MatchController;
         })();
         angular
@@ -387,6 +424,18 @@ var starter;
             return GetMatchesRespond;
         })();
         match.GetMatchesRespond = GetMatchesRespond;
+        var GuessMatchRequest = (function () {
+            function GuessMatchRequest() {
+            }
+            return GuessMatchRequest;
+        })();
+        match.GuessMatchRequest = GuessMatchRequest;
+        var GuessMatchRespond = (function () {
+            function GuessMatchRespond() {
+            }
+            return GuessMatchRespond;
+        })();
+        match.GuessMatchRespond = GuessMatchRespond;
     })(match = starter.match || (starter.match = {}));
 })(starter || (starter = {}));
 var starter;
@@ -399,7 +448,11 @@ var starter;
                 this.queryRemoteSvc = queryRemoteSvc;
             }
             MatchServices.prototype.GetMatches = function (req) {
-                var requestUrl = "Matches?UserId=" + req.UserId;
+                var requestUrl = 'Matches/GetMatches?UserId=' + req.UserId;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            MatchServices.prototype.GuessMatch = function (req) {
+                var requestUrl = 'Matches/GuessMatch?userId=' + req.UserId + '&matchId=' + req.MatchId + '&isHome=' + req.IsHome;
                 return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
             MatchServices.$inject = ['starter.shared.QueryRemoteDataService'];
