@@ -12,7 +12,6 @@
 
         private checkIonicUserData() {
             var user = Ionic.User.current();
-            alert(user.id);
             if (user.id && user.id != 'empty') {
                 this.$location.path('/matches/todaymatches');
             } else {
