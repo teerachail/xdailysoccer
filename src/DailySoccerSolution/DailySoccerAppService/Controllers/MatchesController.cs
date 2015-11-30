@@ -264,5 +264,17 @@ namespace DailySoccerAppService.Controllers
                 Matches = matches
             };
         }
+
+        [HttpGet]
+        public GuessMatchRespond GuessMatch(string userId, int matchId, bool isHome)
+        {
+            // HACK: Mocking GuessMatch' data
+            return new GuessMatchRespond
+            {
+                IsSuccessed = true,
+                AccountInfo = new AccountInformation(),
+                Matches = Enumerable.Empty<MatchInformation>()
+            };
+        }
     }
 }

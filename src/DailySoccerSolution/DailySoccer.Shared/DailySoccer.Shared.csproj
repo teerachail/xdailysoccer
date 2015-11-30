@@ -57,6 +57,7 @@
     <Compile Include="Shared\Models\CreateNewGuestRespond.cs" />
     <Compile Include="Shared\Models\GetMatchesRequest.cs" />
     <Compile Include="Shared\Models\GetMatchesRespond.cs" />
+    <Compile Include="Shared\Models\GuessMatchRespond.cs" />
     <Compile Include="Shared\Models\MatchInformation.cs" />
     <Compile Include="Shared\Models\TeamInformation.cs" />
   </ItemGroup>

@@ -36,7 +36,18 @@
             var unselectedTeam = !isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
             selectedTeam.IsSelected = !selectedTeam.IsSelected;
             unselectedTeam.IsSelected = false;
-            console.log('Select team: ' + selectedTeam.Name);
+
+            var request = new GuessMatchRequest();
+            request.UserId = Ionic.User.current().id;
+            request.MatchId = selectedMatch.Id;
+            request.IsHome = isSelectedTeamHome;
+
+            this.matchSvc.GuessMatch(request)
+                .then((respond: GuessMatchRespond) => {
+                    this.Matches = respond.Matches;
+                    this.AccountInfo = respond.AccountInfo;
+                    console.log('Send guess match completed.');
+                });
         }
 
     }
