@@ -48,8 +48,10 @@ $modal-inset-mode-bottom:         35% !default;
 $modal-inset-mode-left:           10% !default;
 $modal-inset-mode-min-height:     150px !default;
 $modal-inset-mode-min-width:     80% !default;
-$ads-top-adroid:   ($bar-height + $bar-subheader-height + $ios-statusbar-height) -31;
-$ads-top-ios :   ($bar-height + $bar-subheader-height + $ios-statusbar-height) -11;
+
+
+$ads-top-adroid:   ($bar-height + $bar-subheader-height) - 11;
+$ads-top-ios :   ($bar-height + $bar-subheader-height + $ios-statusbar-height) - 11;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -61,10 +63,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // --------------------------------------------- Background color
 
-
+.platform-android.platform-cordova {
 .has-subheader{
             top: $ads-top-adroid !important;
-        }
+            }
+}
 .platform-ios.platform-cordova {
             .has-subheader{
             top: $ads-top-ios !important;

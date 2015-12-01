@@ -9089,11 +9089,11 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-.has-subheader {
-  top: 140px -31 !important; }
+.platform-android.platform-cordova .has-subheader {
+  top: 109px !important; }
 
 .platform-ios.platform-cordova .has-subheader {
-  top: 140px -11 !important; }
+  top: 129px !important; }
 
 .bg-main {
   background: #233b83; }
