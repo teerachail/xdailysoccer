@@ -58,13 +58,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CreateNewGuestSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Specs\CreateNewGuest.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateNewGuest.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\Hooks.cs" />
     <Compile Include="Specs\MatchesServices.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MatchesServices.feature</DependentUpon>
     </Compile>
+    <Compile Include="Specs\Steps\CreateNewGuestSteps.cs" />
     <Compile Include="Specs\Steps\MatchesServicesSteps.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +83,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Specs\CreateNewGuest.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CreateNewGuest.feature.cs</LastGenOutput>
+    </None>
     <None Include="Specs\MatchesServices.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MatchesServices.feature.cs</LastGenOutput>

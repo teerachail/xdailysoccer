@@ -82,7 +82,14 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Accounts/Login.html',
-                        //controller: 'PlaylistsCtrl'
+                    }
+                }
+            })
+            .state('account.favoritteam', {
+                url: '/favoritteam',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/Accounts/FavoritTeam.html',
                     }
                 }
             })
