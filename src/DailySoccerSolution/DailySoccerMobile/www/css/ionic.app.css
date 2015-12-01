@@ -9090,10 +9090,10 @@ a.button {
   transition-duration: 0s; }
 
 .has-subheader {
-  top: 109px !important; }
+  top: 140px -31 !important; }
 
 .platform-ios.platform-cordova .has-subheader {
-  top: 129px !important; }
+  top: 140px -11 !important; }
 
 .bg-main {
   background: #233b83; }

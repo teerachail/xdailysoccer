@@ -28,7 +28,10 @@ $button-stable-text:              $button-energized-text;
 $button-stable-active-bg:         #e5e5e5 ;
 $font-size-large:                 18px ; // font-large
 $border-radius-large:             6px ; // button-radius
-$bar-height:                      60px; 
+$bar-height:                      60px;
+$bar-subheader-height:            $bar-height !default;
+$ios-statusbar-height:           20px !default;
+ 
 $button-dark-text:                #ffffff ; //text-white
 $tabs-dark-text:                  $button-dark-text !default;
 $menu-bg:                         $royal; //bg side menu
@@ -45,8 +48,8 @@ $modal-inset-mode-bottom:         35% !default;
 $modal-inset-mode-left:           10% !default;
 $modal-inset-mode-min-height:     150px !default;
 $modal-inset-mode-min-width:     80% !default;
-$ads-top-adroid:   ($bar-height + $bar-subheader-height + $ios-statusbar-height)-31;
-$ads-top-ios :   ($bar-height + $bar-subheader-height + $ios-statusbar-height)-11;
+$ads-top-adroid:   ($bar-height + $bar-subheader-height + $ios-statusbar-height) -31;
+$ads-top-ios :   ($bar-height + $bar-subheader-height + $ios-statusbar-height) -11;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;

@@ -79,6 +79,14 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
             }
         }
     })
+        .state('account.favoritteam', {
+        url: '/favoritteam',
+        views: {
+            'MainContent': {
+                templateUrl: 'templates/Accounts/FavoritTeam.html',
+            }
+        }
+    })
         .state('matches', {
         url: '/matches',
         abstract: true,
@@ -256,7 +264,7 @@ var starter;
                 this.$timeout = $timeout;
                 this.$location = $location;
                 this.accountSvc = accountSvc;
-                this.checkIonicUserData();
+                //this.checkIonicUserData();
             }
             AccountController.prototype.checkIonicUserData = function () {
                 var user = Ionic.User.current();
