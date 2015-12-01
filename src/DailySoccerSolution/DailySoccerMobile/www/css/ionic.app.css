@@ -5289,7 +5289,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
     right: 10%;
     bottom: 35%;
     left: 10%;
-    min-height: 100px;
+    min-height: 150px;
     width: 80%; }
   .modal.ng-leave-active {
     bottom: 0; }
@@ -9275,6 +9275,9 @@ i {
 .no-border {
   border: 0px !important; }
 
+.no-radius {
+  border-radius: 0px !important; }
+
 .tabs-top > .tabs, .tabs.tabs-top {
   border-bottom-width: 0px; }
 
@@ -9303,18 +9306,18 @@ i {
   .item.col.col-40 span {
     font-size: 12px; }
 
-.login .scroll-content {
+.scroll-middle .scroll-content {
   display: table !important;
   width: 100% !important;
   height: 100% !important; }
 
-.login .scroll {
+.scroll-middle .scroll {
   display: table-cell;
   vertical-align: middle;
   text-align: center; }
 
 ion-modal-view {
-  border-radius: 20px; }
+  border-radius: 10px; }
 
 .input-number {
   border: 1px solid !important;
@@ -9334,3 +9337,19 @@ ion-modal-view {
   margin-top: 4px !important;
   line-height: 20px !important;
   display: block !important; }
+
+.advertisement.modal {
+  top: initial;
+  right: initial;
+  bottom: initial;
+  left: initial;
+  min-height: 150px;
+  width: 100%;
+  height: 100%;
+  border-radius: 0; }
+
+.advertisement .scroll {
+  height: 100%; }
+
+.advertisement .button-royal {
+  background: #242F4B !important; }

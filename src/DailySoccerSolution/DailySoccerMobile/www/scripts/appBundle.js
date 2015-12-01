@@ -353,29 +353,13 @@ var starter;
                 this.$ionicModal = $ionicModal;
                 this.Matches = [];
                 this.GetTodayMatches();
-<<<<<<< HEAD
-                this.$ionicModal.fromTemplateUrl('/Matches/modal.html', {
+                this.$ionicModal.fromTemplateUrl('templates/Matches/MatchPopup.html', {
                     scope: $scope,
                     animation: 'slide-in-up'
                 }).then(function (modal) {
-                    $scope.modal = modal;
+                    $scope.MatchPopup = modal;
                 });
-                this.$scope.openModal = function () {
-                    $scope.modal.show();
-                };
-=======
-                this.$ionicModal.fromTemplateUrl('templates/Matches/modal.html', {
-                    scope: $scope,
-                    animation: 'slide-in-up'
-                }).then(function (modal) {
-                    $scope.popup = modal;
-                });
->>>>>>> c9883e8... - Add example modal
             }
-            MatchController.prototype.openModal = function () {
-                this.$scope.popup.show();
-            };
-            ;
             MatchController.prototype.GetTodayMatches = function () {
                 var _this = this;
                 var user = Ionic.User.current();
@@ -395,12 +379,22 @@ var starter;
                 this.$location.path('/account/login');
             };
             MatchController.prototype.SelectTeam = function (selectedMatch, selectedTeamId) {
+                var _this = this;
                 var isSelectedTeamHome = selectedMatch.TeamHome.Id == selectedTeamId;
                 var selectedTeam = isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
                 var unselectedTeam = !isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
                 selectedTeam.IsSelected = !selectedTeam.IsSelected;
                 unselectedTeam.IsSelected = false;
-                console.log('Select team: ' + selectedTeam.Name);
+                var request = new match.GuessMatchRequest();
+                request.UserId = Ionic.User.current().id;
+                request.MatchId = selectedMatch.Id;
+                request.IsHome = isSelectedTeamHome;
+                this.matchSvc.GuessMatch(request)
+                    .then(function (respond) {
+                    _this.Matches = respond.Matches;
+                    _this.AccountInfo = respond.AccountInfo;
+                    console.log('Send guess match completed.');
+                });
             };
             MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal'];
             return MatchController;
@@ -491,7 +485,7 @@ var starter;
         var QueryRemoteDataService = (function () {
             function QueryRemoteDataService($http) {
                 this.$http = $http;
-                this.serviceURL = 'https://dailysoccer.azurewebsites.net/api/';
+                this.serviceURL = 'http://localhost:3728/api/';
             }
             QueryRemoteDataService.prototype.RemoteQuery = function (baseUrl) {
                 return this.$http({ method: 'GET', url: this.serviceURL + baseUrl })
