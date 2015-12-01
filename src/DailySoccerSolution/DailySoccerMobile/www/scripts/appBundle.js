@@ -351,14 +351,18 @@ var starter;
                 this.matchSvc = matchSvc;
                 this.$location = $location;
                 this.$ionicModal = $ionicModal;
-                this.Matches = [];
+                this.PastOneDaysDate = new Date();
+                this.PastTwoDaysDate = new Date();
+                this.FutureOneDaysDate = new Date();
+                this.FutureTwoDaysDate = new Date();
+                this.TodayMatches = [];
+                this.PastMatches = [];
+                this.FutureMatches = [];
                 this.GetTodayMatches();
                 this.$ionicModal.fromTemplateUrl('templates/Matches/MatchPopup.html', {
                     scope: $scope,
                     animation: 'slide-in-up'
-                }).then(function (modal) {
-                    $scope.MatchPopup = modal;
-                });
+                }).then(function (modal) { $scope.MatchPopup = modal; });
             }
             MatchController.prototype.GetTodayMatches = function () {
                 var _this = this;
@@ -367,8 +371,10 @@ var starter;
                 data.UserId = user.id;
                 this.matchSvc.GetMatches(data)
                     .then(function (respond) {
-                    _this.Matches = respond.Matches;
                     _this.AccountInfo = respond.AccountInfo;
+                    _this.updateDisplayDate(respond.CurrentDate);
+                    _this.updateDisplayMatches(respond.Matches);
+                    _this.updateRemainingGuessAmount();
                     console.log('Get all matches completed.');
                 });
             };
@@ -380,6 +386,9 @@ var starter;
             };
             MatchController.prototype.SelectTeam = function (selectedMatch, selectedTeamId) {
                 var _this = this;
+                var isChangingValid = this.AccountInfo.MaximumGuessAmount > this.getSelectedTodayMatches().length;
+                if (!isChangingValid)
+                    return;
                 var isSelectedTeamHome = selectedMatch.TeamHome.Id == selectedTeamId;
                 var selectedTeam = isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
                 var unselectedTeam = !isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
@@ -391,10 +400,36 @@ var starter;
                 request.IsHome = isSelectedTeamHome;
                 this.matchSvc.GuessMatch(request)
                     .then(function (respond) {
-                    _this.Matches = respond.Matches;
                     _this.AccountInfo = respond.AccountInfo;
+                    _this.updateDisplayMatches(respond.Matches);
+                    _this.updateRemainingGuessAmount();
                     console.log('Send guess match completed.');
                 });
+                this.updateRemainingGuessAmount();
+            };
+            MatchController.prototype.updateDisplayMatches = function (matches) {
+                var _this = this;
+                this.TodayMatches = matches.filter(function (it) { return it.BeginDate == _this.CurrentDate; });
+                this.PastMatches = matches.filter(function (it) { return it.BeginDate < _this.CurrentDate; });
+                this.FutureMatches = matches.filter(function (it) { return it.BeginDate > _this.CurrentDate; });
+                console.log('# Update matches completed.');
+            };
+            MatchController.prototype.updateDisplayDate = function (currentDate) {
+                this.CurrentDate = currentDate;
+                currentDate = new Date(currentDate.toString());
+                this.PastOneDaysDate.setDate(currentDate.getDate() - 1);
+                this.PastTwoDaysDate.setDate(currentDate.getDate() - 2);
+                this.FutureOneDaysDate.setDate(currentDate.getDate() + 1);
+                this.FutureTwoDaysDate.setDate(currentDate.getDate() + 2);
+                console.log('# Update date completed.');
+            };
+            MatchController.prototype.updateRemainingGuessAmount = function () {
+                this.RemainingGuessAmount = this.AccountInfo.MaximumGuessAmount - this.getSelectedTodayMatches().length;
+                console.log('# Update remaining guess amount completed.');
+            };
+            MatchController.prototype.getSelectedTodayMatches = function () {
+                var selectedMatchesQry = this.TodayMatches.filter(function (it) { return it.TeamHome.IsSelected || it.TeamAway.IsSelected; });
+                return selectedMatchesQry;
             };
             MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal'];
             return MatchController;
