@@ -1,6 +1,7 @@
 ﻿<ion-view view-title="DAILY SOCCER">
     <ion-content class="has-subheader">
-        <div ng-include src="'templates/Matches/_matchHeader.html'"></div>
+        <div ng-include src="'templates/Matches/_matchHeaderAds.html'"></div>
+        <div ng-include src="'templates/Matches/_matchHeaderScore.html'"></div>
         <ion-list>
             <div class="row padding-bottom" ng-repeat="match in matchCtrl.TodayMatches">
                 <div class="col col-40 item" 

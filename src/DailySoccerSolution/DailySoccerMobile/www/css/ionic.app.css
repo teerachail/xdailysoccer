@@ -9359,3 +9359,12 @@ ion-modal-view {
 
 .advertisement .button-royal {
   background: #242F4B !important; }
+
+.history .item.item-stable {
+  line-height: 40px; }
+
+.history .item.item-royal {
+  background: #D2D2D2 !important;
+  border: 0px !important;
+  margin: 0px !important;
+  color: #000000 !important; }
