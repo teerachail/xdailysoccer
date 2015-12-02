@@ -1,0 +1,26 @@
+﻿<ion-view view-title="DAILY SOCCER">
+    <ion-content class="history">
+        <div ng-include src="'templates/Matches/_matchHeaderAds.html'" class="padding-bottom"></div>
+        <ion-list>
+            <div ng-repeat="group in groups" class="padding-bottom">
+                <ion-item class="item-stable bg-gray row no-padding no-border "
+                          ng-click="toggleGroup(group)"
+                          ng-class="{active: isGroupShown(group)}">
+                    <div class="col col-20 col-center text-center">
+                        <b>+20</b>
+                    </div>
+                    <div class="col col-center text-center">
+                        22 พฤษจิกายน 2558
+                    </div>
+                    <dsiv class="col col-20 col-center text-right">
+                        <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-down' : 'ion-chevron-up'"></i>
+                    </dsiv>
+                </ion-item>
+                <ion-item class="item-accordion"
+                          ng-show="isGroupShown(group)">
+                    1 2
+                </ion-item>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

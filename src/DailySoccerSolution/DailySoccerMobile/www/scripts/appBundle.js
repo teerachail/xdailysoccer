@@ -145,6 +145,14 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
             }
         }
     })
+        .state('history.historybyday', {
+        url: '/historybyday',
+        views: {
+            'MainContent': {
+                templateUrl: 'templates/Matches/HistoryByDay.html',
+            }
+        }
+    })
         .state('ticket', {
         url: '/ticket',
         abstract: true,
@@ -198,6 +206,27 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
 });
 angular.module('starter.controllers', [])
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
+    $scope.groups = [];
+    for (var i = 0; i < 10; i++) {
+        $scope.groups[i] = {
+            name: i,
+            items: []
+        };
+        for (var j = 0; j < 3; j++) {
+            $scope.groups[i].items.push(i + '-' + j);
+        }
+    }
+    $scope.toggleGroup = function (group) {
+        if ($scope.isGroupShown(group)) {
+            $scope.shownGroup = null;
+        }
+        else {
+            $scope.shownGroup = group;
+        }
+    };
+    $scope.isGroupShown = function (group) {
+        return $scope.shownGroup === group;
+    };
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),

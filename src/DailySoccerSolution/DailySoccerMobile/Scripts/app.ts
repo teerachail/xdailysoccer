@@ -160,6 +160,15 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                     }
                 }
             })
+            .state('history.historybyday', {
+                url: '/historybyday',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/Matches/HistoryByDay.html',
+                        //controller: 'PlaylistsCtrl'
+                    }
+                }
+            })
 
             .state('ticket', {
                 url: '/ticket',

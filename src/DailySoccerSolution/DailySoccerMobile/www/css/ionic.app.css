@@ -9362,7 +9362,7 @@ ion-modal-view {
 
 <<<<<<< HEAD
 .history .item.item-stable {
-  line-height: 40px; }
+  line-height: 28px; }
 
 .history .item.item-royal {
   background: #D2D2D2 !important;
@@ -9398,3 +9398,16 @@ ion-modal-view {
     visibility: visible;
     color: #323232; }
 >>>>>>> 5621bcb... FavoritTeam.html
+
+.list .item.item-accordion {
+  line-height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear; }
+
+.list .item.item-accordion.ng-hide {
+  line-height: 0px; }
+
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important; }
