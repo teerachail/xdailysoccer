@@ -63,9 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
-    <Build Include="dbo\Tables\Accounts.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Accounts.sql" />
+    <Build Include="dbo\Tables\Accounts.sql" />
+    <Build Include="dbo\Tables\Matches.sql" />
+    <Build Include="dbo\Tables\GuessMatches.sql" />
   </ItemGroup>
 </Project>

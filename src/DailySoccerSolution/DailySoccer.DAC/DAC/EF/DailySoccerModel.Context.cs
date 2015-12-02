@@ -26,5 +26,7 @@ namespace DailySoccer.DAC.EF
         }
     
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Match> Matches { get; set; }
+        public virtual DbSet<GuessMatch> GuessMatches { get; set; }
     }
 }

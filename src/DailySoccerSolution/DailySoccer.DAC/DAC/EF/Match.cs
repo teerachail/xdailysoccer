@@ -12,17 +12,25 @@ namespace DailySoccer.DAC.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class Match
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Account()
+        public Match()
         {
             this.GuessMatches = new HashSet<GuessMatch>();
+            this.TeamHome = new Team();
+            this.TeamAway = new Team();
         }
     
         public int Id { get; set; }
-        public string SecrectCode { get; set; }
-        public int Points { get; set; }
+        public string LeagueName { get; set; }
+        public System.DateTime BeginDate { get; set; }
+        public Nullable<System.DateTime> StartedDate { get; set; }
+        public Nullable<System.DateTime> CompletedDate { get; set; }
+        public string Status { get; set; }
+    
+        public Team TeamHome { get; set; }
+        public Team TeamAway { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GuessMatch> GuessMatches { get; set; }

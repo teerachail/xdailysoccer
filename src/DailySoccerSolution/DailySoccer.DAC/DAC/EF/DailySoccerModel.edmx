@@ -7,34 +7,158 @@
     <Schema Namespace="DailySoccerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="DailySoccerModelStoreContainer">
     <EntitySet Name="Accounts" EntityType="DailySoccerModel.Store.Accounts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Matches" EntityType="DailySoccerModel.Store.Matches" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GuessMatches" EntityType="DailySoccerModel.Store.GuessMatches" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="AccountGuessMatch" Association="DailySoccerModel.Store.AccountGuessMatch">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="GuessMatch" EntitySet="GuessMatches" />
+    </AssociationSet>
+    <AssociationSet Name="MatchGuessMatch" Association="DailySoccerModel.Store.MatchGuessMatch">
+      <End Role="Match" EntitySet="Matches" />
+      <End Role="GuessMatch" EntitySet="GuessMatches" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accounts">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Points" Type="int" Nullable="true" />
-    <Property Name="SecrectCode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="RemainingGuessAmount" Type="int" Nullable="true" />
-    <Property Name="CurrentOrderedCoupon" Type="int" Nullable="true" />
+    <Property Name="SecrectCode" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Points" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Matches">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LeagueName" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="BeginDate" Type="datetime" Nullable="false" />
+    <Property Name="StartedDate" Type="datetime" Nullable="true" />
+    <Property Name="CompletedDate" Type="datetime" Nullable="true" />
+    <Property Name="Status" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="TeamHome_Id" Type="int" Nullable="false" />
+    <Property Name="TeamHome_Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="TeamHome_CurrentScore" Type="int" Nullable="false" />
+    <Property Name="TeamHome_CurrentPredictionPoints" Type="int" Nullable="false" />
+    <Property Name="TeamAway_Id" Type="int" Nullable="false" />
+    <Property Name="TeamAway_Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="TeamAway_CurrentScore" Type="int" Nullable="false" />
+    <Property Name="TeamAway_CurrentPredictionPoints" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GuessMatches">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GuessTeamId" Type="int" Nullable="true" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="MatchId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="AccountGuessMatch">
+    <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
+    <End Role="GuessMatch" Type="DailySoccerModel.Store.GuessMatches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GuessMatch">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MatchGuessMatch">
+    <End Role="Match" Type="DailySoccerModel.Store.Matches" Multiplicity="1" />
+    <End Role="GuessMatch" Type="DailySoccerModel.Store.GuessMatches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Match">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GuessMatch">
+        <PropertyRef Name="MatchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DailySoccerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="DailySoccerModelContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="DailySoccerModel.Account" />
+          <EntitySet Name="Matches" EntityType="DailySoccerModel.Match" />
+          <EntitySet Name="GuessMatches" EntityType="DailySoccerModel.GuessMatch" />
+          <AssociationSet Name="AccountGuessMatch" Association="DailySoccerModel.AccountGuessMatch">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="GuessMatch" EntitySet="GuessMatches" />
+          </AssociationSet>
+          <AssociationSet Name="MatchGuessMatch" Association="DailySoccerModel.MatchGuessMatch">
+            <End Role="Match" EntitySet="Matches" />
+            <End Role="GuessMatch" EntitySet="GuessMatches" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Points" Type="Int32" Nullable="true" />
-          <Property Name="SecrectCode" Type="String" Nullable="false" />
-          <Property Name="RemainingGuessAmount" Type="Int32" Nullable="true" />
-          <Property Name="CurrentOrderedCoupon" Type="Int32" Nullable="true" />
+          <Property Name="SecrectCode" Type="String" Nullable="false" Unicode="false" FixedLength="false" MaxLength="100" />
+          <Property Name="Points" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GuessMatches" Relationship="DailySoccerModel.AccountGuessMatch" FromRole="Account" ToRole="GuessMatch" />
         </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LeagueName" Type="String" Nullable="false" FixedLength="false" Unicode="false" MaxLength="255" />
+          <Property Name="BeginDate" Type="DateTime" Nullable="false" />
+          <Property Name="StartedDate" Type="DateTime" Nullable="true" />
+          <Property Name="CompletedDate" Type="DateTime" Nullable="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TeamHome" Type="DailySoccerModel.Team" Nullable="false" />
+          <Property Name="TeamAway" Type="DailySoccerModel.Team" Nullable="false" />
+          <NavigationProperty Name="GuessMatches" Relationship="DailySoccerModel.MatchGuessMatch" FromRole="Match" ToRole="GuessMatch" />
+        </EntityType>
+        <ComplexType Name="Team" >
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" Unicode="true" FixedLength="false" MaxLength="255" />
+          <Property Type="Int32" Name="CurrentScore" Nullable="false" />
+          <Property Type="Int32" Name="CurrentPredictionPoints" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="GuessMatch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GuessTeamId" Type="Int32" Nullable="true" />
+          <NavigationProperty Name="Account" Relationship="DailySoccerModel.AccountGuessMatch" FromRole="GuessMatch" ToRole="Account" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Match" Relationship="DailySoccerModel.MatchGuessMatch" FromRole="GuessMatch" ToRole="Match" />
+          <Property Name="MatchId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="AccountGuessMatch">
+          <End Type="DailySoccerModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="DailySoccerModel.GuessMatch" Role="GuessMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuessMatch">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MatchGuessMatch">
+          <End Type="DailySoccerModel.Match" Role="Match" Multiplicity="1" />
+          <End Type="DailySoccerModel.GuessMatch" Role="GuessMatch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuessMatch">
+              <PropertyRef Name="MatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -45,10 +169,42 @@
       <EntityTypeMapping TypeName="IsTypeOf(DailySoccerModel.Account)">
         <MappingFragment StoreEntitySet="Accounts">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Points" ColumnName="Points" />
           <ScalarProperty Name="SecrectCode" ColumnName="SecrectCode" />
-          <ScalarProperty Name="RemainingGuessAmount" ColumnName="RemainingGuessAmount" />
-          <ScalarProperty Name="CurrentOrderedCoupon" ColumnName="CurrentOrderedCoupon" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Matches">
+      <EntityTypeMapping TypeName="IsTypeOf(DailySoccerModel.Match)">
+        <MappingFragment StoreEntitySet="Matches">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LeagueName" ColumnName="LeagueName" />
+          <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+          <ScalarProperty Name="StartedDate" ColumnName="StartedDate" />
+          <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ComplexProperty Name="TeamHome" TypeName="DailySoccerModel.Team">
+            <ScalarProperty Name="Id" ColumnName="TeamHome_Id" />
+            <ScalarProperty Name="Name" ColumnName="TeamHome_Name" />
+            <ScalarProperty Name="CurrentScore" ColumnName="TeamHome_CurrentScore" />
+            <ScalarProperty Name="CurrentPredictionPoints" ColumnName="TeamHome_CurrentPredictionPoints" />
+          </ComplexProperty>
+          <ComplexProperty Name="TeamAway" TypeName="DailySoccerModel.Team">
+            <ScalarProperty Name="Id" ColumnName="TeamAway_Id" />
+            <ScalarProperty Name="Name" ColumnName="TeamAway_Name" />
+            <ScalarProperty Name="CurrentScore" ColumnName="TeamAway_CurrentScore" />
+            <ScalarProperty Name="CurrentPredictionPoints" ColumnName="TeamAway_CurrentPredictionPoints" />
+          </ComplexProperty>
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuessMatches">
+      <EntityTypeMapping TypeName="IsTypeOf(DailySoccerModel.GuessMatch)">
+        <MappingFragment StoreEntitySet="GuessMatches">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GuessTeamId" ColumnName="GuessTeamId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="MatchId" ColumnName="MatchId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

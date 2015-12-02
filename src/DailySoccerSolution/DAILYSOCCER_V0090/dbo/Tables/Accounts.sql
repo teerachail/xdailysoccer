@@ -5,10 +5,8 @@
 -- Creating table 'Accounts'
 CREATE TABLE [dbo].[Accounts] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Points] int  NULL,
-    [SecrectCode] nvarchar(max)  NOT NULL,
-    [RemainingGuessAmount] int  NULL,
-    [CurrentOrderedCoupon] int  NULL
+    [SecrectCode] varchar(100)  NOT NULL,
+    [Points] int  NOT NULL
 );
 GO
 -- --------------------------------------------------

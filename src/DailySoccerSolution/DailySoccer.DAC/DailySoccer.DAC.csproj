@@ -69,6 +69,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DailySoccerModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DAC\EF\GuessMatch.cs">
+      <DependentUpon>DailySoccerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAC\EF\Match.cs">
+      <DependentUpon>DailySoccerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAC\EF\Team.cs">
+      <DependentUpon>DailySoccerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
