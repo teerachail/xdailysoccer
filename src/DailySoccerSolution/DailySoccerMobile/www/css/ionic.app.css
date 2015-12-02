@@ -9311,7 +9311,8 @@ i {
   height: 52px;
   border: none; }
   .item.col.col-40 span {
-    font-size: 12px; }
+    font-size: 12px;
+    vertical-align: bottom; }
 
 .scroll-middle .scroll-content {
   display: table !important;
@@ -9389,6 +9390,12 @@ ion-modal-view {
     visibility: visible;
     color: #323232; }
 
+<<<<<<< HEAD
+=======
+.history .item.item-stable {
+  line-height: 28px; }
+
+>>>>>>> 4f6380c... add colum and flag
 .history .item.item-royal {
   background: #D2D2D2 !important;
   border: 0px !important;
@@ -9409,6 +9416,7 @@ ion-modal-view {
 .list .item.item-accordion.ng-hide-remove {
   display: block !important; }
 
+<<<<<<< HEAD
 .line-height-small {
   line-height: 30px; }
 
@@ -9421,3 +9429,11 @@ ion-modal-view {
 
 .padding-small {
   padding: 5px; }
+=======
+.team-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 69%;
+  display: inline-block; }
+>>>>>>> 4f6380c... add colum and flag

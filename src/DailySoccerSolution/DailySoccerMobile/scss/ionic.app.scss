@@ -321,6 +321,7 @@ i {
     border:none;
     span {
         font-size: 12px;
+        vertical-align:bottom;
     }
 }
 .scroll-middle .scroll-content {
@@ -429,6 +430,14 @@ ion-modal-view{
 .list .item.item-accordion.ng-hide-add,
 .list .item.item-accordion.ng-hide-remove {
   display: block !important;
+}
+
+.team-name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width:69%;
+    display:inline-block;
 }
 .line-height-small{
     line-height:30px;

@@ -3,7 +3,12 @@
         <div ng-include src="'templates/Matches/_matchHeaderAds.html'"></div>
         <div ng-include src="'templates/Matches/_matchHeaderScore.html'"></div>
         <ion-list>
-            <ion-item class="item item-divider no-border bg-gray text-center">อังกฤษ พรีเมียร์ลีก</ion-item>
+            <ion-item class="item item-divider no-border bg-gray text-center">
+            <div class="item-icon-left">
+                <i class="icon"><img class="" src="../../img/Logos/Flag-ENGx1.png" /></i>
+                
+            </div>
+                 อังกฤษ พรีเมียร์ลีก</ion-item>
             <div class="row padding-bottom" ng-repeat="match in matchCtrl.TodayMatches">
                 <div class="col col-40 item" 
                      ng-class="{'item-stable': !match.TeamHome.IsSelected,
