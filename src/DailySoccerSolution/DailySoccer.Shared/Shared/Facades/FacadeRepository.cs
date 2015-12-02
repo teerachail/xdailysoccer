@@ -26,6 +26,7 @@ namespace DailySoccer.Shared.Facades
         private FacadeRepository()
         {
             // TODO: Initialize DACs
+            AccountDataAccess = new AccountDataAccess();
         }
 
         internal void InitializeDataAccess(IAccountDataAccess accountDac, IMatchDataAccess matchDac)
