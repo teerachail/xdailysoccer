@@ -50,14 +50,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DailySoccer.Shared.Models.GuessMatchInformation">
-    <Position X="11.25" Y="5" Width="2.25" />
+    <Position X="11.25" Y="5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <HashCode>AAAiAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>Shared\Models\GuessMatchInformation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DailySoccer.Shared.Facades.AccountFacade">
-    <Position X="12" Y="3" Width="3.25" />
+    <Position X="13.25" Y="3.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shared\Facades\AccountFacade.cs</FileName>
@@ -69,26 +69,26 @@
       <Field Name="_instance" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAIAAQAAACAAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAAAQAAAIAAQAAACAAAQAAAAAgAAAA=</HashCode>
       <FileName>Shared\Facades\FacadeRepository.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DailySoccer.Shared.Facades.MatchFacade">
-    <Position X="7.5" Y="3" Width="4.25" />
+    <Position X="7.5" Y="3.25" Width="5.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shared\Facades\MatchFacade.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="DailySoccer.Shared.DAC.IAccountDataAccess">
-    <Position X="16" Y="2" Width="6.25" />
+    <Position X="16.75" Y="2" Width="6.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAAAAAAAABAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
       <FileName>Shared\DAC\IAccountDataAccess.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="DailySoccer.Shared.DAC.IMatchDataAccess">
-    <Position X="16" Y="0.5" Width="3.5" />
+    <Position X="16.75" Y="0.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shared\DAC\IMatchDataAccess.cs</FileName>

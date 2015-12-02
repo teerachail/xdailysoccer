@@ -31,8 +31,8 @@ namespace DailySoccer.Specs
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GetMatches", "In order to avoid silly mistakes\nAs a math idiot\nI want to be told the sum of two" +
-                    " numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GetMatches", "In order to avoid silly mistakes\r\nAs a math idiot\r\nI want to be told the sum of t" +
+                    "wo numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -124,7 +124,7 @@ this.FeatureBackground();
 #line 17
  testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table3, "And ");
 #line 19
- testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/1/2015\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
@@ -149,6 +149,1508 @@ this.FeatureBackground();
                         "0"});
 #line 22
  testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table5, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่ยังไม่แข่ง ระบบส่" +
+            "งแมช์ปัจจุบันกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชขอแมชในตอนทเซฟเวอรมแตแมชปจจบนทมแตรายการทยงไมแขงระบบสงแมชปจจบนกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่ยังไม่แข่ง ระบบส่" +
+                    "งแมช์ปัจจุบันกลับไป", new string[] {
+                        "mock"});
+#line 27
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table6.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "",
+                        "",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table6.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "",
+                        "",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+#line 28
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table6, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+#line 32
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table7, "And ");
+#line 34
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table8.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "",
+                        "",
+                        "1",
+                        "Brentford",
+                        "false",
+                        "2",
+                        "Hull City",
+                        "false"});
+            table8.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "",
+                        "",
+                        "3",
+                        "Birmingham City",
+                        "false",
+                        "4",
+                        "Blackburn Rovers",
+                        "false"});
+#line 35
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table8, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table9.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 39
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table9, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่กำลังแข่ง ระบบส่ง" +
+            "แมช์ปัจจุบันกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชขอแมชในตอนทเซฟเวอรมแตแมชปจจบนทมแตรายการทกำลงแขงระบบสงแมชปจจบนกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่กำลังแข่ง ระบบส่ง" +
+                    "แมช์ปัจจุบันกลับไป", new string[] {
+                        "mock"});
+#line 44
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table10.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table10.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+#line 45
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table10, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+#line 49
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table11, "And ");
+#line 51
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/1/2015 02:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table12.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "",
+                        "1",
+                        "Brentford",
+                        "false",
+                        "2",
+                        "Hull City",
+                        "false"});
+            table12.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "",
+                        "3",
+                        "Birmingham City",
+                        "false",
+                        "4",
+                        "Blackburn Rovers",
+                        "false"});
+#line 52
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table12, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table13.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 56
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table13, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่กำลังแข่ง (มีบางแ" +
+            "มช์ที่ทายผลไว้) ระบบส่งแมช์ปัจจุบันกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชขอแมชในตอนทเซฟเวอรมแตแมชปจจบนทมแตรายการทกำลงแขงมบางแมชททายผลไวระบบสงแมชปจจบนกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่กำลังแข่ง (มีบางแ" +
+                    "มช์ที่ทายผลไว้) ระบบส่งแมช์ปัจจุบันกลับไป", new string[] {
+                        "mock"});
+#line 61
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table14.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table14.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+#line 62
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table14, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+            table15.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "2",
+                        "3"});
+#line 66
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table15, "And ");
+#line 69
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/1/2015 02:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table16.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "",
+                        "1",
+                        "Brentford",
+                        "false",
+                        "2",
+                        "Hull City",
+                        "false"});
+            table16.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "",
+                        "3",
+                        "Birmingham City",
+                        "true",
+                        "4",
+                        "Blackburn Rovers",
+                        "false"});
+#line 70
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table16, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table17.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 74
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table17, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่กำลังแข่ง (ทายผลไ" +
+            "ว้ทุกแมช์) ระบบส่งแมช์ปัจจุบันกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชขอแมชในตอนทเซฟเวอรมแตแมชปจจบนทมแตรายการทกำลงแขงทายผลไวทกแมชระบบสงแมชปจจบนกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่กำลังแข่ง (ทายผลไ" +
+                    "ว้ทุกแมช์) ระบบส่งแมช์ปัจจุบันกลับไป", new string[] {
+                        "mock"});
+#line 79
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table18.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table18.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+#line 80
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table18, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+            table19.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1",
+                        "2"});
+            table19.AddRow(new string[] {
+                        "2",
+                        "s01",
+                        "2",
+                        "3"});
+#line 84
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table19, "And ");
+#line 88
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/1/2015 02:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table20.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "",
+                        "1",
+                        "Brentford",
+                        "false",
+                        "2",
+                        "Hull City",
+                        "true"});
+            table20.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "",
+                        "3",
+                        "Birmingham City",
+                        "true",
+                        "4",
+                        "Blackburn Rovers",
+                        "false"});
+#line 89
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table20, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table21.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 93
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table21, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่แข่งจบแล้ว ระบบส่" +
+            "งแมช์ปัจจุบันกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชขอแมชในตอนทเซฟเวอรมแตแมชปจจบนทมแตรายการทแขงจบแลวระบบสงแมชปจจบนกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่แข่งจบแล้ว ระบบส่" +
+                    "งแมช์ปัจจุบันกลับไป", new string[] {
+                        "mock"});
+#line 98
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table22.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "1/1/2015 02:30",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table22.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "1/1/2015 03:00",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+#line 99
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table22, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+#line 103
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table23, "And ");
+#line 105
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table24.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "1/1/2015 02:30",
+                        "1",
+                        "Brentford",
+                        "false",
+                        "2",
+                        "Hull City",
+                        "false"});
+            table24.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "1/1/2015 03:00",
+                        "3",
+                        "Birmingham City",
+                        "false",
+                        "4",
+                        "Blackburn Rovers",
+                        "false"});
+#line 106
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table24, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table25.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 110
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table25, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่แข่งจบแล้ว (มีบาง" +
+            "แมช์ที่ทายผลไว้) ระบบส่งแมช์ปัจจุบันกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชขอแมชในตอนทเซฟเวอรมแตแมชปจจบนทมแตรายการทแขงจบแลวมบางแมชททายผลไวระบบสงแมชปจจบนกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่แข่งจบแล้ว (มีบาง" +
+                    "แมช์ที่ทายผลไว้) ระบบส่งแมช์ปัจจุบันกลับไป", new string[] {
+                        "mock"});
+#line 115
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table26.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "1/1/2015 02:30",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table26.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "1/1/2015 03:00",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+#line 116
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table26, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+            table27.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "2",
+                        "3"});
+#line 120
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table27, "And ");
+#line 123
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table28.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "1/1/2015 02:30",
+                        "1",
+                        "Brentford",
+                        "false",
+                        "2",
+                        "Hull City",
+                        "false"});
+            table28.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "1/1/2015 03:00",
+                        "3",
+                        "Birmingham City",
+                        "true",
+                        "4",
+                        "Blackburn Rovers",
+                        "false"});
+#line 124
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table28, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table29.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 128
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table29, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่แข่งจบแล้ว (ทายผล" +
+            "ไว้ทุกแมช์) ระบบส่งแมช์ปัจจุบันกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชขอแมชในตอนทเซฟเวอรมแตแมชปจจบนทมแตรายการทแขงจบแลวทายผลไวทกแมชระบบสงแมชปจจบนกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่แข่งจบแล้ว (ทายผล" +
+                    "ไว้ทุกแมช์) ระบบส่งแมช์ปัจจุบันกลับไป", new string[] {
+                        "mock"});
+#line 133
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table30 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table30.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "1/1/2015 02:30",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table30.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "1/1/2015 03:00",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+#line 134
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table30, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+            table31.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1",
+                        "2"});
+            table31.AddRow(new string[] {
+                        "2",
+                        "s01",
+                        "2",
+                        "3"});
+#line 138
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table31, "And ");
+#line 142
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table32.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "1/1/2015 02:30",
+                        "1",
+                        "Brentford",
+                        "false",
+                        "2",
+                        "Hull City",
+                        "true"});
+            table32.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 01:30",
+                        "1/1/2015 01:30",
+                        "1/1/2015 03:00",
+                        "3",
+                        "Birmingham City",
+                        "true",
+                        "4",
+                        "Blackburn Rovers",
+                        "false"});
+#line 143
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table32, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table33.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 147
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table33, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีรายการแข่งขันทุกประเภท ระบบส่" +
+            "งแมช์ปัจจุบันกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชขอแมชในตอนทเซฟเวอรมแตแมชปจจบนทมรายการแขงขนทกประเภทระบบสงแมชปจจบนกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีรายการแข่งขันทุกประเภท ระบบส่" +
+                    "งแมช์ปัจจุบันกลับไป", new string[] {
+                        "mock"});
+#line 152
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table34 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table34.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 02:00",
+                        "1/1/2015 02:00",
+                        "",
+                        "1",
+                        "FC Astana",
+                        "2",
+                        "Atletico Madrid"});
+            table34.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 02:30",
+                        "1/1/2015 02:30",
+                        "1/1/2015 04:00",
+                        "3",
+                        "Real Madrid",
+                        "4",
+                        "Paris Saint-Germain"});
+            table34.AddRow(new string[] {
+                        "3",
+                        "Premier league",
+                        "1/1/2015 06:00",
+                        "",
+                        "",
+                        "5",
+                        "Brentford",
+                        "6",
+                        "Hull City"});
+            table34.AddRow(new string[] {
+                        "4",
+                        "Premier league",
+                        "1/1/2015 06:30",
+                        "",
+                        "",
+                        "7",
+                        "Birmingham City",
+                        "8",
+                        "Blackburn Rovers"});
+#line 153
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table34, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table35 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+            table35.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1",
+                        "1"});
+            table35.AddRow(new string[] {
+                        "2",
+                        "s01",
+                        "2",
+                        "4"});
+            table35.AddRow(new string[] {
+                        "3",
+                        "s01",
+                        "3",
+                        "6"});
+#line 159
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table35, "And ");
+#line 164
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/1/2015 05:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table36 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table36.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 02:00",
+                        "1/1/2015 02:00",
+                        "",
+                        "1",
+                        "FC Astana",
+                        "true",
+                        "2",
+                        "Atletico Madrid",
+                        "false"});
+            table36.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/1/2015 02:30",
+                        "1/1/2015 02:30",
+                        "1/1/2015 04:00",
+                        "3",
+                        "Real Madrid",
+                        "false",
+                        "4",
+                        "Paris Saint-Germain",
+                        "true"});
+            table36.AddRow(new string[] {
+                        "3",
+                        "Premier league",
+                        "1/1/2015 06:00",
+                        "",
+                        "",
+                        "5",
+                        "Brentford",
+                        "false",
+                        "6",
+                        "Hull City",
+                        "true"});
+            table36.AddRow(new string[] {
+                        "4",
+                        "Premier league",
+                        "1/1/2015 06:30",
+                        "",
+                        "",
+                        "7",
+                        "Birmingham City",
+                        "false",
+                        "8",
+                        "Blackburn Rovers",
+                        "false"});
+#line 165
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table36, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table37.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 171
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table37, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ขอแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ที่ผ่านมาแล้ว ระบบส่งแมช์ที่ผ่านมาแล้วที่ไม" +
+            "่เกิน 2 วันย้อนหลังกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชขอแมชในตอนทเซฟเวอรมแตแมชทผานมาแลวระบบสงแมชทผานมาแลวทไมเกน2วนยอนหลงกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ขอแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ที่ผ่านมาแล้ว ระบบส่งแมช์ที่ผ่านมาแล้วที่ไม" +
+                    "่เกิน 2 วันย้อนหลังกลับไป", new string[] {
+                        "mock"});
+#line 176
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table38 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table38.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "1/1/2015 02:30",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table38.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/2/2015 01:00",
+                        "1/2/2015 01:00",
+                        "1/2/2015 02:30",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+            table38.AddRow(new string[] {
+                        "3",
+                        "Premier league",
+                        "1/3/2015 01:00",
+                        "1/3/2015 01:00",
+                        "1/3/2015 02:30",
+                        "5",
+                        "FC Astana",
+                        "7",
+                        "Atletico Madrid"});
+            table38.AddRow(new string[] {
+                        "4",
+                        "Premier league",
+                        "1/4/2015 01:00",
+                        "1/4/2015 01:00",
+                        "1/4/2015 02:30",
+                        "6",
+                        "Real Madrid",
+                        "8",
+                        "Paris Saint-Germain"});
+#line 177
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table38, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table39 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+            table39.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1",
+                        "1"});
+            table39.AddRow(new string[] {
+                        "2",
+                        "s01",
+                        "4",
+                        "8"});
+#line 183
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table39, "And ");
+#line 187
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/4/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table40 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table40.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/2/2015 01:00",
+                        "1/2/2015 01:00",
+                        "1/2/2015 02:30",
+                        "3",
+                        "Birmingham City",
+                        "false",
+                        "4",
+                        "Blackburn Rovers",
+                        "false"});
+            table40.AddRow(new string[] {
+                        "3",
+                        "Premier league",
+                        "1/3/2015 01:00",
+                        "1/3/2015 01:00",
+                        "1/3/2015 02:30",
+                        "5",
+                        "FC Astana",
+                        "false",
+                        "7",
+                        "Atletico Madrid",
+                        "false"});
+            table40.AddRow(new string[] {
+                        "4",
+                        "Premier league",
+                        "1/4/2015 01:00",
+                        "1/4/2015 01:00",
+                        "1/4/2015 02:30",
+                        "6",
+                        "Real Madrid",
+                        "false",
+                        "8",
+                        "Paris Saint-Germain",
+                        "true"});
+#line 188
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table40, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table41.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 193
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table41, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ขอแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ในอนาคต ระบบส่งแมช์ในอนาคตที่ไม่เกิน 2 วันใ" +
+            "นอนาคตกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชขอแมชในตอนทเซฟเวอรมแตแมชในอนาคตระบบสงแมชในอนาคตทไมเกน2วนในอนาคตกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ขอแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ในอนาคต ระบบส่งแมช์ในอนาคตที่ไม่เกิน 2 วันใ" +
+                    "นอนาคตกลับไป", new string[] {
+                        "mock"});
+#line 198
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table42 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table42.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/2/2015 01:00",
+                        "",
+                        "",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table42.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/3/2015 01:00",
+                        "",
+                        "",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+            table42.AddRow(new string[] {
+                        "3",
+                        "Premier league",
+                        "1/4/2015 01:00",
+                        "",
+                        "",
+                        "5",
+                        "FC Astana",
+                        "7",
+                        "Atletico Madrid"});
+            table42.AddRow(new string[] {
+                        "4",
+                        "Premier league",
+                        "1/5/2015 01:00",
+                        "",
+                        "",
+                        "6",
+                        "Real Madrid",
+                        "8",
+                        "Paris Saint-Germain"});
+#line 199
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table42, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table43 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+#line 205
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table43, "And ");
+#line 207
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table44 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table44.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/2/2015 01:00",
+                        "",
+                        "",
+                        "1",
+                        "Brentford",
+                        "false",
+                        "2",
+                        "Hull City",
+                        "false"});
+            table44.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/3/2015 01:00",
+                        "",
+                        "",
+                        "3",
+                        "Birmingham City",
+                        "false",
+                        "4",
+                        "Blackburn Rovers",
+                        "false"});
+#line 208
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table44, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table45.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 212
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table45, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ขอแมช์ในตอนที่เซิฟเวอร์มีข้อมูลอดีต, ปัจจุบัน, อนาคต ระบบส่งข้อมูลแมช์อดีตท" +
+            "ี่ไม่เกิน 2 วันย้อนหลัง, แมช์ปัจจุบัน, แมช์ในอนาคตที่ไม่เกิน 2 วันในอนาคตกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชขอแมชในตอนทเซฟเวอรมขอมลอดตปจจบนอนาคตระบบสงขอมลแมชอดตทไมเกน2วนยอนหลงแมชปจจบนแมชในอนาคตทไมเกน2วนในอนาคตกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ขอแมช์ในตอนที่เซิฟเวอร์มีข้อมูลอดีต, ปัจจุบัน, อนาคต ระบบส่งข้อมูลแมช์อดีตท" +
+                    "ี่ไม่เกิน 2 วันย้อนหลัง, แมช์ปัจจุบัน, แมช์ในอนาคตที่ไม่เกิน 2 วันในอนาคตกลับไป", new string[] {
+                        "mock"});
+#line 217
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table46 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table46.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "1/1/2015 02:30",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table46.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/2/2015 01:00",
+                        "1/2/2015 01:00",
+                        "1/2/2015 02:30",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+            table46.AddRow(new string[] {
+                        "3",
+                        "Premier league",
+                        "1/3/2015 01:00",
+                        "1/3/2015 01:00",
+                        "1/3/2015 02:30",
+                        "5",
+                        "FC Astana",
+                        "7",
+                        "Atletico Madrid"});
+            table46.AddRow(new string[] {
+                        "4",
+                        "Premier league",
+                        "1/4/2015 01:00",
+                        "1/4/2015 01:00",
+                        "",
+                        "6",
+                        "Real Madrid",
+                        "8",
+                        "Paris Saint-Germain"});
+            table46.AddRow(new string[] {
+                        "5",
+                        "Premier league",
+                        "1/5/2015 01:00",
+                        "",
+                        "",
+                        "9",
+                        "Shakhtar Donetsk",
+                        "10",
+                        "Malmo"});
+            table46.AddRow(new string[] {
+                        "6",
+                        "Premier league",
+                        "1/6/2015 01:00",
+                        "",
+                        "",
+                        "11",
+                        "Manchester United",
+                        "12",
+                        "CSKA Moscow"});
+            table46.AddRow(new string[] {
+                        "7",
+                        "Premier league",
+                        "1/7/2015 01:00",
+                        "",
+                        "",
+                        "13",
+                        "PSV Eindhoven",
+                        "14",
+                        "VfL Wolfsburg"});
+#line 218
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table46, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table47 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+#line 227
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table47, "And ");
+#line 229
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/4/2015 01:30\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table48 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table48.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/2/2015 01:00",
+                        "1/2/2015 01:00",
+                        "1/2/2015 02:30",
+                        "3",
+                        "Birmingham City",
+                        "false",
+                        "4",
+                        "Blackburn Rovers",
+                        "false"});
+            table48.AddRow(new string[] {
+                        "3",
+                        "Premier league",
+                        "1/3/2015 01:00",
+                        "1/3/2015 01:00",
+                        "1/3/2015 02:30",
+                        "5",
+                        "FC Astana",
+                        "false",
+                        "7",
+                        "Atletico Madrid",
+                        "false"});
+            table48.AddRow(new string[] {
+                        "4",
+                        "Premier league",
+                        "1/4/2015 01:00",
+                        "1/4/2015 01:00",
+                        "",
+                        "6",
+                        "Real Madrid",
+                        "false",
+                        "8",
+                        "Paris Saint-Germain",
+                        "false"});
+            table48.AddRow(new string[] {
+                        "5",
+                        "Premier league",
+                        "1/5/2015 01:00",
+                        "",
+                        "",
+                        "9",
+                        "Shakhtar Donetsk",
+                        "false",
+                        "10",
+                        "Malmo",
+                        "false"});
+            table48.AddRow(new string[] {
+                        "6",
+                        "Premier league",
+                        "1/6/2015 01:00",
+                        "",
+                        "",
+                        "11",
+                        "Manchester United",
+                        "false",
+                        "12",
+                        "CSKA Moscow",
+                        "false"});
+#line 230
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table48, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table49.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 237
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table49, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

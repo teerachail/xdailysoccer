@@ -28,7 +28,14 @@ namespace DailySoccer.Shared.Facades
             var guessMatches = accountDac.GetGuessMatchsByAccountSecrectCode(request.UserId)
                 .Where(it => it.GuessTeamId.HasValue)
                 .ToList();
-            var matches = FacadeRepository.Instance.MatchDataAccess.GetAllMatches().ToList();
+
+            var limitedPastDate = currentTime.Date.AddDays(-2);
+            var limitedFutureDate = currentTime.Date.AddDays(2);
+
+            var matches = FacadeRepository.Instance.MatchDataAccess.GetAllMatches()
+                .Where(it => it.BeginDate.Date >= limitedPastDate)
+                .Where(it => it.BeginDate.Date <= limitedFutureDate)
+                .ToList();
             foreach (var match in matches.Where(it => guessMatches.Select(guess => guess.MatchId).Contains(it.Id)))
             {
                 var guess = guessMatches.First(it => it.MatchId == match.Id);
