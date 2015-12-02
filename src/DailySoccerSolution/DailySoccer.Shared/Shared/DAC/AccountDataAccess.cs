@@ -4,11 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DailySoccer.Shared.Models;
+using DailySoccer.DAC.EF;
 
 namespace DailySoccer.Shared.DAC
 {
     public class AccountDataAccess : IAccountDataAccess
     {
+        public AccountInformation CreateAccount()
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var SecrectCode = Guid.NewGuid().ToString();
+                var newGuest = new AccountInformation()
+                {
+                    SecrectCode = SecrectCode,
+                    CurrentOrderedCoupon = 0,
+                    Points = 0,
+                    MaximumGuessAmount = 5,
+                };
+
+                dctx.Accounts.Add(new Account
+                {
+                    Points = newGuest.Points,
+                    SecrectCode = newGuest.SecrectCode,
+                });
+                dctx.SaveChanges();
+
+                return newGuest;
+            }
+        }
+
         public AccountInformation GetAccountBySecrectCode(string secrectCode)
         {
             var isArgumentValid = !string.IsNullOrEmpty(secrectCode);

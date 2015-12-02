@@ -55,6 +55,7 @@
     <Compile Include="Shared\DAC\AccountDataAccess.cs" />
     <Compile Include="Shared\DAC\IAccountDataAccess.cs" />
     <Compile Include="Shared\DAC\IMatchDataAccess.cs" />
+    <Compile Include="Shared\DAC\MatchDataAccess.cs" />
     <Compile Include="Shared\Facades\AccountFacade.cs" />
     <Compile Include="Shared\Facades\FacadeRepository.cs" />
     <Compile Include="Shared\Facades\MatchFacade.cs" />

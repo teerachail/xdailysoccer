@@ -1,4 +1,9 @@
-﻿using System;
+﻿using DailySoccer.Shared.DAC;
+using DailySoccer.Shared.Facades;
+using DailySoccer.Shared.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System;
 using TechTalk.SpecFlow;
 
 namespace DailySoccer.Specs.Steps
@@ -9,20 +14,35 @@ namespace DailySoccer.Specs.Steps
         [Given(@"มีการเรียกใช้serviceให้สร้าง guest user")]
         public void GivenมการเรยกใชServiceใหสรางGuestUser()
         {
-            ScenarioContext.Current.Pending();
-        }
+            var accountDataAccess = ScenarioContext.Current.Get<Moq.Mock<IAccountDataAccess>>();
+            accountDataAccess.Setup(dac => dac.CreateAccount()).Returns(() =>
+            {
+                return new AccountInformation();
+            }); 
 
+        }
+        
         [When(@"ระบบทำการสร้างguestให้ใหม่")]
         public void WhenระบบทำการสรางGuestใหใหม()
         {
-            ScenarioContext.Current.Pending();
+            var accountFacade = new AccountFacade();
+            var guestAccount = accountFacade.CreateNewGuest();
+            ScenarioContext.Current.Set(guestAccount);
         }
+
+        [Then(@"ระบบทำการบันทึกขอมูลaccount")]
+        public void ThenระบบทำการบนทกขอมลAccount()
+        {
+            var accountDataAccess = ScenarioContext.Current.Get<Moq.Mock<IAccountDataAccess>>();
+            accountDataAccess.Verify(it => it.CreateAccount(), Times.Once);
+        }
+
 
         [Then(@"ระบบทำการส่งข้อมูลguestกลับ")]
         public void ThenระบบทำการสงขอมลGuestกลบ()
         {
-            ScenarioContext.Current.Pending();
+            var guestAccount = ScenarioContext.Current.Get<CreateNewGuestRespond>();
+            Assert.IsNotNull(guestAccount);
         }
-
     }
 }

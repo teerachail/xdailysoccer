@@ -9,6 +9,7 @@ namespace DailySoccer.Shared.DAC
 {
     public interface IAccountDataAccess
     {
+        AccountInformation CreateAccount();
         AccountInformation GetAccountBySecrectCode(string secrectCode);
         IEnumerable<GuessMatchInformation> GetGuessMatchsByAccountSecrectCode(string secrectCode);
     }
