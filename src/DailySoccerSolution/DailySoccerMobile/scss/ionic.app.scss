@@ -372,6 +372,38 @@ ion-modal-view{
 .advertisement .button-royal {
     background:#242F4B !important;
 }
+.item-radio .radio-icon {
+  /* checkmark icon will be hidden by default */
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: $z-index-item-radio;
+  visibility: visible;
+  padding: $item-padding - 2;
+  height: 100%;
+  font-size: 24px;
+  color:#a7a7a7;
+}
+.radio-content .item-content{
+      background-color:#dedede !important;
+          padding: 10px 49px 10px 10px;
+  }
+.item-radio input {
+  /* hide any radio button inputs elements (the ugly circles) */
+  position: absolute;
+  left: -9999px;
+  
+  &:checked + .radio-content .item-content {
+    /* style the item content when its checked */
+    background: #f7f7f7;
+  }
+
+  &:checked + .radio-content .radio-icon {
+    /* show the checkmark icon when its checked */
+    visibility: visible;
+    color:#323232;
+  }
+}
 .history {
     .item.item-stable{
     line-height:40px;

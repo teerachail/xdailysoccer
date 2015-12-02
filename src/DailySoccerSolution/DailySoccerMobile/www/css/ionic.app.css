@@ -9360,6 +9360,7 @@ ion-modal-view {
 .advertisement .button-royal {
   background: #242F4B !important; }
 
+<<<<<<< HEAD
 .history .item.item-stable {
   line-height: 40px; }
 
@@ -9368,3 +9369,32 @@ ion-modal-view {
   border: 0px !important;
   margin: 0px !important;
   color: #000000 !important; }
+=======
+.item-radio .radio-icon {
+  /* checkmark icon will be hidden by default */
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  visibility: visible;
+  padding: 14px;
+  height: 100%;
+  font-size: 24px;
+  color: #a7a7a7; }
+
+.radio-content .item-content {
+  background-color: #dedede !important;
+  padding: 10px 49px 10px 10px; }
+
+.item-radio input {
+  /* hide any radio button inputs elements (the ugly circles) */
+  position: absolute;
+  left: -9999px; }
+  .item-radio input:checked + .radio-content .item-content {
+    /* style the item content when its checked */
+    background: #f7f7f7; }
+  .item-radio input:checked + .radio-content .radio-icon {
+    /* show the checkmark icon when its checked */
+    visibility: visible;
+    color: #323232; }
+>>>>>>> 5621bcb... FavoritTeam.html
