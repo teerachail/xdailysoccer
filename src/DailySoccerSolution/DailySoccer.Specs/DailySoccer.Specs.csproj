@@ -65,12 +65,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CreateNewGuest.feature</DependentUpon>
     </Compile>
-    <Compile Include="Specs\Hooks.cs" />
-    <Compile Include="Specs\MatchesServices.feature.cs">
+    <Compile Include="Specs\GetMatches.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MatchesServices.feature</DependentUpon>
+      <DependentUpon>GetMatches.feature</DependentUpon>
     </Compile>
+    <Compile Include="Specs\Hooks.cs" />
     <Compile Include="Specs\Steps\CreateNewGuestSteps.cs" />
     <Compile Include="Specs\Steps\MatchesServicesSteps.cs" />
   </ItemGroup>
@@ -87,9 +87,9 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CreateNewGuest.feature.cs</LastGenOutput>
     </None>
-    <None Include="Specs\MatchesServices.feature">
+    <None Include="Specs\GetMatches.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>MatchesServices.feature.cs</LastGenOutput>
+      <LastGenOutput>GetMatches.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup />

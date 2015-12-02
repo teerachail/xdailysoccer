@@ -19,19 +19,19 @@ namespace DailySoccer.Specs
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class MatchesServicesFeature
+    public partial class GetMatchesFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "MatchesServices.feature"
+#line 1 "GetMatches.feature"
 #line hidden
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "MatchesServices", "In order to avoid silly mistakes\nAs a math idiot\nI want to be told the sum of two" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GetMatches", "In order to avoid silly mistakes\nAs a math idiot\nI want to be told the sum of two" +
                     " numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -47,9 +47,9 @@ namespace DailySoccer.Specs
         public virtual void TestInitialize()
         {
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
-                        && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "MatchesServices")))
+                        && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "GetMatches")))
             {
-                DailySoccer.Specs.MatchesServicesFeature.FeatureSetup(null);
+                DailySoccer.Specs.GetMatchesFeature.FeatureSetup(null);
             }
         }
         
@@ -70,12 +70,12 @@ namespace DailySoccer.Specs
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add two numbers")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "MatchesServices")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ขอแมช์ในตอนที่เซิฟเวอร์ไม่มีข้อมูลแมช์อยู่เลย ระบบส่งแมช์เปล่ากลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
-        public virtual void AddTwoNumbers()
+        public virtual void ขอแมชในตอนทเซฟเวอรไมมขอมลแมชอยเลยระบบสงแมชเปลากลบไป()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอแมช์ในตอนที่เซิฟเวอร์ไม่มีข้อมูลแมช์อยู่เลย ระบบส่งแมช์เปล่ากลับไป", new string[] {
                         "mock"});
 #line 7
 this.ScenarioSetup(scenarioInfo);

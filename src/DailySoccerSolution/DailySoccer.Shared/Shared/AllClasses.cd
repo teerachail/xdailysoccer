@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="DailySoccer.Shared.Models.AccountInformation">
+    <Position X="7" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAACAAIAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Shared\Models\AccountInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DailySoccer.Shared.Models.CreateNewGuestRespond" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Models\CreateNewGuestRespond.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DailySoccer.Shared.Models.GetMatchesRequest">
+    <Position X="0.5" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Models\GetMatchesRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DailySoccer.Shared.Models.GetMatchesRespond">
+    <Position X="2.75" Y="2" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Models\GetMatchesRespond.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DailySoccer.Shared.Models.GuessMatchRespond" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAIAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Models\GuessMatchRespond.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DailySoccer.Shared.Models.MatchInformation">
+    <Position X="7" Y="2.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAMCAAAAAIAAACAAAAAAAAAAAABAAAAAABAAAA=</HashCode>
+      <FileName>Shared\Models\MatchInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DailySoccer.Shared.Models.TeamInformation">
+    <Position X="7" Y="5.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAACAEAAEAgAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Models\TeamInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
