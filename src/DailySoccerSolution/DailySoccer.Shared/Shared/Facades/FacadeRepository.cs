@@ -23,10 +23,16 @@ namespace DailySoccer.Shared.Facades
         public IAccountDataAccess AccountDataAccess { get; private set; }
         public IMatchDataAccess MatchDataAccess { get; private set; }
 
+        public MatchFacade MatchFacade { get; set; }
+        public AccountFacade AccountFacade { get; set; }
+
         private FacadeRepository()
         {
-            // TODO: Initialize DACs
             AccountDataAccess = new AccountDataAccess();
+            MatchDataAccess = new MatchDataAccess();
+
+            MatchFacade = new MatchFacade();
+            AccountFacade = new AccountFacade();
         }
 
         internal void InitializeDataAccess(IAccountDataAccess accountDac, IMatchDataAccess matchDac)

@@ -4,20 +4,24 @@
 	I want to be told the sum of two numbers
 
 @mock
+Background: Initialize
+	Given Setup mocking
+	And ผู้ใช้ในระบบมีดังนี้
+	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| 1  | s01         | 0      | 5                  | 0                    |
+	
+@mock
 Scenario: ผู้ใช้ขอแมช์ในตอนที่เซิฟเวอร์ไม่มีข้อมูลแมช์อยู่เลย ระบบส่งแมช์เปล่ากลับไป
 	Given ในระบบมีข้อมูลแมช์เป็น
-	|Id|LeagueName|BeginDate|StartedDate|CompletedDate|
+	| Id | LeagueName | BeginDate | StartedDate | CompletedDate |
 	And ในระบบมีข้อมูลการทายเป็น
-	|Id|MatchId|GuessTeamId|
-	When ผู้ใช้ UserId: '1' ขอข้อมูลแมช์
+	| Id | AccountSecrectCode | MatchId | GuessTeamId |
+	When ผู้ใช้ UserId: 's01' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น '1/1/2015'
 	Then ระบบส่งข้อมูลแมช์กลับไปเป็น
-	|Id|LeagueName|BeginDate|StartedDate|CompletedDate|
+	| Id | LeagueName | BeginDate | StartedDate | CompletedDate |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	|Id|SecrectCode|Points|MaximumGuessAmount|CurrentOrderedCoupon|
-
-
-
-#ผู้ใช้ขอแมช์ในตอนที่เซิฟเวอร์ไม่มีข้อมูลแมช์อยู่เลย ระบบส่งแมช์เปล่ากลับไป
+	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| 1  | s01         | 0      | 5                  | 0                    |
 
 #ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่ยังไม่แข่ง ระบบส่งแมช์ปัจจุบันกลับไป
 #ผู้ใช้ข้อแมช์ในตอนที่เซิฟเวอร์มีแต่แมช์ปัจจุบันที่มีแต่รายการที่กำลังแข่ง ระบบส่งแมช์ปัจจุบันกลับไป

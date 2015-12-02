@@ -71,6 +71,7 @@ namespace DailySoccer.Shared.DAC
                     .Select(it => new GuessMatchInformation
                     {
                         Id = it.Id,
+                        AccountSecrectCode = it.Account.SecrectCode,
                         GuessTeamId = it.GuessTeamId,
                         MatchId = it.MatchId
                     }).ToList();

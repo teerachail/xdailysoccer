@@ -11,6 +11,7 @@ namespace DailySoccer.Shared.DAC
     {
         public IEnumerable<MatchInformation> GetAllMatches()
         {
+            // TODO: DAC GetAllMatches
             throw new NotImplementedException();
         }
     }
