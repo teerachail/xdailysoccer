@@ -4,11 +4,17 @@
 	I want to be told the sum of two numbers
 
 @mock
-Scenario: ขอแมช์ในตอนที่เซิฟเวอร์ไม่มีข้อมูลแมช์อยู่เลย ระบบส่งแมช์เปล่ากลับไป
-	Given I have entered 50 into the calculator
-	And I have entered 70 into the calculator
-	When I press add
-	Then the result should be 120 on the screen
+Scenario: ผู้ใช้ขอแมช์ในตอนที่เซิฟเวอร์ไม่มีข้อมูลแมช์อยู่เลย ระบบส่งแมช์เปล่ากลับไป
+	Given ในระบบมีข้อมูลแมช์เป็น
+	|Id|LeagueName|BeginDate|StartedDate|CompletedDate|
+	And ในระบบมีข้อมูลการทายเป็น
+	|Id|MatchId|GuessTeamId|
+	When ผู้ใช้ UserId: '1' ขอข้อมูลแมช์
+	Then ระบบส่งข้อมูลแมช์กลับไปเป็น
+	|Id|LeagueName|BeginDate|StartedDate|CompletedDate|
+	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
+	|Id|SecrectCode|Points|MaximumGuessAmount|CurrentOrderedCoupon|
+
 
 
 #ผู้ใช้ขอแมช์ในตอนที่เซิฟเวอร์ไม่มีข้อมูลแมช์อยู่เลย ระบบส่งแมช์เปล่ากลับไป
