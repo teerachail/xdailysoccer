@@ -202,19 +202,16 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
     });
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/app/playlists');
-    $urlRouterProvider.otherwise('/account/favoritteam');
+    $urlRouterProvider.otherwise('/account/login');
 });
 angular.module('starter.controllers', [])
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
     $scope.groups = [];
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 2; i++) {
         $scope.groups[i] = {
             name: i,
             items: []
         };
-        for (var j = 0; j < 3; j++) {
-            $scope.groups[i].items.push(i + '-' + j);
-        }
     }
     $scope.toggleGroup = function (group) {
         if ($scope.isGroupShown(group)) {

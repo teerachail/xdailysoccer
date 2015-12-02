@@ -9291,7 +9291,8 @@ i {
   position: absolute;
   font-size: 11px;
   min-width: 20px;
-  text-align: center; }
+  text-align: center;
+  line-height: 20px; }
 
 .status-left {
   top: 0;
@@ -9360,16 +9361,6 @@ ion-modal-view {
 .advertisement .button-royal {
   background: #242F4B !important; }
 
-<<<<<<< HEAD
-.history .item.item-stable {
-  line-height: 28px; }
-
-.history .item.item-royal {
-  background: #D2D2D2 !important;
-  border: 0px !important;
-  margin: 0px !important;
-  color: #000000 !important; }
-=======
 .item-radio .radio-icon {
   /* checkmark icon will be hidden by default */
   position: absolute;
@@ -9397,13 +9388,19 @@ ion-modal-view {
     /* show the checkmark icon when its checked */
     visibility: visible;
     color: #323232; }
->>>>>>> 5621bcb... FavoritTeam.html
+
+.history .item.item-royal {
+  background: #D2D2D2 !important;
+  border: 0px !important;
+  margin: 0px !important;
+  color: #000000 !important; }
 
 .list .item.item-accordion {
-  line-height: 30px;
+  /*line-height: 30px;*/
   padding-top: 0;
-  padding-bottom: 0;
-  transition: 0.09s all linear; }
+  padding-bottom: 0; }
+  .list .item.item-accordion .item.item-stable {
+    /*line-height:40px;*/ }
 
 .list .item.item-accordion.ng-hide {
   line-height: 0px; }
@@ -9411,3 +9408,16 @@ ion-modal-view {
 .list .item.item-accordion.ng-hide-add,
 .list .item.item-accordion.ng-hide-remove {
   display: block !important; }
+
+.line-height-small {
+  line-height: 30px; }
+
+.default-title {
+  display: none; }
+
+.back-button .button .icon {
+  vertical-align: middle;
+  pointer-events: none; }
+
+.padding-small {
+  padding: 5px; }

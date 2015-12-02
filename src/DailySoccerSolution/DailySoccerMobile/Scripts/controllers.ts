@@ -2,14 +2,11 @@ angular.module('starter.controllers', [])
 
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
         $scope.groups = [];
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 2; i++) {
             $scope.groups[i] = {
                 name: i,
                 items: []
             };
-            for (var j = 0; j < 3; j++) {
-                $scope.groups[i].items.push(i + '-' + j);
-            }
         }
 
         $scope.toggleGroup = function (group) {

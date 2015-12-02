@@ -297,6 +297,7 @@ i {
     font-size: $font-size-small;
     min-width: 20px;
     text-align: center;
+    line-height: 20px;
 }
 
 .status-left {
@@ -405,9 +406,7 @@ ion-modal-view{
   }
 }
 .history {
-    .item.item-stable{
-    line-height:28px;
-    }
+
     .item.item-royal{
         background:#D2D2D2 !important;
         border:0px !important;
@@ -416,10 +415,13 @@ ion-modal-view{
     }
 }
 .list .item.item-accordion {
-  line-height: 30px;
+    .item.item-stable{
+    /*line-height:40px;*/
+    }
+
+  /*line-height: 30px;*/
   padding-top: 0;
   padding-bottom: 0;
-  transition: 0.09s all linear;
 }
 .list .item.item-accordion.ng-hide {
   line-height: 0px;
@@ -427,4 +429,17 @@ ion-modal-view{
 .list .item.item-accordion.ng-hide-add,
 .list .item.item-accordion.ng-hide-remove {
   display: block !important;
+}
+.line-height-small{
+    line-height:30px;
+}
+.default-title{
+    display:none;
+}
+.back-button .button .icon {
+    vertical-align: middle;
+    pointer-events: none;
+}
+.padding-small{
+    padding:5px
 }
