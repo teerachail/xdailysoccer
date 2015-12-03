@@ -103,7 +103,7 @@ namespace DailySoccer.Specs
                         "2",
                         "Premier league",
                         "1/1/2015 01:30",
-                        "",
+                        "1/1/2015 01:30",
                         "",
                         "3",
                         "Birmingham City",
@@ -111,6 +111,30 @@ namespace DailySoccer.Specs
                         "4",
                         "Blackburn Rovers",
                         "9"});
+            table1.AddRow(new string[] {
+                        "3",
+                        "Premier league",
+                        "1/1/2015 02:00",
+                        "1/1/2015 02:00",
+                        "1/1/2015 03:30",
+                        "5",
+                        "FC Astana",
+                        "10",
+                        "6",
+                        "Atletico Madrid",
+                        "11"});
+            table1.AddRow(new string[] {
+                        "4",
+                        "Premier league",
+                        "1/20/2015 02:00",
+                        "",
+                        "",
+                        "7",
+                        "Real Madrid",
+                        "12",
+                        "8",
+                        "Paris Saint-Germain",
+                        "13"});
 #line 9
  testRunner.And("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table1, "And ");
 #line hidden
@@ -126,7 +150,7 @@ namespace DailySoccer.Specs
                         "0",
                         "5",
                         "0"});
-#line 13
+#line 15
  testRunner.And("ผู้ใช้ในระบบมีดังนี้", ((string)(null)), table2, "And ");
 #line hidden
         }
@@ -141,7 +165,7 @@ namespace DailySoccer.Specs
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ทายผลว่าทีมเย่าชนะให้กับแมช์ที่ยังไม่แข่ง ระบบทำการบันทึกการทายผลไว้", new string[] {
                         "mock",
                         "mock"});
-#line 18
+#line 20
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
@@ -152,14 +176,489 @@ this.FeatureBackground();
                         "MatchId",
                         "GuessTeamId",
                         "PredictionPoints"});
-#line 19
- testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table3, "Given ");
 #line 21
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table3, "Given ");
+#line 23
  testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'1\' IsGuessTeamHome: \'true\' เวลาในขณะนั้น" +
                     "เป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 22
+#line 24
  testRunner.Then("ระบบทำการบันทึกการทายผลไว้ UserId: \'s01\', MatchId: \'1\', GuessTeamId \'1\', Predicti" +
                     "onPoints \'6\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ทายผลว่าทีมเยือนชนะให้กับแมช์ที่ยังไม่แข่ง ระบบทำการบันทึกการทายผลไว้")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ทายผลวาทมเยอนชนะใหกบแมชทยงไมแขงระบบทำการบนทกการทายผลไว()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ทายผลว่าทีมเยือนชนะให้กับแมช์ที่ยังไม่แข่ง ระบบทำการบันทึกการทายผลไว้", new string[] {
+                        "mock"});
+#line 27
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+#line 28
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table4, "Given ");
+#line 30
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'1\' IsGuessTeamHome: \'false\' เวลาในขณะนั้" +
+                    "นเป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 31
+ testRunner.Then("ระบบทำการบันทึกการทายผลไว้ UserId: \'s01\', MatchId: \'1\', GuessTeamId \'2\', Predicti" +
+                    "onPoints \'7\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ทายผลว่าทีมเย่าชนะให้กับแมช์ที่กำลังแข่ง ระบบทำการบันทึกการทายผลไว้")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ทายผลวาทมเยาชนะใหกบแมชทกำลงแขงระบบทำการบนทกการทายผลไว()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ทายผลว่าทีมเย่าชนะให้กับแมช์ที่กำลังแข่ง ระบบทำการบันทึกการทายผลไว้", new string[] {
+                        "mock"});
+#line 34
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+#line 35
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table5, "Given ");
+#line 37
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'2\' IsGuessTeamHome: \'true\' เวลาในขณะนั้น" +
+                    "เป็น \'1/1/2015 02:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 38
+ testRunner.Then("ระบบทำการบันทึกการทายผลไว้ UserId: \'s01\', MatchId: \'2\', GuessTeamId \'3\', Predicti" +
+                    "onPoints \'8\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ทายผลว่าทีมเยือนชนะให้กับแมช์ที่กำลังแข่ง ระบบทำการบันทึกการทายผลไว้")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ทายผลวาทมเยอนชนะใหกบแมชทกำลงแขงระบบทำการบนทกการทายผลไว()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ทายผลว่าทีมเยือนชนะให้กับแมช์ที่กำลังแข่ง ระบบทำการบันทึกการทายผลไว้", new string[] {
+                        "mock"});
+#line 41
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+#line 42
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table6, "Given ");
+#line 44
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'2\' IsGuessTeamHome: \'false\' เวลาในขณะนั้" +
+                    "นเป็น \'1/1/2015 02:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 45
+ testRunner.Then("ระบบทำการบันทึกการทายผลไว้ UserId: \'s01\', MatchId: \'2\', GuessTeamId \'4\', Predicti" +
+                    "onPoints \'9\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ทายผลว่าทีมเย่าชนะให้กับแมช์ที่แข่งจบแล้ว ระบบไม่ทำการบันทึกผล")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ทายผลวาทมเยาชนะใหกบแมชทแขงจบแลวระบบไมทำการบนทกผล()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ทายผลว่าทีมเย่าชนะให้กับแมช์ที่แข่งจบแล้ว ระบบไม่ทำการบันทึกผล", new string[] {
+                        "mock"});
+#line 48
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+#line 49
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table7, "Given ");
+#line 51
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'3\' IsGuessTeamHome: \'true\' เวลาในขณะนั้น" +
+                    "เป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 52
+ testRunner.Then("ระบบไม่ทำการบันทึกผลการทาย", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ทายผลว่าทีมเยือนชนะให้กับแมช์ที่แข่งจบแล้ว ระบบไม่ทำการบันทึกผล")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ทายผลวาทมเยอนชนะใหกบแมชทแขงจบแลวระบบไมทำการบนทกผล()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ทายผลว่าทีมเยือนชนะให้กับแมช์ที่แข่งจบแล้ว ระบบไม่ทำการบันทึกผล", new string[] {
+                        "mock"});
+#line 55
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+#line 56
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table8, "Given ");
+#line 58
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'3\' IsGuessTeamHome: \'false\' เวลาในขณะนั้" +
+                    "นเป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 59
+ testRunner.Then("ระบบไม่ทำการบันทึกผลการทาย", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("เปลี่ยนการทายจากทีมเย่าชนะเป็นทีมเยือนชนะให้กับแมช์ที่ยังไม่แข่ง ระบบทำการบันทึกก" +
+            "ารทายผลไว้")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void เปลยนการทายจากทมเยาชนะเปนทมเยอนชนะใหกบแมชทยงไมแขงระบบทำการบนทกการทายผลไว()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("เปลี่ยนการทายจากทีมเย่าชนะเป็นทีมเยือนชนะให้กับแมช์ที่ยังไม่แข่ง ระบบทำการบันทึกก" +
+                    "ารทายผลไว้", new string[] {
+                        "mock"});
+#line 62
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+            table9.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1",
+                        "1",
+                        "10"});
+#line 63
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table9, "Given ");
+#line 66
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'1\' IsGuessTeamHome: \'false\' เวลาในขณะนั้" +
+                    "นเป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 67
+ testRunner.Then("ระบบทำการบันทึกการทายผลไว้ UserId: \'s01\', MatchId: \'1\', GuessTeamId \'2\', Predicti" +
+                    "onPoints \'7\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("เปลี่ยนการทายจากทีมเยือนชนะเป็นทีมเย่าชนะให้กับแมช์ที่ยังไม่แข่ง ระบบทำการบันทึกก" +
+            "ารทายผลไว้")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void เปลยนการทายจากทมเยอนชนะเปนทมเยาชนะใหกบแมชทยงไมแขงระบบทำการบนทกการทายผลไว()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("เปลี่ยนการทายจากทีมเยือนชนะเป็นทีมเย่าชนะให้กับแมช์ที่ยังไม่แข่ง ระบบทำการบันทึกก" +
+                    "ารทายผลไว้", new string[] {
+                        "mock"});
+#line 70
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+            table10.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1",
+                        "2",
+                        "10"});
+#line 71
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table10, "Given ");
+#line 74
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'1\' IsGuessTeamHome: \'true\' เวลาในขณะนั้น" +
+                    "เป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 75
+ testRunner.Then("ระบบทำการบันทึกการทายผลไว้ UserId: \'s01\', MatchId: \'1\', GuessTeamId \'1\', Predicti" +
+                    "onPoints \'6\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("เปลี่ยนการทายจากทีมเย่าชนะเป็นทีมเยือนชนะให้กับแมช์ที่กำลังแข่ง ระบบทำการบันทึกกา" +
+            "รทายผลไว้")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void เปลยนการทายจากทมเยาชนะเปนทมเยอนชนะใหกบแมชทกำลงแขงระบบทำการบนทกการทายผลไว()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("เปลี่ยนการทายจากทีมเย่าชนะเป็นทีมเยือนชนะให้กับแมช์ที่กำลังแข่ง ระบบทำการบันทึกกา" +
+                    "รทายผลไว้", new string[] {
+                        "mock"});
+#line 78
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+            table11.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "2",
+                        "3",
+                        "10"});
+#line 79
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table11, "Given ");
+#line 82
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'2\' IsGuessTeamHome: \'false\' เวลาในขณะนั้" +
+                    "นเป็น \'1/1/2015 02:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 83
+ testRunner.Then("ระบบทำการบันทึกการทายผลไว้ UserId: \'s01\', MatchId: \'2\', GuessTeamId \'4\', Predicti" +
+                    "onPoints \'9\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("เปลี่ยนการทายจากทีมเยือนชนะเป็นทีมเย่าชนะให้กับแมช์ที่กำลังแข่ง ระบบทำการบันทึกกา" +
+            "รทายผลไว้")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void เปลยนการทายจากทมเยอนชนะเปนทมเยาชนะใหกบแมชทกำลงแขงระบบทำการบนทกการทายผลไว()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("เปลี่ยนการทายจากทีมเยือนชนะเป็นทีมเย่าชนะให้กับแมช์ที่กำลังแข่ง ระบบทำการบันทึกกา" +
+                    "รทายผลไว้", new string[] {
+                        "mock"});
+#line 86
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+            table12.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "2",
+                        "4",
+                        "10"});
+#line 87
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table12, "Given ");
+#line 90
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'2\' IsGuessTeamHome: \'true\' เวลาในขณะนั้น" +
+                    "เป็น \'1/1/2015 02:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 91
+ testRunner.Then("ระบบทำการบันทึกการทายผลไว้ UserId: \'s01\', MatchId: \'2\', GuessTeamId \'3\', Predicti" +
+                    "onPoints \'8\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("เปลี่ยนการทายจากทีมเย่าชนะเป็นทีมเยือนชนะให้กับแมช์ที่แข่งจบแล้ว ระบบไม่ทำการบันท" +
+            "ึกผล")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void เปลยนการทายจากทมเยาชนะเปนทมเยอนชนะใหกบแมชทแขงจบแลวระบบไมทำการบนทกผล()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("เปลี่ยนการทายจากทีมเย่าชนะเป็นทีมเยือนชนะให้กับแมช์ที่แข่งจบแล้ว ระบบไม่ทำการบันท" +
+                    "ึกผล", new string[] {
+                        "mock"});
+#line 94
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+            table13.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "3",
+                        "5",
+                        "10"});
+#line 95
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table13, "Given ");
+#line 98
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'3\' IsGuessTeamHome: \'false\' เวลาในขณะนั้" +
+                    "นเป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 99
+ testRunner.Then("ระบบไม่ทำการบันทึกผลการทาย", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("เปลี่ยนการทายจากทีมเยือนชนะเป็นทีมเย่าชนะให้กับแมช์ที่แข่งจบแล้ว ระบบไม่ทำการบันท" +
+            "ึกผล")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void เปลยนการทายจากทมเยอนชนะเปนทมเยาชนะใหกบแมชทแขงจบแลวระบบไมทำการบนทกผล()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("เปลี่ยนการทายจากทีมเยือนชนะเป็นทีมเย่าชนะให้กับแมช์ที่แข่งจบแล้ว ระบบไม่ทำการบันท" +
+                    "ึกผล", new string[] {
+                        "mock"});
+#line 102
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+            table14.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "3",
+                        "6",
+                        "10"});
+#line 103
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table14, "Given ");
+#line 106
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'3\' IsGuessTeamHome: \'true\' เวลาในขณะนั้น" +
+                    "เป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 107
+ testRunner.Then("ระบบไม่ทำการบันทึกผลการทาย", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ทายแมช์ที่ไม่มีในระบบ ระบบไม่ทำการบันทึกผล")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ทายแมชทไมมในระบบระบบไมทำการบนทกผล()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ทายแมช์ที่ไม่มีในระบบ ระบบไม่ทำการบันทึกผล", new string[] {
+                        "mock"});
+#line 110
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+#line 111
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table15, "Given ");
+#line 113
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'99\' IsGuessTeamHome: \'true\' เวลาในขณะนั้" +
+                    "นเป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 114
+ testRunner.Then("ระบบไม่ทำการบันทึกผลการทาย", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ทายผลว่าทีมเย่าชนะให้กับแมช์ที่ยังไม่แข่งที่อยู่ในอนาคต ระบบไม่ทำการบันทึกผล")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ทายผลวาทมเยาชนะใหกบแมชทยงไมแขงทอยในอนาคตระบบไมทำการบนทกผล()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ทายผลว่าทีมเย่าชนะให้กับแมช์ที่ยังไม่แข่งที่อยู่ในอนาคต ระบบไม่ทำการบันทึกผล", new string[] {
+                        "mock"});
+#line 117
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+#line 118
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table16, "Given ");
+#line 120
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'4\' IsGuessTeamHome: \'true\' เวลาในขณะนั้น" +
+                    "เป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 121
+ testRunner.Then("ระบบไม่ทำการบันทึกผลการทาย", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ทายผลว่าทีมเยือนชนะให้กับแมช์ที่ยังไม่แข่งที่อยู่ในอนาคต ระบบไม่ทำการบันทึกผล")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GuessMatch")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ทายผลวาทมเยอนชนะใหกบแมชทยงไมแขงทอยในอนาคตระบบไมทำการบนทกผล()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ทายผลว่าทีมเยือนชนะให้กับแมช์ที่ยังไม่แข่งที่อยู่ในอนาคต ระบบไม่ทำการบันทึกผล", new string[] {
+                        "mock"});
+#line 124
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId",
+                        "PredictionPoints"});
+#line 125
+ testRunner.Given("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table17, "Given ");
+#line 127
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ทายผลแมช์ MatchId: \'4\' IsGuessTeamHome: \'false\' เวลาในขณะนั้" +
+                    "นเป็น \'1/1/2015 04:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 128
+ testRunner.Then("ระบบไม่ทำการบันทึกผลการทาย", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

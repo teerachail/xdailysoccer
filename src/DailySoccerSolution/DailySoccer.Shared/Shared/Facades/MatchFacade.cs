@@ -74,18 +74,26 @@ namespace DailySoccer.Shared.Facades
             var account = accountDac.GetAccountBySecrectCode(request.UserId);
             if (account == null) return invalidRespondData;
 
+            var limitedPastDate = currentTime.Date.AddDays(-2);
+            var limitedFutureDate = currentTime.Date.AddDays(2);
             var selectedMatche = FacadeRepository.Instance.MatchDataAccess.GetAllMatches()
+                .Where(it => it.BeginDate.Date >= limitedPastDate)
+                .Where(it => it.BeginDate.Date <= limitedFutureDate)
                 .FirstOrDefault(it => it.Id == request.MatchId);
-            if(selectedMatche==null) return invalidRespondData;
+            if (selectedMatche == null) return invalidRespondData;
 
-            var updateData = new GuessMatchInformation
+            var isMatchEnableToGuess = !selectedMatche.CompletedDate.HasValue;
+            if (isMatchEnableToGuess)
             {
-                AccountSecrectCode = request.UserId,
-                MatchId = request.MatchId,
-                GuessTeamId = request.IsCancelGuess ? null : request.IsGuessTeamHome ? new Nullable<int>(selectedMatche.TeamHome.Id) : new Nullable<int>(selectedMatche.TeamAway.Id),
-                PredictionPoints = request.IsCancelGuess ? 0 : request.IsGuessTeamHome ? selectedMatche.TeamHome.CurrentPredictionPoints : selectedMatche.TeamAway.CurrentPredictionPoints
-            };
-            FacadeRepository.Instance.MatchDataAccess.SaveGuess(updateData);
+                var updateData = new GuessMatchInformation
+                {
+                    AccountSecrectCode = request.UserId,
+                    MatchId = request.MatchId,
+                    GuessTeamId = request.IsCancelGuess ? null : request.IsGuessTeamHome ? new Nullable<int>(selectedMatche.TeamHome.Id) : new Nullable<int>(selectedMatche.TeamAway.Id),
+                    PredictionPoints = request.IsCancelGuess ? 0 : request.IsGuessTeamHome ? selectedMatche.TeamHome.CurrentPredictionPoints : selectedMatche.TeamAway.CurrentPredictionPoints
+                };
+                FacadeRepository.Instance.MatchDataAccess.SaveGuess(updateData);
+            }
 
             var respond = GetMatches(new GetMatchesRequest { UserId = request.UserId }, currentTime);
             return new GuessMatchRespond

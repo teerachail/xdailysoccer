@@ -37,5 +37,13 @@ namespace DailySoccer.Specs.Steps
                 && it.PredictionPoints == predictionPoints
             )), Times.Once());
         }
+
+        [Then(@"ระบบไม่ทำการบันทึกผลการทาย")]
+        public void Thenระบบไมทำการบนทกผลการทาย()
+        {
+            var mockMatchDataAccess = ScenarioContext.Current.Get<Moq.Mock<IMatchDataAccess>>();
+            mockMatchDataAccess.Verify(dac => dac.SaveGuess(It.IsAny<GuessMatchInformation>()), Times.Never());
+        }
+
     }
 }
