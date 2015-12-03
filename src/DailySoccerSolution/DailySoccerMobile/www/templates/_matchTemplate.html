@@ -13,7 +13,7 @@
                 <button class="button button-icon ion-navicon" menu-toggle="right"></button>
             </ion-nav-buttons>
         </ion-nav-bar>
-        <ion-tabs class="tabs-dark tabs-top">
+        <ion-tabs delegate-handle="calendarTabs" class="tabs-dark tabs-top">
             <ion-tab title="{{ matchCtrl.PastTwoDaysDate | date: 'EEE' }}<br>{{ matchCtrl.PastTwoDaysDate | date: 'd' }}" on-select="matchCtrl.SelectDay(matchCtrl.PastTwoDaysDate)">
             </ion-tab>
             <ion-tab title="{{ matchCtrl.PastOneDaysDate | date: 'EEE' }}<br>{{ matchCtrl.PastOneDaysDate | date: 'd' }}" on-select="matchCtrl.SelectDay(matchCtrl.PastOneDaysDate)">

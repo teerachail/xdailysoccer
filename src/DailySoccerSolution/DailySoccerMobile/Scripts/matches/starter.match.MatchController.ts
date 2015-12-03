@@ -13,11 +13,12 @@
         public AccountInfo: account.AccountInformation;
         private _allMatches: MatchInformation[] = [];
 
-        static $inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal'];
+        static $inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal', '$ionicTabsDelegate'];
         constructor(private $scope,
             private matchSvc: starter.match.MatchServices,
             private $location: ng.ILocationService,
-            private $ionicModal) {
+            private $ionicModal,
+            private $ionicTabsDelegate) {
         
             this.GetTodayMatches();
             this.$ionicModal.fromTemplateUrl('templates/Matches/MatchPopup.html',
@@ -37,6 +38,7 @@
                     this.updateDisplayDate(respond.CurrentDate);
                     this.updateDisplayMatches(respond.Matches);
                     this.updateRemainingGuessAmount();
+                    this.$ionicTabsDelegate.$getByHandle('calendarTabs').select(2);
                     console.log('Get all matches completed.');
                 });
         }
