@@ -13,7 +13,7 @@
                 
             </div>
                  อังกฤษ พรีเมียร์ลีก</ion-item>
-            <div class="row padding-bottom" ng-repeat="match in matchCtrl.TodayMatches">
+            <div class="row padding-bottom" ng-repeat="match in matchCtrl.DisplayMatches">
                 <div class="col col-40 item" 
                      ng-class="{'item-stable': !match.TeamHome.IsSelected,
                      'item-calm': match.TeamHome.IsSelected && !match.CompletedDate,
