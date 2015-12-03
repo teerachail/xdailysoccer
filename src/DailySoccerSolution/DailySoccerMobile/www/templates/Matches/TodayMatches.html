@@ -39,10 +39,10 @@
                 <div class="col col-20 col-center item item-dark ">
                     <div class="col-center">
                         <span class="status status-left" ng-class="{'energized': !match.CompletedDate, 'stable': match.CompletedDate}" >{{ match.Status }}</span>
-                        <div class="text-center padding" ng-show="!match.StartedDate">
+                        <div class="text-center padding-vertical" ng-show="!match.StartedDate">
                             <span>{{ match.BeginDate | date : 'hh:mm'}}</span>
                         </div>
-                        <div class="text-center padding" ng-show="match.StartedDate">
+                        <div class="text-center padding-vertical" ng-show="match.StartedDate">
                             <span>{{ match.TeamHome.CurrentScore }}</span>
                             <span> - </span>
                             <span>{{ match.TeamAway.CurrentScore }}</span>
