@@ -282,6 +282,13 @@ i {
 .no-padding {
     padding: 0px !important;
 }
+.no-padding-bottom{
+    padding-bottom:0px !important;
+}
+.padding-small{
+    padding:5px
+}
+
 .no-border{
     border:0px !important;
 }
@@ -448,7 +455,3 @@ ion-modal-view{
 .button .icon {
     vertical-align: middle;
 }  
-
-.padding-small{
-    padding:5px
-}
