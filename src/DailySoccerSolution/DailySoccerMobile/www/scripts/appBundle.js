@@ -202,7 +202,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
     });
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/app/playlists');
-    $urlRouterProvider.otherwise('/account/login');
+    $urlRouterProvider.otherwise('/account/favoritteam');
 });
 angular.module('starter.controllers', [])
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {

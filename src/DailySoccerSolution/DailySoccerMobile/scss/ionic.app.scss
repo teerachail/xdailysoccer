@@ -119,7 +119,9 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     border: 0px;
     border-radius: $border-radius-large;
 }
-
+.border-radius-large{
+    border-radius: $border-radius-large;
+}
 .header-item {
     text-align: center !important;
     font-weight: bold !important;

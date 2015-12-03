@@ -9146,6 +9146,9 @@ a.button {
   border: 0px;
   border-radius: 6px; }
 
+.border-radius-large {
+  border-radius: 6px; }
+
 .header-item {
   text-align: center !important;
   font-weight: bold !important; }
