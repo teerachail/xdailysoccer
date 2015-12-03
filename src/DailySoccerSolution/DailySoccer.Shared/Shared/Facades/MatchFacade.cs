@@ -57,5 +57,11 @@ namespace DailySoccer.Shared.Facades
                 Matches = matches
             };
         }
+
+        public GuessMatchRespond GuessMatch(GuessMatchRequest request)
+        {
+            // TODO: GuessMatch
+            throw new NotImplementedException();
+        }
     }
 }

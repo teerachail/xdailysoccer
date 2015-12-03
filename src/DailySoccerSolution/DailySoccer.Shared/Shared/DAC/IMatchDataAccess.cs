@@ -10,5 +10,6 @@ namespace DailySoccer.Shared.DAC
     public interface IMatchDataAccess
     {
         IEnumerable<MatchInformation> GetAllMatches();
+        void SaveGuess(GuessMatchInformation guess);
     }
 }

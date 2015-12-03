@@ -32,5 +32,11 @@ namespace DailySoccer.Shared.DAC
                 return qry;
             }
         }
+
+        public void SaveGuess(GuessMatchInformation guess)
+        {
+            // TODO: SaveGuess
+            throw new NotImplementedException();
+        }
     }
 }
