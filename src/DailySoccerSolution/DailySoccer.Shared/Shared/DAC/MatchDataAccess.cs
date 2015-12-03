@@ -27,7 +27,14 @@ namespace DailySoccer.Shared.DAC
                         Name = it.TeamAway.Name,
                         CurrentScore = it.TeamAway.CurrentScore,
                         CurrentPredictionPoints = it.TeamAway.CurrentPredictionPoints,
-                    }
+                    },
+                    TeamHome = new TeamInformation
+                    {
+                        Id = it.TeamHome.Id,
+                        Name = it.TeamHome.Name,
+                        CurrentScore = it.TeamHome.CurrentScore,
+                        CurrentPredictionPoints = it.TeamHome.CurrentPredictionPoints,
+                    },
                 }).ToList();
                 return qry;
             }

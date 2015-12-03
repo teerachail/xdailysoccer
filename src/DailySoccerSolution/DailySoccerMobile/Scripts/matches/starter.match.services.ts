@@ -13,7 +13,7 @@
         }
 
         public GuessMatch(req: GuessMatchRequest): ng.IPromise<GuessMatchRespond> {
-            var requestUrl = 'Matches/GuessMatch?userId=' + req.UserId + '&matchId=' + req.MatchId + '&isHome=' + req.IsHome;
+            var requestUrl = 'Matches/GuessMatch?userId=' + req.UserId + '&matchId=' + req.MatchId + '&isHome=' + req.IsHome + '&isCancel=' + req.IsCancel;
             return this.queryRemoteSvc.RemoteQuery<GuessMatchRespond>(requestUrl);
         }
 

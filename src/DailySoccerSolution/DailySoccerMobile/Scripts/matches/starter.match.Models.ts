@@ -36,6 +36,7 @@
         public UserId: string;
         public MatchId: number;
         public IsHome: boolean;
+        public IsCancel: boolean;
     }
     export class GuessMatchRespond {
         public AccountInfo: account.AccountInformation;
