@@ -58,10 +58,42 @@ namespace DailySoccer.Shared.Facades
             };
         }
 
-        public GuessMatchRespond GuessMatch(GuessMatchRequest request)
+        public GuessMatchRespond GuessMatch(GuessMatchRequest request, DateTime currentTime)
         {
-            // TODO: GuessMatch
-            throw new NotImplementedException();
+            var invalidRespondData = new GuessMatchRespond
+            {
+                IsSuccessed = false,
+                AccountInfo = new AccountInformation(),
+                Matches = Enumerable.Empty<MatchInformation>(),
+            };
+
+            var isArgumentsValid = request != null && !string.IsNullOrEmpty(request.UserId);
+            if (!isArgumentsValid) return invalidRespondData;
+
+            var accountDac = FacadeRepository.Instance.AccountDataAccess;
+            var account = accountDac.GetAccountBySecrectCode(request.UserId);
+            if (account == null) return invalidRespondData;
+
+            var selectedMatche = FacadeRepository.Instance.MatchDataAccess.GetAllMatches()
+                .FirstOrDefault(it => it.Id == request.MatchId);
+            if(selectedMatche==null) return invalidRespondData;
+
+            var updateData = new GuessMatchInformation
+            {
+                AccountSecrectCode = request.UserId,
+                MatchId = request.MatchId,
+                GuessTeamId = request.IsCancelGuess ? null : request.IsGuessTeamHome ? new Nullable<int>(selectedMatche.TeamHome.Id) : new Nullable<int>(selectedMatche.TeamAway.Id),
+                PredictionPoints = request.IsCancelGuess ? 0 : request.IsGuessTeamHome ? selectedMatche.TeamHome.CurrentPredictionPoints : selectedMatche.TeamAway.CurrentPredictionPoints
+            };
+            FacadeRepository.Instance.MatchDataAccess.SaveGuess(updateData);
+
+            var respond = GetMatches(new GetMatchesRequest { UserId = request.UserId }, currentTime);
+            return new GuessMatchRespond
+            {
+                IsSuccessed = true,
+                AccountInfo = respond.AccountInfo,
+                Matches = respond.Matches
+            };
         }
     }
 }

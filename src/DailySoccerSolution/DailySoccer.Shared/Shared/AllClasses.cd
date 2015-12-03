@@ -52,7 +52,7 @@
   <Class Name="DailySoccer.Shared.Models.GuessMatchInformation">
     <Position X="11.25" Y="5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAiAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAg=</HashCode>
+      <HashCode>AAAiQAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>Shared\Models\GuessMatchInformation.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -76,8 +76,15 @@
   <Class Name="DailySoccer.Shared.Facades.MatchFacade">
     <Position X="7.5" Y="3.25" Width="5.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shared\Facades\MatchFacade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DailySoccer.Shared.Models.GuessMatchRequest">
+    <Position X="2.75" Y="5.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>gAAgAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Models\GuessMatchRequest.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="DailySoccer.Shared.DAC.IAccountDataAccess">
@@ -90,7 +97,7 @@
   <Interface Name="DailySoccer.Shared.DAC.IMatchDataAccess">
     <Position X="16.75" Y="0.5" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAgAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shared\DAC\IMatchDataAccess.cs</FileName>
     </TypeIdentifier>
   </Interface>
