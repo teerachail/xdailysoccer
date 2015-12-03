@@ -41,6 +41,9 @@ namespace DailySoccer.Shared.Facades
                 var guess = guessMatches.First(it => it.MatchId == match.Id);
                 if (guess == null) continue;
 
+                var isSelectionGuessValid = guess.GuessTeamId.Value == match.TeamHome.Id || guess.GuessTeamId.Value == match.TeamAway.Id;
+                if (!isSelectionGuessValid) continue;
+
                 var isGuessTeamHome = guess.GuessTeamId.Value == match.TeamHome.Id;
                 var selectedTeam = isGuessTeamHome ? match.TeamHome : match.TeamAway;
                 selectedTeam.IsSelected = true;

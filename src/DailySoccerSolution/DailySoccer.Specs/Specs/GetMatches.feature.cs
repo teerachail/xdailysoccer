@@ -1654,6 +1654,227 @@ this.FeatureBackground();
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ข้อมูลการทายของผู้ใช้ไม่ถูกต้อง ระบบส่งข้อมูลแมช์กลับมาปรกติและไม่สนใจข้อมูลการทา" +
+            "ยเหล่านั้น")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetMatches")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ขอมลการทายของผใชไมถกตองระบบสงขอมลแมชกลบมาปรกตและไมสนใจขอมลการทายเหลานน()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ข้อมูลการทายของผู้ใช้ไม่ถูกต้อง ระบบส่งข้อมูลแมช์กลับมาปรกติและไม่สนใจข้อมูลการทา" +
+                    "ยเหล่านั้น", new string[] {
+                        "mock"});
+#line 242
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table50 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table50.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "1/1/2015 02:30",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table50.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/2/2015 01:00",
+                        "1/2/2015 01:00",
+                        "1/2/2015 02:30",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+            table50.AddRow(new string[] {
+                        "3",
+                        "Premier league",
+                        "1/3/2015 01:00",
+                        "1/3/2015 01:00",
+                        "1/3/2015 02:30",
+                        "5",
+                        "FC Astana",
+                        "7",
+                        "Atletico Madrid"});
+            table50.AddRow(new string[] {
+                        "4",
+                        "Premier league",
+                        "1/4/2015 01:00",
+                        "1/4/2015 01:00",
+                        "",
+                        "6",
+                        "Real Madrid",
+                        "8",
+                        "Paris Saint-Germain"});
+            table50.AddRow(new string[] {
+                        "5",
+                        "Premier league",
+                        "1/5/2015 01:00",
+                        "",
+                        "",
+                        "9",
+                        "Shakhtar Donetsk",
+                        "10",
+                        "Malmo"});
+            table50.AddRow(new string[] {
+                        "6",
+                        "Premier league",
+                        "1/6/2015 01:00",
+                        "",
+                        "",
+                        "11",
+                        "Manchester United",
+                        "12",
+                        "CSKA Moscow"});
+            table50.AddRow(new string[] {
+                        "7",
+                        "Premier league",
+                        "1/7/2015 01:00",
+                        "",
+                        "",
+                        "13",
+                        "PSV Eindhoven",
+                        "14",
+                        "VfL Wolfsburg"});
+#line 243
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table50, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table51 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+            table51.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1",
+                        "1"});
+            table51.AddRow(new string[] {
+                        "2",
+                        "s01",
+                        "2",
+                        "99"});
+            table51.AddRow(new string[] {
+                        "3",
+                        "s01",
+                        "3",
+                        "-1"});
+            table51.AddRow(new string[] {
+                        "4",
+                        "s01",
+                        "99",
+                        "12"});
+#line 252
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table51, "And ");
+#line 258
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น \'1/4/2015 01:30\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table52 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.IsSelected",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.IsSelected"});
+            table52.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/2/2015 01:00",
+                        "1/2/2015 01:00",
+                        "1/2/2015 02:30",
+                        "3",
+                        "Birmingham City",
+                        "false",
+                        "4",
+                        "Blackburn Rovers",
+                        "false"});
+            table52.AddRow(new string[] {
+                        "3",
+                        "Premier league",
+                        "1/3/2015 01:00",
+                        "1/3/2015 01:00",
+                        "1/3/2015 02:30",
+                        "5",
+                        "FC Astana",
+                        "false",
+                        "7",
+                        "Atletico Madrid",
+                        "false"});
+            table52.AddRow(new string[] {
+                        "4",
+                        "Premier league",
+                        "1/4/2015 01:00",
+                        "1/4/2015 01:00",
+                        "",
+                        "6",
+                        "Real Madrid",
+                        "false",
+                        "8",
+                        "Paris Saint-Germain",
+                        "false"});
+            table52.AddRow(new string[] {
+                        "5",
+                        "Premier league",
+                        "1/5/2015 01:00",
+                        "",
+                        "",
+                        "9",
+                        "Shakhtar Donetsk",
+                        "false",
+                        "10",
+                        "Malmo",
+                        "false"});
+            table52.AddRow(new string[] {
+                        "6",
+                        "Premier league",
+                        "1/6/2015 01:00",
+                        "",
+                        "",
+                        "11",
+                        "Manchester United",
+                        "false",
+                        "12",
+                        "CSKA Moscow",
+                        "false"});
+#line 259
+ testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table52, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table53 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table53.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 266
+ testRunner.And("ระบบส่งข้อมูลผู้ใช้กลับไปเป็น", ((string)(null)), table53, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
