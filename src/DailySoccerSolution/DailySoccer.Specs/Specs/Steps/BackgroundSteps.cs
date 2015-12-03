@@ -22,10 +22,6 @@ namespace DailySoccer.Specs.Steps
             ScenarioContext.Current.Set(accountDataAccess);
             ScenarioContext.Current.Set(matchDataAccess);
 
-            // Facade
-            var accountFacade = new AccountFacade();
-            ScenarioContext.Current.Set(accountFacade);
-
             // Facade repositories
             FacadeRepository.Instance.InitializeDataAccess(accountDataAccess.Object, matchDataAccess.Object);
             

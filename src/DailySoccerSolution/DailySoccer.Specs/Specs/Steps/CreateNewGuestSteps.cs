@@ -25,8 +25,7 @@ namespace DailySoccer.Specs.Steps
         [When(@"ระบบทำการสร้างguestให้ใหม่")]
         public void WhenระบบทำการสรางGuestใหใหม()
         {
-            var accountFacade = new AccountFacade();
-            var guestAccount = accountFacade.CreateNewGuest();
+            var guestAccount = FacadeRepository.Instance.AccountFacade.CreateNewGuest();
             ScenarioContext.Current.Set(guestAccount);
         }
 
