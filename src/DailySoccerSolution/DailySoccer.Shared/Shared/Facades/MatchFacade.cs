@@ -47,6 +47,7 @@ namespace DailySoccer.Shared.Facades
                 var isGuessTeamHome = guess.GuessTeamId.Value == match.TeamHome.Id;
                 var selectedTeam = isGuessTeamHome ? match.TeamHome : match.TeamAway;
                 selectedTeam.IsSelected = true;
+                selectedTeam.WinningPredictionPoints = guess.PredictionPoints;
             }
 
             return new GetMatchesRespond

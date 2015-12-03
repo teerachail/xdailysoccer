@@ -53,6 +53,7 @@
     <Property Name="GuessTeamId" Type="int" Nullable="true" />
     <Property Name="AccountId" Type="int" Nullable="false" />
     <Property Name="MatchId" Type="int" Nullable="false" />
+    <Property Name="PredictionPoints" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="AccountGuessMatch">
     <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
@@ -134,6 +135,7 @@
           <Property Name="AccountId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Match" Relationship="DailySoccerModel.MatchGuessMatch" FromRole="GuessMatch" ToRole="Match" />
           <Property Name="MatchId" Type="Int32" Nullable="false" />
+          <Property Name="PredictionPoints" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="AccountGuessMatch">
           <End Type="DailySoccerModel.Account" Role="Account" Multiplicity="1" />
@@ -205,6 +207,7 @@
           <ScalarProperty Name="GuessTeamId" ColumnName="GuessTeamId" />
           <ScalarProperty Name="AccountId" ColumnName="AccountId" />
           <ScalarProperty Name="MatchId" ColumnName="MatchId" />
+          <ScalarProperty Name="PredictionPoints" ColumnName="PredictionPoints" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

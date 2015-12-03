@@ -435,12 +435,14 @@ this.FeatureBackground();
                         "Id",
                         "AccountSecrectCode",
                         "MatchId",
-                        "GuessTeamId"});
+                        "GuessTeamId",
+                        "PredictionPoints"});
             table15.AddRow(new string[] {
                         "1",
                         "s01",
                         "2",
-                        "3"});
+                        "3",
+                        "7"});
 #line 66
  testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table15, "And ");
 #line 69
@@ -455,9 +457,11 @@ this.FeatureBackground();
                         "TeamHome.Id",
                         "TeamHome.Name",
                         "TeamHome.IsSelected",
+                        "TeamHome.WinningPredictionPoints",
                         "TeamAway.Id",
                         "TeamAway.Name",
-                        "TeamAway.IsSelected"});
+                        "TeamAway.IsSelected",
+                        "TeamAway.WinningPredictionPoints"});
             table16.AddRow(new string[] {
                         "1",
                         "Premier league",
@@ -467,9 +471,11 @@ this.FeatureBackground();
                         "1",
                         "Brentford",
                         "false",
+                        "",
                         "2",
                         "Hull City",
-                        "false"});
+                        "false",
+                        ""});
             table16.AddRow(new string[] {
                         "2",
                         "Premier league",
@@ -479,9 +485,11 @@ this.FeatureBackground();
                         "3",
                         "Birmingham City",
                         "true",
+                        "7",
                         "4",
                         "Blackburn Rovers",
-                        "false"});
+                        "false",
+                        ""});
 #line 70
  testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table16, "Then ");
 #line hidden
@@ -555,17 +563,20 @@ this.FeatureBackground();
                         "Id",
                         "AccountSecrectCode",
                         "MatchId",
-                        "GuessTeamId"});
+                        "GuessTeamId",
+                        "PredictionPoints"});
             table19.AddRow(new string[] {
                         "1",
                         "s01",
                         "1",
-                        "2"});
+                        "2",
+                        "7"});
             table19.AddRow(new string[] {
                         "2",
                         "s01",
                         "2",
-                        "3"});
+                        "3",
+                        "7"});
 #line 84
  testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table19, "And ");
 #line 88
@@ -580,9 +591,11 @@ this.FeatureBackground();
                         "TeamHome.Id",
                         "TeamHome.Name",
                         "TeamHome.IsSelected",
+                        "TeamHome.WinningPredictionPoints",
                         "TeamAway.Id",
                         "TeamAway.Name",
-                        "TeamAway.IsSelected"});
+                        "TeamAway.IsSelected",
+                        "TeamAway.WinningPredictionPoints"});
             table20.AddRow(new string[] {
                         "1",
                         "Premier league",
@@ -592,9 +605,11 @@ this.FeatureBackground();
                         "1",
                         "Brentford",
                         "false",
+                        "",
                         "2",
                         "Hull City",
-                        "true"});
+                        "true",
+                        "7"});
             table20.AddRow(new string[] {
                         "2",
                         "Premier league",
@@ -604,9 +619,11 @@ this.FeatureBackground();
                         "3",
                         "Birmingham City",
                         "true",
+                        "7",
                         "4",
                         "Blackburn Rovers",
-                        "false"});
+                        "false",
+                        ""});
 #line 89
  testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table20, "Then ");
 #line hidden
@@ -795,12 +812,14 @@ this.FeatureBackground();
                         "Id",
                         "AccountSecrectCode",
                         "MatchId",
-                        "GuessTeamId"});
+                        "GuessTeamId",
+                        "PredictionPoints"});
             table27.AddRow(new string[] {
                         "1",
                         "s01",
                         "2",
-                        "3"});
+                        "3",
+                        "7"});
 #line 120
  testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table27, "And ");
 #line 123
@@ -815,9 +834,11 @@ this.FeatureBackground();
                         "TeamHome.Id",
                         "TeamHome.Name",
                         "TeamHome.IsSelected",
+                        "TeamHome.WinningPredictionPoints",
                         "TeamAway.Id",
                         "TeamAway.Name",
-                        "TeamAway.IsSelected"});
+                        "TeamAway.IsSelected",
+                        "TeamAway.WinningPredictionPoints"});
             table28.AddRow(new string[] {
                         "1",
                         "Premier league",
@@ -827,9 +848,11 @@ this.FeatureBackground();
                         "1",
                         "Brentford",
                         "false",
+                        "",
                         "2",
                         "Hull City",
-                        "false"});
+                        "false",
+                        ""});
             table28.AddRow(new string[] {
                         "2",
                         "Premier league",
@@ -839,9 +862,11 @@ this.FeatureBackground();
                         "3",
                         "Birmingham City",
                         "true",
+                        "7",
                         "4",
                         "Blackburn Rovers",
-                        "false"});
+                        "false",
+                        ""});
 #line 124
  testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table28, "Then ");
 #line hidden
@@ -915,17 +940,20 @@ this.FeatureBackground();
                         "Id",
                         "AccountSecrectCode",
                         "MatchId",
-                        "GuessTeamId"});
+                        "GuessTeamId",
+                        "PredictionPoints"});
             table31.AddRow(new string[] {
                         "1",
                         "s01",
                         "1",
-                        "2"});
+                        "2",
+                        "7"});
             table31.AddRow(new string[] {
                         "2",
                         "s01",
                         "2",
-                        "3"});
+                        "3",
+                        "7"});
 #line 138
  testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table31, "And ");
 #line 142
@@ -940,9 +968,11 @@ this.FeatureBackground();
                         "TeamHome.Id",
                         "TeamHome.Name",
                         "TeamHome.IsSelected",
+                        "TeamHome.WinningPredictionPoints",
                         "TeamAway.Id",
                         "TeamAway.Name",
-                        "TeamAway.IsSelected"});
+                        "TeamAway.IsSelected",
+                        "TeamAway.WinningPredictionPoints"});
             table32.AddRow(new string[] {
                         "1",
                         "Premier league",
@@ -952,9 +982,11 @@ this.FeatureBackground();
                         "1",
                         "Brentford",
                         "false",
+                        "",
                         "2",
                         "Hull City",
-                        "true"});
+                        "true",
+                        "7"});
             table32.AddRow(new string[] {
                         "2",
                         "Premier league",
@@ -964,9 +996,11 @@ this.FeatureBackground();
                         "3",
                         "Birmingham City",
                         "true",
+                        "7",
                         "4",
                         "Blackburn Rovers",
-                        "false"});
+                        "false",
+                        ""});
 #line 143
  testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table32, "Then ");
 #line hidden
@@ -1060,22 +1094,26 @@ this.FeatureBackground();
                         "Id",
                         "AccountSecrectCode",
                         "MatchId",
-                        "GuessTeamId"});
+                        "GuessTeamId",
+                        "PredictionPoints"});
             table35.AddRow(new string[] {
                         "1",
                         "s01",
                         "1",
-                        "1"});
+                        "1",
+                        "7"});
             table35.AddRow(new string[] {
                         "2",
                         "s01",
                         "2",
-                        "4"});
+                        "4",
+                        "7"});
             table35.AddRow(new string[] {
                         "3",
                         "s01",
                         "3",
-                        "6"});
+                        "6",
+                        "7"});
 #line 159
  testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table35, "And ");
 #line 164
@@ -1090,9 +1128,11 @@ this.FeatureBackground();
                         "TeamHome.Id",
                         "TeamHome.Name",
                         "TeamHome.IsSelected",
+                        "TeamHome.WinningPredictionPoints",
                         "TeamAway.Id",
                         "TeamAway.Name",
-                        "TeamAway.IsSelected"});
+                        "TeamAway.IsSelected",
+                        "TeamAway.WinningPredictionPoints"});
             table36.AddRow(new string[] {
                         "1",
                         "Premier league",
@@ -1102,9 +1142,11 @@ this.FeatureBackground();
                         "1",
                         "FC Astana",
                         "true",
+                        "7",
                         "2",
                         "Atletico Madrid",
-                        "false"});
+                        "false",
+                        ""});
             table36.AddRow(new string[] {
                         "2",
                         "Premier league",
@@ -1114,9 +1156,11 @@ this.FeatureBackground();
                         "3",
                         "Real Madrid",
                         "false",
+                        "",
                         "4",
                         "Paris Saint-Germain",
-                        "true"});
+                        "true",
+                        "7"});
             table36.AddRow(new string[] {
                         "3",
                         "Premier league",
@@ -1126,9 +1170,11 @@ this.FeatureBackground();
                         "5",
                         "Brentford",
                         "false",
+                        "",
                         "6",
                         "Hull City",
-                        "true"});
+                        "true",
+                        "7"});
             table36.AddRow(new string[] {
                         "4",
                         "Premier league",
@@ -1138,9 +1184,11 @@ this.FeatureBackground();
                         "7",
                         "Birmingham City",
                         "false",
+                        "",
                         "8",
                         "Blackburn Rovers",
-                        "false"});
+                        "false",
+                        ""});
 #line 165
  testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table36, "Then ");
 #line hidden
@@ -1234,17 +1282,20 @@ this.FeatureBackground();
                         "Id",
                         "AccountSecrectCode",
                         "MatchId",
-                        "GuessTeamId"});
+                        "GuessTeamId",
+                        "PredictionPoints"});
             table39.AddRow(new string[] {
                         "1",
                         "s01",
                         "1",
-                        "1"});
+                        "1",
+                        "7"});
             table39.AddRow(new string[] {
                         "2",
                         "s01",
                         "4",
-                        "8"});
+                        "8",
+                        "7"});
 #line 183
  testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table39, "And ");
 #line 187
@@ -1259,9 +1310,11 @@ this.FeatureBackground();
                         "TeamHome.Id",
                         "TeamHome.Name",
                         "TeamHome.IsSelected",
+                        "TeamHome.WinningPredictionPoints",
                         "TeamAway.Id",
                         "TeamAway.Name",
-                        "TeamAway.IsSelected"});
+                        "TeamAway.IsSelected",
+                        "TeamAway.WinningPredictionPoints"});
             table40.AddRow(new string[] {
                         "2",
                         "Premier league",
@@ -1271,9 +1324,11 @@ this.FeatureBackground();
                         "3",
                         "Birmingham City",
                         "false",
+                        "",
                         "4",
                         "Blackburn Rovers",
-                        "false"});
+                        "false",
+                        ""});
             table40.AddRow(new string[] {
                         "3",
                         "Premier league",
@@ -1283,9 +1338,11 @@ this.FeatureBackground();
                         "5",
                         "FC Astana",
                         "false",
+                        "",
                         "7",
                         "Atletico Madrid",
-                        "false"});
+                        "false",
+                        ""});
             table40.AddRow(new string[] {
                         "4",
                         "Premier league",
@@ -1295,9 +1352,11 @@ this.FeatureBackground();
                         "6",
                         "Real Madrid",
                         "false",
+                        "",
                         "8",
                         "Paris Saint-Germain",
-                        "true"});
+                        "true",
+                        "7"});
 #line 188
  testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table40, "Then ");
 #line hidden
@@ -1757,27 +1816,32 @@ this.FeatureBackground();
                         "Id",
                         "AccountSecrectCode",
                         "MatchId",
-                        "GuessTeamId"});
+                        "GuessTeamId",
+                        "PredictionPoints"});
             table51.AddRow(new string[] {
                         "1",
                         "s01",
                         "1",
-                        "1"});
+                        "1",
+                        "7"});
             table51.AddRow(new string[] {
                         "2",
                         "s01",
                         "2",
-                        "99"});
+                        "99",
+                        "7"});
             table51.AddRow(new string[] {
                         "3",
                         "s01",
                         "3",
-                        "-1"});
+                        "-1",
+                        "7"});
             table51.AddRow(new string[] {
                         "4",
                         "s01",
                         "99",
-                        "12"});
+                        "12",
+                        "7"});
 #line 252
  testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table51, "And ");
 #line 258

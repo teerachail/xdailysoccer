@@ -73,7 +73,8 @@ namespace DailySoccer.Shared.DAC
                         Id = it.Id,
                         AccountSecrectCode = it.Account.SecrectCode,
                         GuessTeamId = it.GuessTeamId,
-                        MatchId = it.MatchId
+                        MatchId = it.MatchId,
+                        PredictionPoints = it.PredictionPoints
                     }).ToList();
 
                 return result;

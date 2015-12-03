@@ -12,5 +12,6 @@ namespace DailySoccer.Shared.Models
         public string AccountSecrectCode { get; set; }
         public int MatchId { get; set; }
         public int? GuessTeamId { get; set; }
+        public int PredictionPoints { get; set; }
     }
 }

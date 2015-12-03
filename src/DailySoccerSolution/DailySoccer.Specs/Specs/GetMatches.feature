@@ -64,13 +64,13 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 |               | 1           | Brentford       | 2           | Hull City        |
 	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 |               | 3           | Birmingham City | 4           | Blackburn Rovers |
 	And ในระบบมีข้อมูลการทายเป็น
-	| Id | AccountSecrectCode | MatchId | GuessTeamId |
-	| 1  | s01                | 2       | 3           |
+	| Id | AccountSecrectCode | MatchId | GuessTeamId | PredictionPoints |
+	| 1  | s01                | 2       | 3           | 7                |
 	When ผู้ใช้ UserId: 's01' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น '1/1/2015 02:00'
 	Then ระบบส่งข้อมูลแมช์กลับไปเป็น
-	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamAway.Id | TeamAway.Name    | TeamAway.IsSelected |
-	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 |               | 1           | Brentford       | false               | 2           | Hull City        | false               |
-	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 |               | 3           | Birmingham City | true                | 4           | Blackburn Rovers | false               |
+	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamHome.WinningPredictionPoints | TeamAway.Id | TeamAway.Name    | TeamAway.IsSelected | TeamAway.WinningPredictionPoints |
+	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 |               | 1           | Brentford       | false               |                                  | 2           | Hull City        | false               |                                  |
+	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 |               | 3           | Birmingham City | true                | 7                                | 4           | Blackburn Rovers | false               |                                  |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
 	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
@@ -82,14 +82,14 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 |               | 1           | Brentford       | 2           | Hull City        |
 	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 |               | 3           | Birmingham City | 4           | Blackburn Rovers |
 	And ในระบบมีข้อมูลการทายเป็น
-	| Id | AccountSecrectCode | MatchId | GuessTeamId |
-	| 1  | s01                | 1       | 2           |
-	| 2  | s01                | 2       | 3           |
+	| Id | AccountSecrectCode | MatchId | GuessTeamId | PredictionPoints |
+	| 1  | s01                | 1       | 2           | 7                |
+	| 2  | s01                | 2       | 3           | 7                |
 	When ผู้ใช้ UserId: 's01' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น '1/1/2015 02:00'
 	Then ระบบส่งข้อมูลแมช์กลับไปเป็น
-	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamAway.Id | TeamAway.Name    | TeamAway.IsSelected |
-	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 |               | 1           | Brentford       | false               | 2           | Hull City        | true                |
-	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 |               | 3           | Birmingham City | true                | 4           | Blackburn Rovers | false               |
+	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamHome.WinningPredictionPoints | TeamAway.Id | TeamAway.Name    | TeamAway.IsSelected | TeamAway.WinningPredictionPoints |
+	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 |               | 1           | Brentford       | false               |                                  | 2           | Hull City        | true                | 7                                |
+	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 |               | 3           | Birmingham City | true                | 7                                | 4           | Blackburn Rovers | false               |                                  |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
 	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
@@ -118,13 +118,13 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 | 1/1/2015 02:30 | 1           | Brentford       | 2           | Hull City        |
 	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 | 1/1/2015 03:00 | 3           | Birmingham City | 4           | Blackburn Rovers |
 	And ในระบบมีข้อมูลการทายเป็น
-	| Id | AccountSecrectCode | MatchId | GuessTeamId |
-	| 1  | s01                | 2       | 3           |
+	| Id | AccountSecrectCode | MatchId | GuessTeamId | PredictionPoints |
+	| 1  | s01                | 2       | 3           | 7                |
 	When ผู้ใช้ UserId: 's01' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น '1/1/2015 04:00'
 	Then ระบบส่งข้อมูลแมช์กลับไปเป็น
-	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate  | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamAway.Id | TeamAway.Name    | TeamAway.IsSelected |
-	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 | 1/1/2015 02:30 | 1           | Brentford       | false               | 2           | Hull City        | false               |
-	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 | 1/1/2015 03:00 | 3           | Birmingham City | true                | 4           | Blackburn Rovers | false               |
+	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate  | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamHome.WinningPredictionPoints | TeamAway.Id | TeamAway.Name    | TeamAway.IsSelected | TeamAway.WinningPredictionPoints |
+	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 | 1/1/2015 02:30 | 1           | Brentford       | false               |                                  | 2           | Hull City        | false               |                                  |
+	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 | 1/1/2015 03:00 | 3           | Birmingham City | true                | 7                                | 4           | Blackburn Rovers | false               |                                  |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
 	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
@@ -136,14 +136,14 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 | 1/1/2015 02:30 | 1           | Brentford       | 2           | Hull City        |
 	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 | 1/1/2015 03:00 | 3           | Birmingham City | 4           | Blackburn Rovers |
 	And ในระบบมีข้อมูลการทายเป็น
-	| Id | AccountSecrectCode | MatchId | GuessTeamId |
-	| 1  | s01                | 1       | 2           |
-	| 2  | s01                | 2       | 3           |
+	| Id | AccountSecrectCode | MatchId | GuessTeamId | PredictionPoints |
+	| 1  | s01                | 1       | 2           | 7                    |
+	| 2  | s01                | 2       | 3           | 7                    |
 	When ผู้ใช้ UserId: 's01' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น '1/1/2015 04:00'
 	Then ระบบส่งข้อมูลแมช์กลับไปเป็น
-	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate  | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamAway.Id | TeamAway.Name    | TeamAway.IsSelected |
-	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 | 1/1/2015 02:30 | 1           | Brentford       | false               | 2           | Hull City        | true                |
-	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 | 1/1/2015 03:00 | 3           | Birmingham City | true                | 4           | Blackburn Rovers | false               |
+	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate  | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamHome.WinningPredictionPoints | TeamAway.Id | TeamAway.Name    | TeamAway.IsSelected | TeamAway.WinningPredictionPoints |
+	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 | 1/1/2015 02:30 | 1           | Brentford       | false               |                                  | 2           | Hull City        | true                | 7                                |
+	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 | 1/1/2015 03:00 | 3           | Birmingham City | true                | 7                                | 4           | Blackburn Rovers | false               |                                  |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
 	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
@@ -157,17 +157,17 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 3  | Premier league | 1/1/2015 06:00 |                |                | 5           | Brentford       | 6           | Hull City           |
 	| 4  | Premier league | 1/1/2015 06:30 |                |                | 7           | Birmingham City | 8           | Blackburn Rovers    |
 	And ในระบบมีข้อมูลการทายเป็น
-	| Id | AccountSecrectCode | MatchId | GuessTeamId |
-	| 1  | s01                | 1       | 1           |
-	| 2  | s01                | 2       | 4           |
-	| 3  | s01                | 3       | 6           |
+	| Id | AccountSecrectCode | MatchId | GuessTeamId | PredictionPoints |
+	| 1  | s01                | 1       | 1           | 7                |
+	| 2  | s01                | 2       | 4           | 7                |
+	| 3  | s01                | 3       | 6           | 7                |
 	When ผู้ใช้ UserId: 's01' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น '1/1/2015 05:00'
 	Then ระบบส่งข้อมูลแมช์กลับไปเป็น
-	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate  | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamAway.Id | TeamAway.Name       | TeamAway.IsSelected |
-	| 1  | Premier league | 1/1/2015 02:00 | 1/1/2015 02:00 |                | 1           | FC Astana       | true                | 2           | Atletico Madrid     | false               |
-	| 2  | Premier league | 1/1/2015 02:30 | 1/1/2015 02:30 | 1/1/2015 04:00 | 3           | Real Madrid     | false               | 4           | Paris Saint-Germain | true                |
-	| 3  | Premier league | 1/1/2015 06:00 |                |                | 5           | Brentford       | false               | 6           | Hull City           | true                |
-	| 4  | Premier league | 1/1/2015 06:30 |                |                | 7           | Birmingham City | false               | 8           | Blackburn Rovers    | false               |
+	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate  | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamHome.WinningPredictionPoints | TeamAway.Id | TeamAway.Name       | TeamAway.IsSelected | TeamAway.WinningPredictionPoints |
+	| 1  | Premier league | 1/1/2015 02:00 | 1/1/2015 02:00 |                | 1           | FC Astana       | true                | 7                                | 2           | Atletico Madrid     | false               |                                  |
+	| 2  | Premier league | 1/1/2015 02:30 | 1/1/2015 02:30 | 1/1/2015 04:00 | 3           | Real Madrid     | false               |                                  | 4           | Paris Saint-Germain | true                | 7                                |
+	| 3  | Premier league | 1/1/2015 06:00 |                |                | 5           | Brentford       | false               |                                  | 6           | Hull City           | true                | 7                                |
+	| 4  | Premier league | 1/1/2015 06:30 |                |                | 7           | Birmingham City | false               |                                  | 8           | Blackburn Rovers    | false               |                                  |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
 	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
@@ -181,15 +181,15 @@ Scenario: ผู้ใช้ขอแมช์ในตอนที่เซิ�
 	| 3  | Premier league | 1/3/2015 01:00 | 1/3/2015 01:00 | 1/3/2015 02:30 | 5           | FC Astana       | 7           | Atletico Madrid     |
 	| 4  | Premier league | 1/4/2015 01:00 | 1/4/2015 01:00 | 1/4/2015 02:30 | 6           | Real Madrid     | 8           | Paris Saint-Germain |
 	And ในระบบมีข้อมูลการทายเป็น
-	| Id | AccountSecrectCode | MatchId | GuessTeamId |
-	| 1  | s01                | 1       | 1           |
-	| 2  | s01                | 4       | 8           |
+	| Id | AccountSecrectCode | MatchId | GuessTeamId | PredictionPoints |
+	| 1  | s01                | 1       | 1           | 7                |
+	| 2  | s01                | 4       | 8           | 7                |
 	When ผู้ใช้ UserId: 's01' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น '1/4/2015 04:00'
 	Then ระบบส่งข้อมูลแมช์กลับไปเป็น
-	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate  | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamAway.Id | TeamAway.Name       | TeamAway.IsSelected |
-	| 2  | Premier league | 1/2/2015 01:00 | 1/2/2015 01:00 | 1/2/2015 02:30 | 3           | Birmingham City | false               | 4           | Blackburn Rovers    | false               |
-	| 3  | Premier league | 1/3/2015 01:00 | 1/3/2015 01:00 | 1/3/2015 02:30 | 5           | FC Astana       | false               | 7           | Atletico Madrid     | false               |
-	| 4  | Premier league | 1/4/2015 01:00 | 1/4/2015 01:00 | 1/4/2015 02:30 | 6           | Real Madrid     | false               | 8           | Paris Saint-Germain | true                |
+	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate  | TeamHome.Id | TeamHome.Name   | TeamHome.IsSelected | TeamHome.WinningPredictionPoints | TeamAway.Id | TeamAway.Name       | TeamAway.IsSelected | TeamAway.WinningPredictionPoints |
+	| 2  | Premier league | 1/2/2015 01:00 | 1/2/2015 01:00 | 1/2/2015 02:30 | 3           | Birmingham City | false               |                                  | 4           | Blackburn Rovers    | false               |                                  |
+	| 3  | Premier league | 1/3/2015 01:00 | 1/3/2015 01:00 | 1/3/2015 02:30 | 5           | FC Astana       | false               |                                  | 7           | Atletico Madrid     | false               |                                  |
+	| 4  | Premier league | 1/4/2015 01:00 | 1/4/2015 01:00 | 1/4/2015 02:30 | 6           | Real Madrid     | false               |                                  | 8           | Paris Saint-Germain | true                | 7                                |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
 	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
@@ -250,11 +250,11 @@ Scenario: ข้อมูลการทายของผู้ใช้ไม�
 	| 6  | Premier league | 1/6/2015 01:00 |                |                | 11          | Manchester United | 12          | CSKA Moscow         |
 	| 7  | Premier league | 1/7/2015 01:00 |                |                | 13          | PSV Eindhoven     | 14          | VfL Wolfsburg       |
 	And ในระบบมีข้อมูลการทายเป็น
-	| Id | AccountSecrectCode | MatchId | GuessTeamId |
-	| 1  | s01                | 1       | 1           |
-	| 2  | s01                | 2       | 99          |
-	| 3  | s01                | 3       | -1          |
-	| 4  | s01                | 99      | 12          |
+	| Id | AccountSecrectCode | MatchId | GuessTeamId | PredictionPoints |
+	| 1  | s01                | 1       | 1           | 7                |
+	| 2  | s01                | 2       | 99          | 7                |
+	| 3  | s01                | 3       | -1          | 7                |
+	| 4  | s01                | 99      | 12          | 7                |
 	When ผู้ใช้ UserId: 's01' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น '1/4/2015 01:30'
 	Then ระบบส่งข้อมูลแมช์กลับไปเป็น
 	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate  | TeamHome.Id | TeamHome.Name     | TeamHome.IsSelected | TeamAway.Id | TeamAway.Name       | TeamAway.IsSelected |

@@ -11,8 +11,26 @@ namespace DailySoccer.Shared.DAC
     {
         public IEnumerable<MatchInformation> GetAllMatches()
         {
-            // TODO: DAC GetAllMatches
-            throw new NotImplementedException();
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var qry = dctx.Matches.Select(it => new MatchInformation
+                {
+                    Id = it.Id,
+                    LeagueName = it.LeagueName,
+                    BeginDate = it.BeginDate,
+                    StartedDate = it.StartedDate,
+                    CompletedDate = it.CompletedDate,
+                    Status = it.Status,
+                    TeamAway = new TeamInformation
+                    {
+                        Id = it.TeamAway.Id,
+                        Name = it.TeamAway.Name,
+                        CurrentScore = it.TeamAway.CurrentScore,
+                        CurrentPredictionPoints = it.TeamAway.CurrentPredictionPoints,
+                    }
+                }).ToList();
+                return qry;
+            }
         }
     }
 }

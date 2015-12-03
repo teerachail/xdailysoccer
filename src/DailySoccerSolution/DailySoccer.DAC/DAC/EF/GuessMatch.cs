@@ -18,6 +18,7 @@ namespace DailySoccer.DAC.EF
         public Nullable<int> GuessTeamId { get; set; }
         public int AccountId { get; set; }
         public int MatchId { get; set; }
+        public int PredictionPoints { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Match Match { get; set; }
