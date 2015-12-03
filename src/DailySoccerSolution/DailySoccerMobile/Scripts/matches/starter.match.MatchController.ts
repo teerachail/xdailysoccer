@@ -49,8 +49,13 @@
         }
 
         public SelectTeam(selectedMatch: MatchInformation, selectedTeamId: number) {
-            var isChangingValid = this.AccountInfo.MaximumGuessAmount > this.getSelectedTodayMatches().length;
-            if (!isChangingValid) return;
+            var isChangingValid = this.AccountInfo.MaximumGuessAmount > this.getSelectedTodayMatches().length
+            if (!isChangingValid) {
+                if (selectedMatch.TeamHome.IsSelected != !selectedMatch.TeamAway.IsSelected) {
+                    this.$scope.MatchPopup.show();
+                    return;
+                }
+            }
 
             var isSelectedTeamHome = selectedMatch.TeamHome.Id == selectedTeamId;
             var selectedTeam = isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
