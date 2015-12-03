@@ -9421,11 +9421,10 @@ ion-modal-view {
   line-height: 30px; }
 
 .default-title {
-  display: none; }
+  display: none !important; }
 
-.back-button .button .icon {
-  vertical-align: middle;
-  pointer-events: none; }
+.button .icon {
+  vertical-align: middle; }
 
 .padding-small {
   padding: 5px; }

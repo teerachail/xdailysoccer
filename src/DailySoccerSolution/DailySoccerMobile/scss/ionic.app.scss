@@ -443,12 +443,12 @@ ion-modal-view{
     line-height:30px;
 }
 .default-title{
-    display:none;
+    display:none !important;
 }
-.back-button .button .icon {
+.button .icon {
     vertical-align: middle;
-    pointer-events: none;
-}
+}  
+
 .padding-small{
     padding:5px
 }
