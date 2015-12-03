@@ -55,6 +55,28 @@ $ads-top-ios :   ($bar-height + $bar-subheader-height + $ios-statusbar-height) -
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
+// --------------------------------------------- Fonts
+
+@font-face {
+    font-family: 'Superspace';
+    src: url("../lib/ionic/fonts/SuperspaceRegularver1_00.eot");
+    src: url("../lib/ionic/fonts/SuperspaceRegularver1_00.eot") format('embedded-opentype'),
+         url("../lib/ionic/fonts/SuperspaceRegularver1_00.woff2") format('woff2'),
+         url("../lib/ionic/fonts/SuperspaceRegularver1_00.woff") format('woff'),
+         url("../lib/ionic/fonts/SuperspaceRegularver1_00.ttf") format('truetype'),
+         url("../lib/ionic/fonts/SuperspaceRegularver1_00.svg#Superspace") format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    font-family:Superspace !important;
+    .tab-item, h1, h2, h3, h4, h5, h6,input, button, select, textarea {
+        font-family:inherit !important;
+    }
+}
+
+
+// ---------------------------------------------End Fonts
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";

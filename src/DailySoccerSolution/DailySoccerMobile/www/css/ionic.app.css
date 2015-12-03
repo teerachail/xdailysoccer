@@ -15,6 +15,18 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+@font-face {
+  font-family: 'Superspace';
+  src: url("../lib/ionic/fonts/SuperspaceRegularver1_00.eot");
+  src: url("../lib/ionic/fonts/SuperspaceRegularver1_00.eot") format("embedded-opentype"), url("../lib/ionic/fonts/SuperspaceRegularver1_00.woff2") format("woff2"), url("../lib/ionic/fonts/SuperspaceRegularver1_00.woff") format("woff"), url("../lib/ionic/fonts/SuperspaceRegularver1_00.ttf") format("truetype"), url("../lib/ionic/fonts/SuperspaceRegularver1_00.svg#Superspace") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+body {
+  font-family: Superspace !important; }
+  body .tab-item, body h1, body h2, body h3, body h4, body h5, body h6, body input, body button, body select, body textarea {
+    font-family: inherit !important; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/

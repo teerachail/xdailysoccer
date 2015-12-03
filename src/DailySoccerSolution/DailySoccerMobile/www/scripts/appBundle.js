@@ -202,7 +202,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
     });
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/app/playlists');
-    $urlRouterProvider.otherwise('/account/favoritteam');
+    $urlRouterProvider.otherwise('/account/login');
 });
 angular.module('starter.controllers', [])
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
@@ -389,9 +389,8 @@ var starter;
                 this.PastTwoDaysDate = new Date();
                 this.FutureOneDaysDate = new Date();
                 this.FutureTwoDaysDate = new Date();
-                this.TodayMatches = [];
-                this.PastMatches = [];
-                this.FutureMatches = [];
+                this.DisplayMatches = [];
+                this._allMatches = [];
                 this.GetTodayMatches();
                 this.$ionicModal.fromTemplateUrl('templates/Matches/MatchPopup.html', {
                     scope: $scope,
@@ -441,11 +440,17 @@ var starter;
                 });
                 this.updateRemainingGuessAmount();
             };
+            MatchController.prototype.SelectDay = function (days) {
+                var compareDate = new Date(days.toString());
+                this.DisplayMatches = this._allMatches.filter(function (it) {
+                    var matchDate = new Date(it.BeginDate.toString());
+                    return matchDate.getDay() == compareDate.getDay();
+                });
+                console.log('# Change display matches completed.');
+            };
             MatchController.prototype.updateDisplayMatches = function (matches) {
-                var _this = this;
-                this.TodayMatches = matches.filter(function (it) { return it.BeginDate == _this.CurrentDate; });
-                this.PastMatches = matches.filter(function (it) { return it.BeginDate < _this.CurrentDate; });
-                this.FutureMatches = matches.filter(function (it) { return it.BeginDate > _this.CurrentDate; });
+                this._allMatches = matches;
+                this.SelectDay(this.CurrentDate);
                 console.log('# Update matches completed.');
             };
             MatchController.prototype.updateDisplayDate = function (currentDate) {
@@ -462,7 +467,8 @@ var starter;
                 console.log('# Update remaining guess amount completed.');
             };
             MatchController.prototype.getSelectedTodayMatches = function () {
-                var selectedMatchesQry = this.TodayMatches.filter(function (it) { return it.TeamHome.IsSelected || it.TeamAway.IsSelected; });
+                var _this = this;
+                var selectedMatchesQry = this._allMatches.filter(function (it) { return (it.TeamHome.IsSelected || it.TeamAway.IsSelected) && it.BeginDate == _this.CurrentDate; });
                 return selectedMatchesQry;
             };
             MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal'];
