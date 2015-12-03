@@ -9,17 +9,16 @@
         public FutureOneDaysDate: Date = new Date();
         public FutureTwoDaysDate: Date = new Date();
         public RemainingGuessAmount: number;
-        public TodayMatches: MatchInformation[] = [];
-        public PastMatches: MatchInformation[] = [];
-        public FutureMatches: MatchInformation[] = [];
+        public DisplayMatches: MatchInformation[] = [];
         public AccountInfo: account.AccountInformation;
+        private _allMatches: MatchInformation[] = [];
 
         static $inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal'];
         constructor(private $scope,
             private matchSvc: starter.match.MatchServices,
             private $location: ng.ILocationService,
             private $ionicModal) {
-
+        
             this.GetTodayMatches();
             this.$ionicModal.fromTemplateUrl('templates/Matches/MatchPopup.html',
                 {
@@ -75,13 +74,21 @@
             this.updateRemainingGuessAmount();
         }
 
-        private updateDisplayMatches(matches: MatchInformation[]): void {
-            this.TodayMatches = matches.filter(it => it.BeginDate == this.CurrentDate);
-            this.PastMatches = matches.filter(it => it.BeginDate < this.CurrentDate);
-            this.FutureMatches = matches.filter(it => it.BeginDate > this.CurrentDate);
-            console.log('# Update matches completed.');
+        public SelectDay(days: Date) {
+            var compareDate = new Date(days.toString());
+            this.DisplayMatches = this._allMatches.filter(it=> {
+                var matchDate = new Date(it.BeginDate.toString());
+                return matchDate.getDay() == compareDate.getDay();
+            });
+            console.log('# Change display matches completed.');
         }
 
+        private updateDisplayMatches(matches: MatchInformation[]): void {
+            this._allMatches = matches;
+            this.SelectDay(this.CurrentDate);
+            console.log('# Update matches completed.');
+        }
+        
         private updateDisplayDate(currentDate: Date): void {
             this.CurrentDate = currentDate;
 
@@ -99,7 +106,7 @@
         }
 
         private getSelectedTodayMatches(): MatchInformation[] {
-            var selectedMatchesQry = this.TodayMatches.filter(it => it.TeamHome.IsSelected || it.TeamAway.IsSelected);
+            var selectedMatchesQry = this._allMatches.filter(it => (it.TeamHome.IsSelected || it.TeamAway.IsSelected) && it.BeginDate == this.CurrentDate);
             return selectedMatchesQry;
         }
     }

@@ -14,15 +14,15 @@
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-tabs class="tabs-dark tabs-top">
-            <ion-tab title="{{ matchCtrl.PastTwoDaysDate | date: 'EEE' }}<br>{{ matchCtrl.PastTwoDaysDate | date: 'd' }}">
+            <ion-tab title="{{ matchCtrl.PastTwoDaysDate | date: 'EEE' }}<br>{{ matchCtrl.PastTwoDaysDate | date: 'd' }}" on-select="matchCtrl.SelectDay(matchCtrl.PastTwoDaysDate)">
             </ion-tab>
-            <ion-tab title="{{ matchCtrl.PastOneDaysDate | date: 'EEE' }}<br>{{ matchCtrl.PastOneDaysDate | date: 'd' }}">
+            <ion-tab title="{{ matchCtrl.PastOneDaysDate | date: 'EEE' }}<br>{{ matchCtrl.PastOneDaysDate | date: 'd' }}" on-select="matchCtrl.SelectDay(matchCtrl.PastOneDaysDate)">
             </ion-tab>
-            <ion-tab title="{{ matchCtrl.CurrentDate | date: 'EEE' }}<br>{{ matchCtrl.CurrentDate | date: 'd' }}">
+            <ion-tab title="{{ matchCtrl.CurrentDate | date: 'EEE' }}<br>{{ matchCtrl.CurrentDate | date: 'd' }}" on-select="matchCtrl.SelectDay(matchCtrl.CurrentDate)">
             </ion-tab>
-            <ion-tab title="{{ matchCtrl.FutureOneDaysDate | date: 'EEE' }}<br>{{ matchCtrl.FutureOneDaysDate | date: 'd' }}">
+            <ion-tab title="{{ matchCtrl.FutureOneDaysDate | date: 'EEE' }}<br>{{ matchCtrl.FutureOneDaysDate | date: 'd' }}" on-select="matchCtrl.SelectDay(matchCtrl.FutureOneDaysDate)">
             </ion-tab>
-            <ion-tab title="{{ matchCtrl.FutureTwoDaysDate | date: 'EEE' }}<br>{{ matchCtrl.FutureTwoDaysDate | date: 'd' }}">
+            <ion-tab title="{{ matchCtrl.FutureTwoDaysDate | date: 'EEE' }}<br>{{ matchCtrl.FutureTwoDaysDate | date: 'd' }}" on-select="matchCtrl.SelectDay(matchCtrl.FutureTwoDaysDate)">
             </ion-tab>
         </ion-tabs>
         <ion-nav-view  name="MainContent"></ion-nav-view>
