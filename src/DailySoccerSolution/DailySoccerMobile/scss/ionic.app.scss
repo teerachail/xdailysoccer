@@ -33,6 +33,8 @@ $bar-subheader-height:            $bar-height !default;
 $ios-statusbar-height:           20px !default;
  
 $button-dark-text:                #ffffff ; //text-white
+$button-small-font-size:          14px;
+
 $tabs-dark-text:                  $button-dark-text !default;
 $menu-bg:                         $royal; //bg side menu
 $draw-status: #d0e3dd;
@@ -49,6 +51,8 @@ $modal-inset-mode-left:           10% !default;
 $modal-inset-mode-min-height:     150px !default;
 $modal-inset-mode-min-width:     80% !default;
 
+$item-thumbnail-width:            100px !default;
+$item-thumbnail-height:           100px !default;
 
 $ads-top-adroid:   ($bar-height + $bar-subheader-height) - 11;
 $ads-top-ios :   ($bar-height + $bar-subheader-height + $ios-statusbar-height) - 11;
@@ -216,6 +220,9 @@ a {
 .text-gray{
     color:#cdcdcd;
 }
+.text-green{
+    color:$balanced;
+}
 .font-large{
     font-size:$font-size-large !important;
 }
@@ -226,7 +233,11 @@ a {
     -webkit-baseline-middle;
 
 }
-// --------------------------------------------- End Text color $ size
+
+hr{
+   border-color:darkslategrey;
+}
+// --------------------------------------------- End Text editing
 
 .button{
     border:0px;
@@ -467,7 +478,7 @@ ion-modal-view{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width:64%;
+    max-width:69%;
     display:inline-block;
 }
 .line-height-small{
@@ -489,4 +500,8 @@ div.title.title-center div{
     left: 0;
     right: 0;
     color: black;
+}.item-thumbnail-left, .item-thumbnail-left .item-content {
+    padding-top: 8px;
+    padding-left: 120px;
+    min-height: 100px;
 }

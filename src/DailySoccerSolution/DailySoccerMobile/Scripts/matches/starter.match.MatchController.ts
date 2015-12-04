@@ -26,6 +26,16 @@
                     scope: $scope,
                     animation: 'slide-in-up'
                 }).then(function (modal): void { $scope.MatchPopup = modal; });
+
+            this.$ionicModal.fromTemplateUrl('templates/Accounts/TieFacebookPopup.html',
+                {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                }).then(function (modal): void { $scope.TieFacebookPopup = modal; });
+        }
+
+        public LoginWithFacebook(): void {
+            this.$scope.TieFacebookPopup.show();
         }
 
         public GetTodayMatches(): void {

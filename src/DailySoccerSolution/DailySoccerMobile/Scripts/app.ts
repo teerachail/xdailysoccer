@@ -235,6 +235,21 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 }
             })
 
+            .state('syncdata', {
+                url: '/syncdata',
+                abstract: true,
+                templateUrl: 'templates/_fullpageTemplate.html',
+                //controller: 'AppCtrl'
+            })
+            .state('syncdata.syncdata', {
+                url: '/syncdata',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/Accounts/SyncData.html',
+                    }
+                }
+            })
+
         ;
 
 
