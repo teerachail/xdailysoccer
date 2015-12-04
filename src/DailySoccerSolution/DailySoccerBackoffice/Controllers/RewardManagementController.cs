@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceStack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,8 @@ namespace DailySoccerBackoffice.Controllers
     {
         // GET: RewardManagement
         public ActionResult Index()
-        {           
+        {
+            var client = new JsonServiceClient("http://host/api/");
             return View();
         }
     }

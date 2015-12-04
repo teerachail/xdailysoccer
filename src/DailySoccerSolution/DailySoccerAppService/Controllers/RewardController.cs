@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Azure.Mobile.Server;
 using DailySoccer.Shared.Models;
+using DailySoccer.Shared.Facades;
 
 namespace DailySoccerAppService.Controllers
 {
@@ -46,6 +47,13 @@ namespace DailySoccerAppService.Controllers
                 TicketCost = 50,
                 Rewards = reward
             };
+        }
+
+        [HttpGet]
+        public IEnumerable<RewardGroupInformation> GetRewardGroup()
+        {
+            var rewardFacade = new RewardFacade();
+            return rewardFacade.GetRewardGroup();
         }
 
     }
