@@ -9332,7 +9332,7 @@ i {
   height: 52px;
   border: none; }
   .item.col.col-40 span {
-    font-size: 12px;
+    font-size: 13px;
     vertical-align: bottom; }
 
 .scroll-middle .scroll-content {
@@ -9446,3 +9446,12 @@ ion-modal-view {
 
 .button .icon {
   vertical-align: middle; }
+
+div.title.title-center div {
+  position: absolute;
+  top: 20px;
+  font-size: 12px;
+  /* text-align: center; */
+  left: 0;
+  right: 0;
+  color: black; }
