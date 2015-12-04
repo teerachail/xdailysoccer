@@ -28,12 +28,12 @@ namespace DailySoccerAppService.Controllers
             {
                 new RewardInformation
                 {
-                    ImagePath = "http://www.samsung.com/th/consumer-images/product/smartphone/2015/SM-G920FZKACAM/features/SM-G920FZKACAM-403979-0.jpg",
+                    ImagePath = "img/Logos/BannerReward01.png",
                     RemainingAmount = 5
                 },
                 new RewardInformation
                 {
-                    ImagePath = "http://www.samsung.com/th/consumer-images/product/smartphone/2015/SM-G920FZKACAM/features/SM-G920FZKACAM-403979-0.jpg",
+                    ImagePath = "img/Logos/BannerReward02.png",
                     RemainingAmount = 3
                 },
                 new RewardInformation
