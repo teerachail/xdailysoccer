@@ -1,5 +1,4 @@
 ﻿-- Creating table 'Matches'
--- Creating table 'Matches'
 CREATE TABLE [dbo].[Matches] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [LeagueName] varchar(255)  NOT NULL,
@@ -17,7 +16,6 @@ CREATE TABLE [dbo].[Matches] (
     [TeamAway_CurrentPredictionPoints] int  NOT NULL
 );
 GO
--- Creating primary key on [Id] in table 'Matches'
 -- Creating primary key on [Id] in table 'Matches'
 ALTER TABLE [dbo].[Matches]
 ADD CONSTRAINT [PK_Matches]

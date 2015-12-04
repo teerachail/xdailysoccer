@@ -1,5 +1,4 @@
 ﻿-- Creating table 'GuessMatches'
--- Creating table 'GuessMatches'
 CREATE TABLE [dbo].[GuessMatches] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [GuessTeamId] int  NULL,
@@ -13,11 +12,6 @@ GO
 -- --------------------------------------------------
 
 -- Creating foreign key on [AccountId] in table 'GuessMatches'
--- --------------------------------------------------
--- Creating all FOREIGN KEY constraints
--- --------------------------------------------------
-
--- Creating foreign key on [AccountId] in table 'GuessMatches'
 ALTER TABLE [dbo].[GuessMatches]
 ADD CONSTRAINT [FK_AccountGuessMatch]
     FOREIGN KEY ([AccountId])
@@ -25,7 +19,6 @@ ADD CONSTRAINT [FK_AccountGuessMatch]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
--- Creating foreign key on [MatchId] in table 'GuessMatches'
 -- Creating foreign key on [MatchId] in table 'GuessMatches'
 ALTER TABLE [dbo].[GuessMatches]
 ADD CONSTRAINT [FK_MatchGuessMatch]
@@ -35,18 +28,15 @@ ADD CONSTRAINT [FK_MatchGuessMatch]
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 -- Creating primary key on [Id] in table 'GuessMatches'
--- Creating primary key on [Id] in table 'GuessMatches'
 ALTER TABLE [dbo].[GuessMatches]
 ADD CONSTRAINT [PK_GuessMatches]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_AccountGuessMatch'
--- Creating non-clustered index for FOREIGN KEY 'FK_AccountGuessMatch'
 CREATE INDEX [IX_FK_AccountGuessMatch]
 ON [dbo].[GuessMatches]
     ([AccountId]);
 GO
--- Creating non-clustered index for FOREIGN KEY 'FK_MatchGuessMatch'
 -- Creating non-clustered index for FOREIGN KEY 'FK_MatchGuessMatch'
 CREATE INDEX [IX_FK_MatchGuessMatch]
 ON [dbo].[GuessMatches]

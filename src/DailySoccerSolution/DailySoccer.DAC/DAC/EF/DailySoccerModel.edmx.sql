@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/04/2015 10:48:39
--- Generated from EDMX file: C:\Users\joker\Documents\Git\dailysoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
+-- Date Created: 12/04/2015 14:03:29
+-- Generated from EDMX file: E:\gits\TheS\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -23,6 +23,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MatchGuessMatch]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[GuessMatches] DROP CONSTRAINT [FK_MatchGuessMatch];
 GO
+IF OBJECT_ID(N'[dbo].[FK_RewardGroupReward]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Rewards] DROP CONSTRAINT [FK_RewardGroupReward];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -36,6 +39,12 @@ IF OBJECT_ID(N'[dbo].[Matches]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[GuessMatches]', 'U') IS NOT NULL
     DROP TABLE [dbo].[GuessMatches];
+GO
+IF OBJECT_ID(N'[dbo].[RewardGroups]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RewardGroups];
+GO
+IF OBJECT_ID(N'[dbo].[Rewards]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Rewards];
 GO
 
 -- --------------------------------------------------
@@ -98,6 +107,16 @@ CREATE TABLE [dbo].[Rewards] (
 );
 GO
 
+-- Creating table 'FavoriteTeams'
+CREATE TABLE [dbo].[FavoriteTeams] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [LeagueName] varchar(255)  NOT NULL,
+    [TeamName] varchar(255)  NOT NULL,
+    [TeamId] int  NOT NULL,
+    [Account_Id] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -129,6 +148,12 @@ GO
 -- Creating primary key on [Id] in table 'Rewards'
 ALTER TABLE [dbo].[Rewards]
 ADD CONSTRAINT [PK_Rewards]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'FavoriteTeams'
+ALTER TABLE [dbo].[FavoriteTeams]
+ADD CONSTRAINT [PK_FavoriteTeams]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -179,6 +204,21 @@ GO
 CREATE INDEX [IX_FK_RewardGroupReward]
 ON [dbo].[Rewards]
     ([RewardGroupId]);
+GO
+
+-- Creating foreign key on [Account_Id] in table 'FavoriteTeams'
+ALTER TABLE [dbo].[FavoriteTeams]
+ADD CONSTRAINT [FK_AccountFavoriteTeam]
+    FOREIGN KEY ([Account_Id])
+    REFERENCES [dbo].[Accounts]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AccountFavoriteTeam'
+CREATE INDEX [IX_FK_AccountFavoriteTeam]
+ON [dbo].[FavoriteTeams]
+    ([Account_Id]);
 GO
 
 -- --------------------------------------------------

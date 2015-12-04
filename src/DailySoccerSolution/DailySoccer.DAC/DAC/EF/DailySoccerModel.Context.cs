@@ -30,5 +30,6 @@ namespace DailySoccer.DAC.EF
         public virtual DbSet<GuessMatch> GuessMatches { get; set; }
         public virtual DbSet<RewardGroup> RewardGroups { get; set; }
         public virtual DbSet<Reward> Rewards { get; set; }
+        public virtual DbSet<FavoriteTeam> FavoriteTeams { get; set; }
     }
 }
