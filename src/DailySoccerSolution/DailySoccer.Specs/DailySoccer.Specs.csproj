@@ -64,6 +64,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CreateNewGuest.feature</DependentUpon>
     </Compile>
+    <Compile Include="Specs\GetAllGuessHistory.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetAllGuessHistory.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\GetAllLeague.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -106,6 +111,10 @@
     <None Include="Specs\CreateNewGuest.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CreateNewGuest.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\GetAllGuessHistory.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GetAllGuessHistory.feature.cs</LastGenOutput>
     </None>
     <None Include="Specs\GetAllLeague.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
