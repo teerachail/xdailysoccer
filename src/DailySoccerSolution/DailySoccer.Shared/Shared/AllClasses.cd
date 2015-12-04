@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="DailySoccer.Shared.Models.AccountInformation">
-    <Position X="7.5" Y="5" Width="3.25" />
+    <Position X="7.5" Y="5.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAACAAIAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Shared\Models\AccountInformation.cs</FileName>
@@ -36,30 +36,30 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DailySoccer.Shared.Models.MatchInformation">
-    <Position X="7.5" Y="7" Width="3.25" />
+    <Position X="7.5" Y="7.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAACAAAMCAAAAAIAAACAAAAAAAAAAAABAAAAAABAAAA=</HashCode>
       <FileName>Shared\Models\MatchInformation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DailySoccer.Shared.Models.TeamInformation">
-    <Position X="11.25" Y="7" Width="3.25" />
+    <Position X="11.25" Y="7.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAACAAACAEAAEAgAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shared\Models\TeamInformation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DailySoccer.Shared.Models.GuessMatchInformation">
-    <Position X="11.25" Y="5" Width="2.75" />
+    <Position X="11.25" Y="5.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAiQAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>Shared\Models\GuessMatchInformation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DailySoccer.Shared.Facades.AccountFacade">
-    <Position X="13.25" Y="3.25" Width="3.25" />
+    <Position X="13.25" Y="3.75" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shared\Facades\AccountFacade.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -69,12 +69,12 @@
       <Field Name="_instance" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAQAAAIAAQAAACAAAQAAAAAgAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAAAQAAAIAAQAAACAAAQAAAABgAQAA=</HashCode>
       <FileName>Shared\Facades\FacadeRepository.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DailySoccer.Shared.Facades.MatchFacade">
-    <Position X="7.5" Y="3.25" Width="5.5" />
+    <Position X="7.5" Y="3.75" Width="5.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shared\Facades\MatchFacade.cs</FileName>
@@ -88,7 +88,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DailySoccer.Shared.Models.GetAllLeagueRespond">
-    <Position X="0.5" Y="9.25" Width="3.75" />
+    <Position X="0.5" Y="10" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
       <FileName>Shared\Models\GetAllLeagueRespond.cs</FileName>
@@ -102,7 +102,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DailySoccer.Shared.Models.LeagueInformation">
-    <Position X="4.5" Y="9.25" Width="2.5" />
+    <Position X="4.5" Y="10" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAACAAAADAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shared\Models\LeagueInformation.cs</FileName>
@@ -111,7 +111,7 @@
   <Class Name="DailySoccer.Shared.Models.RewardInformation">
     <Position X="4.5" Y="7.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAIAAAAgAAAAAAAAAISAAQAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Shared\Models\RewardInformation.cs</FileName>
     </TypeIdentifier>
   </Class>

@@ -80,5 +80,11 @@ namespace DailySoccer.Shared.DAC
                 return result;
             }
         }
+
+        public IEnumerable<LeagueInformation> GetAllLeagues()
+        {
+            // TODO: GetAllLeagues
+            throw new NotImplementedException();
+        }
     }
 }

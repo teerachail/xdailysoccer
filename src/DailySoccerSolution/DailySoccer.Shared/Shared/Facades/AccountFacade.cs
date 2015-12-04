@@ -28,10 +28,13 @@ namespace DailySoccer.Shared.Facades
             };
         }
 
-        public GetAllLeagueRespond GetAllLeague()
+        public GetAllLeagueRespond GetAllLeagues()
         {
-            // TODO: GetAllLeague
-            throw new NotImplementedException();
+            var result = new GetAllLeagueRespond
+            {
+                Leagues = FacadeRepository.Instance.AccountDataAccess.GetAllLeagues()
+            };
+            return result;
         }
     }
 }

@@ -12,5 +12,6 @@ namespace DailySoccer.Shared.DAC
         AccountInformation CreateAccount();
         AccountInformation GetAccountBySecrectCode(string secrectCode);
         IEnumerable<GuessMatchInformation> GetGuessMatchsByAccountSecrectCode(string secrectCode);
+        IEnumerable<LeagueInformation> GetAllLeagues();
     }
 }
