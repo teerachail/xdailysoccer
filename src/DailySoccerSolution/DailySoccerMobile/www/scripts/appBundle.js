@@ -213,6 +213,19 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 templateUrl: 'templates/UnderConstruction.html',
             }
         }
+    })
+        .state('syncdata', {
+        url: '/syncdata',
+        abstract: true,
+        templateUrl: 'templates/_fullpageTemplate.html',
+    })
+        .state('syncdata.syncdata', {
+        url: '/syncdata',
+        views: {
+            'MainContent': {
+                templateUrl: 'templates/Accounts/SyncData.html',
+            }
+        }
     });
     // if none of the above states are matched, use this as the fallback
     //$urlRouterProvider.otherwise('/app/playlists');
@@ -411,7 +424,14 @@ var starter;
                     scope: $scope,
                     animation: 'slide-in-up'
                 }).then(function (modal) { $scope.MatchPopup = modal; });
+                this.$ionicModal.fromTemplateUrl('templates/Accounts/TieFacebookPopup.html', {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                }).then(function (modal) { $scope.TieFacebookPopup = modal; });
             }
+            MatchController.prototype.LoginWithFacebook = function () {
+                this.$scope.TieFacebookPopup.show();
+            };
             MatchController.prototype.GetTodayMatches = function () {
                 var _this = this;
                 var user = Ionic.User.current();

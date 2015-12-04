@@ -358,9 +358,13 @@ i {
     background-color: $draw-status;
 }
 
-.item.col.col-40 {
-    height:52px;
-    border:none;
+.today-match .item.col.col-40 {
+    height: 52px;
+    border: none;
+    line-height: 52px;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    margin: 0;
     span {
         font-size: 13px;
         vertical-align:bottom;
@@ -478,7 +482,8 @@ ion-modal-view{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width:69%;
+    /*width:100%;
+    max-width:69%;*/
     display:inline-block;
 }
 .line-height-small{
@@ -505,3 +510,7 @@ div.title.title-center div{
     padding-left: 120px;
     min-height: 100px;
 }
+ .box-score{
+    height: 52px;
+    margin: 0;
+ }

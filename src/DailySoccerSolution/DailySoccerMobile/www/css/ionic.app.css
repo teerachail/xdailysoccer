@@ -6177,8 +6177,8 @@ button.item.item-button-right {
 .item-thumbnail-left,
 .item-thumbnail-left .item-content {
   padding-top: 8px;
-  padding-left: 106px;
-  min-height: 100px; }
+  padding-left: 126px;
+  min-height: 120px; }
   .item-thumbnail-left > img:first-child,
   .item-thumbnail-left .item-image,
   .item-thumbnail-left .item-content > img:first-child,
@@ -6186,8 +6186,8 @@ button.item.item-button-right {
     position: absolute;
     top: 10px;
     left: 10px;
-    max-width: 80px;
-    max-height: 80px;
+    max-width: 100px;
+    max-height: 100px;
     width: 100%;
     height: 100%; }
 
@@ -6200,8 +6200,8 @@ button.item.item-button-right {
 .item-thumbnail-right,
 .item-thumbnail-right .item-content {
   padding-top: 8px;
-  padding-right: 106px;
-  min-height: 100px; }
+  padding-right: 126px;
+  min-height: 120px; }
   .item-thumbnail-right > img:first-child,
   .item-thumbnail-right .item-image,
   .item-thumbnail-right .item-content > img:first-child,
@@ -6209,8 +6209,8 @@ button.item.item-button-right {
     position: absolute;
     top: 10px;
     right: 10px;
-    max-width: 80px;
-    max-height: 80px;
+    max-width: 100px;
+    max-height: 100px;
     width: 100%;
     height: 100%; }
 
@@ -8189,7 +8189,7 @@ progress {
   padding: 2px 4px 1px;
   min-width: 28px;
   min-height: 30px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 26px; }
   .button-small .icon:before, .button-small.icon:before, .button-small.icon-left:before, .button-small.icon-right:before {
     font-size: 16px;
@@ -9222,6 +9222,9 @@ a {
 .text-gray {
   color: #cdcdcd; }
 
+.text-green {
+  color: #00b95c; }
+
 .font-large {
   font-size: 18px !important; }
 
@@ -9229,6 +9232,9 @@ a {
   position: relative;
   display: inline-block;
   vertical-align: -webkit-baseline-middle; }
+
+hr {
+  border-color: darkslategrey; }
 
 .button {
   border: 0px;
@@ -9328,10 +9334,14 @@ i {
 .item.item-draw-status {
   background-color: #d0e3dd; }
 
-.item.col.col-40 {
+.today-match .item.col.col-40 {
   height: 52px;
-  border: none; }
-  .item.col.col-40 span {
+  border: none;
+  line-height: 52px;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  margin: 0; }
+  .today-match .item.col.col-40 span {
     font-size: 13px;
     vertical-align: bottom; }
 
@@ -9435,7 +9445,8 @@ ion-modal-view {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 64%;
+  /*width:100%;
+    max-width:69%;*/
   display: inline-block; }
 
 .line-height-small {
@@ -9455,3 +9466,12 @@ div.title.title-center div {
   left: 0;
   right: 0;
   color: black; }
+
+.item-thumbnail-left, .item-thumbnail-left .item-content {
+  padding-top: 8px;
+  padding-left: 120px;
+  min-height: 100px; }
+
+.box-score {
+  height: 52px;
+  margin: 0; }

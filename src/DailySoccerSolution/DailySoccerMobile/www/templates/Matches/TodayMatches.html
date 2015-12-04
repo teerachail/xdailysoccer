@@ -1,5 +1,5 @@
 ﻿<ion-view view-title="DAILY SOCCER<br><div>พฤษจิกายน</div>">
-    <ion-content class="has-subheader">
+    <ion-content class="has-subheader today-match">
         <div ng-include src="'templates/Matches/_matchHeaderAds.html'"></div>
         <div ng-include src="'templates/Matches/_matchHeaderScore.html'"></div>
 
@@ -24,19 +24,25 @@
                      ng-click="match.CompletedDate || !matchCtrl.IsTodayMatch(match) || matchCtrl.SelectTeam(match, match.TeamHome.Id)">
                     <span class="status status-left bg-yellow" ng-show="match.CompletedDate && match.TeamHome.IsSelected && match.TeamHome.CurrentScore >= match.TeamAway.CurrentScore">+{{ match.TeamAway.WinningPredictionPoints }}</span>
                     <span class="status status-left bg-red" ng-show="match.CompletedDate && match.TeamHome.IsSelected && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore">L</span>
-                    <div class="text-right padding-vertical">
-                        <span ng-show="match.TeamHome.IsSelected" >
-                            (+{{ match.TeamHome.WinningPredictionPoints }})
-                        </span>
-                        <span class="team-name">
-                            {{ match.TeamHome.Name }}
-                        </span>
-                        <span>
-                            {{ match.TeamHome.CurrentPredictionPoints }}
-                        </span>
+                    <div class="text-right row row-center no-padding">
+                            <div class="col col-20 col-center no-padding text-left">
+                                <span ng-show="match.TeamHome.IsSelected">
+                                    (+{{ match.TeamHome.WinningPredictionPoints }})
+                                </span>
+                            </div>
+                            <div class="col col-70 col-center no-padding team-name">
+                                <span class="">
+                                    {{ match.TeamHome.Name }}
+                                </span>
+                            </div>
+                            <div class="col col-10 col-center no-padding">
+                                <span>
+                                    {{ match.TeamHome.CurrentPredictionPoints }}
+                                </span>
+                            </div>
                     </div>
                 </div>
-                <div class="col col-20 col-center item item-dark ">
+                <div class="col col-20 col-center box-score item item-dark ">
                     <div class="col-center">
                         <span class="status status-left" ng-class="{'energized': !match.CompletedDate, 'stable': match.CompletedDate}" >{{ match.Status }}</span>
                         <div class="text-center padding-vertical" ng-show="!match.StartedDate">
@@ -58,16 +64,22 @@
                      ng-click="match.CompletedDate || !matchCtrl.IsTodayMatch(match) || matchCtrl.SelectTeam(match, match.TeamAway.Id)">
                     <span class="status status-right bg-yellow" ng-show="match.CompletedDate && match.TeamAway.IsSelected && match.TeamHome.CurrentScore <= match.TeamAway.CurrentScore">+{{ match.TeamAway.WinningPredictionPoints }}</span>
                     <span class="status status-right bg-red" ng-show="match.CompletedDate && match.TeamAway.IsSelected && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore">L</span>
-                    <div class="text-left padding-vertical">
-                        <span>
-                            {{ match.TeamAway.CurrentPredictionPoints }}
-                        </span>
-                        <span class="team-name">
-                            {{ match.TeamAway.Name }}
-                        </span>
-                        <span ng-show="match.TeamAway.IsSelected">
-                            (+{{ match.TeamAway.WinningPredictionPoints }})
-                        </span>
+                    <div class="text-left row row-center no-padding">
+                        <div class="col col-10 col-center no-padding">
+                            <span>
+                                {{ match.TeamAway.CurrentPredictionPoints }}
+                            </span>
+                        </div>
+                        <div class="col col-70 col-center no-padding team-name">
+                            <span>
+                                {{ match.TeamAway.Name }}
+                            </span>  
+                        </div>   
+                        <div class="col col-20 col-center no-padding text-right">
+                            <span ng-show="match.TeamAway.IsSelected">
+                                (+{{ match.TeamAway.WinningPredictionPoints }})
+                            </span>
+                        </div>                        
                     </div>
                 </div>
             </div>
