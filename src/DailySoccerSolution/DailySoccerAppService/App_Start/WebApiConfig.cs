@@ -25,12 +25,12 @@ namespace DailySoccerAppService
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });
 
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver();
-
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()
                 .ApplyTo(config);
-           
+
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver();
+
 
             // To display errors in the browser during development, uncomment the following
             // line. Comment it out again when you deploy your service for production use.

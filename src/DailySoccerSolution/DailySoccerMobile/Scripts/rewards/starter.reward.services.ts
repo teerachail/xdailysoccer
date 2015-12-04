@@ -7,7 +7,7 @@
         }
 
         public GetCurrentRewards(): ng.IPromise<GetCurrentRewardsRespond> {
-            var requestUrl = 'Reward';
+            var requestUrl = 'Reward/GetCurrentRewards';
             return this.queryRemoteSvc.RemoteQuery<GetCurrentRewardsRespond>(requestUrl);
         }
     }
