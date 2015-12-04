@@ -93,7 +93,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="LeagueName" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="TeamName" Type="varchar" Nullable="false" MaxLength="255" />
-    <Property Name="TeamId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="AccountGuessMatch">
     <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
@@ -277,7 +276,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LeagueName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TeamName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="TeamId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Accounts" Relationship="DailySoccerModel.FavoriteTeamAccount" FromRole="FavoriteTeam" ToRole="Account" />
         </EntityType>
         <Association Name="FavoriteTeamAccount">
@@ -361,7 +359,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="LeagueName" ColumnName="LeagueName" />
           <ScalarProperty Name="TeamName" ColumnName="TeamName" />
-          <ScalarProperty Name="TeamId" ColumnName="TeamId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/04/2015 15:12:33
+-- Date Created: 12/04/2015 15:17:10
 -- Generated from EDMX file: E:\gits\TheS\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
@@ -26,8 +26,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_RewardGroupReward]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Rewards] DROP CONSTRAINT [FK_RewardGroupReward];
 GO
-IF OBJECT_ID(N'[dbo].[FK_AccountFavoriteTeam]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[FavoriteTeams] DROP CONSTRAINT [FK_AccountFavoriteTeam];
+IF OBJECT_ID(N'[dbo].[FK_FavoriteTeamAccount]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Accounts] DROP CONSTRAINT [FK_FavoriteTeamAccount];
 GO
 
 -- --------------------------------------------------
@@ -118,8 +118,7 @@ GO
 CREATE TABLE [dbo].[FavoriteTeams] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [LeagueName] varchar(255)  NOT NULL,
-    [TeamName] varchar(255)  NOT NULL,
-    [TeamId] int  NOT NULL
+    [TeamName] varchar(255)  NOT NULL
 );
 GO
 
