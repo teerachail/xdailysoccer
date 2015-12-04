@@ -14,12 +14,17 @@ namespace DailySoccerAppService.Controllers
     {
         public ApiServices Services { get; set; }
 
-        // GET api/Reward
-        //[HttpGet]
-        //public string Get()
-        //{
-        //    return "Respond by GET method";
-        //}
+        [HttpGet]
+        public string Get()
+        {
+            return "Respond by GET method";
+        }
+
+        [HttpPost]
+        public string Post(int id)
+        {
+            return "Respond by POST method, your ID: " + id;
+        }
 
         [HttpGet]
         public GetCurrentRewardsRespond GetCurrentRewards()

@@ -1,4 +1,5 @@
-﻿using ServiceStack;
+﻿using DailySoccer.Shared.Models;
+using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace DailySoccerBackoffice.Controllers
         // GET: RewardManagement
         public ActionResult Index()
         {
-            var client = new JsonServiceClient("http://host/api/");
+            var client = new JsonServiceClient("http://localhost:3728/api/");
+            var response = client.Get<IEnumerable<RewardGroupInformation>>("/Reward/GetRewardGroup");
             return View();
         }
     }
