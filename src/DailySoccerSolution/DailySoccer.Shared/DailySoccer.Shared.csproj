@@ -72,7 +72,6 @@
     <Compile Include="Shared\Models\GuessMatchRequest.cs" />
     <Compile Include="Shared\Models\GuessMatchRespond.cs" />
     <Compile Include="Shared\Models\LeagueInformation.cs" />
-    <Compile Include="Shared\Models\RewardInformation.cs" />
     <Compile Include="Shared\Models\RewardGroupInformation.cs" />
     <Compile Include="Shared\Models\MatchInformation.cs" />
     <Compile Include="Shared\Models\RewardInformation.cs" />

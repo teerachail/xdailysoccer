@@ -15,7 +15,5 @@ namespace DailySoccer.Shared.Models
         public int RemainingAmount { get; set; }
         public string ImagePath { get; set; }
         public int RewardGroupId { get; set; }
-        public string ImagePath { get; set; }
-        public int RemainingAmount { get; set; }
     }
 }
