@@ -26,5 +26,6 @@ namespace DailySoccer.DAC.EF
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GuessMatch> GuessMatches { get; set; }
+        public virtual FavoriteTeam FavoriteTeam { get; set; }
     }
 }
