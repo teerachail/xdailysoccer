@@ -351,7 +351,7 @@ i {
     height:52px;
     border:none;
     span {
-        font-size: 12px;
+        font-size: 13px;
         vertical-align:bottom;
     }
 }
@@ -479,3 +479,14 @@ ion-modal-view{
 .button .icon {
     vertical-align: middle;
 }  
+
+//* Today matches month
+div.title.title-center div{
+        position: absolute;
+    top: 20px;
+    font-size: 12px;
+    /* text-align: center; */
+    left: 0;
+    right: 0;
+    color: black;
+}

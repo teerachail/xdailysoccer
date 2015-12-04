@@ -380,11 +380,12 @@ var starter;
     (function (match) {
         'use strict';
         var MatchController = (function () {
-            function MatchController($scope, matchSvc, $location, $ionicModal) {
+            function MatchController($scope, matchSvc, $location, $ionicModal, $ionicTabsDelegate) {
                 this.$scope = $scope;
                 this.matchSvc = matchSvc;
                 this.$location = $location;
                 this.$ionicModal = $ionicModal;
+                this.$ionicTabsDelegate = $ionicTabsDelegate;
                 this.PastOneDaysDate = new Date();
                 this.PastTwoDaysDate = new Date();
                 this.FutureOneDaysDate = new Date();
@@ -408,6 +409,7 @@ var starter;
                     _this.updateDisplayDate(respond.CurrentDate);
                     _this.updateDisplayMatches(respond.Matches);
                     _this.updateRemainingGuessAmount();
+                    _this.$ionicTabsDelegate.$getByHandle('calendarTabs').select(2);
                     console.log('Get all matches completed.');
                 });
             };
@@ -420,8 +422,12 @@ var starter;
             MatchController.prototype.SelectTeam = function (selectedMatch, selectedTeamId) {
                 var _this = this;
                 var isChangingValid = this.AccountInfo.MaximumGuessAmount > this.getSelectedTodayMatches().length;
-                if (!isChangingValid)
-                    return;
+                if (!isChangingValid) {
+                    if (selectedMatch.TeamHome.IsSelected != !selectedMatch.TeamAway.IsSelected) {
+                        this.$scope.MatchPopup.show();
+                        return;
+                    }
+                }
                 var isSelectedTeamHome = selectedMatch.TeamHome.Id == selectedTeamId;
                 var selectedTeam = isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
                 var unselectedTeam = !isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
@@ -471,7 +477,7 @@ var starter;
                 var selectedMatchesQry = this._allMatches.filter(function (it) { return (it.TeamHome.IsSelected || it.TeamAway.IsSelected) && it.BeginDate == _this.CurrentDate; });
                 return selectedMatchesQry;
             };
-            MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal'];
+            MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal', '$ionicTabsDelegate'];
             return MatchController;
         })();
         angular
