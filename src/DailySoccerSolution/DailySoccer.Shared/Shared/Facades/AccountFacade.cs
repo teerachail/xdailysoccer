@@ -43,7 +43,14 @@ namespace DailySoccer.Shared.Facades
                 && request.SelectedTeamId > IgnoreRange;
             if (!isArgumentValid) return;
 
-            FacadeRepository.Instance.AccountDataAccess.SetFavoriteTeam(request);
+            var accountDac = FacadeRepository.Instance.AccountDataAccess;
+            var selectedAccount = accountDac.GetAccountBySecrectCode(request.UserId);
+            if (selectedAccount == null) return;
+
+            var isSelectedTeamAvailable = accountDac.GetAllLeagues().Any(it => it.TeamId == request.SelectedTeamId);
+            if (!isSelectedTeamAvailable) return;
+
+            accountDac.SetFavoriteTeam(request);
         }
     }
 }

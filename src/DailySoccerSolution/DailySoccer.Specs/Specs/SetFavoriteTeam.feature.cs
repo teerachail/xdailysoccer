@@ -133,6 +133,66 @@ this.FeatureBackground();
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ไม่เลือกทีมที่ชอบ ระบบไม่ทำการบันทึกข้อมูล")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SetFavoriteTeam")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชไมเลอกทมทชอบระบบไมทำการบนทกขอมล()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ไม่เลือกทีมที่ชอบ ระบบไม่ทำการบันทึกข้อมูล", new string[] {
+                        "mock"});
+#line 24
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 25
+ testRunner.When("ผู้ใช้ UserId: \'s01\' เลือกทีมที่ชอบเป็น SelectedTeamId: \'0\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 26
+ testRunner.Then("ระบบไม่ทำการบันทึกข้อมูลทีมที่ชอบ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้เลือกทีมที่ชอบที่ไม่มีในระบบ ระบบไม่ทำการบันทึกข้อมูล")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SetFavoriteTeam")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชเลอกทมทชอบทไมมในระบบระบบไมทำการบนทกขอมล()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้เลือกทีมที่ชอบที่ไม่มีในระบบ ระบบไม่ทำการบันทึกข้อมูล", new string[] {
+                        "mock"});
+#line 29
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 30
+ testRunner.When("ผู้ใช้ UserId: \'s01\' เลือกทีมที่ชอบเป็น SelectedTeamId: \'99\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 31
+ testRunner.Then("ระบบไม่ทำการบันทึกข้อมูลทีมที่ชอบ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ที่ข้อมูลไม่ถูกต้องทำการเลือกทีมที่ชอบ ระบบไม่ทำการบันทึกข้อมูล")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SetFavoriteTeam")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชทขอมลไมถกตองทำการเลอกทมทชอบระบบไมทำการบนทกขอมล()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่ข้อมูลไม่ถูกต้องทำการเลือกทีมที่ชอบ ระบบไม่ทำการบันทึกข้อมูล", new string[] {
+                        "mock"});
+#line 34
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 35
+ testRunner.When("ผู้ใช้ UserId: \'s02\' เลือกทีมที่ชอบเป็น SelectedTeamId: \'1\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 36
+ testRunner.Then("ระบบไม่ทำการบันทึกข้อมูลทีมที่ชอบ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

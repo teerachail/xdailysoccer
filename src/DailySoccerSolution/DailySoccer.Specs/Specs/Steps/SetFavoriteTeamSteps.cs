@@ -32,5 +32,13 @@ namespace DailySoccer.Specs.Steps
                 && it.SelectedTeamId == selectedTeamId
                 )), Times.Once());
         }
+
+        [Then(@"ระบบไม่ทำการบันทึกข้อมูลทีมที่ชอบ")]
+        public void Thenระบบไมทำการบนทกขอมลทมทชอบ()
+        {
+            var mockAccountDac = ScenarioContext.Current.Get<Moq.Mock<IAccountDataAccess>>();
+            mockAccountDac.Verify(dac => dac.SetFavoriteTeam(It.IsAny<SetFavoriteTeamRequest>()), Times.Never());
+        }
+
     }
 }
