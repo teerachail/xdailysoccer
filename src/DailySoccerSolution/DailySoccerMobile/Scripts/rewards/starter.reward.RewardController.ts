@@ -8,18 +8,10 @@
         public RewardInfo: reward.GetCurrentRewardsRespond;
 
         
-        static $inject = ['$scope', 'starter.reward.RewardServices', '$location', '$ionicModal'];
+        static $inject = ['$scope', 'starter.reward.RewardServices'];
         constructor(private $scope,
-            private rewardSvc: starter.reward.RewardServices,
-            private $location: ng.ILocationService,
-            private $ionicModal) {
+            private rewardSvc: starter.reward.RewardServices) {
             this.GetRewards();
-
-            //this.$ionicModal.fromTemplateUrl('templates/Matches/MatchPopup.html',
-            //    {
-            //        scope: $scope,
-            //        animation: 'slide-in-up'
-            //    }).then(function (modal): void { $scope.MatchPopup = modal; });
         }
 
         public GetRewards(): void {
@@ -29,13 +21,6 @@
                     console.log('Get all rewards completed.');
                 });
         }
-
-        //public Logout(): void {
-        //    var user = Ionic.User.current();
-        //    user.id = 'empty';
-        //    user.save();
-        //    this.$location.path('/account/login');
-        //}
     }
 
     angular

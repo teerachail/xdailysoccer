@@ -115,7 +115,6 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 url: '/rewards',
                 abstract: true,
                 templateUrl: 'templates/_rewardTemplate.html',
-                //controller: 'AppCtrl'
                 controller: 'starter.reward.RewardController as rewardCtrl'
             })
             .state('rewards.rewards', {

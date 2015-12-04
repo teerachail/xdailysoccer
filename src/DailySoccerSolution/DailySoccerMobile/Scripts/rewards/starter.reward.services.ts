@@ -11,8 +11,6 @@
             return this.queryRemoteSvc.RemoteQuery<GetCurrentRewardsRespond>(requestUrl);
         }
     }
-    
-    
 
     angular
         .module('starter.reward')
