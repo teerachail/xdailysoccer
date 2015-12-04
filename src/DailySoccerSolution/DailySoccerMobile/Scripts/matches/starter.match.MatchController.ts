@@ -69,6 +69,7 @@
             request.UserId = Ionic.User.current().id;
             request.MatchId = selectedMatch.Id;
             request.IsHome = isSelectedTeamHome;
+            request.IsCancel = false;
 
             this.matchSvc.GuessMatch(request)
                 .then((respond: GuessMatchRespond): void => {

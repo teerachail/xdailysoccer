@@ -64,7 +64,7 @@ namespace DailySoccer.Shared.DAC
                 }
                 else
                 {
-                    selectedLastGuessed.GuessTeamId = guess.MatchId;
+                    selectedLastGuessed.GuessTeamId = guess.GuessTeamId;
                     selectedLastGuessed.PredictionPoints = guess.PredictionPoints;
                     dctx.SaveChanges();
                 }
