@@ -110,6 +110,118 @@ this.FeatureBackground();
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ขอข้อมูลทีมทั้งหมดในตอนที่มีอยู่ข้อมูลเดียว ระบบส่งข้อมูลทีมทั้งหมดที่มีกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetAllLeague")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ขอขอมลทมทงหมดในตอนทมอยขอมลเดยวระบบสงขอมลทมทงหมดทมกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอข้อมูลทีมทั้งหมดในตอนที่มีอยู่ข้อมูลเดียว ระบบส่งข้อมูลทีมทั้งหมดที่มีกลับไป", new string[] {
+                        "mock"});
+#line 19
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "TeamId",
+                        "TeamName",
+                        "LeagueName"});
+            table3.AddRow(new string[] {
+                        "1",
+                        "AS Roma",
+                        "EUFA Champions League"});
+#line 20
+ testRunner.Given("ข้อมูลทีมทั้งหมดในระบบมีเป็น", ((string)(null)), table3, "Given ");
+#line 23
+ testRunner.When("ขอข้อมูลทีมทั้งหมดในระบบ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "TeamId",
+                        "TeamName",
+                        "LeagueName"});
+            table4.AddRow(new string[] {
+                        "1",
+                        "AS Roma",
+                        "EUFA Champions League"});
+#line 24
+ testRunner.Then("ระบบส่งข้อมูลทีมทั้งหมดในระบบมีเป็น", ((string)(null)), table4, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ขอข้อมูลทีมทั้งหมดในตอนที่มีอยู่หลายข้อมูล ระบบส่งข้อมูลทีมทั้งหมดที่มีกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetAllLeague")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ขอขอมลทมทงหมดในตอนทมอยหลายขอมลระบบสงขอมลทมทงหมดทมกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอข้อมูลทีมทั้งหมดในตอนที่มีอยู่หลายข้อมูล ระบบส่งข้อมูลทีมทั้งหมดที่มีกลับไป", new string[] {
+                        "mock"});
+#line 29
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "TeamId",
+                        "TeamName",
+                        "LeagueName"});
+            table5.AddRow(new string[] {
+                        "1",
+                        "AS Roma",
+                        "EUFA Champions League"});
+            table5.AddRow(new string[] {
+                        "2",
+                        "Bayer Leverkusen",
+                        "EUFA Champions League"});
+            table5.AddRow(new string[] {
+                        "3",
+                        "Barcelona",
+                        "EUFA Champions League"});
+            table5.AddRow(new string[] {
+                        "4",
+                        "BATE Borisov",
+                        "EUFA Champions League"});
+            table5.AddRow(new string[] {
+                        "5",
+                        "Bayern Munich",
+                        "EUFA Champions League"});
+#line 30
+ testRunner.Given("ข้อมูลทีมทั้งหมดในระบบมีเป็น", ((string)(null)), table5, "Given ");
+#line 37
+ testRunner.When("ขอข้อมูลทีมทั้งหมดในระบบ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "TeamId",
+                        "TeamName",
+                        "LeagueName"});
+            table6.AddRow(new string[] {
+                        "1",
+                        "AS Roma",
+                        "EUFA Champions League"});
+            table6.AddRow(new string[] {
+                        "2",
+                        "Bayer Leverkusen",
+                        "EUFA Champions League"});
+            table6.AddRow(new string[] {
+                        "3",
+                        "Barcelona",
+                        "EUFA Champions League"});
+            table6.AddRow(new string[] {
+                        "4",
+                        "BATE Borisov",
+                        "EUFA Champions League"});
+            table6.AddRow(new string[] {
+                        "5",
+                        "Bayern Munich",
+                        "EUFA Champions League"});
+#line 38
+ testRunner.Then("ระบบส่งข้อมูลทีมทั้งหมดในระบบมีเป็น", ((string)(null)), table6, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
