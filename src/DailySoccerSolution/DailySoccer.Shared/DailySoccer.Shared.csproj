@@ -61,12 +61,14 @@
     <Compile Include="Shared\Facades\MatchFacade.cs" />
     <Compile Include="Shared\Models\AccountInformation.cs" />
     <Compile Include="Shared\Models\CreateNewGuestRespond.cs" />
+    <Compile Include="Shared\Models\GetCurrentRewardsRespond.cs" />
     <Compile Include="Shared\Models\GetMatchesRequest.cs" />
     <Compile Include="Shared\Models\GetMatchesRespond.cs" />
     <Compile Include="Shared\Models\GuessMatchInformation.cs" />
     <Compile Include="Shared\Models\GuessMatchRequest.cs" />
     <Compile Include="Shared\Models\GuessMatchRespond.cs" />
     <Compile Include="Shared\Models\MatchInformation.cs" />
+    <Compile Include="Shared\Models\RewardInformation.cs" />
     <Compile Include="Shared\Models\TeamInformation.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -7,7 +7,7 @@
                 </i>
             </div>
             <div class="col col-center">
-                แต้มสะสม 7500
+                แต้มสะสม {{rewardCtrl.CurrentOrderedCoupon}}
             </div>
             <div class="col col-center">
                 <a menu-close href="#/ticket/buyticket" class=" button button-full bg-yellow font-large">
@@ -17,7 +17,7 @@
         </ion-item>
         <div class="item item-stable no-border">
             <div class="">
-                แลกซื้อคูปองไปแล้วทั้งหมด 5 ใบ
+                แลกซื้อคูปองไปแล้วทั้งหมด {{rewardCtrl.UserCoupon}} ใบ
             </div>
         </div>
         <div class="item no-border text-center no-padding-bottom">
@@ -25,7 +25,16 @@
                 รางวัลประจำสัปดาห์
             </div>
         </div>
-        <div class="item no-border text-right">
+        <div class="item no-border text-right" ng-repeat="reward in rewardCtrl.RewardInfo.Rewards">
+            <div>
+                <img class="col" src="{{reward.ImagePath}}" />
+            </div>
+            <div class="">
+                จำนวน {{reward.RemainingAmount}} รางวัล
+            </div>
+        </div>
+
+        <!--<div class="item no-border text-right">
             <div>
                 <img class="col" src="http://www.samsung.com/th/consumer-images/product/smartphone/2015/SM-G920FZKACAM/features/SM-G920FZKACAM-403979-0.jpg"/>
             </div>
@@ -40,9 +49,10 @@
             <div class="">
                 จำนวน 2 รางวัล
             </div>
-        </div>
+        </div>-->
+
         <!-- No Reward -->
-        <div class="item no-border text-right">
+        <div class="item no-border text-right" ng-show="reward.length == 0">
             <div>
                 <img class="col" src="img/Logos/NoReward.png" />
             </div>

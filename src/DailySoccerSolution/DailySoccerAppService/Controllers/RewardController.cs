@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Microsoft.Azure.Mobile.Server;
+using DailySoccer.Shared.Models;
 
 namespace DailySoccerAppService.Controllers
 {
@@ -13,10 +14,38 @@ namespace DailySoccerAppService.Controllers
         public ApiServices Services { get; set; }
 
         // GET api/Reward
-        public string Get()
+        //[HttpGet]
+        //public string Get()
+        //{
+        //    return "Respond by GET method";
+        //}
+
+        [HttpGet]
+        public GetCurrentRewardsRespond GetCurrentRewards()
         {
-            Services.Log.Info("Hello from custom controller!");
-            return "Hello";
+            var reward = new List<RewardInformation>
+            {
+                new RewardInformation
+                {
+                    ImagePath = "http://www.samsung.com/th/consumer-images/product/smartphone/2015/SM-G920FZKACAM/features/SM-G920FZKACAM-403979-0.jpg",
+                    RemainingAmount = 5
+                },
+                new RewardInformation
+                {
+                    ImagePath = "http://www.samsung.com/th/consumer-images/product/smartphone/2015/SM-G920FZKACAM/features/SM-G920FZKACAM-403979-0.jpg",
+                    RemainingAmount = 3
+                },
+                new RewardInformation
+                {
+                    ImagePath = "http://www.samsung.com/th/consumer-images/product/smartphone/2015/SM-G920FZKACAM/features/SM-G920FZKACAM-403979-0.jpg",
+                    RemainingAmount = 1
+                }
+            };
+
+            return new GetCurrentRewardsRespond {
+                TicketCost = 50,
+                Rewards = reward
+            };
         }
 
     }
