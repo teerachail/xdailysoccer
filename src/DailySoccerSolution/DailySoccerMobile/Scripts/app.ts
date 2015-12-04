@@ -221,6 +221,19 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                     }
                 }
             })
+            .state('underconstruction', {
+                url: '/underconstruction',
+                abstract: true,
+                templateUrl: 'templates/_basicTemplate.html'
+            })
+            .state('underconstruction.underconstruction', {
+                url: '/underconstruction',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/UnderConstruction.html',
+                    }
+                }
+            })
 
         ;
 
