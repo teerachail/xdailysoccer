@@ -62,6 +62,7 @@
             var isSelectedTeamHome = selectedMatch.TeamHome.Id == selectedTeamId;
             var selectedTeam = isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
             var unselectedTeam = !isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
+            var beforeChange = selectedTeam.IsSelected;
             selectedTeam.IsSelected = !selectedTeam.IsSelected;
             unselectedTeam.IsSelected = false;
 
@@ -69,7 +70,7 @@
             request.UserId = Ionic.User.current().id;
             request.MatchId = selectedMatch.Id;
             request.IsHome = isSelectedTeamHome;
-            request.IsCancel = false;
+            request.IsCancel = ((selectedTeamId == selectedTeam.Id) && (beforeChange)) ? true : false;
 
             this.matchSvc.GuessMatch(request)
                 .then((respond: GuessMatchRespond): void => {
