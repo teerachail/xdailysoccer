@@ -80,12 +80,18 @@
       <DependentUpon>GuessMatch.feature</DependentUpon>
     </Compile>
     <Compile Include="Specs\Hooks.cs" />
+    <Compile Include="Specs\SetFavoriteTeam.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SetFavoriteTeam.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\Steps\BackgroundSteps.cs" />
     <Compile Include="Specs\Steps\CommonSetup.cs" />
     <Compile Include="Specs\Steps\CreateNewGuestSteps.cs" />
     <Compile Include="Specs\Steps\GetAllLeagueSteps.cs" />
     <Compile Include="Specs\Steps\GetMatchesSteps.cs" />
     <Compile Include="Specs\Steps\GuessMatchSteps.cs" />
+    <Compile Include="Specs\Steps\SetFavoriteTeamSteps.cs" />
     <Compile Include="Specs\Steps\StepHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +118,10 @@
     <None Include="Specs\GuessMatch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GuessMatch.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\SetFavoriteTeam.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SetFavoriteTeam.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup />

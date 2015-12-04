@@ -75,6 +75,7 @@
     <Compile Include="Shared\Models\RewardGroupInformation.cs" />
     <Compile Include="Shared\Models\MatchInformation.cs" />
     <Compile Include="Shared\Models\RewardInformation.cs" />
+    <Compile Include="Shared\Models\SetFavoriteTeamRequest.cs" />
     <Compile Include="Shared\Models\TeamInformation.cs" />
   </ItemGroup>
   <ItemGroup />

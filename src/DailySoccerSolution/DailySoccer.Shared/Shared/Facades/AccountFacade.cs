@@ -30,11 +30,20 @@ namespace DailySoccer.Shared.Facades
 
         public GetAllLeagueRespond GetAllLeagues()
         {
-            var result = new GetAllLeagueRespond
-            {
-                Leagues = FacadeRepository.Instance.AccountDataAccess.GetAllLeagues()
-            };
+            var leagues = FacadeRepository.Instance.AccountDataAccess.GetAllLeagues();
+            var result = new GetAllLeagueRespond { Leagues = leagues };
             return result;
+        }
+
+        public void SetFavoriteTeam(SetFavoriteTeamRequest request)
+        {
+            const int IgnoreRange = 0;
+            var isArgumentValid = request != null 
+                && !string.IsNullOrEmpty(request.UserId) 
+                && request.SelectedTeamId > IgnoreRange;
+            if (!isArgumentValid) return;
+
+            FacadeRepository.Instance.AccountDataAccess.SetFavoriteTeam(request);
         }
     }
 }

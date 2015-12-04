@@ -86,5 +86,11 @@ namespace DailySoccer.Shared.DAC
             // TODO: GetAllLeagues
             throw new NotImplementedException();
         }
+
+        public void SetFavoriteTeam(SetFavoriteTeamRequest request)
+        {
+            // TODO: SetFavoriteTeam
+            throw new NotImplementedException();
+        }
     }
 }
