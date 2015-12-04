@@ -52,5 +52,11 @@ namespace DailySoccer.Shared.Facades
 
             accountDac.SetFavoriteTeam(request);
         }
+
+        public GetAllGuessHistoryRespond GetAllGuessHistory(GetAllGuessHistoryRequest request)
+        {
+            // TODO: GetAllGuessHistory
+            throw new NotImplementedException();
+        }
     }
 }

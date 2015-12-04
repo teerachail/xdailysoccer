@@ -219,10 +219,10 @@ this.FeatureBackground();
                         "CompletedDate",
                         "TeamHome.Id",
                         "TeamHome.Name",
-                        "TeamHome.CurrentPredictionPoints",
+                        "TeamHome.IsSelected",
                         "TeamAway.Id",
                         "TeamAway.Name",
-                        "TeamAway.CurrentPredictionPoints"});
+                        "TeamAway.IsSelected"});
             table8.AddRow(new string[] {
                         "1",
                         "Premier league",
@@ -231,22 +231,22 @@ this.FeatureBackground();
                         "",
                         "1",
                         "Brentford",
-                        "6",
+                        "false",
                         "2",
                         "Hull City",
-                        "7"});
+                        "false"});
             table8.AddRow(new string[] {
                         "2",
                         "Premier league",
                         "1/1/2015 01:30",
-                        "1/1/2015 01:30",
+                        "",
                         "",
                         "3",
                         "Birmingham City",
-                        "8",
+                        "false",
                         "4",
                         "Blackburn Rovers",
-                        "9"});
+                        "false"});
 #line 35
  testRunner.Then("ระบบส่งข้อมูลแมช์กลับไปเป็น", ((string)(null)), table8, "Then ");
 #line hidden

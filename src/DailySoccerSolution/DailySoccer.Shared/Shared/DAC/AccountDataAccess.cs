@@ -110,5 +110,11 @@ namespace DailySoccer.Shared.DAC
                 dctx.SaveChanges();
             }
         }
+
+        public IEnumerable<GuessHistoryMonthlyInformation> GetAllGuessHistory(GetAllGuessHistoryRequest request)
+        {
+            // TODO: GetAllGuessHistory
+            throw new NotImplementedException();
+        }
     }
 }
