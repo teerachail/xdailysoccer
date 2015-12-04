@@ -82,12 +82,14 @@
         }
 
         public SelectDay(days: Date) {
-            var compareDate = new Date(days.toString());
-            this.DisplayMatches = this._allMatches.filter(it=> {
-                var matchDate = new Date(it.BeginDate.toString());
-                return matchDate.getDay() == compareDate.getDay();
-            });
+            this.DisplayMatches = this._allMatches.filter(it=> this.IsEqualDay(it.BeginDate, days));
             console.log('# Change display matches completed.');
+        }
+
+        public IsEqualDay(firstDate: Date, secondDate: Date): boolean {
+            var first = new Date(firstDate.toString());
+            var second = new Date(secondDate.toString());
+            return first.getDay() == second.getDay();
         }
 
         private updateDisplayMatches(matches: MatchInformation[]): void {
@@ -113,11 +115,7 @@
         }
 
         private getSelectedTodayMatches(): MatchInformation[] {
-            var selectedMatchesQry = this._allMatches.filter(it=> {
-                var matchDate = new Date(it.BeginDate.toString());
-                var currentDate = new Date(this.CurrentDate.toString());
-                return ((it.TeamHome.IsSelected || it.TeamAway.IsSelected) && matchDate.getDay() == currentDate.getDay());
-            });
+            var selectedMatchesQry = this._allMatches.filter(it=> (it.TeamHome.IsSelected || it.TeamAway.IsSelected) && this.IsEqualDay(it.BeginDate, this.CurrentDate));
             return selectedMatchesQry;
         }
     }
