@@ -2,7 +2,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'azure-mobile-service.module', 'starter.shared', 'starter.account', 'starter.match'])
+angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'azure-mobile-service.module', 'starter.shared', 'starter.account', 'starter.match', 'starter.reward'])
     .constant('AzureMobileServiceClient', {
     API_URL: 'https://dailysoccer.azurewebsites.net'
 })
@@ -106,6 +106,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
         url: '/rewards',
         abstract: true,
         templateUrl: 'templates/_rewardTemplate.html',
+        controller: 'starter.reward.RewardController as rewardCtrl'
     })
         .state('rewards.rewards', {
         url: '/rewards',
@@ -197,6 +198,19 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
         views: {
             'MainContent': {
                 templateUrl: 'templates/Accounts/VerifyCode.html',
+            }
+        }
+    })
+        .state('underconstruction', {
+        url: '/underconstruction',
+        abstract: true,
+        templateUrl: 'templates/_basicTemplate.html'
+    })
+        .state('underconstruction.underconstruction', {
+        url: '/underconstruction',
+        views: {
+            'MainContent': {
+                templateUrl: 'templates/UnderConstruction.html',
             }
         }
     });
@@ -377,7 +391,7 @@ var starter;
 var starter;
 (function (starter) {
     var match;
-    (function (match) {
+    (function (match_1) {
         'use strict';
         var MatchController = (function () {
             function MatchController($scope, matchSvc, $location, $ionicModal, $ionicTabsDelegate) {
@@ -401,7 +415,7 @@ var starter;
             MatchController.prototype.GetTodayMatches = function () {
                 var _this = this;
                 var user = Ionic.User.current();
-                var data = new match.GetMatchesRequest();
+                var data = new match_1.GetMatchesRequest();
                 data.UserId = user.id;
                 this.matchSvc.GetMatches(data)
                     .then(function (respond) {
@@ -431,12 +445,14 @@ var starter;
                 var isSelectedTeamHome = selectedMatch.TeamHome.Id == selectedTeamId;
                 var selectedTeam = isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
                 var unselectedTeam = !isSelectedTeamHome ? selectedMatch.TeamHome : selectedMatch.TeamAway;
+                var beforeChange = selectedTeam.IsSelected;
                 selectedTeam.IsSelected = !selectedTeam.IsSelected;
                 unselectedTeam.IsSelected = false;
-                var request = new match.GuessMatchRequest();
+                var request = new match_1.GuessMatchRequest();
                 request.UserId = Ionic.User.current().id;
                 request.MatchId = selectedMatch.Id;
                 request.IsHome = isSelectedTeamHome;
+                request.IsCancel = ((selectedTeamId == selectedTeam.Id) && (beforeChange)) ? true : false;
                 this.matchSvc.GuessMatch(request)
                     .then(function (respond) {
                     _this.AccountInfo = respond.AccountInfo;
@@ -447,12 +463,17 @@ var starter;
                 this.updateRemainingGuessAmount();
             };
             MatchController.prototype.SelectDay = function (days) {
-                var compareDate = new Date(days.toString());
-                this.DisplayMatches = this._allMatches.filter(function (it) {
-                    var matchDate = new Date(it.BeginDate.toString());
-                    return matchDate.getDay() == compareDate.getDay();
-                });
+                var _this = this;
+                this.DisplayMatches = this._allMatches.filter(function (it) { return _this.dateAreEqual(it.BeginDate, days); });
                 console.log('# Change display matches completed.');
+            };
+            MatchController.prototype.IsTodayMatch = function (match) {
+                return this.dateAreEqual(match.BeginDate, this.CurrentDate);
+            };
+            MatchController.prototype.dateAreEqual = function (firstDate, secondDate) {
+                var first = new Date(firstDate.toString());
+                var second = new Date(secondDate.toString());
+                return first.getDay() == second.getDay();
             };
             MatchController.prototype.updateDisplayMatches = function (matches) {
                 this._allMatches = matches;
@@ -474,7 +495,7 @@ var starter;
             };
             MatchController.prototype.getSelectedTodayMatches = function () {
                 var _this = this;
-                var selectedMatchesQry = this._allMatches.filter(function (it) { return (it.TeamHome.IsSelected || it.TeamAway.IsSelected) && it.BeginDate == _this.CurrentDate; });
+                var selectedMatchesQry = this._allMatches.filter(function (it) { return (it.TeamHome.IsSelected || it.TeamAway.IsSelected) && _this.dateAreEqual(it.BeginDate, _this.CurrentDate); });
                 return selectedMatchesQry;
             };
             MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal', '$ionicTabsDelegate'];
@@ -541,7 +562,7 @@ var starter;
                 return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
             MatchServices.prototype.GuessMatch = function (req) {
-                var requestUrl = 'Matches/GuessMatch?userId=' + req.UserId + '&matchId=' + req.MatchId + '&isHome=' + req.IsHome;
+                var requestUrl = 'Matches/GuessMatch?userId=' + req.UserId + '&matchId=' + req.MatchId + '&isHome=' + req.IsHome + '&isCancel=' + req.IsCancel;
                 return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
             MatchServices.$inject = ['starter.shared.QueryRemoteDataService'];
@@ -552,6 +573,75 @@ var starter;
             .module('starter.match')
             .service('starter.match.MatchServices', MatchServices);
     })(match = starter.match || (starter.match = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var reward;
+    (function (reward) {
+        var GetCurrentRewardsRespond = (function () {
+            function GetCurrentRewardsRespond() {
+            }
+            return GetCurrentRewardsRespond;
+        })();
+        reward.GetCurrentRewardsRespond = GetCurrentRewardsRespond;
+        var RewardInformation = (function () {
+            function RewardInformation() {
+            }
+            return RewardInformation;
+        })();
+        reward.RewardInformation = RewardInformation;
+    })(reward = starter.reward || (starter.reward = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var reward;
+    (function (reward) {
+        'use strict';
+        var RewardController = (function () {
+            function RewardController($scope, rewardSvc) {
+                this.$scope = $scope;
+                this.rewardSvc = rewardSvc;
+                this.CurrentOrderedCoupon = 2940;
+                this.UserCoupon = 0;
+                this.GetRewards();
+            }
+            RewardController.prototype.GetRewards = function () {
+                var _this = this;
+                this.rewardSvc.GetCurrentRewards()
+                    .then(function (respond) {
+                    _this.RewardInfo = respond;
+                    console.log('Get all rewards completed.');
+                });
+            };
+            RewardController.$inject = ['$scope', 'starter.reward.RewardServices'];
+            return RewardController;
+        })();
+        angular
+            .module('starter.reward', [])
+            .controller('starter.reward.RewardController', RewardController);
+    })(reward = starter.reward || (starter.reward = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var reward;
+    (function (reward) {
+        'use strict';
+        var RewardServices = (function () {
+            function RewardServices(queryRemoteSvc) {
+                this.queryRemoteSvc = queryRemoteSvc;
+            }
+            RewardServices.prototype.GetCurrentRewards = function () {
+                var requestUrl = 'Reward';
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            RewardServices.$inject = ['starter.shared.QueryRemoteDataService'];
+            return RewardServices;
+        })();
+        reward.RewardServices = RewardServices;
+        angular
+            .module('starter.reward')
+            .service('starter.reward.RewardServices', RewardServices);
+    })(reward = starter.reward || (starter.reward = {}));
 })(starter || (starter = {}));
 (function () {
     'use strict';
