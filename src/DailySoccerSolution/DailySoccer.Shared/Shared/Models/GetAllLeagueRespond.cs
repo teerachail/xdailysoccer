@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DailySoccer.Shared.Models
 {
-    public class RewardInformation
+    public class GetAllLeagueRespond
     {
-        public string ImagePath { get; set; }
-        public int RemainingAmount { get; set; }
+        public IEnumerable<LeagueInformation> Leagues { get; set; }
     }
 }

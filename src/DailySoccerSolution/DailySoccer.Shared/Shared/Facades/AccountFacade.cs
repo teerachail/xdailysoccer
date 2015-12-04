@@ -27,5 +27,11 @@ namespace DailySoccer.Shared.Facades
                 IsSuccessed = true
             };
         }
+
+        public GetAllLeagueRespond GetAllLeague()
+        {
+            // TODO: GetAllLeague
+            throw new NotImplementedException();
+        }
     }
 }
