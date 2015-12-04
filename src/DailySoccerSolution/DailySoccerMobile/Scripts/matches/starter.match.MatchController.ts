@@ -113,7 +113,11 @@
         }
 
         private getSelectedTodayMatches(): MatchInformation[] {
-            var selectedMatchesQry = this._allMatches.filter(it => (it.TeamHome.IsSelected || it.TeamAway.IsSelected) && it.BeginDate == this.CurrentDate);
+            var selectedMatchesQry = this._allMatches.filter(it=> {
+                var matchDate = new Date(it.BeginDate.toString());
+                var currentDate = new Date(this.CurrentDate.toString());
+                return ((it.TeamHome.IsSelected || it.TeamAway.IsSelected) && matchDate.getDay() == currentDate.getDay());
+            });
             return selectedMatchesQry;
         }
     }
