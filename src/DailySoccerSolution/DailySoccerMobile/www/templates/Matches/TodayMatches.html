@@ -21,7 +21,7 @@
                      'item-balanced': match.TeamHome.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore,
                      'item-royal': match.TeamHome.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore,
                      'item-draw-status': match.TeamHome.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore == match.TeamAway.CurrentScore}"
-                     ng-click="match.CompletedDate || !matchCtrl.IsEqualDay(match.BeginDate, matchCtrl.CurrentDate) || matchCtrl.SelectTeam(match, match.TeamHome.Id)">
+                     ng-click="match.CompletedDate || !matchCtrl.IsTodayMatch(match) || matchCtrl.SelectTeam(match, match.TeamHome.Id)">
                     <span class="status status-left bg-yellow" ng-show="match.CompletedDate && match.TeamHome.IsSelected && match.TeamHome.CurrentScore >= match.TeamAway.CurrentScore">+{{ match.TeamAway.WinningPredictionPoints }}</span>
                     <span class="status status-left bg-red" ng-show="match.CompletedDate && match.TeamHome.IsSelected && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore">L</span>
                     <div class="text-right padding-vertical">
@@ -55,7 +55,7 @@
                      'item-balanced': match.TeamAway.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore,
                      'item-royal': match.TeamAway.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore,
                      'item-draw-status': match.TeamAway.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore == match.TeamAway.CurrentScore}"
-                     ng-click="match.CompletedDate || !matchCtrl.IsEqualDay(match.BeginDate, matchCtrl.CurrentDate) || matchCtrl.SelectTeam(match, match.TeamAway.Id)">
+                     ng-click="match.CompletedDate || !matchCtrl.IsTodayMatch(match) || matchCtrl.SelectTeam(match, match.TeamAway.Id)">
                     <span class="status status-right bg-yellow" ng-show="match.CompletedDate && match.TeamAway.IsSelected && match.TeamHome.CurrentScore <= match.TeamAway.CurrentScore">+{{ match.TeamAway.WinningPredictionPoints }}</span>
                     <span class="status status-right bg-red" ng-show="match.CompletedDate && match.TeamAway.IsSelected && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore">L</span>
                     <div class="text-left padding-vertical">
