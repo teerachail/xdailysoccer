@@ -83,14 +83,32 @@ namespace DailySoccer.Shared.DAC
 
         public IEnumerable<LeagueInformation> GetAllLeagues()
         {
-            // TODO: GetAllLeagues
-            throw new NotImplementedException();
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var result = dctx.FavoriteTeams
+                    .Select(it => new LeagueInformation
+                    {
+                        TeamId = it.Id,
+                        LeagueName = it.LeagueName,
+                        TeamName = it.TeamName
+                    }).ToList();
+                return result;
+            }
         }
 
         public void SetFavoriteTeam(SetFavoriteTeamRequest request)
         {
-            // TODO: SetFavoriteTeam
-            throw new NotImplementedException();
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.SecrectCode.Equals(request.UserId, StringComparison.CurrentCultureIgnoreCase));
+                if (selectedAccount == null) return;
+
+                var selectedTeam = dctx.FavoriteTeams.FirstOrDefault(it => it.Id == request.SelectedTeamId);
+                if (selectedTeam == null) return;
+
+                selectedAccount.FavoriteTeam = selectedTeam;
+                dctx.SaveChanges();
+            }
         }
     }
 }
