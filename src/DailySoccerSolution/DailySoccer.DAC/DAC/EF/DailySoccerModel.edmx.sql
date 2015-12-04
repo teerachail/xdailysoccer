@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/04/2015 14:03:29
+-- Date Created: 12/04/2015 15:12:33
 -- Generated from EDMX file: E:\gits\TheS\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
@@ -26,6 +26,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_RewardGroupReward]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Rewards] DROP CONSTRAINT [FK_RewardGroupReward];
 GO
+IF OBJECT_ID(N'[dbo].[FK_AccountFavoriteTeam]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FavoriteTeams] DROP CONSTRAINT [FK_AccountFavoriteTeam];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -46,6 +49,9 @@ GO
 IF OBJECT_ID(N'[dbo].[Rewards]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Rewards];
 GO
+IF OBJECT_ID(N'[dbo].[FavoriteTeams]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FavoriteTeams];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -55,7 +61,8 @@ GO
 CREATE TABLE [dbo].[Accounts] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [SecrectCode] varchar(100)  NOT NULL,
-    [Points] int  NOT NULL
+    [Points] int  NOT NULL,
+    [FavoriteTeam_Id] int  NULL
 );
 GO
 
@@ -112,8 +119,7 @@ CREATE TABLE [dbo].[FavoriteTeams] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [LeagueName] varchar(255)  NOT NULL,
     [TeamName] varchar(255)  NOT NULL,
-    [TeamId] int  NOT NULL,
-    [Account_Id] int  NOT NULL
+    [TeamId] int  NOT NULL
 );
 GO
 
@@ -206,19 +212,19 @@ ON [dbo].[Rewards]
     ([RewardGroupId]);
 GO
 
--- Creating foreign key on [Account_Id] in table 'FavoriteTeams'
-ALTER TABLE [dbo].[FavoriteTeams]
-ADD CONSTRAINT [FK_AccountFavoriteTeam]
-    FOREIGN KEY ([Account_Id])
-    REFERENCES [dbo].[Accounts]
+-- Creating foreign key on [FavoriteTeam_Id] in table 'Accounts'
+ALTER TABLE [dbo].[Accounts]
+ADD CONSTRAINT [FK_FavoriteTeamAccount]
+    FOREIGN KEY ([FavoriteTeam_Id])
+    REFERENCES [dbo].[FavoriteTeams]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_AccountFavoriteTeam'
-CREATE INDEX [IX_FK_AccountFavoriteTeam]
-ON [dbo].[FavoriteTeams]
-    ([Account_Id]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_FavoriteTeamAccount'
+CREATE INDEX [IX_FK_FavoriteTeamAccount]
+ON [dbo].[Accounts]
+    ([FavoriteTeam_Id]);
 GO
 
 -- --------------------------------------------------

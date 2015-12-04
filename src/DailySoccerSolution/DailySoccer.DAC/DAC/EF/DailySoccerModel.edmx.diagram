@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="DailySoccerModel.Reward" Width="1.5" PointX="10.5" PointY="0.5" FillColor="Maroon" />
         <AssociationConnector Association="DailySoccerModel.RewardGroupReward" />
         <EntityTypeShape EntityType="DailySoccerModel.FavoriteTeam" Width="1.5" PointX="0.5" PointY="3.125" />
-        <AssociationConnector Association="DailySoccerModel.AccountFavoriteTeam" />
+        <AssociationConnector Association="DailySoccerModel.FavoriteTeamAccount" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

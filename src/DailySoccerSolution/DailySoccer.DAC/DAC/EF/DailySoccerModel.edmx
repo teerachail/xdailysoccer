@@ -24,9 +24,9 @@
       <End Role="RewardGroup" EntitySet="RewardGroups" />
       <End Role="Reward" EntitySet="Rewards" />
     </AssociationSet>
-    <AssociationSet Name="AccountFavoriteTeam" Association="DailySoccerModel.Store.AccountFavoriteTeam">
-      <End Role="Account" EntitySet="Accounts" />
+    <AssociationSet Name="FavoriteTeamAccount" Association="DailySoccerModel.Store.FavoriteTeamAccount">
       <End Role="FavoriteTeam" EntitySet="FavoriteTeams" />
+      <End Role="Account" EntitySet="Accounts" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accounts">
@@ -36,6 +36,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SecrectCode" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="Points" Type="int" Nullable="false" />
+    <Property Name="FavoriteTeam_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Matches">
     <Key>
@@ -93,7 +94,6 @@
     <Property Name="LeagueName" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="TeamName" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="TeamId" Type="int" Nullable="false" />
-    <Property Name="Account_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="AccountGuessMatch">
     <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
@@ -131,15 +131,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="AccountFavoriteTeam">
-    <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
-    <End Role="FavoriteTeam" Type="DailySoccerModel.Store.FavoriteTeams" Multiplicity="*" />
+  <Association Name="FavoriteTeamAccount">
+    <End Role="FavoriteTeam" Type="DailySoccerModel.Store.FavoriteTeams" Multiplicity="0..1" />
+    <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Account">
+      <Principal Role="FavoriteTeam">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="FavoriteTeam">
-        <PropertyRef Name="Account_Id" />
+      <Dependent Role="Account">
+        <PropertyRef Name="FavoriteTeam_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -166,9 +166,9 @@
             <End Role="Reward" EntitySet="Rewards" />
           </AssociationSet>
           <EntitySet Name="FavoriteTeams" EntityType="DailySoccerModel.FavoriteTeam" />
-          <AssociationSet Name="AccountFavoriteTeam" Association="DailySoccerModel.AccountFavoriteTeam">
-            <End Role="Account" EntitySet="Accounts" />
+          <AssociationSet Name="FavoriteTeamAccount" Association="DailySoccerModel.FavoriteTeamAccount">
             <End Role="FavoriteTeam" EntitySet="FavoriteTeams" />
+            <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
@@ -179,7 +179,7 @@
           <Property Name="SecrectCode" Type="String" Nullable="false" Unicode="false" FixedLength="false" MaxLength="100" />
           <Property Name="Points" Type="Int32" Nullable="false" />
           <NavigationProperty Name="GuessMatches" Relationship="DailySoccerModel.AccountGuessMatch" FromRole="Account" ToRole="GuessMatch" />
-          <NavigationProperty Name="FavoriteTeam" Relationship="DailySoccerModel.AccountFavoriteTeam" FromRole="Account" ToRole="FavoriteTeam" />
+          <NavigationProperty Name="FavoriteTeam" Relationship="DailySoccerModel.FavoriteTeamAccount" FromRole="Account" ToRole="FavoriteTeam" />
         </EntityType>
         <EntityType Name="Match">
           <Key>
@@ -278,11 +278,11 @@
           <Property Name="LeagueName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TeamName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TeamId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="DailySoccerModel.AccountFavoriteTeam" FromRole="FavoriteTeam" ToRole="Account" />
+          <NavigationProperty Name="Accounts" Relationship="DailySoccerModel.FavoriteTeamAccount" FromRole="FavoriteTeam" ToRole="Account" />
         </EntityType>
-        <Association Name="AccountFavoriteTeam">
-          <End Type="DailySoccerModel.Account" Role="Account" Multiplicity="1" />
+        <Association Name="FavoriteTeamAccount">
           <End Type="DailySoccerModel.FavoriteTeam" Role="FavoriteTeam" Multiplicity="0..1" />
+          <End Type="DailySoccerModel.Account" Role="Account" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -365,13 +365,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="AccountFavoriteTeam" TypeName="DailySoccerModel.AccountFavoriteTeam" StoreEntitySet="FavoriteTeams">
-      <EndProperty Name="Account">
-        <ScalarProperty Name="Id" ColumnName="Account_Id" />
-      </EndProperty>
+    <AssociationSetMapping Name="FavoriteTeamAccount" TypeName="DailySoccerModel.FavoriteTeamAccount" StoreEntitySet="Accounts">
       <EndProperty Name="FavoriteTeam">
+        <ScalarProperty Name="Id" ColumnName="FavoriteTeam_Id" />
+      </EndProperty>
+      <EndProperty Name="Account">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="FavoriteTeam_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
