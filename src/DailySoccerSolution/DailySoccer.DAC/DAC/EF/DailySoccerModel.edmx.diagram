@@ -10,6 +10,9 @@
         <EntityTypeShape EntityType="DailySoccerModel.GuessMatch" Width="1.5" PointX="3.125" PointY="0.5" />
         <AssociationConnector Association="DailySoccerModel.AccountGuessMatch" />
         <AssociationConnector Association="DailySoccerModel.MatchGuessMatch" />
+        <EntityTypeShape EntityType="DailySoccerModel.RewardGroup" Width="1.5" PointX="0.625" PointY="4" FillColor="DarkRed" />
+        <EntityTypeShape EntityType="DailySoccerModel.Reward" Width="1.5" PointX="3.25" PointY="3.75" FillColor="Maroon" />
+        <AssociationConnector Association="DailySoccerModel.RewardGroupReward" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
