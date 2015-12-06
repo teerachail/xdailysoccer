@@ -53,12 +53,18 @@ namespace DailySoccer.Specs.Steps
         [Then(@"ระบบส่งรายชื่อผู้โชคดีกลับไปเป็น")]
         public void Thenระบบสงรายชอผโชคดกลบไปเปน(Table table)
         {
-            var expecteds = table.CreateSet<WinnerAwardInformation>()
-                .OrderBy(it => it.Ordering)
-                .ToList();
+            var expecteds = table.Rows.Select(it => new WinnerAwardInformation
+            {
+                Ordering = it.ConvertToInt("Ordering"),
+                Description = it.GetString("Description"),
+                ImagePath = it.GetString("ImagePath"),
+                Winners = it.GetString("Winners").Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            }).OrderBy(it => it.Ordering).ToList();
             var actuals = ScenarioContext.Current.Get<GetCurrentWinnersRespond>().Winners
                 .OrderBy(it => it.Ordering)
                 .ToList();
+
+            foreach (var item in expecteds) item.Winners = item.Winners ?? Enumerable.Empty<string>();
 
             Assert.AreEqual(expecteds.Count, actuals.Count, "Elements aren't equal");
             for (int elementIndex = 0; elementIndex < expecteds.Count; elementIndex++)
@@ -67,7 +73,11 @@ namespace DailySoccer.Specs.Steps
                 Assert.AreEqual(expecteds[elementIndex].Ordering, actuals[elementIndex].Ordering, "Ordering aren't equal" + errorMessage);
                 Assert.AreEqual(expecteds[elementIndex].Description, actuals[elementIndex].Description, "Description aren't equal" + errorMessage);
                 Assert.AreEqual(expecteds[elementIndex].ImagePath, actuals[elementIndex].ImagePath, "ImagePath aren't equal" + errorMessage);
-                Assert.AreEqual(expecteds[elementIndex].Winners, actuals[elementIndex].Winners, "Winners aren't equal" + errorMessage);
+
+                var expectedWinners = expecteds[elementIndex].Winners;
+                var actualWinners = actuals[elementIndex].Winners;
+                Assert.AreEqual(expectedWinners.Count(), actualWinners.Count(), "Winners aren't equal" + errorMessage);
+                Assert.IsTrue(actualWinners.All(it => expectedWinners.Contains(it)));
             }
         }
     }

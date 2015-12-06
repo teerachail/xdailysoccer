@@ -26,6 +26,7 @@ namespace DailySoccer.Shared.Facades
             var invalidDataModel = new GetCurrentWinnersRespond { Winners = Enumerable.Empty<WinnerAwardInformation>() };
             if (selectedRewardGroup == null) return invalidDataModel;
 
+            int ordering = 1;
             var result = selectedRewardGroup.RewardInfo.Select(reward =>
             {
                 var winnerNames = rewardDac.GetAllWinners()
@@ -36,7 +37,7 @@ namespace DailySoccer.Shared.Facades
                 {
                     Description = reward.Description,
                     ImagePath = reward.ImagePath,
-                    //Ordering // TODO: Reward ordering
+                    Ordering = ordering++, // HACK: Reward ordering
                     Winners = winnerNames
                 };
             }).ToList();

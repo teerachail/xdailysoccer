@@ -87,6 +87,18 @@ namespace DailySoccer.Specs
                         "0",
                         "5",
                         "0"});
+            table1.AddRow(new string[] {
+                        "2",
+                        "s02",
+                        "0",
+                        "5",
+                        "0"});
+            table1.AddRow(new string[] {
+                        "3",
+                        "s03",
+                        "0",
+                        "5",
+                        "0"});
 #line 9
  testRunner.And("ผู้ใช้ในระบบมีดังนี้", ((string)(null)), table1, "And ");
 #line hidden
@@ -102,7 +114,7 @@ namespace DailySoccer.Specs
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอรายชื่อผู้โชคดีในตอนที่ไม่รางวัลในระบบ ระบบส่งรายชื่อผู้โชคดีเปล่ากลับไป", new string[] {
                         "mock",
                         "mock"});
-#line 14
+#line 16
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
@@ -111,29 +123,29 @@ this.FeatureBackground();
                         "Id",
                         "RequestPoints",
                         "ExpiredDate"});
-#line 15
+#line 17
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table2, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                        "RewardGroupId",
                         "Id",
+                        "RewardGroupId",
                         "Name",
                         "Description",
                         "Amount",
                         "RemainingAmount",
                         "ImagePath"});
-#line 17
+#line 19
  testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table3, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "AccountSecrectCode",
                         "RewardId"});
-#line 19
- testRunner.And("รายชื่อผู้โชคดีทั้งหมดในระบบเป็นดังนี้", ((string)(null)), table4, "And ");
 #line 21
+ testRunner.And("รายชื่อผู้โชคดีทั้งหมดในระบบเป็นดังนี้", ((string)(null)), table4, "And ");
+#line 23
  testRunner.And("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
+#line 24
  testRunner.When("ขอรายชื่อผู้โชคดี", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -141,8 +153,436 @@ this.FeatureBackground();
                         "Description",
                         "ImagePath",
                         "Winners"});
-#line 23
+#line 25
  testRunner.Then("ระบบส่งรายชื่อผู้โชคดีกลับไปเป็น", ((string)(null)), table5, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ขอรายชื่อผู้โชคดีในตอนที่ไม่มีผู้โชคดีในระบบ ระบบส่งรายชื่อผู้โชคดีเปล่ากลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetWinners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ขอรายชอผโชคดในตอนทไมมผโชคดในระบบระบบสงรายชอผโชคดเปลากลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอรายชื่อผู้โชคดีในตอนที่ไม่มีผู้โชคดีในระบบ ระบบส่งรายชื่อผู้โชคดีเปล่ากลับไป", new string[] {
+                        "mock"});
+#line 29
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+            table6.AddRow(new string[] {
+                        "1",
+                        "100",
+                        "1/1/2015 00:00"});
+#line 30
+ testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table6, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+            table7.AddRow(new string[] {
+                        "1",
+                        "1",
+                        "iPhone 6S",
+                        "iPhone 6S",
+                        "5",
+                        "5",
+                        "iphone6S.jpg"});
+            table7.AddRow(new string[] {
+                        "2",
+                        "1",
+                        "iPhone 6",
+                        "iPhone 6",
+                        "10",
+                        "10",
+                        "iphone6.jpg"});
+            table7.AddRow(new string[] {
+                        "3",
+                        "1",
+                        "iPhone 5S",
+                        "iPhone 5S",
+                        "15",
+                        "15",
+                        "iphone5S.jpg"});
+#line 33
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table7, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "RewardId"});
+#line 38
+ testRunner.And("รายชื่อผู้โชคดีทั้งหมดในระบบเป็นดังนี้", ((string)(null)), table8, "And ");
+#line 40
+ testRunner.And("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+ testRunner.When("ขอรายชื่อผู้โชคดี", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Ordering",
+                        "Description",
+                        "ImagePath",
+                        "Winners"});
+            table9.AddRow(new string[] {
+                        "1",
+                        "iPhone 6S",
+                        "iphone6S.jpg",
+                        ""});
+            table9.AddRow(new string[] {
+                        "2",
+                        "iPhone 6",
+                        "iphone6.jpg",
+                        ""});
+            table9.AddRow(new string[] {
+                        "3",
+                        "iPhone 5S",
+                        "iphone5S.jpg",
+                        ""});
+#line 42
+ testRunner.Then("ระบบส่งรายชื่อผู้โชคดีกลับไปเป็น", ((string)(null)), table9, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ขอรายชื่อผู้โชคดีในตอนที่มีผู้โชคดีแค่คนเดียว ระบบส่งรายชื่อผู้โชคดีปัจจุบันกลับไ" +
+            "ป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetWinners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ขอรายชอผโชคดในตอนทมผโชคดแคคนเดยวระบบสงรายชอผโชคดปจจบนกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอรายชื่อผู้โชคดีในตอนที่มีผู้โชคดีแค่คนเดียว ระบบส่งรายชื่อผู้โชคดีปัจจุบันกลับไ" +
+                    "ป", new string[] {
+                        "mock"});
+#line 49
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+            table10.AddRow(new string[] {
+                        "1",
+                        "100",
+                        "1/1/2015 00:00"});
+#line 50
+ testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table10, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+            table11.AddRow(new string[] {
+                        "1",
+                        "1",
+                        "iPhone 6S",
+                        "iPhone 6S",
+                        "5",
+                        "5",
+                        "iphone6S.jpg"});
+            table11.AddRow(new string[] {
+                        "2",
+                        "1",
+                        "iPhone 6",
+                        "iPhone 6",
+                        "10",
+                        "10",
+                        "iphone6.jpg"});
+            table11.AddRow(new string[] {
+                        "3",
+                        "1",
+                        "iPhone 5S",
+                        "iPhone 5S",
+                        "15",
+                        "15",
+                        "iphone5S.jpg"});
+#line 53
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table11, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "RewardId",
+                        "AccountFullName"});
+            table12.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1",
+                        "Sakul"});
+#line 58
+ testRunner.And("รายชื่อผู้โชคดีทั้งหมดในระบบเป็นดังนี้", ((string)(null)), table12, "And ");
+#line 61
+ testRunner.And("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 62
+ testRunner.When("ขอรายชื่อผู้โชคดี", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Ordering",
+                        "Description",
+                        "ImagePath",
+                        "Winners"});
+            table13.AddRow(new string[] {
+                        "1",
+                        "iPhone 6S",
+                        "iphone6S.jpg",
+                        "Sakul"});
+            table13.AddRow(new string[] {
+                        "2",
+                        "iPhone 6",
+                        "iphone6.jpg",
+                        ""});
+            table13.AddRow(new string[] {
+                        "3",
+                        "iPhone 5S",
+                        "iphone5S.jpg",
+                        ""});
+#line 63
+ testRunner.Then("ระบบส่งรายชื่อผู้โชคดีกลับไปเป็น", ((string)(null)), table13, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ขอรายชื่อผู้โชคดีในตอนที่มีผู้โชคดีหลายคน (ถูกรางวัลเดียวกัน) ระบบส่งรายชื่อผู้โช" +
+            "คดีปัจจุบันกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetWinners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ขอรายชอผโชคดในตอนทมผโชคดหลายคนถกรางวลเดยวกนระบบสงรายชอผโชคดปจจบนกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอรายชื่อผู้โชคดีในตอนที่มีผู้โชคดีหลายคน (ถูกรางวัลเดียวกัน) ระบบส่งรายชื่อผู้โช" +
+                    "คดีปัจจุบันกลับไป", new string[] {
+                        "mock"});
+#line 70
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+            table14.AddRow(new string[] {
+                        "1",
+                        "100",
+                        "1/1/2015 00:00"});
+#line 71
+ testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table14, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+            table15.AddRow(new string[] {
+                        "1",
+                        "1",
+                        "iPhone 6S",
+                        "iPhone 6S",
+                        "5",
+                        "5",
+                        "iphone6S.jpg"});
+            table15.AddRow(new string[] {
+                        "2",
+                        "1",
+                        "iPhone 6",
+                        "iPhone 6",
+                        "10",
+                        "10",
+                        "iphone6.jpg"});
+            table15.AddRow(new string[] {
+                        "3",
+                        "1",
+                        "iPhone 5S",
+                        "iPhone 5S",
+                        "15",
+                        "15",
+                        "iphone5S.jpg"});
+#line 74
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table15, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "RewardId",
+                        "AccountFullName"});
+            table16.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1",
+                        "Sakul"});
+            table16.AddRow(new string[] {
+                        "2",
+                        "s02",
+                        "1",
+                        "Miolynet"});
+            table16.AddRow(new string[] {
+                        "3",
+                        "s03",
+                        "1",
+                        "Au"});
+#line 79
+ testRunner.And("รายชื่อผู้โชคดีทั้งหมดในระบบเป็นดังนี้", ((string)(null)), table16, "And ");
+#line 84
+ testRunner.And("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 85
+ testRunner.When("ขอรายชื่อผู้โชคดี", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Ordering",
+                        "Description",
+                        "ImagePath",
+                        "Winners"});
+            table17.AddRow(new string[] {
+                        "1",
+                        "iPhone 6S",
+                        "iphone6S.jpg",
+                        "Sakul,Miolynet,Au"});
+            table17.AddRow(new string[] {
+                        "2",
+                        "iPhone 6",
+                        "iphone6.jpg",
+                        ""});
+            table17.AddRow(new string[] {
+                        "3",
+                        "iPhone 5S",
+                        "iphone5S.jpg",
+                        ""});
+#line 86
+ testRunner.Then("ระบบส่งรายชื่อผู้โชคดีกลับไปเป็น", ((string)(null)), table17, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ขอรายชื่อผู้โชคดีในตอนที่มีผู้โชคดีหลายคน (ต่างรางวัลกัน) ระบบส่งรายชื่อผู้โชคดีป" +
+            "ัจจุบันกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetWinners")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ขอรายชอผโชคดในตอนทมผโชคดหลายคนตางรางวลกนระบบสงรายชอผโชคดปจจบนกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอรายชื่อผู้โชคดีในตอนที่มีผู้โชคดีหลายคน (ต่างรางวัลกัน) ระบบส่งรายชื่อผู้โชคดีป" +
+                    "ัจจุบันกลับไป", new string[] {
+                        "mock"});
+#line 93
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+            table18.AddRow(new string[] {
+                        "1",
+                        "100",
+                        "1/1/2015 00:00"});
+#line 94
+ testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table18, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+            table19.AddRow(new string[] {
+                        "1",
+                        "1",
+                        "iPhone 6S",
+                        "iPhone 6S",
+                        "5",
+                        "5",
+                        "iphone6S.jpg"});
+            table19.AddRow(new string[] {
+                        "2",
+                        "1",
+                        "iPhone 6",
+                        "iPhone 6",
+                        "10",
+                        "10",
+                        "iphone6.jpg"});
+            table19.AddRow(new string[] {
+                        "3",
+                        "1",
+                        "iPhone 5S",
+                        "iPhone 5S",
+                        "15",
+                        "15",
+                        "iphone5S.jpg"});
+#line 97
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table19, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "RewardId",
+                        "AccountFullName"});
+            table20.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1",
+                        "Sakul"});
+            table20.AddRow(new string[] {
+                        "2",
+                        "s02",
+                        "1",
+                        "Miolynet"});
+            table20.AddRow(new string[] {
+                        "3",
+                        "s03",
+                        "3",
+                        "Au"});
+#line 102
+ testRunner.And("รายชื่อผู้โชคดีทั้งหมดในระบบเป็นดังนี้", ((string)(null)), table20, "And ");
+#line 107
+ testRunner.And("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 108
+ testRunner.When("ขอรายชื่อผู้โชคดี", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Ordering",
+                        "Description",
+                        "ImagePath",
+                        "Winners"});
+            table21.AddRow(new string[] {
+                        "1",
+                        "iPhone 6S",
+                        "iphone6S.jpg",
+                        "Sakul,Miolynet"});
+            table21.AddRow(new string[] {
+                        "2",
+                        "iPhone 6",
+                        "iphone6.jpg",
+                        ""});
+            table21.AddRow(new string[] {
+                        "3",
+                        "iPhone 5S",
+                        "iphone5S.jpg",
+                        "Au"});
+#line 109
+ testRunner.Then("ระบบส่งรายชื่อผู้โชคดีกลับไปเป็น", ((string)(null)), table21, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
