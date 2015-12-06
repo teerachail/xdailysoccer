@@ -11,5 +11,6 @@ namespace DailySoccer.Shared.DAC
     {
         IEnumerable<RewardGroupInformation> GetRewardGroup();
         RewardGroupInformation GetRewardGroupById(int id);
+        IEnumerable<WinnerInformation> GetAllWinners();
     }
 }

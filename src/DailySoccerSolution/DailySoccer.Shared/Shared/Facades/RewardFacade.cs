@@ -17,8 +17,34 @@ namespace DailySoccer.Shared.Facades
 
         public GetCurrentWinnersRespond GetCurrentWinners(DateTime currentTime)
         {
-            // TODO: GetCurrentWinners
-            throw new NotImplementedException();
+            var rewardDac = FacadeRepository.Instance.RewardDataAccess;
+            var selectedRewardGroup = rewardDac.GetRewardGroup()
+                .Where(it => it.ExpiredDate.HasValue)
+                .OrderByDescending(it => it.ExpiredDate)
+                .FirstOrDefault();
+
+            var invalidDataModel = new GetCurrentWinnersRespond { Winners = Enumerable.Empty<WinnerAwardInformation>() };
+            if (selectedRewardGroup == null) return invalidDataModel;
+
+            var result = selectedRewardGroup.RewardInfo.Select(reward =>
+            {
+                var winnerNames = rewardDac.GetAllWinners()
+                        .Where(it => it.RewardId == reward.Id)
+                        .Select(it => it.AccountFullName);
+
+                return new WinnerAwardInformation
+                {
+                    Description = reward.Description,
+                    ImagePath = reward.ImagePath,
+                    //Ordering // TODO: Reward ordering
+                    Winners = winnerNames
+                };
+            }).ToList();
+
+            return new GetCurrentWinnersRespond
+            {
+                Winners = result
+            };
         }
     }
 }

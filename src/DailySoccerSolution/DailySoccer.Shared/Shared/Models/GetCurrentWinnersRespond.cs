@@ -8,6 +8,6 @@ namespace DailySoccer.Shared.Models
 {
     public class GetCurrentWinnersRespond
     {
-        public IEnumerable<WinnerInformation> Winners { get; set; }
+        public IEnumerable<WinnerAwardInformation> Winners { get; set; }
     }
 }

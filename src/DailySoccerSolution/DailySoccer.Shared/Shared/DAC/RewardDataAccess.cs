@@ -56,5 +56,19 @@ namespace DailySoccer.Shared.DAC
                 };
             }
         }
+
+        public IEnumerable<WinnerInformation> GetAllWinners()
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                return dctx.Winners.Select(it => new WinnerInformation
+                {
+                    Id = it.Id,
+                    AccountSecrectCode = it.Account.SecrectCode,
+                    ReferenceCode = it.ReferenceCode,
+                    RewardId = it.RewardId
+                }).ToList();
+            }
+        }
     }
 }

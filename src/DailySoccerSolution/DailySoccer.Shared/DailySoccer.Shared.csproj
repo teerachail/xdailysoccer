@@ -84,6 +84,7 @@
     <Compile Include="Shared\Models\RewardInformation.cs" />
     <Compile Include="Shared\Models\SetFavoriteTeamRequest.cs" />
     <Compile Include="Shared\Models\TeamInformation.cs" />
+    <Compile Include="Shared\Models\WinnerAwardInformation.cs" />
     <Compile Include="Shared\Models\WinnerInformation.cs" />
   </ItemGroup>
   <ItemGroup />

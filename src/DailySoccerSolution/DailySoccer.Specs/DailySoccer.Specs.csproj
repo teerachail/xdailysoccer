@@ -84,6 +84,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GetMatches.feature</DependentUpon>
     </Compile>
+    <Compile Include="Specs\GetWinners.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetWinners.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\GuessMatch.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,6 +107,7 @@
     <Compile Include="Specs\Steps\GetAllLeagueSteps.cs" />
     <Compile Include="Specs\Steps\GetGuessHistoryByMonthSteps.cs" />
     <Compile Include="Specs\Steps\GetMatchesSteps.cs" />
+    <Compile Include="Specs\Steps\GetWinnersSteps.cs" />
     <Compile Include="Specs\Steps\GuessMatchSteps.cs" />
     <Compile Include="Specs\Steps\SetFavoriteTeamSteps.cs" />
     <Compile Include="Specs\Steps\StepHelper.cs" />
@@ -134,6 +140,10 @@
     <None Include="Specs\GetMatches.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GetMatches.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\GetWinners.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GetWinners.feature.cs</LastGenOutput>
     </None>
     <None Include="Specs\GuessMatch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

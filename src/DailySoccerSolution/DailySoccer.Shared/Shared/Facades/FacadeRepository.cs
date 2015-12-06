@@ -39,10 +39,11 @@ namespace DailySoccer.Shared.Facades
             RewardFacade = new RewardFacade(); 
         }
 
-        internal void InitializeDataAccess(IAccountDataAccess accountDac, IMatchDataAccess matchDac)
+        internal void InitializeDataAccess(IAccountDataAccess accountDac, IMatchDataAccess matchDac, IRewardDataAccess rewardDac)
         {
             AccountDataAccess = accountDac;
             MatchDataAccess = matchDac;
+            RewardDataAccess = rewardDac;
         }
     }
 }

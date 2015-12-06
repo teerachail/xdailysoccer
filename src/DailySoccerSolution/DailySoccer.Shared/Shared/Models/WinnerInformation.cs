@@ -8,9 +8,10 @@ namespace DailySoccer.Shared.Models
 {
     public class WinnerInformation
     {
-        public int Ordering { get; set; }
-        public string Message { get; set; }
-        public string ImagePath { get; set; }
-        public IEnumerable<string> Winners { get; set; }
+        public int Id { get; set; }
+        public string AccountSecrectCode { get; set; }
+        public int RewardId { get; set; }
+        public string ReferenceCode { get; set; }
+        public string AccountFullName { get; set; }
     }
 }
