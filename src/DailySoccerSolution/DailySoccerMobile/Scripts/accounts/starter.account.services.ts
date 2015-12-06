@@ -18,7 +18,7 @@
         }
 
         public SetFavoriteTeam(req: SetFavoriteTeamRequest): void {
-            var requestUrl = "Favorite/SetFavoriteTeam?userId=" + req.UserId + "selectedTeamId=" + req.SelectedTeamId;
+            var requestUrl = "Favorite/SetFavoriteTeam?userId=" + req.UserId + "&selectedTeamId=" + req.SelectedTeamId;
             this.queryRemoteSvc.RemoteQuery<SetFavoriteTeamRequest>(requestUrl);
         }
 

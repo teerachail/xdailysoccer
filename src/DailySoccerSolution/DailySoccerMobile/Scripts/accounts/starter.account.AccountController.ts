@@ -49,8 +49,8 @@
                         user.set('isSkiped', 'true');
                         user.save();
                         console.log('Create new guest complete.');
-
-                        this.$location.path('/matches/todaymatches');
+                        
+                        this.$location.path('/account/favorite');
                     });
         }
 
@@ -73,7 +73,7 @@
             var user = Ionic.User.current();
             if (this._selectedTeamId > -1) {
                 var favoriteTeam = new SetFavoriteTeamRequest();
-                favoriteTeam.UserId = user
+                favoriteTeam.UserId = user.id;
                 favoriteTeam.SelectedTeamId = this._selectedTeamId;
                 this.accountSvc.SetFavoriteTeam(favoriteTeam);
                 console.log('Send favorite team completed.');

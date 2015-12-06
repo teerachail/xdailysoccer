@@ -27,7 +27,7 @@
     }
 
     export class SetFavoriteTeamRequest {
-        public UserId: number;
+        public UserId: string;
         public SelectedTeamId: number;
     }
 

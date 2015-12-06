@@ -1,4 +1,5 @@
-﻿using DailySoccer.Shared.Models;
+﻿using DailySoccer.Shared.Facades;
+using DailySoccer.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,29 +14,19 @@ namespace DailySoccerAppService.Controllers
         [HttpGet]
         public GetAllLeagueRespond GetAllLeagues()
         {
-            //Hack: Mock data for display favorit page
-            var teamId = 1;
-            var leagueList = new List<LeagueInformation>()
-            {
-                new LeagueInformation { TeamId = teamId++, LeagueName= "Premier League", TeamName = "Chelsea"},
-                new LeagueInformation { TeamId = teamId++, LeagueName= "Premier League", TeamName = "Crystal Palace"},
-                new LeagueInformation { TeamId = teamId++, LeagueName= "Premier League", TeamName = "Manchester City"},
-                new LeagueInformation { TeamId = teamId++, LeagueName= "Premier League", TeamName = "Newcastle United"},
-                new LeagueInformation { TeamId = teamId++, LeagueName= "Premier League", TeamName = "Swansea City"},
-            };
-
-            return new GetAllLeagueRespond { Leagues = leagueList };
-
-            // TODO: GetAllLeague
-            //throw new NotImplementedException();
+            var accountFacade = new AccountFacade();
+            var result = accountFacade.GetAllLeagues();
+            return result;
         }
 
         [HttpGet]
-        public void SetFavoriteTeam(int userId, int selectedTeamId)
+        public void SetFavoriteTeam(string userId, int selectedTeamId)
         {
-
-            //TODO: SetFavoriteTeam
-            throw new NotImplementedException();
+            var accountFacade = new AccountFacade();
+            var favoriteRequest = new SetFavoriteTeamRequest();
+            favoriteRequest.UserId = userId;
+            favoriteRequest.SelectedTeamId = selectedTeamId;
+            accountFacade.SetFavoriteTeam(favoriteRequest);
         }
     }
 }
