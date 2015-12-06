@@ -7,7 +7,7 @@
         }
 
         public GetAllGuessHistory(req: GetAllGuessHistoryRequest): ng.IPromise<GetAllGuessHistoryRespond> {
-            var requestUrl = 'History/GetCurrentRewards?UserId=' + req.UserId;
+            var requestUrl = 'History/GetAllGuessHistory?UserId=' + req.UserId;
             return this.queryRemoteSvc.RemoteQuery<GetAllGuessHistoryRespond>(requestUrl);
         }
 

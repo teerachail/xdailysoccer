@@ -1,29 +1,14 @@
 ﻿<ion-view view-title="DAILY SOCCER">
     <ion-content class="history">
-        <div ng-include src="'templates/Matches/_matchHeaderAds.html'" ></div>
+        <div ng-include src="'templates/Matches/_matchHeaderAds.html'"></div>
         <div class="list">
-            <div class="row padding-bottom line-height-small">
-                <a class="row item item-stable no-border no-padding" href="#/history/historybyday">
+            <div class="row padding-bottom line-height-small" ng-hide="historyCtrl.HistoryInfo.Histories.length==0" ng-repeat="history in historyCtrl.HistoryInfo.Histories">
+                <a class="row item item-stable no-border no-padding" href="#/history/historybyday" ng-click="historyCtrl.GetHistoriesByMonth(history.Month)">
                     <div class=" item item-royal col col-20 col-center text-center">
-                        <b>+111</b>
+                        <b>+{{history.TotalPoints}}</b>
                     </div>
                     <div class="col  col-center text-center">
-                        พฤษจิกายน 2558
-                    </div>
-                    <div class=" col col-20 col-center text-right">
-                        <i menu-close="" href="#/rewards/rewards" class="icon ion-chevron-right icon-accessory ">
-                        
-                        </i>
-                    </div>
-                </a>
-            </div>
-            <div class="row padding-bottom line-height-small">
-                <a class="row item item-stable no-border no-padding" href="#/history/historybyday">
-                    <div class=" item item-royal col col-20 col-center text-center">
-                        <b>+300</b>
-                    </div>
-                    <div class="col col-center text-center">
-                        ตุลาคม 2558
+                        {{historyCtrl.GetMonthString(history.Month) | date: 'MMMM yyyy'}}
                     </div>
                     <div class=" col col-20 col-center text-right">
                         <i menu-close="" href="#/rewards/rewards" class="icon ion-chevron-right icon-accessory ">
@@ -32,22 +17,6 @@
                     </div>
                 </a>
             </div>
-            <div class="row padding-bottom line-height-small">
-                <a class="row item item-stable no-border no-padding" href="#/history/historybyday">
-                    <div class=" item item-royal col col-20 col-center text-center">
-                        <b>+250</b>
-                    </div>
-                    <div class="col col-center text-center">
-                        กันยายน 2558
-                    </div>
-                    <div class=" col col-20 col-center text-right">
-                        <i menu-close="" href="#/rewards/rewards" class="icon ion-chevron-right icon-accessory ">
-
-                        </i>
-                    </div>
-                </a>
-            </div>
-
         </div>
     </ion-content>
 </ion-view>
