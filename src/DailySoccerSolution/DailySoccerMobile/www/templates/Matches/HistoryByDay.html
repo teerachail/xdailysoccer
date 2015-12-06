@@ -2,40 +2,43 @@
     <ion-content class="today-match">
         <div ng-include src="'templates/Matches/_matchHeaderAds.html'" class="padding-bottom"></div>
         <ion-list>
-            <div ng-repeat="group in groups" class="padding-bottom">
+            <div ng-repeat="history in historyCtrl.HistoryByMonthInfo.Histories" class="padding-bottom">
                 <ion-item class="item-stable bg-gray row no-padding no-border line-height-small"
-                          ng-click="toggleGroup(group)"
-                          ng-class="{active: isGroupShown(group)}">
+                          ng-click="historyCtrl.toggleGroup(history)"
+                          ng-class="{active: historyCtrl.isGroupShown(history)}">
                     <div class="col col-20 col-center text-center">
-                        <b>+20</b>
+                        <b>+{{history.TotalPoints}}</b>
                     </div>
                     <div class="col col-center text-center">
-                        22 พฤษจิกายน 2558
+                        {{history.Day | date: 'd MMMM yyyy'}}
                     </div>
                     <dsiv class="col col-20 col-center text-right">
-                        <i class="icon" ng-class="isGroupShown(group) ? 'ion-chevron-down' : 'ion-chevron-up'"></i>
+                        <i class="icon" ng-class="historyCtrl.isGroupShown(history ) ? 'ion-chevron-down' : 'ion-chevron-up'"></i>
                     </dsiv>
                 </ion-item>
-                <ion-item class="item-accordion no-padding no-border"
-                          ng-show="isGroupShown(group)" animation="no-animation">                    
-                    <div class="row padding-bottom">
-                        <div class="col col-40 item">
-                            <span class="status status-left bg-yellow">+6</span>
-                            <span class="status status-left bg-red">L</span>
+                <ion-item class="item-accordion no-padding no-border" ng-show="historyCtrl.isGroupShown(history )" animation="no-animation">
+                    <div class="row padding-bottom" ng-repeat="match in history.Matches">
+                        <div class="col col-40 item"
+                             ng-class="{'item-stable': !match.TeamHome.IsSelected,
+                            'item-balanced': match.TeamHome.IsSelected && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore,
+                            'item-royal': match.TeamHome.IsSelected && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore,
+                            'item-draw-status': match.TeamHome.IsSelected && match.TeamHome.CurrentScore == match.TeamAway.CurrentScore}">
+                            <span class="status status-left bg-yellow" ng-show="match.TeamHome.IsSelected && match.TeamHome.CurrentScore >= match.TeamAway.CurrentScore">+{{ match.TeamAway.WinningPredictionPoints }}</span>
+                            <span class="status status-left bg-red" ng-show="match.TeamHome.IsSelected && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore">L</span>
                             <div class="text-right row row-center no-padding">
                                 <div class="col col-20 col-center no-padding text-left">
-                                    <span>
-                                        (+5)
+                                    <span ng-show="match.TeamHome.IsSelected">
+                                        (+{{ match.TeamHome.WinningPredictionPoints }})
                                     </span>
                                 </div>
                                 <div class="col col-70 col-center no-padding team-name">
                                     <span>
-                                        Manchester City
+                                        {{ match.TeamHome.Name }}
                                     </span>
                                 </div>
                                 <div class="col col-10 col-center no-padding">
                                     <span>
-                                        10
+                                        {{ match.TeamHome.CurrentPredictionPoints }}
                                     </span>
                                 </div>
                             </div>
@@ -44,89 +47,34 @@
                             <div class="col-center">
                                 <span class="status status-left">FT</span>
                                 <div class="text-center padding-vertical">
-                                    <span>17:40</span>
-                                </div>
-                                <div class="text-center padding-vertical">
-                                    <span>5</span>
+                                    <span>{{ match.TeamHome.CurrentScore }}</span>
                                     <span> - </span>
-                                    <span>0</span>
+                                    <span>{{ match.TeamAway.CurrentScore }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col col-40 item">
-                            <span class="status status-right bg-yellow">+6</span>
-                            <span class="status status-right bg-red">L</span>
+                        <div class="col col-40 item"
+                             ng-class="{'item-stable': !match.TeamAway.IsSelected,
+                            'item-calm': match.TeamAway.IsSelected && !match.CompletedDate,
+                            'item-balanced': match.TeamAway.IsSelected && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore,
+                            'item-royal': match.TeamAway.IsSelected && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore,
+                            'item-draw-status': match.TeamAway.IsSelected && match.TeamHome.CurrentScore == match.TeamAway.CurrentScore}">
+                            <span class="status status-right bg-yellow" ng-show="match.TeamAway.IsSelected && match.TeamHome.CurrentScore <= match.TeamAway.CurrentScore">+{{ match.TeamAway.WinningPredictionPoints }}</span>
+                            <span class="status status-right bg-red" ng-show="match.TeamAway.IsSelected && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore">L</span>
                             <div class="text-left row row-center no-padding">
                                 <div class="col col-10 col-center no-padding">
                                     <span>
-                                        2
+                                        {{ match.TeamAway.CurrentPredictionPoints }}
                                     </span>
                                 </div>
                                 <div class="col col-70 col-center no-padding team-name">
                                     <span>
-                                        Liverpool
+                                        {{ match.TeamAway.Name }}
                                     </span>
                                 </div>
                                 <div class="col col-20 col-center no-padding text-right">
-                                    <span>
-                                        (+5)
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row padding-bottom">
-                        <div class="col col-40 item">
-                            <span class="status status-left bg-yellow">+6</span>
-                            <span class="status status-left bg-red">L</span>
-                            <div class="text-right row row-center no-padding">
-                                <div class="col col-20 col-center no-padding text-left">
-                                    <span>
-                                        (+5)
-                                    </span>
-                                </div>
-                                <div class="col col-70 col-center no-padding team-name">
-                                    <span>
-                                        Manchester City
-                                    </span>
-                                </div>
-                                <div class="col col-10 col-center no-padding">
-                                    <span>
-                                        10
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-20 col-center box-score item item-dark ">
-                            <div class="col-center">
-                                <span class="status status-left">FT</span>
-                                <div class="text-center padding-vertical">
-                                    <span>17:40</span>
-                                </div>
-                                <div class="text-center padding-vertical">
-                                    <span>5</span>
-                                    <span> - </span>
-                                    <span>0</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-40 item">
-                            <span class="status status-right bg-yellow">+6</span>
-                            <span class="status status-right bg-red">L</span>
-                            <div class="text-left row row-center no-padding">
-                                <div class="col col-10 col-center no-padding">
-                                    <span>
-                                        2
-                                    </span>
-                                </div>
-                                <div class="col col-70 col-center no-padding team-name">
-                                    <span>
-                                        Liverpool
-                                    </span>
-                                </div>
-                                <div class="col col-20 col-center no-padding text-right">
-                                    <span>
-                                        (+5)
+                                    <span ng-show="match.TeamAway.IsSelected">
+                                        (+{{ match.TeamAway.WinningPredictionPoints }})
                                     </span>
                                 </div>
                             </div>
@@ -134,8 +82,8 @@
                     </div>
                 </ion-item>
             </div>
-            
-            
+
+
         </ion-list>
     </ion-content>
 </ion-view>

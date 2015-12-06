@@ -156,7 +156,6 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Matches/HistoryByMonth.html',
-                        //controller: 'PlaylistsCtrl'
                     }
                 }
             })
@@ -165,7 +164,6 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Matches/HistoryByDay.html',
-                        //controller: 'PlaylistsCtrl'
                     }
                 }
             })
