@@ -93,6 +93,7 @@
     <Compile Include="Specs\Steps\BackgroundSteps.cs" />
     <Compile Include="Specs\Steps\CommonSetup.cs" />
     <Compile Include="Specs\Steps\CreateNewGuestSteps.cs" />
+    <Compile Include="Specs\Steps\GetAllGuessHistorySteps.cs" />
     <Compile Include="Specs\Steps\GetAllLeagueSteps.cs" />
     <Compile Include="Specs\Steps\GetMatchesSteps.cs" />
     <Compile Include="Specs\Steps\GuessMatchSteps.cs" />

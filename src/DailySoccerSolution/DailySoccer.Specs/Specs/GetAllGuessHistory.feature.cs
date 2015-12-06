@@ -31,8 +31,8 @@ namespace DailySoccer.Specs
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GetAllGuessHistory", "In order to avoid silly mistakes\nAs a math idiot\nI want to be told the sum of two" +
-                    " numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GetAllGuessHistory", "In order to avoid silly mistakes\r\nAs a math idiot\r\nI want to be told the sum of t" +
+                    "wo numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -75,30 +75,131 @@ namespace DailySoccer.Specs
 #line 8
  testRunner.Given("Setup mocking", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table1.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 9
+ testRunner.And("ผู้ใช้ในระบบมีดังนี้", ((string)(null)), table1, "And ");
+#line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add two numbers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ที่ไม่เคยทายผลขอข้อมูลการทายผลทั้งหมด (ไม่มีข้อมูลแมช์) ระบบส่งรายการทายผลเ" +
+            "ปล่ากลับไป")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetAllGuessHistory")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
-        public virtual void AddTwoNumbers()
+        public virtual void ผใชทไมเคยทายผลขอขอมลการทายผลทงหมดไมมขอมลแมชระบบสงรายการทายผลเปลากลบไป()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่ไม่เคยทายผลขอข้อมูลการทายผลทั้งหมด (ไม่มีข้อมูลแมช์) ระบบส่งรายการทายผลเ" +
+                    "ปล่ากลับไป", new string[] {
                         "mock",
                         "mock"});
-#line 11
+#line 14
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 12
- testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 13
- testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 14
- testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate"});
 #line 15
- testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table2, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+#line 17
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table3, "And ");
+#line 19
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลการทายผลทั้งหมด", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Month",
+                        "TotalPoints"});
+#line 20
+ testRunner.Then("ระบบส่งรายการทายผลกลับไปเป็น", ((string)(null)), table4, "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ที่ไม่เคยทายผลขอข้อมูลการทายผลทั้งหมด (มีข้อมูลแมช์) ระบบส่งรายการทายผลเปล่" +
+            "ากลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetAllGuessHistory")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชทไมเคยทายผลขอขอมลการทายผลทงหมดมขอมลแมชระบบสงรายการทายผลเปลากลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่ไม่เคยทายผลขอข้อมูลการทายผลทั้งหมด (มีข้อมูลแมช์) ระบบส่งรายการทายผลเปล่" +
+                    "ากลับไป", new string[] {
+                        "mock"});
+#line 24
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamAway.Id",
+                        "TeamAway.Name"});
+            table5.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "1/1/2015 02:30",
+                        "1",
+                        "Brentford",
+                        "2",
+                        "Hull City"});
+            table5.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/2/2015 01:00",
+                        "1/2/2015 01:00",
+                        "1/2/2015 02:30",
+                        "3",
+                        "Birmingham City",
+                        "4",
+                        "Blackburn Rovers"});
+#line 25
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table5, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+#line 29
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table6, "And ");
+#line 31
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลการทายผลทั้งหมด", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Month",
+                        "TotalPoints"});
+#line 32
+ testRunner.Then("ระบบส่งรายการทายผลกลับไปเป็น", ((string)(null)), table7, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
