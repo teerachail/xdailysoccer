@@ -111,5 +111,11 @@ namespace DailySoccer.Shared.Facades
                 Histories = result
             };
         }
+
+        public GetGuessHistoryByMonthRespond GetGuessHistoryByMonth(GetGuessHistoryByMonthRequest request)
+        {
+            // TODO: GetGuessHistoryByMonth
+            throw new NotImplementedException();
+        }
     }
 }
