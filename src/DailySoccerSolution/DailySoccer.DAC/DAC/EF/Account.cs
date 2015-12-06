@@ -18,6 +18,7 @@ namespace DailySoccer.DAC.EF
         public Account()
         {
             this.GuessMatches = new HashSet<GuessMatch>();
+            this.Winners = new HashSet<Winner>();
         }
     
         public int Id { get; set; }
@@ -27,5 +28,7 @@ namespace DailySoccer.DAC.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GuessMatch> GuessMatches { get; set; }
         public virtual FavoriteTeam FavoriteTeam { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Winner> Winners { get; set; }
     }
 }

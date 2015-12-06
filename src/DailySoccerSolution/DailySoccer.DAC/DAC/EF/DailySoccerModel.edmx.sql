@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/04/2015 15:17:10
--- Generated from EDMX file: E:\gits\TheS\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
+-- Date Created: 12/06/2015 23:45:59
+-- Generated from EDMX file: E:\TheS\gits\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -122,6 +122,16 @@ CREATE TABLE [dbo].[FavoriteTeams] (
 );
 GO
 
+-- Creating table 'Winners'
+CREATE TABLE [dbo].[Winners] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [AccountId] int  NOT NULL,
+    [RewardId] int  NOT NULL,
+    [ReferenceCode] varchar(100)  NOT NULL,
+    [LastContactDate] datetime  NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -159,6 +169,12 @@ GO
 -- Creating primary key on [Id] in table 'FavoriteTeams'
 ALTER TABLE [dbo].[FavoriteTeams]
 ADD CONSTRAINT [PK_FavoriteTeams]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Winners'
+ALTER TABLE [dbo].[Winners]
+ADD CONSTRAINT [PK_Winners]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -224,6 +240,36 @@ GO
 CREATE INDEX [IX_FK_FavoriteTeamAccount]
 ON [dbo].[Accounts]
     ([FavoriteTeam_Id]);
+GO
+
+-- Creating foreign key on [AccountId] in table 'Winners'
+ALTER TABLE [dbo].[Winners]
+ADD CONSTRAINT [FK_AccountWinner]
+    FOREIGN KEY ([AccountId])
+    REFERENCES [dbo].[Accounts]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AccountWinner'
+CREATE INDEX [IX_FK_AccountWinner]
+ON [dbo].[Winners]
+    ([AccountId]);
+GO
+
+-- Creating foreign key on [RewardId] in table 'Winners'
+ALTER TABLE [dbo].[Winners]
+ADD CONSTRAINT [FK_RewardWinner]
+    FOREIGN KEY ([RewardId])
+    REFERENCES [dbo].[Rewards]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RewardWinner'
+CREATE INDEX [IX_FK_RewardWinner]
+ON [dbo].[Winners]
+    ([RewardId]);
 GO
 
 -- --------------------------------------------------

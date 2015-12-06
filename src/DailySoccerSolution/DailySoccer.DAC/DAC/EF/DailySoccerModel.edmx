@@ -12,6 +12,7 @@
     <EntitySet Name="RewardGroups" EntityType="DailySoccerModel.Store.RewardGroups" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Rewards" EntityType="DailySoccerModel.Store.Rewards" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="FavoriteTeams" EntityType="DailySoccerModel.Store.FavoriteTeams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Winners" EntityType="DailySoccerModel.Store.Winners" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AccountGuessMatch" Association="DailySoccerModel.Store.AccountGuessMatch">
       <End Role="Account" EntitySet="Accounts" />
       <End Role="GuessMatch" EntitySet="GuessMatches" />
@@ -27,6 +28,14 @@
     <AssociationSet Name="FavoriteTeamAccount" Association="DailySoccerModel.Store.FavoriteTeamAccount">
       <End Role="FavoriteTeam" EntitySet="FavoriteTeams" />
       <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="AccountWinner" Association="DailySoccerModel.Store.AccountWinner">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Winner" EntitySet="Winners" />
+    </AssociationSet>
+    <AssociationSet Name="RewardWinner" Association="DailySoccerModel.Store.RewardWinner">
+      <End Role="Reward" EntitySet="Rewards" />
+      <End Role="Winner" EntitySet="Winners" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accounts">
@@ -94,6 +103,16 @@
     <Property Name="LeagueName" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="TeamName" Type="varchar" Nullable="false" MaxLength="255" />
   </EntityType>
+  <EntityType Name="Winners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="RewardId" Type="int" Nullable="false" />
+    <Property Name="ReferenceCode" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="LastContactDate" Type="datetime" Nullable="true" />
+  </EntityType>
   <Association Name="AccountGuessMatch">
     <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
     <End Role="GuessMatch" Type="DailySoccerModel.Store.GuessMatches" Multiplicity="*" />
@@ -142,6 +161,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="AccountWinner">
+    <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
+    <End Role="Winner" Type="DailySoccerModel.Store.Winners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Winner">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RewardWinner">
+    <End Role="Reward" Type="DailySoccerModel.Store.Rewards" Multiplicity="1" />
+    <End Role="Winner" Type="DailySoccerModel.Store.Winners" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reward">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Winner">
+        <PropertyRef Name="RewardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -169,6 +212,15 @@
             <End Role="FavoriteTeam" EntitySet="FavoriteTeams" />
             <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
+          <EntitySet Name="Winners" EntityType="DailySoccerModel.Winner" />
+          <AssociationSet Name="AccountWinner" Association="DailySoccerModel.AccountWinner">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Winner" EntitySet="Winners" />
+          </AssociationSet>
+          <AssociationSet Name="RewardWinner" Association="DailySoccerModel.RewardWinner">
+            <End Role="Reward" EntitySet="Rewards" />
+            <End Role="Winner" EntitySet="Winners" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -179,6 +231,7 @@
           <Property Name="Points" Type="Int32" Nullable="false" />
           <NavigationProperty Name="GuessMatches" Relationship="DailySoccerModel.AccountGuessMatch" FromRole="Account" ToRole="GuessMatch" />
           <NavigationProperty Name="FavoriteTeam" Relationship="DailySoccerModel.FavoriteTeamAccount" FromRole="Account" ToRole="FavoriteTeam" />
+          <NavigationProperty Name="Winners" Relationship="DailySoccerModel.AccountWinner" FromRole="Account" ToRole="Winner" />
         </EntityType>
         <EntityType Name="Match">
           <Key>
@@ -256,6 +309,7 @@
           <Property Name="Amount" Type="Int32" Nullable="false" />
           <Property Name="ImagePath" Type="String" Nullable="false" />
           <Property Name="RewardGroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Winners" Relationship="DailySoccerModel.RewardWinner" FromRole="Reward" ToRole="Winner" />
         </EntityType>
         <Association Name="RewardGroupReward">
           <End Type="DailySoccerModel.RewardGroup" Role="RewardGroup" Multiplicity="1" />
@@ -281,6 +335,42 @@
         <Association Name="FavoriteTeamAccount">
           <End Type="DailySoccerModel.FavoriteTeam" Role="FavoriteTeam" Multiplicity="0..1" />
           <End Type="DailySoccerModel.Account" Role="Account" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Winner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Account" Relationship="DailySoccerModel.AccountWinner" FromRole="Winner" ToRole="Account" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reward" Relationship="DailySoccerModel.RewardWinner" FromRole="Winner" ToRole="Reward" />
+          <Property Name="RewardId" Type="Int32" Nullable="false" />
+          <Property Name="ReferenceCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastContactDate" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <Association Name="AccountWinner">
+          <End Type="DailySoccerModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="DailySoccerModel.Winner" Role="Winner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Winner">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RewardWinner">
+          <End Type="DailySoccerModel.Reward" Role="Reward" Multiplicity="1" />
+          <End Type="DailySoccerModel.Winner" Role="Winner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reward">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Winner">
+              <PropertyRef Name="RewardId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -359,6 +449,17 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="LeagueName" ColumnName="LeagueName" />
           <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Winners">
+      <EntityTypeMapping TypeName="IsTypeOf(DailySoccerModel.Winner)">
+        <MappingFragment StoreEntitySet="Winners">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="RewardId" ColumnName="RewardId" />
+          <ScalarProperty Name="ReferenceCode" ColumnName="ReferenceCode" />
+          <ScalarProperty Name="LastContactDate" ColumnName="LastContactDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

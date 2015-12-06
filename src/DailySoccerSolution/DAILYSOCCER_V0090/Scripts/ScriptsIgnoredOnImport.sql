@@ -408,3 +408,74 @@ GO
 -- --------------------------------------------------
 
 GO
+
+-- --------------------------------------------------
+-- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
+-- --------------------------------------------------
+-- Date Created: 12/06/2015 23:45:59
+-- Generated from EDMX file: E:\TheS\gits\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
+-- --------------------------------------------------
+
+SET QUOTED_IDENTIFIER OFF;
+GO
+
+USE [DAILYSOCCER_V0090];
+GO
+
+IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
+GO
+
+-- --------------------------------------------------
+-- Dropping existing FOREIGN KEY constraints
+-- --------------------------------------------------
+
+IF OBJECT_ID(N'[dbo].[FK_AccountGuessMatch]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GuessMatches] DROP CONSTRAINT [FK_AccountGuessMatch];
+GO
+
+IF OBJECT_ID(N'[dbo].[FK_MatchGuessMatch]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GuessMatches] DROP CONSTRAINT [FK_MatchGuessMatch];
+GO
+
+IF OBJECT_ID(N'[dbo].[FK_RewardGroupReward]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Rewards] DROP CONSTRAINT [FK_RewardGroupReward];
+GO
+
+IF OBJECT_ID(N'[dbo].[FK_FavoriteTeamAccount]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Accounts] DROP CONSTRAINT [FK_FavoriteTeamAccount];
+GO
+
+-- --------------------------------------------------
+-- Dropping existing tables
+-- --------------------------------------------------
+
+IF OBJECT_ID(N'[dbo].[Accounts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Accounts];
+GO
+
+IF OBJECT_ID(N'[dbo].[Matches]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Matches];
+GO
+
+IF OBJECT_ID(N'[dbo].[GuessMatches]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GuessMatches];
+GO
+
+IF OBJECT_ID(N'[dbo].[RewardGroups]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RewardGroups];
+GO
+
+IF OBJECT_ID(N'[dbo].[Rewards]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Rewards];
+GO
+
+IF OBJECT_ID(N'[dbo].[FavoriteTeams]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FavoriteTeams];
+GO
+
+
+-- --------------------------------------------------
+-- Script has ended
+-- --------------------------------------------------
+
+GO
