@@ -17,7 +17,7 @@ namespace DailySoccer.Specs.Steps
         [Given(@"ในระบบมีข้อมูลแมช์เป็น")]
         public void Givenในระบบมขอมลแมชเปน(Table table)
         {
-            var matches = convertToMatchInformationList(table.Rows);
+            var matches = CommonSetup.ConvertToMatchInformationList(table.Rows);
             var mockMatchDac = ScenarioContext.Current.Get<Moq.Mock<IMatchDataAccess>>();
             mockMatchDac
                 .Setup(it => it.GetAllMatches())
@@ -44,7 +44,7 @@ namespace DailySoccer.Specs.Steps
         [Then(@"ระบบส่งข้อมูลแมช์กลับไปเป็น")]
         public void Thenระบบสงขอมลแมชกลบไปเปน(Table table)
         {
-            var expecteds = convertToMatchInformationList(table.Rows).OrderBy(it => it.Id).ToList();
+            var expecteds = CommonSetup.ConvertToMatchInformationList(table.Rows).OrderBy(it => it.Id).ToList();
             var actuals = ScenarioContext.Current.Get<GetMatchesRespond>().Matches.OrderBy(it => it.Id).ToList();
 
             Assert.AreEqual(expecteds.Count(), actuals.Count(), "Matches element aren't equal");
@@ -84,39 +84,6 @@ namespace DailySoccer.Specs.Steps
             Assert.AreEqual(expected.Points, actual.Points, "Account's Points isn't matched");
             Assert.AreEqual(expected.MaximumGuessAmount, actual.MaximumGuessAmount, "Account's MaximumGuessAmount isn't matched");
             Assert.AreEqual(expected.CurrentOrderedCoupon, actual.CurrentOrderedCoupon, "Account's CurrentOrderedCoupon isn't matched");
-        }
-
-        private IEnumerable<MatchInformation> convertToMatchInformationList(TableRows row)
-        {
-            var qry = row.Select(it => new MatchInformation
-            {
-                Id = it.ConvertToInt("Id"),
-                LeagueName = it.GetString("LeagueName"),
-                Status = it.GetString("Status"),
-                BeginDate = it.ConvertToDateTime("BeginDate"),
-                CompletedDate = it.ConvertToNullableDateTime("CompletedDate"),
-                StartedDate = it.ConvertToNullableDateTime("StartedDate"),
-                TeamAway = new TeamInformation
-                {
-                    Id = it.ConvertToInt("TeamAway.Id"),
-                    Name = it.GetString("TeamAway.Name"),
-                    CurrentScore = it.ConvertToInt("TeamAway.CurrentScore"),
-                    IsSelected = it.ConvertToBoolean("TeamAway.IsSelected"),
-                    CurrentPredictionPoints = it.ConvertToInt("TeamAway.CurrentPredictionPoints"),
-                    WinningPredictionPoints = it.ConvertToInt("TeamAway.WinningPredictionPoints")
-                },
-                TeamHome = new TeamInformation
-                {
-                    Id = it.ConvertToInt("TeamHome.Id"),
-                    Name = it.GetString("TeamHome.Name"),
-                    CurrentScore = it.ConvertToInt("TeamHome.CurrentScore"),
-                    IsSelected = it.ConvertToBoolean("TeamHome.IsSelected"),
-                    CurrentPredictionPoints = it.ConvertToInt("TeamHome.CurrentPredictionPoints"),
-                    WinningPredictionPoints = it.ConvertToInt("TeamHome.WinningPredictionPoints")
-                },
-            }).ToList();
-
-            return qry;
         }
     }
 }

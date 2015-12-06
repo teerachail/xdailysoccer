@@ -23,12 +23,11 @@ namespace DailySoccer.Specs.Steps
             var result = FacadeRepository.Instance.AccountFacade.GetGuessHistoryByMonth(request);
             ScenarioContext.Current.Set(result);
         }
-        
-        [Then(@"ระบบส่งผลการทายผลรายเดือนกลับไปเป็น")]
-        public void Thenระบบสงผลการทายผลรายเดอนกลบไปเปน(Table table)
+
+        [Then(@"ระบบส่งผลการทายผลรายเดือนในส่วนของแมช์กลับไปเป็น")]
+        public void Thenระบบสงผลการทายผลรายเดอนในสวนของแมชกลบไปเปน(Table table)
         {
-            //GuessHistoryDailyInformation
-            var expecteds = table.CreateSet<MatchInformation>().OrderBy(it => it.Id).ToList();
+            var expecteds = CommonSetup.ConvertToMatchInformationList(table.Rows).OrderBy(it => it.Id).ToList();
             var actuals = ScenarioContext.Current.Get<GetGuessHistoryByMonthRespond>().Histories
                 .SelectMany(it => it.Matches)
                 .OrderBy(it => it.Id).ToList();
@@ -57,6 +56,21 @@ namespace DailySoccer.Specs.Steps
                 Assert.AreEqual(expecteds[elementIndex].TeamHome.CurrentPredictionPoints, actuals[elementIndex].TeamHome.CurrentPredictionPoints, "Match's TeamHome.CurrentPredictionPoints aren't equal" + messageMatchInfo);
                 Assert.AreEqual(expecteds[elementIndex].TeamHome.CurrentScore, actuals[elementIndex].TeamHome.CurrentScore, "Match's TeamHome.CurrentScore aren't equal" + messageMatchInfo);
                 Assert.AreEqual(expecteds[elementIndex].TeamHome.WinningPredictionPoints, actuals[elementIndex].TeamHome.WinningPredictionPoints, "Match's TeamHome.WinningPredictionPoints aren't equal" + messageMatchInfo);
+            }
+        }
+
+        [Then(@"ระบบส่งผลการทายผลรายเดือนในส่วนของวันกลับไปเป็น")]
+        public void Thenระบบสงผลการทายผลรายเดอนในสวนของวนกลบไปเปน(Table table)
+        {
+            var expecteds = table.CreateSet<GuessHistoryDailyInformation>().OrderBy(it => it.Day).ToList();
+            var actuals = ScenarioContext.Current.Get<GetGuessHistoryByMonthRespond>().Histories.OrderBy(it => it.Day).ToList();
+
+            Assert.AreEqual(expecteds.Count(), actuals.Count(), "Matches element aren't equal");
+            for (int elementIndex = 0; elementIndex < expecteds.Count(); elementIndex++)
+            {
+                var messageMatchInfo = string.Format(" Day: {0}", expecteds[elementIndex].Day);
+                Assert.AreEqual(expecteds[elementIndex].Day, actuals[elementIndex].Day, "Day aren't equal" + messageMatchInfo);
+                Assert.AreEqual(expecteds[elementIndex].TotalPoints, actuals[elementIndex].TotalPoints, "TotalPoints aren't equal" + messageMatchInfo);
             }
         }
     }

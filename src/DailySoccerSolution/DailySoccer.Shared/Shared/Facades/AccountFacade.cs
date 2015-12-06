@@ -156,6 +156,7 @@ namespace DailySoccer.Shared.Facades
             var result = new List<GuessHistoryDailyInformation>();
             foreach (var item in qry)
             {
+                var day = item.First().BeginDate;
                 var totalPoints = (int)item.Sum(it =>
                 {
                     var selectedTeam = it.TeamAway.IsSelected ? it.TeamAway : it.TeamHome;
@@ -167,9 +168,9 @@ namespace DailySoccer.Shared.Facades
                 });
                 result.Add(new GuessHistoryDailyInformation
                 {
-                    Day = item.First().BeginDate,
+                    Day = day,
                     TotalPoints = totalPoints,
-                    Matches = matches
+                    Matches = matches.Where(it => it.BeginDate.Date == day.Date)
                 });
             }
 

@@ -24,5 +24,38 @@ namespace DailySoccer.Specs.Steps
                 return accounts.FirstOrDefault(account => account.SecrectCode == it);
             });
         }
+
+        public static IEnumerable<MatchInformation> ConvertToMatchInformationList(TableRows row)
+        {
+            var qry = row.Select(it => new MatchInformation
+            {
+                Id = it.ConvertToInt("Id"),
+                LeagueName = it.GetString("LeagueName"),
+                Status = it.GetString("Status"),
+                BeginDate = it.ConvertToDateTime("BeginDate"),
+                CompletedDate = it.ConvertToNullableDateTime("CompletedDate"),
+                StartedDate = it.ConvertToNullableDateTime("StartedDate"),
+                TeamAway = new TeamInformation
+                {
+                    Id = it.ConvertToInt("TeamAway.Id"),
+                    Name = it.GetString("TeamAway.Name"),
+                    CurrentScore = it.ConvertToInt("TeamAway.CurrentScore"),
+                    IsSelected = it.ConvertToBoolean("TeamAway.IsSelected"),
+                    CurrentPredictionPoints = it.ConvertToInt("TeamAway.CurrentPredictionPoints"),
+                    WinningPredictionPoints = it.ConvertToInt("TeamAway.WinningPredictionPoints")
+                },
+                TeamHome = new TeamInformation
+                {
+                    Id = it.ConvertToInt("TeamHome.Id"),
+                    Name = it.GetString("TeamHome.Name"),
+                    CurrentScore = it.ConvertToInt("TeamHome.CurrentScore"),
+                    IsSelected = it.ConvertToBoolean("TeamHome.IsSelected"),
+                    CurrentPredictionPoints = it.ConvertToInt("TeamHome.CurrentPredictionPoints"),
+                    WinningPredictionPoints = it.ConvertToInt("TeamHome.WinningPredictionPoints")
+                },
+            }).ToList();
+
+            return qry;
+        }
     }
 }
