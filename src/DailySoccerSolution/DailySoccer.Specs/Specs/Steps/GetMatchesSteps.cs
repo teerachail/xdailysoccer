@@ -100,6 +100,7 @@ namespace DailySoccer.Specs.Steps
                 {
                     Id = it.ConvertToInt("TeamAway.Id"),
                     Name = it.GetString("TeamAway.Name"),
+                    CurrentScore = it.ConvertToInt("TeamAway.CurrentScore"),
                     IsSelected = it.ConvertToBoolean("TeamAway.IsSelected"),
                     CurrentPredictionPoints = it.ConvertToInt("TeamAway.CurrentPredictionPoints"),
                     WinningPredictionPoints = it.ConvertToInt("TeamAway.WinningPredictionPoints")
@@ -108,6 +109,7 @@ namespace DailySoccer.Specs.Steps
                 {
                     Id = it.ConvertToInt("TeamHome.Id"),
                     Name = it.GetString("TeamHome.Name"),
+                    CurrentScore = it.ConvertToInt("TeamHome.CurrentScore"),
                     IsSelected = it.ConvertToBoolean("TeamHome.IsSelected"),
                     CurrentPredictionPoints = it.ConvertToInt("TeamHome.CurrentPredictionPoints"),
                     WinningPredictionPoints = it.ConvertToInt("TeamHome.WinningPredictionPoints")

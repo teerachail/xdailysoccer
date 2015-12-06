@@ -24,7 +24,13 @@ namespace DailySoccer.Specs.Steps
 
             // Facade repositories
             FacadeRepository.Instance.InitializeDataAccess(accountDataAccess.Object, matchDataAccess.Object);
-            
         }
-     }
+
+        [Given(@"วันเวลาในปัจจุบันเป็น '(.*)'")]
+        public void Givenวนเวลาในปจจบนเปน(DateTime currentTime)
+        {
+            ScenarioContext.Current.Set(currentTime);
+        }
+
+    }
 }

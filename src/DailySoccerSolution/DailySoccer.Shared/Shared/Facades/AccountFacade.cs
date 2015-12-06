@@ -53,7 +53,7 @@ namespace DailySoccer.Shared.Facades
             accountDac.SetFavoriteTeam(request);
         }
 
-        public GetAllGuessHistoryRespond GetAllGuessHistory(GetAllGuessHistoryRequest request)
+        public GetAllGuessHistoryRespond GetAllGuessHistory(GetAllGuessHistoryRequest request, DateTime currentTime)
         {
             var invalidRespondData = new GetAllGuessHistoryRespond { Histories = Enumerable.Empty<GuessHistoryMonthlyInformation>() };
             var areArgumentsValid = request != null && !string.IsNullOrEmpty(request.UserId);
@@ -64,6 +64,7 @@ namespace DailySoccer.Shared.Facades
             if (guessedMatches == null) return invalidRespondData;
 
             var matches = FacadeRepository.Instance.MatchDataAccess.GetAllMatches()
+                .Where(it => it.BeginDate.Year == currentTime.Year)
                 .Where(it => guessedMatches.Any(s => s.MatchId == it.Id))
                 .ToList();
 
@@ -81,26 +82,26 @@ namespace DailySoccer.Shared.Facades
                 selectedTeam.WinningPredictionPoints = guess.PredictionPoints;
             }
 
-            var qry = from x in matches
-                      group x by x.BeginDate.ToString("mmyy") into grouping
+            var qry = from match in matches
+                      group match by match.BeginDate.ToString("MMyy") into grouping
                       select grouping;
 
             var result = new List<GuessHistoryMonthlyInformation>();
             foreach (var item in qry)
             {
-                var first = item.First().BeginDate;
-                var totalPoints = (int)item.Sum(c =>
+                var DateGroup = item.First().BeginDate;
+                var totalPoints = (int)item.Sum(it =>
                 {
-                    var selectedTeam = c.TeamAway.IsSelected ? c.TeamAway : c.TeamHome;
-                    var opponentTeam = c.TeamAway.IsSelected ? c.TeamHome : c.TeamAway;
+                    var selectedTeam = it.TeamAway.IsSelected ? it.TeamAway : it.TeamHome;
+                    var opponentTeam = it.TeamAway.IsSelected ? it.TeamHome : it.TeamAway;
 
                     if (selectedTeam.CurrentScore > opponentTeam.CurrentScore) return selectedTeam.WinningPredictionPoints;
-                    else if (selectedTeam.CurrentScore == opponentTeam.CurrentScore) return selectedTeam.WinningPredictionPoints / 2;
+                    else if (selectedTeam.CurrentScore == opponentTeam.CurrentScore) return (int)(selectedTeam.WinningPredictionPoints / 2);
                     else return 0;
                 });
                 result.Add(new GuessHistoryMonthlyInformation
                 {
-                    Month = first.Month,
+                    Month = DateGroup.Month,
                     TotalPoints = totalPoints
                 });
             }

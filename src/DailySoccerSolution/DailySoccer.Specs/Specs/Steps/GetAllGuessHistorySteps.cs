@@ -14,8 +14,9 @@ namespace DailySoccer.Specs.Steps
         [When(@"ผู้ใช้ UserId: '(.*)' ขอข้อมูลการทายผลทั้งหมด")]
         public void WhenผใชUserIdขอขอมลการทายผลทงหมด(string userId)
         {
+            var currentTime = ScenarioContext.Current.Get<DateTime>();
             var request = new GetAllGuessHistoryRequest { UserId = userId };
-            var result = FacadeRepository.Instance.AccountFacade.GetAllGuessHistory(request);
+            var result = FacadeRepository.Instance.AccountFacade.GetAllGuessHistory(request, currentTime);
             ScenarioContext.Current.Set(result);
         }
         
