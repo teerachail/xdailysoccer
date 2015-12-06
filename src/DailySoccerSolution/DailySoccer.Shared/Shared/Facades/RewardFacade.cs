@@ -47,5 +47,11 @@ namespace DailySoccer.Shared.Facades
                 Winners = result
             };
         }
+
+        public GetYourRewardsRespond GetYourRewards(GetYourRewardsRequest request)
+        {
+            // TODO: GetYourRewards
+            throw new NotImplementedException();
+        }
     }
 }
