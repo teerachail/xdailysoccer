@@ -68,6 +68,7 @@
     <Compile Include="Shared\Models\GetAllGuessHistoryRespond.cs" />
     <Compile Include="Shared\Models\GetAllLeagueRespond.cs" />
     <Compile Include="Shared\Models\GetCurrentRewardsRespond.cs" />
+    <Compile Include="Shared\Models\GetCurrentWinnersRespond.cs" />
     <Compile Include="Shared\Models\GetGuessHistoryByMonthRequest.cs" />
     <Compile Include="Shared\Models\GetGuessHistoryByMonthRespond.cs" />
     <Compile Include="Shared\Models\GetMatchesRequest.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Shared\Models\RewardInformation.cs" />
     <Compile Include="Shared\Models\SetFavoriteTeamRequest.cs" />
     <Compile Include="Shared\Models\TeamInformation.cs" />
+    <Compile Include="Shared\Models\WinnerInformation.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
