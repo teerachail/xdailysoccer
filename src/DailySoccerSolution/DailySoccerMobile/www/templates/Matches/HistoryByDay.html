@@ -1,5 +1,5 @@
 ﻿<ion-view view-title="DAILY SOCCER">
-    <ion-content class="history">
+    <ion-content class="today-match">
         <div ng-include src="'templates/Matches/_matchHeaderAds.html'" class="padding-bottom"></div>
         <ion-list>
             <div ng-repeat="group in groups" class="padding-bottom">
@@ -17,228 +17,124 @@
                     </dsiv>
                 </ion-item>
                 <ion-item class="item-accordion no-padding no-border"
-                          ng-show="isGroupShown(group)" animation="no-animation">
+                          ng-show="isGroupShown(group)" animation="no-animation">                    
                     <div class="row padding-bottom">
-                        <div class="col col-40 item item-stable ">
-                            <!------------status color item-stable------------>
-                            <span class="status status-left bg-yellow">+6</span><!------------result color bg-yellow------------>
-                            <div class="text-right padding-vertical">
-                                <span class="">
-                                    (+5)
-                                </span>
-                                <span class="team-name">
-                                    Newcastle Utd
-                                </span>
-                                <span class="">
-                                    10
-                                </span>
+                        <div class="col col-40 item">
+                            <span class="status status-left bg-yellow">+6</span>
+                            <span class="status status-left bg-red">L</span>
+                            <div class="text-right row row-center no-padding">
+                                <div class="col col-20 col-center no-padding text-left">
+                                    <span>
+                                        (+5)
+                                    </span>
+                                </div>
+                                <div class="col col-70 col-center no-padding team-name">
+                                    <span>
+                                        Manchester City
+                                    </span>
+                                </div>
+                                <div class="col col-10 col-center no-padding">
+                                    <span>
+                                        10
+                                    </span>
+                                </div>
                             </div>
-
                         </div>
-                        <div class="col col-20 col-center item item-dark ">
+                        <div class="col col-20 col-center box-score item item-dark ">
                             <div class="col-center">
-                                <span class="status status-left stable">FT</span><!------------Time color stable------------>
-                                <div class="text-center padding">
+                                <span class="status status-left">FT</span>
+                                <div class="text-center padding-vertical">
+                                    <span>17:40</span>
+                                </div>
+                                <div class="text-center padding-vertical">
                                     <span>5</span>
                                     <span> - </span>
                                     <span>0</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="item item-balanced col col-40">
-                            <!------------status color item-balanced------------>
-                            <span class="status status-right bg-yellow">+6</span><!------------result color bg-yellow------------>
-                            <div class="text-left padding-vertical">
-                                <span class="">
-                                    2
-                                </span>
-                                <span class="team-name">
-                                    Leicester
-                                </span>
-                                <span class="">
-                                    (+5)
-                                </span>
+                        <div class="col col-40 item">
+                            <span class="status status-right bg-yellow">+6</span>
+                            <span class="status status-right bg-red">L</span>
+                            <div class="text-left row row-center no-padding">
+                                <div class="col col-10 col-center no-padding">
+                                    <span>
+                                        2
+                                    </span>
+                                </div>
+                                <div class="col col-70 col-center no-padding team-name">
+                                    <span>
+                                        Liverpool
+                                    </span>
+                                </div>
+                                <div class="col col-20 col-center no-padding text-right">
+                                    <span>
+                                        (+5)
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!---------------------------------------------------->
                     <div class="row padding-bottom">
-                        <div class="col col-40 item item-stable ">
-                            <!------------status color item-stable------------>
-                            <span class="status status-left bg-yellow">+6</span><!------------result color bg-yellow------------>
-                            <div class="text-right padding-vertical">
-                                <span class="">
-                                    (+5)
-                                </span>
-                                <span class="team-name">
-                                    Southampton
-                                </span>
-                                <span class="">
-                                    10
-                                </span>
+                        <div class="col col-40 item">
+                            <span class="status status-left bg-yellow">+6</span>
+                            <span class="status status-left bg-red">L</span>
+                            <div class="text-right row row-center no-padding">
+                                <div class="col col-20 col-center no-padding text-left">
+                                    <span>
+                                        (+5)
+                                    </span>
+                                </div>
+                                <div class="col col-70 col-center no-padding team-name">
+                                    <span>
+                                        Manchester City
+                                    </span>
+                                </div>
+                                <div class="col col-10 col-center no-padding">
+                                    <span>
+                                        10
+                                    </span>
+                                </div>
                             </div>
-
                         </div>
-                        <div class="col col-20 col-center item item-dark ">
+                        <div class="col col-20 col-center box-score item item-dark ">
                             <div class="col-center">
-                                <span class="status status-left stable">FT</span><!------------Time color stable------------>
-                                <div class="text-center padding">
+                                <span class="status status-left">FT</span>
+                                <div class="text-center padding-vertical">
+                                    <span>17:40</span>
+                                </div>
+                                <div class="text-center padding-vertical">
                                     <span>5</span>
                                     <span> - </span>
                                     <span>0</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="item item-royal col col-40">
-                            <!------------status color item-royal------------>
-                            <span class="status status-right bg-red">L</span><!------------result color bg-red------------>
-                            <div class="text-left padding-vertical">
-                                <span class="">
-                                    2
-                                </span>
-                                <span class="team-name">
-                                    Stoke City
-                                </span>
-                                <span class="">
-                                    (+5)
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <!---------------------------------------------------->
-                    <div class="row padding-bottom">
-                        <div class="col col-40 item item-stable ">
-                            <!------------status color item-stable------------>
-                            <span class="status status-left bg-yellow">+6</span><!------------result color bg-yellow------------>
-                            <div class="text-right padding-vertical">
-                                <span class="">
-                                    (+5)
-                                </span>
-                                <span class="team-name">
-                                    Swansea
-                                </span>
-                                <span class="">
-                                    10
-                                </span>
-                            </div>
-
-                        </div>
-                        <div class="col col-20 col-center item item-dark ">
-                            <div class="col-center">
-                                <span class="status status-left energized">65'</span><!------------Time color stable------------>
-                                <div class="text-center padding">
-                                    <span>5</span>
-                                    <span> - </span>
-                                    <span>0</span>
+                        <div class="col col-40 item">
+                            <span class="status status-right bg-yellow">+6</span>
+                            <span class="status status-right bg-red">L</span>
+                            <div class="text-left row row-center no-padding">
+                                <div class="col col-10 col-center no-padding">
+                                    <span>
+                                        2
+                                    </span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="item item-draw-status col col-40">
-                            <!------------status color draw-status------------>
-                            <span class="status status-right background-positive bg-yellow">+6</span><!------------result color bg-yellow------------>
-                            <div class="text-left padding-vertical">
-                                <span class="">
-                                    2
-                                </span>
-                                <span class="team-name">
-                                    Bournemouth
-                                </span>
-                                <span class="">
-                                    (+5)
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <!---------------------------------------------------->
-                    <div class="row padding-bottom">
-                        <div class="col col-40 item item-stable ">
-                            <!------------status color item-stable------------>
-                            <span class="status status-left bg-yellow">+6</span><!------------result color bg-yellow------------>
-                            <div class="text-right padding-vertical">
-                                <span class="">
-                                    (+5)
-                                </span>
-                                <span class="team-name">
-                                    West Brom
-                                </span>
-                                <span class="">
-                                    10
-                                </span>
-                            </div>
-
-                        </div>
-                        <div class="col col-20 col-center item item-dark ">
-                            <div class="col-center">
-                                <span class="status status-left energized">65'</span><!------------Time color stable------------>
-                                <div class="text-center padding">
-                                    <span>5</span>
-                                    <span> - </span>
-                                    <span>0</span>
+                                <div class="col col-70 col-center no-padding team-name">
+                                    <span>
+                                        Liverpool
+                                    </span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="item item-stable col col-40">
-                            <!------------status color draw-status------------>
-                            <span class="status status-right background-positive bg-yellow">+6</span><!------------result color bg-yellow------------>
-                            <div class="text-left padding-vertical">
-                                <span class="">
-                                    2
-                                </span>
-                                <span class="team-name">
-                                    Arsenal
-                                </span>
-                                <span class="">
-                                    (+5)
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <!---------------------------------------------------->
-                    <div class="row padding-bottom">
-                        <div class="col col-40 item item-calm ">
-                            <!------------status color item-stable------------>
-                            <span class="status status-left bg-yellow">+6</span><!------------result color bg-yellow------------>
-                            <div class="text-right padding-vertical">
-                                <span class="">
-                                    (+5)
-                                </span>
-                                <span class="team-name">
-                                    Manchester City
-                                </span>
-                                <span class="">
-                                    10
-                                </span>
-                            </div>
-
-                        </div>
-                        <div class="col col-20 col-center item item-dark ">
-                            <div class="col-center">
-                                <span class="status status-left energized">65'</span><!------------Time color stable------------>
-                                <div class="text-center padding">
-                                    <span>5</span>
-                                    <span> - </span>
-                                    <span>0</span>
+                                <div class="col col-20 col-center no-padding text-right">
+                                    <span>
+                                        (+5)
+                                    </span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="item item-stable col col-40">
-                            <!------------status color draw-status------------>
-                            <span class="status status-right background-positive bg-yellow">+6</span><!------------result color bg-yellow------------>
-                            <div class="text-left padding-vertical">
-                                <span class="">
-                                    2
-                                </span>
-                                <span class="team-name">
-                                    Liverpool
-                                </span>
-                                <span class="">
-                                    (+5)
-                                </span>
                             </div>
                         </div>
                     </div>
                 </ion-item>
             </div>
+            
             
         </ion-list>
     </ion-content>

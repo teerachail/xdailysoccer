@@ -651,7 +651,7 @@ var starter;
                 this.queryRemoteSvc = queryRemoteSvc;
             }
             RewardServices.prototype.GetCurrentRewards = function () {
-                var requestUrl = 'Reward';
+                var requestUrl = 'Reward/GetCurrentRewards';
                 return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
             RewardServices.$inject = ['starter.shared.QueryRemoteDataService'];
