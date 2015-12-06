@@ -75,30 +75,140 @@ namespace DailySoccer.Specs
 #line 8
  testRunner.Given("Setup mocking", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table1.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 9
+ testRunner.And("ผู้ใช้ในระบบมีดังนี้", ((string)(null)), table1, "And ");
+#line 12
+ testRunner.And("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add two numbers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ขอข้อมูลการทายผลรายเดือนในปีที่ไม่มีแมช์ ระบบส่งรายการทายผลเปล่ากลับไป")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetGuessHistoryByMonth")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
-        public virtual void AddTwoNumbers()
+        public virtual void ผใชขอขอมลการทายผลรายเดอนในปทไมมแมชระบบสงรายการทายผลเปลากลบไป()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ขอข้อมูลการทายผลรายเดือนในปีที่ไม่มีแมช์ ระบบส่งรายการทายผลเปล่ากลับไป", new string[] {
                         "mock",
                         "mock"});
-#line 11
+#line 15
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 12
- testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 13
- testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 14
- testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 15
- testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.CurrentScore",
+                        "TeamHome.WinningPredictionPoints",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamHome.CurrentScore",
+                        "TeamAway.WinningPredictionPoints"});
+            table2.AddRow(new string[] {
+                        "1",
+                        "Premier league",
+                        "1/1/2015 01:00",
+                        "1/1/2015 01:00",
+                        "1/1/2015 02:30",
+                        "1",
+                        "Brentford",
+                        "0",
+                        "10",
+                        "2",
+                        "Hull City",
+                        "1",
+                        "5"});
+            table2.AddRow(new string[] {
+                        "2",
+                        "Premier league",
+                        "1/2/2015 01:00",
+                        "1/2/2015 01:00",
+                        "1/2/2015 02:30",
+                        "3",
+                        "Birmingham City",
+                        "1",
+                        "10",
+                        "4",
+                        "Blackburn Rovers",
+                        "0",
+                        "5"});
+            table2.AddRow(new string[] {
+                        "3",
+                        "Premier league",
+                        "1/3/2015 01:00",
+                        "1/3/2015 01:00",
+                        "1/3/2015 02:30",
+                        "5",
+                        "FC Astana",
+                        "0",
+                        "7",
+                        "6",
+                        "Atletico Madrid",
+                        "0",
+                        "5"});
+#line 16
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table2, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
+            table3.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1",
+                        "1"});
+            table3.AddRow(new string[] {
+                        "2",
+                        "s01",
+                        "2",
+                        "2"});
+            table3.AddRow(new string[] {
+                        "3",
+                        "s01",
+                        "3",
+                        "3"});
+#line 21
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table3, "And ");
+#line 26
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลการทายผลรายเดือน month: \'1\', year: \'2014\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.CurrentScore",
+                        "TeamHome.WinningPredictionPoints",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamHome.CurrentScore",
+                        "TeamAway.WinningPredictionPoints"});
+#line 27
+ testRunner.Then("ระบบส่งผลการทายผลรายเดือนกลับไปเป็น", ((string)(null)), table4, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
