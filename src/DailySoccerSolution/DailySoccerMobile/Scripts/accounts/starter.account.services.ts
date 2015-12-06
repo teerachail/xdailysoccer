@@ -12,6 +12,16 @@
             return this.queryRemoteSvc.RemoteQuery<CreateNewGuestRespond>(requestUrl);
         }
 
+        public GetAllLeague(): ng.IPromise<GetAllLeagueRespond> {
+            var requestUrl = "Favorite/GetAllLeagues";
+            return this.queryRemoteSvc.RemoteQuery<GetAllLeagueRespond>(requestUrl);
+        }
+
+        public SetFavoriteTeam(req: SetFavoriteTeamRequest): void {
+            var requestUrl = "Favorite/SetFavoriteTeam?userId=" + req.UserId + "selectedTeamId=" + req.SelectedTeamId;
+            this.queryRemoteSvc.RemoteQuery<SetFavoriteTeamRequest>(requestUrl);
+        }
+
     }
     angular
         .module('starter.account')

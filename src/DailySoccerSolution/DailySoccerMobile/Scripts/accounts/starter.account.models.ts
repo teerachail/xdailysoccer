@@ -16,4 +16,19 @@
         public IsSuccessed: Boolean;
     }
 
+    export class LeagueInformation {
+        public LeagueName: string;
+        public TeamName: string;
+        public TeamId: number;
+    }
+
+    export class GetAllLeagueRespond {
+        public Leagues: LeagueInformation[];
+    }
+
+    export class SetFavoriteTeamRequest {
+        public UserId: number;
+        public SelectedTeamId: number;
+    }
+
 }

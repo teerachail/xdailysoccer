@@ -85,11 +85,11 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
                     }
                 }
             })
-            .state('account.favoritteam', {
-                url: '/favoritteam',
+            .state('account.favorite', {
+                url: '/favorite',
                 views: {
                     'MainContent': {
-                        templateUrl: 'templates/Accounts/FavoritTeam.html',
+                        templateUrl: 'templates/Accounts/Favorite.html',
                     }
                 }
             })
