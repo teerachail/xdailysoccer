@@ -14,17 +14,21 @@ namespace DailySoccerBackoffice.Controllers
     {
         // GET: RewardManagement
         public async Task<ActionResult> Index()
-        {
-            var serviceEngine = new ServiceEngine();
-            var response = await serviceEngine.Client.GetAsync<IEnumerable<RewardGroupInformation>>("/Reward/GetRewardGroup");
-            return View(response);
+        {            
+            using (var serviceEngine = new ServiceHelper())
+            {
+                var response = await serviceEngine.Client.GetAsync<IEnumerable<RewardGroupInformation>>("/Reward/GetRewardGroup");
+                return View(response);
+            }
         }
 
         public async Task<ActionResult> Details(int id)
         {
-            var serviceEngine = new ServiceEngine();
-            var response = await serviceEngine.Client.GetAsync<RewardGroupInformation>("/Reward/GetRewardGroupById?id=" + id);
-            return View(response);
+            using (var serviceEngine = new ServiceHelper())
+            {
+                var response = await serviceEngine.Client.GetAsync<RewardGroupInformation>("/Reward/GetRewardGroupById?id=" + id);
+                return View(response);
+            }
         }
 
         public ActionResult Create()
@@ -35,9 +39,11 @@ namespace DailySoccerBackoffice.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(RewardGroupInformation model)
         {
-            var serviceEngine = new ServiceEngine();
-            await serviceEngine.Client.PostAsync<RewardGroupInformation>("/Reward/CreateRewardGroup", model);
-            return RedirectToAction("Index");
+            using (var serviceEngine = new ServiceHelper())
+            {
+                await serviceEngine.Client.PostAsync<RewardGroupInformation>("/Reward/CreateRewardGroup", model);
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult CreateReward(int id)
@@ -47,12 +53,22 @@ namespace DailySoccerBackoffice.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateReward(int id, RewardInformation model, HttpPostedFileBase file)
+        public async Task<ActionResult> CreateReward(int id, RewardInformation model, HttpPostedFileBase ThumbnailPath, HttpPostedFileBase ImagePath)
         {
-            var serviceEngine = new ServiceEngine();
-            model.RewardGroupId = id;
-            await serviceEngine.Client.PostAsync<RewardInformation>("/Reward/CreateReward" , model);
-            return RedirectToAction("Details", new { id = id });
+            using (var serviceEngine = new ServiceHelper())
+            {
+                var uploader = new UploadImageHelper();
+                const char TypeSpliter = '/';
+                var thumbnailFileName = string.Format("{0}.{1}", Guid.NewGuid(), ThumbnailPath.ContentType.Split(TypeSpliter).Last());
+                var imageFileName = string.Format("{0}.{1}", Guid.NewGuid(), ThumbnailPath.ContentType.Split(TypeSpliter).Last());
+
+                model.ThumbnailPath = await uploader.UploadImage(thumbnailFileName, ThumbnailPath.InputStream, "thumbnails");
+                model.ImagePath = await uploader.UploadImage(imageFileName, ImagePath.InputStream, "images");
+                model.RewardGroupId = id;
+
+                await serviceEngine.Client.PostAsync<RewardInformation>("/Reward/CreateReward", model);
+                return RedirectToAction("Details", new { id = id });
+            }
         }
     }
 }

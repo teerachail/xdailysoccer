@@ -11,39 +11,44 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.RequestPoints)
+            วันที่สิ้นสุดการส่ง
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpiredDate)
+        </dd>
+        <dt>
+            คะแนนที่ใช้ในการแลก
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.RequestPoints)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ExpiredDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ExpiredDate)
-        </dd>
-
     </dl>
     <br />
-    <div class="pull-right"><a class="btn btn-info" href="@Url.Action("CreateReward", new { id = Model.Id })">เพิ่ม</a></div>
+    <div class="pull-right"><a class="btn btn-info btn-lg" href="@Url.Action("CreateReward", new { id = Model.Id })">เพิ่ม</a></div>
+    <div class="clearfix"></div>
     <br />
     <br />
 
     @foreach (var reward in Model.RewardInfo)
     {
         <div class="row">
-            <div class="col-xs-2">@reward.ImagePath</div>
-            <div class="col-xs-6">
-                <div>@reward.Name</div>
-                <div>@reward.Description</div>
-                <div>@reward.Amount</div>
-                <div>@reward.RemainingAmount</div>
+            <div class="col-xs-2">
+                <a href="#" class="thumbnail">
+                    <img src="@reward.ThumbnailPath" />
+                </a>
             </div>
-            <div class="col-xs-4">manage me</div>
+            <div class="col-xs-10">
+                <div>ชื่อ: @reward.Name</div>
+                <div>รายละเอียด: @reward.Description</div>
+                <div>จำนวน: @reward.Amount</div>
+                <div>จำนวนคงเหลือ: @reward.RemainingAmount</div>
+            </div>
         </div>
+        <br />
+        <br />
     }
 
 </div>

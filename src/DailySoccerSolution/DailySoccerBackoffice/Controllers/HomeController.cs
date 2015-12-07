@@ -10,7 +10,7 @@ namespace DailySoccerBackoffice.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Reward");
         }
 
         public ActionResult About()

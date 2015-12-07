@@ -52,6 +52,7 @@ namespace DailySoccer.Shared.DAC
                         Name = reward.Name,
                         Description = reward.Description,
                         Amount = reward.Amount,
+                        RemainingAmount = reward.RemainingAmount.Value,
                         ImagePath = reward.ImagePath,
                         ThumbnailPath = reward.ThumbnailPath,
                         RewardGroupId = reward.RewardGroupId,
