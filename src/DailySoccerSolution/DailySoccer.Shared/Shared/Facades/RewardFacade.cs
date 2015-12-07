@@ -25,7 +25,7 @@ namespace DailySoccer.Shared.Facades
         {
             var rewardDac = FacadeRepository.Instance.RewardDataAccess;
             var selectedRewardGroup = rewardDac.GetRewardGroup()
-                .Where(it => it.ExpiredDate.HasValue)
+                .Where(it => it.RewardInfo.Any())
                 .OrderByDescending(it => it.ExpiredDate)
                 .FirstOrDefault();
 
@@ -69,7 +69,7 @@ namespace DailySoccer.Shared.Facades
             var allWinRewards = rewardDac.GetWinnersByUserId(request.UserId);
             var allRewards = rewardDac.GetRewardsByIds(allWinRewards.Select(it => it.RewardId));
 
-            var allRewardGroups = rewardDac.GetRewardGroup().Where(it => it.ExpiredDate.HasValue).ToList();
+            var allRewardGroups = rewardDac.GetRewardGroup().ToList();
             var currentRewardGroup = allRewardGroups.OrderByDescending(it => it.ExpiredDate).FirstOrDefault();
             if (currentRewardGroup == null) return invalidDataModel;
 
@@ -102,7 +102,7 @@ namespace DailySoccer.Shared.Facades
                 {
                     Ordering = running++, // HACK: Ordering
                     Description = selectedReward.Description,
-                    ExpiredDate = selectedRewardGroup.ExpiredDate.Value,
+                    ExpiredDate = selectedRewardGroup.ExpiredDate,
                     ImagePath = selectedReward.ImagePath,
                     ReferenceCode = winner.ReferenceCode
                 };
@@ -116,8 +116,8 @@ namespace DailySoccer.Shared.Facades
             var rewardDac = FacadeRepository.Instance.RewardDataAccess;
             var currentDate = DateTime.Now;
             var rewardGroup = rewardDac.GetRewardGroup();
-            var isAllowCreate = rewardGroup.All(it => it.ExpiredDate.Value.Date != model.ExpiredDate.Value.Date);
-            if (model.ExpiredDate.Value.Date >= currentDate.Date && isAllowCreate)
+            var isAllowCreate = rewardGroup.All(it => it.ExpiredDate.Date != model.ExpiredDate.Date);
+            if (model.ExpiredDate.Date >= currentDate.Date && isAllowCreate)
             {
                 rewardDac.CreateRewardGroup(model);
             }            

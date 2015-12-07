@@ -10,7 +10,7 @@ namespace DailySoccer.Shared.Models
     {
         public int Id { get; set; }
         public int RequestPoints { get; set; }
-        public DateTime? ExpiredDate { get; set; }
+        public DateTime ExpiredDate { get; set; }
         public IEnumerable<RewardInformation> RewardInfo { get; set; }
     }
 }

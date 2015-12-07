@@ -69,7 +69,7 @@ namespace DailySoccer.Shared.DAC
                 {
                     Id = model.Id,
                     RequestPoints = model.RequestPoints,
-                    ExpiredDate = model.ExpiredDate.Value
+                    ExpiredDate = model.ExpiredDate
                 });
                 dctx.SaveChanges();
             }
@@ -97,7 +97,7 @@ namespace DailySoccer.Shared.DAC
                 var qry = dctx.RewardGroups.FirstOrDefault(it => it.Id == model.Id);
                 qry.Id = model.Id;
                 qry.RequestPoints = model.RequestPoints;
-                qry.ExpiredDate = model.ExpiredDate.Value;
+                qry.ExpiredDate = model.ExpiredDate;
 
                 dctx.SaveChanges();
             }

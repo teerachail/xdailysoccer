@@ -589,13 +589,13 @@ this.FeatureBackground();
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ขอรายชื่อผู้โชคดีในตอนที่เดือนปัจจุบันยังไม่มีข้อมูลรางวัล ระบบส่งรายชื่อผู้โชคดี" +
-            "ปัจจุบันกลับไป")]
+            "เดือนก่อนหน้ากลับไป")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetWinners")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
-        public virtual void ขอรายชอผโชคดในตอนทเดอนปจจบนยงไมมขอมลรางวลระบบสงรายชอผโชคดปจจบนกลบไป()
+        public virtual void ขอรายชอผโชคดในตอนทเดอนปจจบนยงไมมขอมลรางวลระบบสงรายชอผโชคดเดอนกอนหนากลบไป()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอรายชื่อผู้โชคดีในตอนที่เดือนปัจจุบันยังไม่มีข้อมูลรางวัล ระบบส่งรายชื่อผู้โชคดี" +
-                    "ปัจจุบันกลับไป", new string[] {
+                    "เดือนก่อนหน้ากลับไป", new string[] {
                         "mock"});
 #line 116
 this.ScenarioSetup(scenarioInfo);
@@ -684,6 +684,21 @@ this.FeatureBackground();
                         "Description",
                         "ImagePath",
                         "Winners"});
+            table25.AddRow(new string[] {
+                        "1",
+                        "iPhone 6S",
+                        "iphone6S.jpg",
+                        "Sakul,Miolynet"});
+            table25.AddRow(new string[] {
+                        "2",
+                        "iPhone 6",
+                        "iphone6.jpg",
+                        ""});
+            table25.AddRow(new string[] {
+                        "3",
+                        "iPhone 5S",
+                        "iphone5S.jpg",
+                        "Au"});
 #line 133
  testRunner.Then("ระบบส่งรายชื่อผู้โชคดีกลับไปเป็น", ((string)(null)), table25, "Then ");
 #line hidden
@@ -700,7 +715,7 @@ this.FeatureBackground();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอรายชื่อผู้โชคดีในตอนที่เดือนปัจจุบันยังไม่มีคนถูกรางวัล ระบบส่งรายชื่อผู้โชคดีป" +
                     "ัจจุบันกลับไป", new string[] {
                         "mock"});
-#line 137
+#line 140
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
@@ -717,7 +732,7 @@ this.FeatureBackground();
                         "2",
                         "200",
                         "2/1/2015 00:00"});
-#line 138
+#line 141
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table26, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
@@ -768,7 +783,7 @@ this.FeatureBackground();
                         "200",
                         "120",
                         "xboxone.jpg"});
-#line 142
+#line 145
  testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table27, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table28 = new TechTalk.SpecFlow.Table(new string[] {
@@ -791,11 +806,11 @@ this.FeatureBackground();
                         "s03",
                         "3",
                         "Au"});
-#line 149
+#line 152
  testRunner.And("รายชื่อผู้โชคดีทั้งหมดในระบบเป็นดังนี้", ((string)(null)), table28, "And ");
-#line 154
+#line 157
  testRunner.And("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 155
+#line 158
  testRunner.When("ขอรายชื่อผู้โชคดี", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
@@ -813,7 +828,7 @@ this.FeatureBackground();
                         "XBoxOne description",
                         "xboxone.jpg",
                         ""});
-#line 156
+#line 159
  testRunner.Then("ระบบส่งรายชื่อผู้โชคดีกลับไปเป็น", ((string)(null)), table29, "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -829,7 +844,7 @@ this.FeatureBackground();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอรายชื่อผู้โชคดี มีข้อมูลคนถูกรางวัลของเดือนก่อนหน้า ระบบส่งรายชื่อผู้โชคดีปัจจุ" +
                     "บันกลับไป", new string[] {
                         "mock"});
-#line 162
+#line 165
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
@@ -846,7 +861,7 @@ this.FeatureBackground();
                         "2",
                         "200",
                         "2/1/2015 00:00"});
-#line 163
+#line 166
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table30, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table31 = new TechTalk.SpecFlow.Table(new string[] {
@@ -897,7 +912,7 @@ this.FeatureBackground();
                         "200",
                         "120",
                         "xboxone.jpg"});
-#line 167
+#line 170
  testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table31, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table32 = new TechTalk.SpecFlow.Table(new string[] {
@@ -935,11 +950,11 @@ this.FeatureBackground();
                         "s03",
                         "5",
                         "Au"});
-#line 174
+#line 177
  testRunner.And("รายชื่อผู้โชคดีทั้งหมดในระบบเป็นดังนี้", ((string)(null)), table32, "And ");
-#line 182
+#line 185
  testRunner.And("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 183
+#line 186
  testRunner.When("ขอรายชื่อผู้โชคดี", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
@@ -957,7 +972,7 @@ this.FeatureBackground();
                         "XBoxOne description",
                         "xboxone.jpg",
                         "Au"});
-#line 184
+#line 187
  testRunner.Then("ระบบส่งรายชื่อผู้โชคดีกลับไปเป็น", ((string)(null)), table33, "Then ");
 #line hidden
             this.ScenarioCleanup();

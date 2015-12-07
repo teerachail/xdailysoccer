@@ -57,34 +57,8 @@ namespace DailySoccerAppService.Controllers
         [HttpGet]
         public GetCurrentWinnersRespond GetCurrentWinners()
         {
-            var winners = new List<WinnerAwardInformation>
-            {
-                new WinnerAwardInformation
-                {
-                    Ordering = 1,
-                    Description = "Ipad5 มูลค่า 25,000 บาท 1 รางวัล",
-                    ImagePath = "img/Logos/BannerReward01.png",
-                    Winners = new List<string> {"นาย A"}
-                },
-                new WinnerAwardInformation
-                {
-                    Ordering = 2,
-                    Description = "ตั๋วเครื่องบินไป-กลับ มูลค่า 10,000 บาท 3 รางวัล",
-                    ImagePath = "img/Logos/BannerReward01.png",
-                    Winners = new List<string> {"นาย C", "นาย B"}
-                },
-                new WinnerAwardInformation
-                {
-                    Ordering = 3,
-                    Description = "เส้นทอง มูลค่า 8,000 บาท 5 รางวัล",
-                    ImagePath = "img/Logos/BannerReward01.png",
-                    Winners = new List<string> { }
-                },
-            };
-            return new GetCurrentWinnersRespond
-            {
-                Winners = winners
-            };
+            var result = FacadeRepository.Instance.RewardFacade.GetCurrentWinners(DateTime.Now);
+            return result;
         }
 
         [HttpGet]
@@ -117,10 +91,9 @@ namespace DailySoccerAppService.Controllers
 
         public GetYourRewardsRespond GetYourRewards(string userId)
         {
-            var rewardFacade = new RewardFacade();
-            var getYourRewardsRequest = new GetYourRewardsRequest();
-            getYourRewardsRequest.UserId = userId;
-            return rewardFacade.GetYourRewards(getYourRewardsRequest);
+            var request = new GetYourRewardsRequest { UserId = userId };
+            var result = FacadeRepository.Instance.RewardFacade.GetYourRewards(request);
+            return result;
         }
 
     }
