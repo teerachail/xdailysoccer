@@ -82,6 +82,7 @@ namespace DailySoccer.Shared.DAC
                 return dctx.Winners.Select(it => new WinnerInformation
                 {
                     Id = it.Id,
+                    AccountFullName = "WinnerName", // HACK: AccountFullName
                     AccountSecrectCode = it.Account.SecretCode,
                     ReferenceCode = it.ReferenceCode,
                     RewardId = it.RewardId
@@ -128,6 +129,44 @@ namespace DailySoccer.Shared.DAC
                     RewardGroupId = model.RewardGroupId,
                 });
                 dctx.SaveChanges();
+            }
+        }
+
+        public IEnumerable<WinnerInformation> GetWinnersByUserId(string userId)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var result = dctx.Winners
+                    .Where(it => it.Account.SecrectCode.Equals(userId, StringComparison.CurrentCultureIgnoreCase))
+                    .Select(it => new WinnerInformation
+                    {
+                        Id = it.Id,
+                        AccountFullName = "WinnerName", // HACK: AccountFullName
+                        AccountSecrectCode = it.Account.SecrectCode,
+                        ReferenceCode = it.ReferenceCode,
+                        RewardId = it.RewardId
+                    }).ToList();
+                return result;
+            }
+        }
+        public IEnumerable<RewardInformation> GetRewardsByIds(IEnumerable<int> ids)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var result = dctx.Rewards
+                    .Where(it => ids.Contains(it.Id))
+                    .Select(it => new RewardInformation
+                    {
+                        Id = it.Id,
+                        Amount = it.Amount,
+                        Description = it.Description,
+                        ImagePath = it.ImagePath,
+                        Name = it.Name,
+                        RemainingAmount = (int)it.RemainingAmount,
+                        RewardGroupId = it.RewardGroupId,
+                        ThumbnailPath = it.ThumbnailPath
+                    }).ToList();
+                return result;
             }
         }
     }

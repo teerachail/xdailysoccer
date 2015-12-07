@@ -54,6 +54,12 @@ namespace DailySoccer.Shared.Facades
             };
         }
 
+        public GetYourRewardsRespond GetYourRewards(GetYourRewardsRequest request)
+        {
+            // TODO: GetYourRewards
+            throw new NotImplementedException();
+        }
+
         public void CreateRewardGroup(RewardGroupInformation model)
         {
             var rewardDac = FacadeRepository.Instance.RewardDataAccess;

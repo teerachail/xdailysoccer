@@ -16,5 +16,7 @@ namespace DailySoccer.Shared.DAC
         void DeleteRewardGroup(int id);
         void CreateReward(RewardInformation model);
         IEnumerable<WinnerInformation> GetAllWinners();
+        IEnumerable<WinnerInformation> GetWinnersByUserId(string userId);
+        IEnumerable<RewardInformation> GetRewardsByIds(IEnumerable<int> ids);
     }
 }
