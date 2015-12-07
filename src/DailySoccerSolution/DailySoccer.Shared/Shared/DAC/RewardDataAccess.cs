@@ -64,12 +64,15 @@ namespace DailySoccer.Shared.DAC
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
-                dctx.RewardGroups.Add(new RewardGroup {
+                dctx.RewardGroups.Add(new RewardGroup
+                {
                     Id = model.Id,
                     RequestPoints = model.RequestPoints,
                     ExpiredDate = model.ExpiredDate.Value
                 });
                 dctx.SaveChanges();
+            }
+        }
 
         public IEnumerable<WinnerInformation> GetAllWinners()
         {
@@ -83,8 +86,6 @@ namespace DailySoccer.Shared.DAC
                     RewardId = it.RewardId
                 }).ToList();
             }
-        }
-    }
         }
 
         public void EditRewardGroup(int id, RewardGroupInformation model)

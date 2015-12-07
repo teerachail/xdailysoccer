@@ -2,7 +2,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'azure-mobile-service.module', 'starter.shared', 'starter.account', 'starter.match', 'starter.reward', 'bhResponsiveImages'])
+angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'azure-mobile-service.module', 'starter.shared', 'starter.account', 'starter.match', 'starter.reward', 'starter.history', 'bhResponsiveImages'])
     .constant('AzureMobileServiceClient', {
     API_URL: 'https://dailysoccer.azurewebsites.net'
 })
@@ -79,11 +79,11 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
             }
         }
     })
-        .state('account.favoritteam', {
-        url: '/favoritteam',
+        .state('account.favorite', {
+        url: '/favorite',
         views: {
             'MainContent': {
-                templateUrl: 'templates/Accounts/FavoritTeam.html',
+                templateUrl: 'templates/Accounts/Favorite.html',
             }
         }
     })
@@ -136,7 +136,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers',
         url: '/history',
         abstract: true,
         templateUrl: 'templates/_basicTemplate.html',
-        controller: 'AppCtrl'
+        controller: 'starter.history.HistoryController as historyCtrl'
     })
         .state('history.historybymonth', {
         url: '/historybymonth',
@@ -317,8 +317,24 @@ var starter;
                 this.$timeout = $timeout;
                 this.$location = $location;
                 this.accountSvc = accountSvc;
+                this._selectedTeamId = -1;
                 //this.checkIonicUserData();
+                this.GetAllLeague();
             }
+            AccountController.prototype.GetAllLeague = function () {
+                var _this = this;
+                this.accountSvc.GetAllLeague()
+                    .then(function (respond) {
+                    _this.updateDisplayLeague(respond.Leagues);
+                    console.log('Get all league completed.');
+                });
+            };
+            AccountController.prototype.updateDisplayLeague = function (leagues) {
+                this._allLeague = leagues;
+                //Hack: Not fliter yet
+                this.DisplayLeague = this._allLeague;
+                console.log('# Update league completed.');
+            };
             AccountController.prototype.checkIonicUserData = function () {
                 var user = Ionic.User.current();
                 if (user.id && user.id != 'empty') {
@@ -340,7 +356,7 @@ var starter;
                     user.set('isSkiped', 'true');
                     user.save();
                     console.log('Create new guest complete.');
-                    _this.$location.path('/matches/todaymatches');
+                    _this.$location.path('/account/favorite');
                 });
             };
             AccountController.prototype.SkipLogin = function () {
@@ -353,6 +369,26 @@ var starter;
                 this.createIonicUserData();
             };
             ;
+            AccountController.prototype.SelectFavoriteTeam = function (TeamId) {
+                this._selectedTeamId = TeamId;
+                console.log('Set favorite team completed.');
+            };
+            AccountController.prototype.SetFavoriteTeam = function () {
+                var user = Ionic.User.current();
+                if (this._selectedTeamId > -1) {
+                    var favoriteTeam = new account.SetFavoriteTeamRequest();
+                    favoriteTeam.UserId = user.id;
+                    favoriteTeam.SelectedTeamId = this._selectedTeamId;
+                    this.accountSvc.SetFavoriteTeam(favoriteTeam);
+                    console.log('Send favorite team completed.');
+                }
+                else {
+                    console.log('Skip to send favorite team completed.');
+                }
+                this.$location.path('/matches/todaymatches');
+                user.set('isSetFavoriteTeam', 'true');
+                user.save();
+            };
             AccountController.$inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices'];
             return AccountController;
         })();
@@ -377,6 +413,24 @@ var starter;
             return CreateNewGuestRespond;
         })();
         account.CreateNewGuestRespond = CreateNewGuestRespond;
+        var LeagueInformation = (function () {
+            function LeagueInformation() {
+            }
+            return LeagueInformation;
+        })();
+        account.LeagueInformation = LeagueInformation;
+        var GetAllLeagueRespond = (function () {
+            function GetAllLeagueRespond() {
+            }
+            return GetAllLeagueRespond;
+        })();
+        account.GetAllLeagueRespond = GetAllLeagueRespond;
+        var SetFavoriteTeamRequest = (function () {
+            function SetFavoriteTeamRequest() {
+            }
+            return SetFavoriteTeamRequest;
+        })();
+        account.SetFavoriteTeamRequest = SetFavoriteTeamRequest;
     })(account = starter.account || (starter.account = {}));
 })(starter || (starter = {}));
 var starter;
@@ -392,6 +446,14 @@ var starter;
                 var requestUrl = "Account/CreateNewGuest";
                 return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
+            AccountServices.prototype.GetAllLeague = function () {
+                var requestUrl = "Favorite/GetAllLeagues";
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            AccountServices.prototype.SetFavoriteTeam = function (req) {
+                var requestUrl = "Favorite/SetFavoriteTeam?userId=" + req.UserId + "&selectedTeamId=" + req.SelectedTeamId;
+                this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
             AccountServices.$inject = ['starter.shared.QueryRemoteDataService'];
             return AccountServices;
         })();
@@ -400,6 +462,149 @@ var starter;
             .module('starter.account')
             .service('starter.account.AccountServices', AccountServices);
     })(account = starter.account || (starter.account = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var history;
+    (function (history) {
+        'use strict';
+        var HistoryController = (function () {
+            function HistoryController($scope, historySvc) {
+                this.$scope = $scope;
+                this.historySvc = historySvc;
+                this.Year = 2015;
+                this.GetHistories();
+            }
+            HistoryController.prototype.GetHistories = function () {
+                var _this = this;
+                var user = Ionic.User.current();
+                var data = new history.GetAllGuessHistoryRequest();
+                data.UserId = user.id;
+                this.historySvc.GetAllGuessHistory(data)
+                    .then(function (respond) {
+                    _this.HistoryInfo = respond;
+                    console.log('Get all history completed.');
+                });
+            };
+            HistoryController.prototype.GetHistoriesByMonth = function (month) {
+                var _this = this;
+                var user = Ionic.User.current();
+                var data = new history.GetGuessHistoryByMonthRequest();
+                data.UserId = user.id;
+                data.Year = this.Year;
+                data.Month = month;
+                this.historySvc.GetGuessHistoryByMonth(data)
+                    .then(function (respond) {
+                    _this.HistoryByMonthInfo = respond;
+                    console.log('Get all history by month completed.');
+                    console.log(month);
+                });
+            };
+            HistoryController.prototype.GetMonthString = function (month) {
+                var monthString = new Date(this.Year, month);
+                return monthString;
+            };
+            HistoryController.prototype.toggleGroup = function (group) {
+                if (this.isGroupShown(group)) {
+                    this.shownGroup = null;
+                }
+                else {
+                    this.shownGroup = group;
+                }
+            };
+            ;
+            HistoryController.prototype.isGroupShown = function (group) {
+                console.log(this.shownGroup == group);
+                return this.shownGroup == group;
+            };
+            ;
+            HistoryController.$inject = ['$scope', 'starter.history.HistoryServices'];
+            return HistoryController;
+        })();
+        angular
+            .module('starter.history', [])
+            .controller('starter.history.HistoryController', HistoryController);
+    })(history = starter.history || (starter.history = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var history;
+    (function (history) {
+        var MatchInformation = (function () {
+            function MatchInformation() {
+            }
+            return MatchInformation;
+        })();
+        history.MatchInformation = MatchInformation;
+        var TeamInformation = (function () {
+            function TeamInformation() {
+            }
+            return TeamInformation;
+        })();
+        history.TeamInformation = TeamInformation;
+        var GetAllGuessHistoryRequest = (function () {
+            function GetAllGuessHistoryRequest() {
+            }
+            return GetAllGuessHistoryRequest;
+        })();
+        history.GetAllGuessHistoryRequest = GetAllGuessHistoryRequest;
+        var GetAllGuessHistoryRespond = (function () {
+            function GetAllGuessHistoryRespond() {
+            }
+            return GetAllGuessHistoryRespond;
+        })();
+        history.GetAllGuessHistoryRespond = GetAllGuessHistoryRespond;
+        var GuessHistoryMonthlyInformation = (function () {
+            function GuessHistoryMonthlyInformation() {
+            }
+            return GuessHistoryMonthlyInformation;
+        })();
+        history.GuessHistoryMonthlyInformation = GuessHistoryMonthlyInformation;
+        var GetGuessHistoryByMonthRequest = (function () {
+            function GetGuessHistoryByMonthRequest() {
+            }
+            return GetGuessHistoryByMonthRequest;
+        })();
+        history.GetGuessHistoryByMonthRequest = GetGuessHistoryByMonthRequest;
+        var GetGuessHistoryByMonthRespond = (function () {
+            function GetGuessHistoryByMonthRespond() {
+            }
+            return GetGuessHistoryByMonthRespond;
+        })();
+        history.GetGuessHistoryByMonthRespond = GetGuessHistoryByMonthRespond;
+        var GuessHistoryDailyInformation = (function () {
+            function GuessHistoryDailyInformation() {
+            }
+            return GuessHistoryDailyInformation;
+        })();
+        history.GuessHistoryDailyInformation = GuessHistoryDailyInformation;
+    })(history = starter.history || (starter.history = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var history;
+    (function (history) {
+        'use strict';
+        var HistoryServices = (function () {
+            function HistoryServices(queryRemoteSvc) {
+                this.queryRemoteSvc = queryRemoteSvc;
+            }
+            HistoryServices.prototype.GetAllGuessHistory = function (req) {
+                var requestUrl = 'History/GetAllGuessHistory?UserId=' + req.UserId;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            HistoryServices.prototype.GetGuessHistoryByMonth = function (req) {
+                var requestUrl = 'History/GetGuessHistoryByMonth?UserId=' + req.UserId + '&year=' + req.Year + '&month=' + req.Month;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            HistoryServices.$inject = ['starter.shared.QueryRemoteDataService'];
+            return HistoryServices;
+        })();
+        history.HistoryServices = HistoryServices;
+        angular
+            .module('starter.history')
+            .service('starter.history.HistoryServices', HistoryServices);
+    })(history = starter.history || (starter.history = {}));
 })(starter || (starter = {}));
 var starter;
 (function (starter) {

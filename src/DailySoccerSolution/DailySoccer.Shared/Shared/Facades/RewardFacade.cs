@@ -19,6 +19,7 @@ namespace DailySoccer.Shared.Facades
         {
             var rewardDac = FacadeRepository.Instance.RewardDataAccess;
             return rewardDac.GetRewardGroupById(id);
+        }
 
         public GetCurrentWinnersRespond GetCurrentWinners(DateTime currentTime)
         {
