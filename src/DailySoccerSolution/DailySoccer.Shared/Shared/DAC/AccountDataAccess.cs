@@ -17,7 +17,7 @@ namespace DailySoccer.Shared.DAC
                 var SecrectCode = Guid.NewGuid().ToString();
                 var newGuest = new AccountInformation()
                 {
-                    SecrectCode = SecrectCode,
+                    SecretCode = SecrectCode,
                     CurrentOrderedCoupon = 0,
                     Points = 0,
                     MaximumGuessAmount = 5,
@@ -26,7 +26,7 @@ namespace DailySoccer.Shared.DAC
                 dctx.Accounts.Add(new Account
                 {
                     Points = newGuest.Points,
-                    SecrectCode = newGuest.SecrectCode,
+                    SecretCode = newGuest.SecretCode,
                 });
                 dctx.SaveChanges();
 
@@ -42,14 +42,14 @@ namespace DailySoccer.Shared.DAC
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
                 var selectedAccount = dctx.Accounts
-                    .FirstOrDefault(it => it.SecrectCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase));
+                    .FirstOrDefault(it => it.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase));
                 if (selectedAccount == null) return null;
 
                 return new AccountInformation
                 {
                     MaximumGuessAmount = 5,
                     Points = selectedAccount.Points,
-                    SecrectCode = selectedAccount.SecrectCode,
+                    SecretCode = selectedAccount.SecretCode,
                 };
             }
         }
@@ -63,7 +63,7 @@ namespace DailySoccer.Shared.DAC
             {
                 var selectedAccount = dctx.Accounts
                     .Include("GuessMatches")
-                    .Where(it => it.SecrectCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase))
+                    .Where(it => it.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase))
                     .FirstOrDefault();
                 if (selectedAccount == null) return Enumerable.Empty<GuessMatchInformation>();
 
@@ -71,7 +71,7 @@ namespace DailySoccer.Shared.DAC
                     .Select(it => new GuessMatchInformation
                     {
                         Id = it.Id,
-                        AccountSecrectCode = it.Account.SecrectCode,
+                        AccountSecrectCode = it.Account.SecretCode,
                         GuessTeamId = it.GuessTeamId,
                         MatchId = it.MatchId,
                         PredictionPoints = it.PredictionPoints
@@ -100,7 +100,7 @@ namespace DailySoccer.Shared.DAC
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
-                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.SecrectCode.Equals(request.UserId, StringComparison.CurrentCultureIgnoreCase));
+                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.SecretCode.Equals(request.UserId, StringComparison.CurrentCultureIgnoreCase));
                 if (selectedAccount == null) return;
 
                 var selectedTeam = dctx.FavoriteTeams.FirstOrDefault(it => it.Id == request.SelectedTeamId);

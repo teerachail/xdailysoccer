@@ -21,7 +21,7 @@ namespace DailySoccer.Specs.Steps
             var mockAccountDac = ScenarioContext.Current.Get<Moq.Mock<IAccountDataAccess>>();
             mockAccountDac.Setup(it => it.GetAccountBySecrectCode(It.IsAny<string>())).Returns<string>(it =>
             {
-                return accounts.FirstOrDefault(account => account.SecrectCode == it);
+                return accounts.FirstOrDefault(account => account.SecretCode == it);
             });
         }
 

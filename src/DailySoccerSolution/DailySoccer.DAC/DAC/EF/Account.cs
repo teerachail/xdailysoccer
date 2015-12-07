@@ -22,7 +22,7 @@ namespace DailySoccer.DAC.EF
         }
     
         public int Id { get; set; }
-        public string SecrectCode { get; set; }
+        public string SecretCode { get; set; }
         public int Points { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

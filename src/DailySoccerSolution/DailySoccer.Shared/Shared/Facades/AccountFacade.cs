@@ -19,7 +19,7 @@ namespace DailySoccer.Shared.Facades
             {
                 AccountInfo = new AccountInformation
                 {
-                    SecrectCode = accountInfo.SecrectCode,
+                    SecretCode = accountInfo.SecretCode,
                     Points = accountInfo.Points,
                     CurrentOrderedCoupon = accountInfo.CurrentOrderedCoupon,
                     MaximumGuessAmount = accountInfo.MaximumGuessAmount,

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/06/2015 17:24:52
+-- Date Created: 12/07/2015 15:56:57
 -- Generated from EDMX file: C:\Users\joker\Documents\Git\dailysoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
@@ -29,6 +29,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_FavoriteTeamAccount]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Accounts] DROP CONSTRAINT [FK_FavoriteTeamAccount];
 GO
+IF OBJECT_ID(N'[dbo].[FK_AccountWinner]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Winners] DROP CONSTRAINT [FK_AccountWinner];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RewardWinner]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Winners] DROP CONSTRAINT [FK_RewardWinner];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -52,6 +58,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FavoriteTeams]', 'U') IS NOT NULL
     DROP TABLE [dbo].[FavoriteTeams];
 GO
+IF OBJECT_ID(N'[dbo].[Winners]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Winners];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -60,7 +69,7 @@ GO
 -- Creating table 'Accounts'
 CREATE TABLE [dbo].[Accounts] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [SecrectCode] varchar(100)  NOT NULL,
+    [SecretCode] varchar(100)  NOT NULL,
     [Points] int  NOT NULL,
     [FavoriteTeam_Id] int  NULL
 );
@@ -91,7 +100,9 @@ CREATE TABLE [dbo].[GuessMatches] (
     [GuessTeamId] int  NULL,
     [AccountId] int  NOT NULL,
     [MatchId] int  NOT NULL,
-    [PredictionPoints] int  NOT NULL
+    [PredictionPoints] int  NOT NULL,
+    [IsWinner] bit  NOT NULL,
+    [WinnerPoints] int  NULL
 );
 GO
 

@@ -80,7 +80,7 @@ namespace DailySoccer.Specs.Steps
             var expected = table.CreateInstance<AccountInformation>();
             var actual = ScenarioContext.Current.Get<GetMatchesRespond>().AccountInfo;
 
-            Assert.AreEqual(expected.SecrectCode, actual.SecrectCode, "Account's SecrectCode isn't matched");
+            Assert.AreEqual(expected.SecretCode, actual.SecretCode, "Account's SecrectCode isn't matched");
             Assert.AreEqual(expected.Points, actual.Points, "Account's Points isn't matched");
             Assert.AreEqual(expected.MaximumGuessAmount, actual.MaximumGuessAmount, "Account's MaximumGuessAmount isn't matched");
             Assert.AreEqual(expected.CurrentOrderedCoupon, actual.CurrentOrderedCoupon, "Account's CurrentOrderedCoupon isn't matched");

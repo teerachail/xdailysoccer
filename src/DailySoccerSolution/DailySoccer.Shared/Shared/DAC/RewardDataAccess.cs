@@ -82,7 +82,7 @@ namespace DailySoccer.Shared.DAC
                 return dctx.Winners.Select(it => new WinnerInformation
                 {
                     Id = it.Id,
-                    AccountSecrectCode = it.Account.SecrectCode,
+                    AccountSecrectCode = it.Account.SecretCode,
                     ReferenceCode = it.ReferenceCode,
                     RewardId = it.RewardId
                 }).ToList();
