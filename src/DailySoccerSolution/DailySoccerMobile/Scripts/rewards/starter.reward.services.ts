@@ -10,6 +10,10 @@
             var requestUrl = 'Reward/GetCurrentRewards';
             return this.queryRemoteSvc.RemoteQuery<GetCurrentRewardsRespond>(requestUrl);
         }
+        public GetCurrentWinners(): ng.IPromise<GetCurrentWinnersRespond> {
+            var requestUrl = 'Reward/GetCurrentWinners';
+            return this.queryRemoteSvc.RemoteQuery<GetCurrentWinnersRespond>(requestUrl);
+        }
 
         public GetYourRewards(req: GetYourRewardsRequest): ng.IPromise<GetYourRewardsRespond> {
             var requestUrl = 'Reward/GetYourRewards?userId=' + req.UserId;

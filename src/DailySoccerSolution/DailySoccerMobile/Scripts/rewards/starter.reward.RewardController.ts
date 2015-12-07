@@ -6,6 +6,8 @@
         public CurrentOrderedCoupon: number = 2940;
         public UserCoupon: number = 0;
         public RewardInfo: reward.GetCurrentRewardsRespond;
+        public WinnersInfo: reward.GetCurrentWinnersRespond;
+
         public CurrentRewards: YourRewardInformation[];
         public AllRewards: YourRewardInformation[];
         public ContactNo: string;
@@ -14,6 +16,7 @@
         constructor(private $scope,
             private rewardSvc: starter.reward.RewardServices) {
             this.GetRewards();
+            this.GetWinners();
             this.updateDisplayRewards();
         }
 
@@ -22,6 +25,14 @@
                 .then((respond: GetCurrentRewardsRespond): void => {
                     this.RewardInfo = respond;
                     console.log('Get all rewards completed.');
+                });
+        }
+
+        public GetWinners(): void {
+            this.rewardSvc.GetCurrentWinners()
+                .then((respond: GetCurrentWinnersRespond): void => {
+                    this.WinnersInfo = respond;
+                    console.log('Get all winners completed.');
                 });
         }
 

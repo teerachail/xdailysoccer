@@ -1,94 +1,34 @@
 ﻿<ion-view view-title="DAILY SOCCER">
     <ion-content class="">
         <!-- มีผู้รับรางวัล -->
-        <div class="item no-border">
+        <div class="item no-border" ng-repeat="reward in rewardCtrl.WinnersInfo.Winners">
             <div>
                 <b>
-                    รางวัลที่ 1
+                    รางวัลที่ {{reward.Ordering}}
                 </b>
                 <br />
                 <b>
-                    Samsung GALAXY Note 3  
-                </b>
-                <br />
-                <b>
-                    มูลค่า 25,000 บาท 1 รางวัล
+                    {{reward.Description}}
                 </b>
             </div>
             <div>
-                <p>
-                    <i>
-                        - Nitiya Wandee
-                    </i>
-                </p>
-            </div> 
-            <div>
-                <img class="col" src="img/Logos/BannerReward01.png" />
-            </div>
-        </div>
-        <div class="item no-border">
-            <div>
-                <b>
-                    รางวัลที่ 2
-                </b>
-                <br />
-                <b>
-                    เสื้อสโมสรลิเวอร์พูล 
-                </b>
-                <br />
-                <b>
-                    มูลค่า 1,800 บาท 3 รางวัล
-                </b>
-            </div>
-            <div>
-                <p>
-                    <i>
-                        - Gus Meyer
-                    </i>
-                </p>
-                <p>
-                    <i>
-                        - Jirapa Dewan
-                    </i>
-                </p>
-                <p>
-                    <i>
-                        - Perawatt Prohmdetbun
-                    </i>
-                </p>
-            </div>
-            <div>
-                <img class="col" src="img/Logos/BannerReward02.png" />
-            </div>
-        </div>
-        <!-- ไม่มีผู้รับรางวัล -->
-        <div class="item no-border">
-            <div>
-                <b>
-                    รางวัลที่ 3
-                </b>
-                <br />
-                <b>
-                    Asus Zenfone 2 
-                </b>
-                <br />
-                <b>
-                    มูลค่า 1,000 บาท 1 รางวัล
-                </b>
-            </div>
-            <div>
-                <p>
+                <p ng-show="reward.Winners.length==0">
                     <i>
                         - ไม่มีผู้โชคดีได้รับรางวัล
                     </i>
                 </p>
+                <p ng-repeat="winners in reward.Winners">
+                    <i>
+                        - {{winners}}
+                    </i>
+                </p>
             </div>
             <div>
-                <img class="col" src="https://www.asus.com/websites/global/products/HRi9R6lem9YbiPVX/v3/img/index/kv-product.png" />
+                <img class="col" src="{{reward.ImagePath}}" />
             </div>
         </div>
         <!-- ไม่มีรางวัล -->
-        <div class="item no-border text-right">
+        <div class="item no-border text-right" ng-show="rewardCtrl.WinnersInfo.Winners.length==0">
             <div>
                 <img class="col" src="img/Logos/NoReward.png" />
             </div>

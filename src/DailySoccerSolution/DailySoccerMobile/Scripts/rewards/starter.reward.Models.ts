@@ -2,6 +2,7 @@
 
     export interface IRewardService {
         GetCurrentRewards(): ng.IPromise<GetCurrentRewardsRespond>;
+        GetCurrentWinners(): ng.IPromise<GetCurrentWinnersRespond>;
     }
 
     export class GetCurrentRewardsRespond {
@@ -12,6 +13,17 @@
     export class RewardInformation {
         public ImagePath: string;
         public RemainingAmount: number;
+    }
+
+    export class GetCurrentWinnersRespond {
+        public Winners: WinnerAwardInformation[];
+    }
+    
+    export class WinnerAwardInformation {
+        public Ordering: number;
+        public Description: string;
+        public ImagePath: string;
+        public Winners: string[];
     }
 
     export class GetYourRewardsRequest {
