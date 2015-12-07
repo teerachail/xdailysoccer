@@ -10,31 +10,28 @@
                     ผู้โชคดีสามารถติดต่อรับของรางวัลได้ที่
                 </p>
                 <div class="text-white ">
-                    02-159716 ต่อ 5
+                    {{ rewardCtrl.ContactNo }}
                 </div>
             </ion-item>
         </div>
         <!-- รางวัลที่ได้ -->
-        <div>
-            <div class="padding">
+        <div ng-show="rewardCtrl.CurrentRewards.length != 0">
+            <div class="padding" >
                 <span>คุณเป็นผู้โชคดีได้รับรางวัล</span>
             </div>
             <div class="list">
-                <div class="item item-thumbnail-left no-border">
-                    <img src="img/Logos/BannerReward01Thumbnail.png" />
+                <div class="item item-thumbnail-left no-border" ng-repeat="reward in rewardCtrl.CurrentRewards">
+                    <img src="{{ reward.ImagePath }}" />
                     <p>
                         <i>
-                            วันที่ 20/12/2558
+                            {{ reward.ExpiredDate | date: 'longDate' }}
                         </i>
                     </p>
                     <p>
-                        รางวัลที่ 1
+                        รางวัลที่ {{ reward.Ordering }}
                     </p>
                     <p>
-                        Samsung GALAXY Note 3
-                    </p>
-                    <p>
-                        มูลค่า 25,000 บาท
+                        {{ reward.Description }}
                     </p>
                     <p>
                         <i>
@@ -43,38 +40,9 @@
                     </p>
                     <b>
                         <i>
-                            DS 1059
+                            {{ reward.ReferenceCode }}
                         </i>
                     </b>
-                </div>
-                <div class="list">
-                    <div class="item item-thumbnail-left no-border">
-                        <img src="img/Logos/BannerReward02Thumbnail.png" />
-                        <p>
-                            <i>
-                                วันที่ 20/12/2558
-                            </i>
-                        </p>
-                        <p>
-                            รางวัลที่ 2
-                        </p>
-                        <p>
-                            เสื้อสโมสรลิเวอร์พูล
-                        </p>
-                        <p>
-                            มูลค่า 7,000 บาท
-                        </p>
-                        <p>
-                            <i>
-                                รหัสของรางวัล
-                            </i>
-                        </p>
-                        <b>
-                            <i>
-                                DS 1060
-                            </i>
-                        </b>
-                    </div>
                 </div>
             </div>
         </div>
@@ -84,26 +52,17 @@
             <div class="col bg-gray text-center">
                 รางวัลที่เคยได้รับ
             </div>
-            <div class="padding">
+            <div class="padding" ng-repeat="reward in rewardCtrl.AllRewards">
                 <span>
-                    วันที่ 20/12/2558
+                    {{ reward.ExpiredDate | date: 'longDate' }}
                 </span>
                 <br />
                 <span>
-                    Iphone 6 plus มูลค่า 25,000 บาท (DS 1060)
-                </span>
-            </div>
-            <div class="padding">
-                <span>
-                    วันที่ 20/12/2558
-                </span>
-                <br />
-                <span>
-                    Iphone 6 มูลค่า 23,000 บาท (DS 1061)
+                    {{ reward.Description }}
                 </span>
             </div>
             <!-- ไม่มีของรางวัล -->
-            <div class="padding text-center">
+            <div class="padding text-center" ng-show="rewardCtrl.AllRewards.length == 0">
                 <i>
                     ไม่มีข้อมูลของรางวัล !
                 </i>

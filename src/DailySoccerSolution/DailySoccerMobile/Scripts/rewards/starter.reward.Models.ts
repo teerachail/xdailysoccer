@@ -13,4 +13,22 @@
         public ImagePath: string;
         public RemainingAmount: number;
     }
+
+    export class GetYourRewardsRequest {
+        public UserId: string;
+    }
+
+    export class GetYourRewardsRespond {
+        public ContactNo: string;
+        public CurrentRewards: YourRewardInformation[];
+        public AllRewards: YourRewardInformation[];
+    }
+
+    export class YourRewardInformation {
+        public Description: string;
+        public ImagePath: string;
+        public ExpiredDate: Date;
+        public Ordering: number;
+        public ReferenceCode: string;
+    }
 }
