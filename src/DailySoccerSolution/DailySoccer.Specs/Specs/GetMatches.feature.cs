@@ -77,7 +77,7 @@ namespace DailySoccer.Specs
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -137,7 +137,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -252,7 +252,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -367,7 +367,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -495,7 +495,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -629,7 +629,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -744,7 +744,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -872,7 +872,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table29 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -1006,7 +1006,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table33 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -1194,7 +1194,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table37 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -1362,7 +1362,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table41 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -1497,7 +1497,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table45 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -1698,7 +1698,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table49 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
@@ -1924,7 +1924,7 @@ this.FeatureBackground();
 #line hidden
             TechTalk.SpecFlow.Table table53 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});

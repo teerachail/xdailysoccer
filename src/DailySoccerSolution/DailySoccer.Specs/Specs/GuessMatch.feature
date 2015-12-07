@@ -13,7 +13,7 @@ Background: Initialize
 	| 3  | Premier league | 1/1/2015 02:00  | 1/1/2015 02:00 | 1/1/2015 03:30 | 5           | FC Astana       | 10                               | 6           | Atletico Madrid     | 11                               |
 	| 4  | Premier league | 1/20/2015 02:00 |                |                | 7           | Real Madrid     | 12                               | 8           | Paris Saint-Germain | 13                               |
 	And ผู้ใช้ในระบบมีดังนี้
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock

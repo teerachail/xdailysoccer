@@ -12,7 +12,7 @@ Background: Initialize
 	| 1      | AS Roma          | EUFA Champions League |
 	| 2      | Bayer Leverkusen | EUFA Champions League |
 	And ผู้ใช้ในระบบมีดังนี้
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock

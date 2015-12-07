@@ -7,7 +7,7 @@
 Background: Initialize
 	Given Setup mocking
 	And ผู้ใช้ในระบบมีดังนี้
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 	
 @mock
@@ -20,7 +20,7 @@ Scenario: ผู้ใช้ขอแมช์ในตอนที่เซิ�
 	Then ระบบส่งข้อมูลแมช์กลับไปเป็น
 	| Id | LeagueName | BeginDate | StartedDate | CompletedDate |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -37,7 +37,7 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 1  | Premier league | 1/1/2015 01:00 |             |               | 1           | Brentford       | false               | 2           | Hull City        | false               |
 	| 2  | Premier league | 1/1/2015 01:30 |             |               | 3           | Birmingham City | false               | 4           | Blackburn Rovers | false               |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -54,7 +54,7 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 |               | 1           | Brentford       | false               | 2           | Hull City        | false               |
 	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 |               | 3           | Birmingham City | false               | 4           | Blackburn Rovers | false               |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -72,7 +72,7 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 |               | 1           | Brentford       | false               |                                  | 2           | Hull City        | false               |                                  |
 	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 |               | 3           | Birmingham City | true                | 7                                | 4           | Blackburn Rovers | false               |                                  |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -91,7 +91,7 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 |               | 1           | Brentford       | false               |                                  | 2           | Hull City        | true                | 7                                |
 	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 |               | 3           | Birmingham City | true                | 7                                | 4           | Blackburn Rovers | false               |                                  |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -108,7 +108,7 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 | 1/1/2015 02:30 | 1           | Brentford       | false               | 2           | Hull City        | false               |
 	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 | 1/1/2015 03:00 | 3           | Birmingham City | false               | 4           | Blackburn Rovers | false               |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -126,7 +126,7 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 | 1/1/2015 02:30 | 1           | Brentford       | false               |                                  | 2           | Hull City        | false               |                                  |
 	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 | 1/1/2015 03:00 | 3           | Birmingham City | true                | 7                                | 4           | Blackburn Rovers | false               |                                  |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -145,7 +145,7 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 | 1/1/2015 02:30 | 1           | Brentford       | false               |                                  | 2           | Hull City        | true                | 7                                |
 	| 2  | Premier league | 1/1/2015 01:30 | 1/1/2015 01:30 | 1/1/2015 03:00 | 3           | Birmingham City | true                | 7                                | 4           | Blackburn Rovers | false               |                                  |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -169,7 +169,7 @@ Scenario: ผู้ใช้ข้อแมช์ในตอนที่เซ�
 	| 3  | Premier league | 1/1/2015 06:00 |                |                | 5           | Brentford       | false               |                                  | 6           | Hull City           | true                | 7                                |
 	| 4  | Premier league | 1/1/2015 06:30 |                |                | 7           | Birmingham City | false               |                                  | 8           | Blackburn Rovers    | false               |                                  |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -191,7 +191,7 @@ Scenario: ผู้ใช้ขอแมช์ในตอนที่เซิ�
 	| 3  | Premier league | 1/3/2015 01:00 | 1/3/2015 01:00 | 1/3/2015 02:30 | 5           | FC Astana       | false               |                                  | 7           | Atletico Madrid     | false               |                                  |
 	| 4  | Premier league | 1/4/2015 01:00 | 1/4/2015 01:00 | 1/4/2015 02:30 | 6           | Real Madrid     | false               |                                  | 8           | Paris Saint-Germain | true                | 7                                |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -210,7 +210,7 @@ Scenario: ผู้ใช้ขอแมช์ในตอนที่เซิ�
 	| 1  | Premier league | 1/2/2015 01:00 |             |               | 1           | Brentford       | false               | 2           | Hull City        | false               |
 	| 2  | Premier league | 1/3/2015 01:00 |             |               | 3           | Birmingham City | false               | 4           | Blackburn Rovers | false               |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -235,7 +235,7 @@ Scenario: ผู้ใช้ขอแมช์ในตอนที่เซิ�
 	| 5  | Premier league | 1/5/2015 01:00 |                |                | 9           | Shakhtar Donetsk  | false               | 10          | Malmo               | false               |
 	| 6  | Premier league | 1/6/2015 01:00 |                |                | 11          | Manchester United | false               | 12          | CSKA Moscow         | false               |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
@@ -264,5 +264,5 @@ Scenario: ข้อมูลการทายของผู้ใช้ไม�
 	| 5  | Premier league | 1/5/2015 01:00 |                |                | 9           | Shakhtar Donetsk  | false               | 10          | Malmo               | false               |
 	| 6  | Premier league | 1/6/2015 01:00 |                |                | 11          | Manchester United | false               | 12          | CSKA Moscow         | false               |
 	And ระบบส่งข้อมูลผู้ใช้กลับไปเป็น
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |

@@ -140,7 +140,7 @@ namespace DailySoccer.Specs
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
-                        "SecrectCode",
+                        "SecretCode",
                         "Points",
                         "MaximumGuessAmount",
                         "CurrentOrderedCoupon"});
