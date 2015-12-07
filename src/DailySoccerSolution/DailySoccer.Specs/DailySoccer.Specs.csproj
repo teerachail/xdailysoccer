@@ -64,6 +64,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CreateNewGuest.feature</DependentUpon>
     </Compile>
+    <Compile Include="Specs\CreateNewRewardGroup.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateNewRewardGroup.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\GetAllGuessHistory.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -108,6 +113,7 @@
     <Compile Include="Specs\Steps\BackgroundSteps.cs" />
     <Compile Include="Specs\Steps\CommonSetup.cs" />
     <Compile Include="Specs\Steps\CreateNewGuestSteps.cs" />
+    <Compile Include="Specs\Steps\CreateNewRewardGroupSteps.cs" />
     <Compile Include="Specs\Steps\GetAllGuessHistorySteps.cs" />
     <Compile Include="Specs\Steps\GetAllLeagueSteps.cs" />
     <Compile Include="Specs\Steps\GetGuessHistoryByMonthSteps.cs" />
@@ -130,6 +136,10 @@
     <None Include="Specs\CreateNewGuest.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CreateNewGuest.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\CreateNewRewardGroup.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CreateNewRewardGroup.feature.cs</LastGenOutput>
     </None>
     <None Include="Specs\GetAllGuessHistory.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

@@ -87,6 +87,9 @@
     <Compile Include="DAC\EF\Team.cs">
       <DependentUpon>DailySoccerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAC\EF\Ticket.cs">
+      <DependentUpon>DailySoccerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAC\EF\Winner.cs">
       <DependentUpon>DailySoccerModel.tt</DependentUpon>
     </Compile>

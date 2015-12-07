@@ -13,6 +13,7 @@
     <EntitySet Name="Rewards" EntityType="DailySoccerModel.Store.Rewards" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="FavoriteTeams" EntityType="DailySoccerModel.Store.FavoriteTeams" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Winners" EntityType="DailySoccerModel.Store.Winners" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tickets" EntityType="DailySoccerModel.Store.Tickets" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AccountGuessMatch" Association="DailySoccerModel.Store.AccountGuessMatch">
       <End Role="Account" EntitySet="Accounts" />
       <End Role="GuessMatch" EntitySet="GuessMatches" />
@@ -36,6 +37,14 @@
     <AssociationSet Name="RewardWinner" Association="DailySoccerModel.Store.RewardWinner">
       <End Role="Reward" EntitySet="Rewards" />
       <End Role="Winner" EntitySet="Winners" />
+    </AssociationSet>
+    <AssociationSet Name="RewardGroupTicket" Association="DailySoccerModel.Store.RewardGroupTicket">
+      <End Role="RewardGroup" EntitySet="RewardGroups" />
+      <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="AccountTicket" Association="DailySoccerModel.Store.AccountTicket">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Ticket" EntitySet="Tickets" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accounts">
@@ -117,6 +126,15 @@
     <Property Name="ReferenceCode" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="LastContactDate" Type="datetime" Nullable="true" />
   </EntityType>
+  <EntityType Name="Tickets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="RewardGroupId" Type="int" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="AccountGuessMatch">
     <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
     <End Role="GuessMatch" Type="DailySoccerModel.Store.GuessMatches" Multiplicity="*" />
@@ -189,6 +207,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="RewardGroupTicket">
+    <End Role="RewardGroup" Type="DailySoccerModel.Store.RewardGroups" Multiplicity="1" />
+    <End Role="Ticket" Type="DailySoccerModel.Store.Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RewardGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="RewardGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountTicket">
+    <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
+    <End Role="Ticket" Type="DailySoccerModel.Store.Tickets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ticket">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -225,6 +267,15 @@
             <End Role="Reward" EntitySet="Rewards" />
             <End Role="Winner" EntitySet="Winners" />
           </AssociationSet>
+          <EntitySet Name="Tickets" EntityType="DailySoccerModel.Ticket" />
+          <AssociationSet Name="RewardGroupTicket" Association="DailySoccerModel.RewardGroupTicket">
+            <End Role="RewardGroup" EntitySet="RewardGroups" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="AccountTicket" Association="DailySoccerModel.AccountTicket">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -236,6 +287,7 @@
           <NavigationProperty Name="GuessMatches" Relationship="DailySoccerModel.AccountGuessMatch" FromRole="Account" ToRole="GuessMatch" />
           <NavigationProperty Name="FavoriteTeam" Relationship="DailySoccerModel.FavoriteTeamAccount" FromRole="Account" ToRole="FavoriteTeam" />
           <NavigationProperty Name="Winners" Relationship="DailySoccerModel.AccountWinner" FromRole="Account" ToRole="Winner" />
+          <NavigationProperty Name="Tickets" Relationship="DailySoccerModel.AccountTicket" FromRole="Account" ToRole="Ticket" />
         </EntityType>
         <EntityType Name="Match">
           <Key>
@@ -303,6 +355,7 @@
           <Property Name="RequestPoints" Type="Int32" Nullable="false" />
           <Property Name="ExpiredDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Rewards" Relationship="DailySoccerModel.RewardGroupReward" FromRole="RewardGroup" ToRole="Reward" />
+          <NavigationProperty Name="Tickets" Relationship="DailySoccerModel.RewardGroupTicket" FromRole="RewardGroup" ToRole="Ticket" />
         </EntityType>
         <EntityType Name="Reward">
           <Key>
@@ -377,6 +430,41 @@
             </Principal>
             <Dependent Role="Winner">
               <PropertyRef Name="RewardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="RewardGroup" Relationship="DailySoccerModel.RewardGroupTicket" FromRole="Ticket" ToRole="RewardGroup" />
+          <Property Name="RewardGroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="DailySoccerModel.AccountTicket" FromRole="Ticket" ToRole="Account" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="RewardGroupTicket">
+          <End Type="DailySoccerModel.RewardGroup" Role="RewardGroup" Multiplicity="1" />
+          <End Type="DailySoccerModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RewardGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="RewardGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AccountTicket">
+          <End Type="DailySoccerModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="DailySoccerModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="AccountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -472,6 +560,16 @@
           <ScalarProperty Name="RewardId" ColumnName="RewardId" />
           <ScalarProperty Name="ReferenceCode" ColumnName="ReferenceCode" />
           <ScalarProperty Name="LastContactDate" ColumnName="LastContactDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tickets">
+      <EntityTypeMapping TypeName="IsTypeOf(DailySoccerModel.Ticket)">
+        <MappingFragment StoreEntitySet="Tickets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="RewardGroupId" ColumnName="RewardGroupId" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

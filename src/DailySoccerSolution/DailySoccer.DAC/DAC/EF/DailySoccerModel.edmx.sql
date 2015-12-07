@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/07/2015 15:56:57
+-- Date Created: 12/07/2015 16:33:46
 -- Generated from EDMX file: C:\Users\joker\Documents\Git\dailysoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
@@ -35,6 +35,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_RewardWinner]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Winners] DROP CONSTRAINT [FK_RewardWinner];
 GO
+IF OBJECT_ID(N'[dbo].[FK_AccountTicket]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Tickets] DROP CONSTRAINT [FK_AccountTicket];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RewardGroupTicket]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Tickets] DROP CONSTRAINT [FK_RewardGroupTicket];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -60,6 +66,9 @@ IF OBJECT_ID(N'[dbo].[FavoriteTeams]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Winners]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Winners];
+GO
+IF OBJECT_ID(N'[dbo].[Tickets]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tickets];
 GO
 
 -- --------------------------------------------------
@@ -145,6 +154,15 @@ CREATE TABLE [dbo].[Winners] (
 );
 GO
 
+-- Creating table 'Tickets'
+CREATE TABLE [dbo].[Tickets] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [CreatedDate] datetime  NOT NULL,
+    [RewardGroupId] int  NOT NULL,
+    [AccountId] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -188,6 +206,12 @@ GO
 -- Creating primary key on [Id] in table 'Winners'
 ALTER TABLE [dbo].[Winners]
 ADD CONSTRAINT [PK_Winners]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Tickets'
+ALTER TABLE [dbo].[Tickets]
+ADD CONSTRAINT [PK_Tickets]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -283,6 +307,36 @@ GO
 CREATE INDEX [IX_FK_RewardWinner]
 ON [dbo].[Winners]
     ([RewardId]);
+GO
+
+-- Creating foreign key on [RewardGroupId] in table 'Tickets'
+ALTER TABLE [dbo].[Tickets]
+ADD CONSTRAINT [FK_RewardGroupTicket]
+    FOREIGN KEY ([RewardGroupId])
+    REFERENCES [dbo].[RewardGroups]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RewardGroupTicket'
+CREATE INDEX [IX_FK_RewardGroupTicket]
+ON [dbo].[Tickets]
+    ([RewardGroupId]);
+GO
+
+-- Creating foreign key on [AccountId] in table 'Tickets'
+ALTER TABLE [dbo].[Tickets]
+ADD CONSTRAINT [FK_AccountTicket]
+    FOREIGN KEY ([AccountId])
+    REFERENCES [dbo].[Accounts]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AccountTicket'
+CREATE INDEX [IX_FK_AccountTicket]
+ON [dbo].[Tickets]
+    ([AccountId]);
 GO
 
 -- --------------------------------------------------

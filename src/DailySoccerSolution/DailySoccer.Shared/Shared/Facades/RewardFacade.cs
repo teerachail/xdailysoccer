@@ -114,7 +114,13 @@ namespace DailySoccer.Shared.Facades
         public void CreateRewardGroup(RewardGroupInformation model)
         {
             var rewardDac = FacadeRepository.Instance.RewardDataAccess;
-            rewardDac.CreateRewardGroup(model);
+            var currentDate = DateTime.Now;
+            var rewardGroup = rewardDac.GetRewardGroup();
+            var isAllowCreate = rewardGroup.All(it => it.ExpiredDate.Value.Date != model.ExpiredDate.Value.Date);
+            if (model.ExpiredDate.Value.Date >= currentDate.Date && isAllowCreate)
+            {
+                rewardDac.CreateRewardGroup(model);
+            }            
         }
 
         public void CreateReward(RewardInformation model)
