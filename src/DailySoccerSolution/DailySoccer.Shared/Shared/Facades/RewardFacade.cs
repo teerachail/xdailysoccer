@@ -65,18 +65,20 @@ namespace DailySoccer.Shared.Facades
             var isArgumentValid = request != null && !string.IsNullOrEmpty(request.UserId);
             if (!isArgumentValid) return invalidDataModel;
 
-            var allWinRewards = FacadeRepository.Instance.RewardDataAccess.GetWinnersByUserId(request.UserId);
-            var allRewards = FacadeRepository.Instance.RewardDataAccess.GetRewardsByIds(allWinRewards.Select(it => it.RewardId));
+            var rewardDac = FacadeRepository.Instance.RewardDataAccess;
+            var allWinRewards = rewardDac.GetWinnersByUserId(request.UserId);
+            var allRewards = rewardDac.GetRewardsByIds(allWinRewards.Select(it => it.RewardId));
 
-            var currentRewardGroup = FacadeRepository.Instance.RewardDataAccess.GetRewardGroup().Where(it => it.ExpiredDate.HasValue).OrderByDescending(it => it.ExpiredDate).FirstOrDefault();
+            var allRewardGroups = rewardDac.GetRewardGroup().Where(it => it.ExpiredDate.HasValue).ToList();
+            var currentRewardGroup = allRewardGroups.OrderByDescending(it => it.ExpiredDate).FirstOrDefault();
             if (currentRewardGroup == null) return invalidDataModel;
 
             var currentRewardQry = allRewards.Where(it => it.RewardGroupId == currentRewardGroup.Id);
             var otherRewardQry = allRewards.Except(currentRewardQry);
 
             int ordering = 1;
-            var currentRewards = convertToYourReward(currentRewardQry, allWinRewards, currentRewardGroup.ExpiredDate.Value, ref ordering).Where(it => it != null);
-            var otherRewards = convertToYourReward(otherRewardQry, allWinRewards, currentRewardGroup.ExpiredDate.Value, ref ordering).Where(it => it != null);
+            var currentRewards = convertToYourReward(currentRewardQry, allWinRewards, allRewardGroups, ref ordering).Where(it => it != null);
+            var otherRewards = convertToYourReward(otherRewardQry, allWinRewards, allRewardGroups, ref ordering).Where(it => it != null);
 
             return new GetYourRewardsRespond
             {
@@ -85,20 +87,24 @@ namespace DailySoccer.Shared.Facades
                 AllRewards = otherRewards
             };
         }
-        private IEnumerable<YourRewardInformation> convertToYourReward(IEnumerable<RewardInformation> rewards, IEnumerable<WinnerInformation> winners, DateTime expiredDate, ref int ordering)
+        private IEnumerable<YourRewardInformation> convertToYourReward(IEnumerable<RewardInformation> rewards, IEnumerable<WinnerInformation> winners, IEnumerable<RewardGroupInformation> rewardGroups, ref int ordering)
         {
             var running = ordering;
-            var result = rewards.Select(x =>
+            var result = winners.Select(winner =>
             {
-                var selectedWinReward = winners.FirstOrDefault(it => x.Id == it.RewardId);
-                if (selectedWinReward == null) return null;
+                var selectedReward = rewards.FirstOrDefault(it => winner.RewardId == it.Id);
+                if (selectedReward == null) return null;
+
+                var selectedRewardGroup = rewardGroups.FirstOrDefault(it => it.Id == selectedReward.RewardGroupId);
+                if (selectedRewardGroup == null) return null;
+
                 return new YourRewardInformation
                 {
                     Ordering = running++, // HACK: Ordering
-                    Description = x.Description,
-                    ExpiredDate = expiredDate,
-                    ImagePath = x.ImagePath,
-                    ReferenceCode = selectedWinReward.ReferenceCode
+                    Description = selectedReward.Description,
+                    ExpiredDate = selectedRewardGroup.ExpiredDate.Value,
+                    ImagePath = selectedReward.ImagePath,
+                    ReferenceCode = winner.ReferenceCode
                 };
             });
             ordering = running;
