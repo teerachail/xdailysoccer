@@ -75,30 +75,84 @@ namespace DailySoccer.Specs
 #line 8
  testRunner.Given("Setup mocking", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecrectCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table1.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 9
+ testRunner.And("ผู้ใช้ในระบบมีดังนี้", ((string)(null)), table1, "And ");
+#line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add two numbers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ขอข้อมูลของรางวัลที่เคยได้ ในตอนที่ยังไม่เคยมีข้อมูลของรางวัล ระบบส่งรายการ" +
+            "ของรางวัลที่เคยได้เปล่ากลับไป")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "GetYourRewards")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
-        public virtual void AddTwoNumbers()
+        public virtual void ผใชขอขอมลของรางวลทเคยไดในตอนทยงไมเคยมขอมลของรางวลระบบสงรายการของรางวลทเคยไดเปลากลบไป()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ขอข้อมูลของรางวัลที่เคยได้ ในตอนที่ยังไม่เคยมีข้อมูลของรางวัล ระบบส่งรายการ" +
+                    "ของรางวัลที่เคยได้เปล่ากลับไป", new string[] {
                         "mock",
                         "mock"});
-#line 11
+#line 14
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 12
- testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 13
- testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 14
- testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
 #line 15
- testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table2, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+#line 17
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table3, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "RewardId"});
+#line 19
+ testRunner.And("รายชื่อผู้โชคดีทั้งหมดในระบบเป็นดังนี้", ((string)(null)), table4, "And ");
+#line 21
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอข้อมูลของรางวัลที่เคยได้", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Ordering",
+                        "ReferenceCode",
+                        "Description",
+                        "ImagePath",
+                        "ExpiredDate"});
+#line 22
+ testRunner.Then("ระบบส่งรายการของรางวัลที่เคยได้ปัจจุบันกลับมาเป็น", ((string)(null)), table5, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Ordering",
+                        "ReferenceCode",
+                        "Description",
+                        "ImagePath",
+                        "ExpiredDate"});
+#line 24
+ testRunner.Then("ระบบส่งรายการของรางวัลที่เคยได้ที่ผ่านมากลับมาเป็น", ((string)(null)), table6, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

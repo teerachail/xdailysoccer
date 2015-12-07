@@ -6,13 +6,23 @@
 @mock
 Background: Initialize
 	Given Setup mocking
+	And ผู้ใช้ในระบบมีดังนี้
+	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| 1  | s01         | 0      | 5                  | 0                    |
 
 @mock
-Scenario: Add two numbers
-	Given I have entered 50 into the calculator
-	And I have entered 70 into the calculator
-	When I press add
-	Then the result should be 120 on the screen
+Scenario: ผู้ใช้ขอข้อมูลของรางวัลที่เคยได้ ในตอนที่ยังไม่เคยมีข้อมูลของรางวัล ระบบส่งรายการของรางวัลที่เคยได้เปล่ากลับไป
+	Given กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้
+	| Id | RequestPoints | ExpiredDate |
+	And ของรางวัลในแต่ละกลุ่มเป็นดังนี้
+	| Id | RewardGroupId | Name | Description | Amount | RemainingAmount | ImagePath |
+	And รายชื่อผู้โชคดีทั้งหมดในระบบเป็นดังนี้
+	| Id | AccountSecrectCode | RewardId |
+	When ผู้ใช้ UserId: 's01' ขอข้อมูลของรางวัลที่เคยได้
+	Then ระบบส่งรายการของรางวัลที่เคยได้ปัจจุบันกลับมาเป็น
+	| Ordering | ReferenceCode | Description | ImagePath | ExpiredDate |
+	Then ระบบส่งรายการของรางวัลที่เคยได้ที่ผ่านมากลับมาเป็น
+	| Ordering | ReferenceCode | Description | ImagePath | ExpiredDate |
 
 #ผู้ใช้ที่ไม่เคยได้รับของรางวัล ขอข้อมูลของรางวัลที่เคยได้ ระบบส่งรายการของรางวัลที่เคยได้เปล่ากลับไป
 #ผู้ใช้มีของรางวัลที่เคยได้ชิ้นเดียว ขอข้อมูลของรางวัลที่เคยได้ ระบบส่งรายการของรางวัลที่เคยได้ทั้งหมดกลับไป

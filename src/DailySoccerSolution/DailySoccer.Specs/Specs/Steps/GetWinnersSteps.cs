@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using DailySoccer.Shared.DAC;
 using DailySoccer.Shared.Facades;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace DailySoccer.Specs.Steps
 {
@@ -19,7 +20,7 @@ namespace DailySoccer.Specs.Steps
             var rewardGroups = table.CreateSet<RewardGroupInformation>().ToList();
             ScenarioContext.Current.Set(rewardGroups);
         }
-        
+
         [Given(@"ของรางวัลในแต่ละกลุ่มเป็นดังนี้")]
         public void Givenของรางวลในแตละกลมเปนดงน(Table table)
         {
@@ -32,14 +33,18 @@ namespace DailySoccer.Specs.Steps
 
             var mockRewardDac = ScenarioContext.Current.Get<Moq.Mock<IRewardDataAccess>>();
             mockRewardDac.Setup(dac => dac.GetRewardGroup()).Returns(() => rewardGroups);
+            mockRewardDac.Setup(dac => dac.GetRewardsByIds(It.IsAny<IEnumerable<int>>()))
+                .Returns<IEnumerable<int>>(ids => rewardQry.Where(it => ids.Contains(it.Id)));
         }
-        
+
         [Given(@"รายชื่อผู้โชคดีทั้งหมดในระบบเป็นดังนี้")]
         public void Givenรายชอผโชคดทงหมดในระบบเปนดงน(Table table)
         {
             var winnerQry = table.CreateSet<WinnerInformation>();
             var mockRewardDac = ScenarioContext.Current.Get<Moq.Mock<IRewardDataAccess>>();
             mockRewardDac.Setup(dac => dac.GetAllWinners()).Returns(() => winnerQry);
+            mockRewardDac.Setup(dac => dac.GetWinnersByUserId(It.IsAny<string>()))
+                .Returns<string>(userId => winnerQry.Where(it => it.AccountSecrectCode.Equals(userId, StringComparison.CurrentCultureIgnoreCase)));
         }
         
         [When(@"ขอรายชื่อผู้โชคดี")]
