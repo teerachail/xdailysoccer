@@ -4,7 +4,9 @@ CREATE TABLE [dbo].[Rewards] (
     [Name] nvarchar(max)  NOT NULL,
     [Description] nvarchar(max)  NOT NULL,
     [Amount] int  NOT NULL,
-    [ImagePath] nvarchar(max)  NOT NULL,
+    [RemainingAmount] int  NULL,
+    [ThumbnailPath] nvarchar(max)  NULL,
+    [ImagePath] nvarchar(max)  NULL,
     [RewardGroupId] int  NOT NULL
 );
 GO

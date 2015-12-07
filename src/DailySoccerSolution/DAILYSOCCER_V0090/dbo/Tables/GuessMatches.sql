@@ -4,7 +4,9 @@ CREATE TABLE [dbo].[GuessMatches] (
     [GuessTeamId] int  NULL,
     [AccountId] int  NOT NULL,
     [MatchId] int  NOT NULL,
-    [PredictionPoints] int  NOT NULL
+    [PredictionPoints] int  NOT NULL,
+    [IsWinner] bit  NOT NULL,
+    [WinnerPoints] int  NULL
 );
 GO
 -- --------------------------------------------------

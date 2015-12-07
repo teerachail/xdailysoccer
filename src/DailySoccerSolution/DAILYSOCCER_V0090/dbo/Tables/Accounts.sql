@@ -5,7 +5,7 @@
 -- Creating table 'Accounts'
 CREATE TABLE [dbo].[Accounts] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [SecrectCode] varchar(100)  NOT NULL,
+    [SecretCode] varchar(100)  NOT NULL,
     [Points] int  NOT NULL,
     [FavoriteTeam_Id] int  NULL
 );

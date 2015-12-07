@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/07/2015 16:33:46
--- Generated from EDMX file: C:\Users\joker\Documents\Git\dailysoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
+-- Date Created: 12/07/2015 20:00:28
+-- Generated from EDMX file: E:\gits\TheS\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -35,11 +35,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_RewardWinner]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Winners] DROP CONSTRAINT [FK_RewardWinner];
 GO
-IF OBJECT_ID(N'[dbo].[FK_AccountTicket]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Tickets] DROP CONSTRAINT [FK_AccountTicket];
-GO
 IF OBJECT_ID(N'[dbo].[FK_RewardGroupTicket]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tickets] DROP CONSTRAINT [FK_RewardGroupTicket];
+GO
+IF OBJECT_ID(N'[dbo].[FK_AccountTicket]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Tickets] DROP CONSTRAINT [FK_AccountTicket];
 GO
 
 -- --------------------------------------------------
