@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DailySoccer.Shared.Models;
+using DailySoccer.DAC.EF;
 
 namespace DailySoccer.Shared.DAC
 {
@@ -25,6 +26,7 @@ namespace DailySoccer.Shared.DAC
                         Description = reward.Description,
                         Amount = reward.Amount,
                         ImagePath = reward.ImagePath,
+                        ThumbnailPath = reward.ThumbnailPath,
                         RewardGroupId = reward.RewardGroupId
                     })
                 }).ToList();
@@ -43,7 +45,7 @@ namespace DailySoccer.Shared.DAC
                 {
                     Id = qry.Id,
                     RequestPoints = qry.RequestPoints,
-                    ExpiredDate  = qry.ExpiredDate,
+                    ExpiredDate = qry.ExpiredDate,
                     RewardInfo = qry.Rewards.Select(reward => new RewardInformation
                     {
                         Id = reward.Id,
@@ -51,11 +53,23 @@ namespace DailySoccer.Shared.DAC
                         Description = reward.Description,
                         Amount = reward.Amount,
                         ImagePath = reward.ImagePath,
-                        RewardGroupId = reward.RewardGroupId
+                        ThumbnailPath = reward.ThumbnailPath,
+                        RewardGroupId = reward.RewardGroupId,
                     })
                 };
             }
         }
+
+        public void CreateRewardGroup(RewardGroupInformation model)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                dctx.RewardGroups.Add(new RewardGroup {
+                    Id = model.Id,
+                    RequestPoints = model.RequestPoints,
+                    ExpiredDate = model.ExpiredDate.Value
+                });
+                dctx.SaveChanges();
 
         public IEnumerable<WinnerInformation> GetAllWinners()
         {
@@ -68,6 +82,50 @@ namespace DailySoccer.Shared.DAC
                     ReferenceCode = it.ReferenceCode,
                     RewardId = it.RewardId
                 }).ToList();
+            }
+        }
+    }
+        }
+
+        public void EditRewardGroup(int id, RewardGroupInformation model)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var qry = dctx.RewardGroups.FirstOrDefault(it => it.Id == model.Id);
+                qry.Id = model.Id;
+                qry.RequestPoints = model.RequestPoints;
+                qry.ExpiredDate = model.ExpiredDate.Value;
+
+                dctx.SaveChanges();
+            }
+        }
+
+        public void DeleteRewardGroup(int id)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var qry = dctx.RewardGroups.FirstOrDefault(it => it.Id == id);
+                dctx.RewardGroups.Remove(qry);
+                dctx.SaveChanges();
+            }
+        }
+
+        public void CreateReward(RewardInformation model)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                dctx.Rewards.Add(new Reward
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Description = model.Description,
+                    Amount = model.Amount,
+                    RemainingAmount = model.Amount,
+                    ImagePath = model.ImagePath,
+                    ThumbnailPath = model.ThumbnailPath,
+                    RewardGroupId = model.RewardGroupId,
+                });
+                dctx.SaveChanges();
             }
         }
     }

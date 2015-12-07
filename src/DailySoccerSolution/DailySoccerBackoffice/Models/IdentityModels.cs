@@ -29,5 +29,9 @@ namespace DailySoccerBackoffice.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<DailySoccer.Shared.Models.RewardGroupInformation> RewardGroupInformations { get; set; }
+
+        public System.Data.Entity.DbSet<DailySoccer.Shared.Models.RewardInformation> RewardInformations { get; set; }
     }
 }

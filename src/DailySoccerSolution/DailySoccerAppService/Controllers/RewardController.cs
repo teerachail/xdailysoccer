@@ -61,5 +61,26 @@ namespace DailySoccerAppService.Controllers
             return rewardFacade.GetRewardGroup();
         }
 
+        [HttpGet]
+        public RewardGroupInformation GetRewardGroupById(int id)
+        {
+            var rewardFacade = new RewardFacade();
+            return rewardFacade.GetRewardGroupById(id);
+        }
+
+        [HttpPost]
+        public void CreateRewardGroup(RewardGroupInformation model)
+        {
+            var rewardFacade = new RewardFacade();
+            rewardFacade.CreateRewardGroup(model);
+        }
+
+        [HttpPost]
+        public void CreateReward(RewardInformation model)
+        {
+            var rewardFacade = new RewardFacade();
+            rewardFacade.CreateReward(model);
+        }
+
     }
 }

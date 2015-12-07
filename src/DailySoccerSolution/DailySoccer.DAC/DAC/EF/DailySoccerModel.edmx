@@ -92,7 +92,9 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Amount" Type="int" Nullable="false" />
-    <Property Name="ImagePath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RemainingAmount" Type="int" Nullable="true" />
+    <Property Name="ThumbnailPath" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ImagePath" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RewardGroupId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="FavoriteTeams">
@@ -307,7 +309,9 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
-          <Property Name="ImagePath" Type="String" Nullable="false" />
+          <Property Name="RemainingAmount" Type="Int32" Nullable="true" />
+          <Property Name="ThumbnailPath" Type="String" Nullable="true" />
+          <Property Name="ImagePath" Type="String" Nullable="true" />
           <Property Name="RewardGroupId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Winners" Relationship="DailySoccerModel.RewardWinner" FromRole="Reward" ToRole="Winner" />
         </EntityType>
@@ -438,6 +442,8 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="RemainingAmount" ColumnName="RemainingAmount" />
+          <ScalarProperty Name="ThumbnailPath" ColumnName="ThumbnailPath" />
           <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
           <ScalarProperty Name="RewardGroupId" ColumnName="RewardGroupId" />
         </MappingFragment>

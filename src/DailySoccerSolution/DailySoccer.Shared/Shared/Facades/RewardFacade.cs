@@ -15,6 +15,11 @@ namespace DailySoccer.Shared.Facades
             return rewardDac.GetRewardGroup();
         }
 
+        public RewardGroupInformation GetRewardGroupById(int id)
+        {
+            var rewardDac = FacadeRepository.Instance.RewardDataAccess;
+            return rewardDac.GetRewardGroupById(id);
+
         public GetCurrentWinnersRespond GetCurrentWinners(DateTime currentTime)
         {
             var rewardDac = FacadeRepository.Instance.RewardDataAccess;
@@ -48,10 +53,16 @@ namespace DailySoccer.Shared.Facades
             };
         }
 
-        public GetYourRewardsRespond GetYourRewards(GetYourRewardsRequest request)
+        public void CreateRewardGroup(RewardGroupInformation model)
         {
-            // TODO: GetYourRewards
-            throw new NotImplementedException();
+            var rewardDac = FacadeRepository.Instance.RewardDataAccess;
+            rewardDac.CreateRewardGroup(model);
+        }
+
+        public void CreateReward(RewardInformation model)
+        {
+            var rewardDac = FacadeRepository.Instance.RewardDataAccess;
+            rewardDac.CreateReward(model);
         }
     }
 }

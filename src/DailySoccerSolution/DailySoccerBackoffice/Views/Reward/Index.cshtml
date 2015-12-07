@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DailySoccer.Shared.Models.RewardGroupInformation>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div class="pull-right"><a class="btn btn-info" href="@Url.Action("Create")">เพิ่ม</a></div>
+<br />
+<br />
+<table class="table table-responsive">
+    <tr>
+        <th>วันสิ้นสุดการส่ง</th>
+        <th>คะแนนที่ใช้แลก</th>
+        <th>รายละเอียด</th>
+    </tr>
+    @foreach (var rewardGroup in Model)
+    {
+        <tr>
+            <td>@rewardGroup.ExpiredDate</td>
+            <td>@rewardGroup.RequestPoints</td>
+            <td><a href="@Url.Action("Details", new { id = rewardGroup.Id })">รายละเอียด</a></td>
+        </tr>
+    }
+</table>
+

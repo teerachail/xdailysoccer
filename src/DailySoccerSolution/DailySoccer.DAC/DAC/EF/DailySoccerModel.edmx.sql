@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/06/2015 23:45:59
--- Generated from EDMX file: E:\TheS\gits\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
+-- Date Created: 12/06/2015 17:24:52
+-- Generated from EDMX file: C:\Users\joker\Documents\Git\dailysoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -109,7 +109,9 @@ CREATE TABLE [dbo].[Rewards] (
     [Name] nvarchar(max)  NOT NULL,
     [Description] nvarchar(max)  NOT NULL,
     [Amount] int  NOT NULL,
-    [ImagePath] nvarchar(max)  NOT NULL,
+    [RemainingAmount] int  NULL,
+    [ThumbnailPath] nvarchar(max)  NULL,
+    [ImagePath] nvarchar(max)  NULL,
     [RewardGroupId] int  NOT NULL
 );
 GO

@@ -24,6 +24,8 @@ namespace DailySoccer.DAC.EF
         public string Name { get; set; }
         public string Description { get; set; }
         public int Amount { get; set; }
+        public Nullable<int> RemainingAmount { get; set; }
+        public string ThumbnailPath { get; set; }
         public string ImagePath { get; set; }
         public int RewardGroupId { get; set; }
     
