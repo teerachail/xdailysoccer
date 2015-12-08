@@ -49,5 +49,28 @@ namespace DailySoccerAppService.Controllers
             return result;
         }
 
+        [HttpGet]
+        public RequestConfirmPhoneNumberRespond RequestConfirmPhoneNumber(string userId, string phoneNo)
+        {
+            var request = new RequestConfirmPhoneNumberRequest
+            {
+                PhoneNo = phoneNo,
+                UserId = userId
+            };
+            var result = FacadeRepository.Instance.AccountFacade.RequestConfirmPhoneNumber(request);
+            return result;
+        }
+
+        [HttpGet]
+        public ConfirmPhoneNumberRespond ConfirmPhoneNumber(string userId, string verificationCode)
+        {
+            var request = new ConfirmPhoneNumberRequest
+            {
+                UserId = userId,
+                VerificationCode = verificationCode
+            };
+            var result = FacadeRepository.Instance.AccountFacade.ConfirmPhoneNumber(request);
+            return result;
+        }
     }
 }
