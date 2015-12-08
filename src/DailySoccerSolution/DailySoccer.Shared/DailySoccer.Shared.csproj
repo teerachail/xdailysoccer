@@ -62,7 +62,10 @@
     <Compile Include="Shared\Facades\FacadeRepository.cs" />
     <Compile Include="Shared\Facades\MatchFacade.cs" />
     <Compile Include="Shared\Facades\RewardFacade.cs" />
+    <Compile Include="Shared\Facades\TicketFacade.cs" />
     <Compile Include="Shared\Models\AccountInformation.cs" />
+    <Compile Include="Shared\Models\BuyTicketRequest.cs" />
+    <Compile Include="Shared\Models\BuyTicketRespond.cs" />
     <Compile Include="Shared\Models\CreateNewGuestRespond.cs" />
     <Compile Include="Shared\Models\GetAllGuessHistoryRequest.cs" />
     <Compile Include="Shared\Models\GetAllGuessHistoryRespond.cs" />

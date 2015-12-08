@@ -24,9 +24,10 @@ namespace DailySoccer.Shared.Facades
         public IMatchDataAccess MatchDataAccess { get; private set; }
         public IRewardDataAccess RewardDataAccess { get; private set; }
 
-        public MatchFacade MatchFacade { get; set; }
-        public AccountFacade AccountFacade { get; set; }
-        public RewardFacade RewardFacade { get; set; }
+        public MatchFacade MatchFacade { get; private set; }
+        public AccountFacade AccountFacade { get; private set; }
+        public RewardFacade RewardFacade { get; private set; }
+        public TicketFacade TicketFacade { get; private set; }
 
         private FacadeRepository()
         {
@@ -36,7 +37,8 @@ namespace DailySoccer.Shared.Facades
 
             MatchFacade = new MatchFacade();
             AccountFacade = new AccountFacade();
-            RewardFacade = new RewardFacade(); 
+            RewardFacade = new RewardFacade();
+            TicketFacade = new TicketFacade();
         }
 
         internal void InitializeDataAccess(IAccountDataAccess accountDac, IMatchDataAccess matchDac, IRewardDataAccess rewardDac)
