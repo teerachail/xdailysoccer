@@ -110,5 +110,17 @@ namespace DailySoccer.Shared.DAC
                 dctx.SaveChanges();
             }
         }
+
+        public void ChargeFromBuyTicket(string secrectCode, int requiredPoints)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase));
+                if (selectedAccount == null) return;
+
+                selectedAccount.Points -= requiredPoints;
+                dctx.SaveChanges();
+            }
+        }
     }
 }

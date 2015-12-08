@@ -14,5 +14,6 @@ namespace DailySoccer.Shared.DAC
         IEnumerable<GuessMatchInformation> GetGuessMatchsByAccountSecrectCode(string secrectCode);
         IEnumerable<LeagueInformation> GetAllLeagues();
         void SetFavoriteTeam(SetFavoriteTeamRequest request);
+        void ChargeFromBuyTicket(string secrectCode, int requiredPoints);
     }
 }

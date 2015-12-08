@@ -23,6 +23,7 @@ namespace DailySoccer.Shared.Facades
         public IAccountDataAccess AccountDataAccess { get; private set; }
         public IMatchDataAccess MatchDataAccess { get; private set; }
         public IRewardDataAccess RewardDataAccess { get; private set; }
+        public ITicketDataAccess TicketDataAccess { get; private set; }
 
         public MatchFacade MatchFacade { get; private set; }
         public AccountFacade AccountFacade { get; private set; }
@@ -34,6 +35,7 @@ namespace DailySoccer.Shared.Facades
             AccountDataAccess = new AccountDataAccess();
             MatchDataAccess = new MatchDataAccess();
             RewardDataAccess = new RewardDataAccess();
+            TicketDataAccess = new TicketDataAccess();
 
             MatchFacade = new MatchFacade();
             AccountFacade = new AccountFacade();
@@ -41,11 +43,15 @@ namespace DailySoccer.Shared.Facades
             TicketFacade = new TicketFacade();
         }
 
-        internal void InitializeDataAccess(IAccountDataAccess accountDac, IMatchDataAccess matchDac, IRewardDataAccess rewardDac)
+        internal void InitializeDataAccess(IAccountDataAccess accountDac,
+            IMatchDataAccess matchDac,
+            IRewardDataAccess rewardDac,
+            ITicketDataAccess ticketDac)
         {
             AccountDataAccess = accountDac;
             MatchDataAccess = matchDac;
             RewardDataAccess = rewardDac;
+            TicketDataAccess = ticketDac;
         }
     }
 }

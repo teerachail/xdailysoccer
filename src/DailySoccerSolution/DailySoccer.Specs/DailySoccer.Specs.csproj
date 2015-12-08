@@ -121,6 +121,7 @@
       <DependentUpon>SetFavoriteTeam.feature</DependentUpon>
     </Compile>
     <Compile Include="Specs\Steps\BackgroundSteps.cs" />
+    <Compile Include="Specs\Steps\BuyTicketSteps.cs" />
     <Compile Include="Specs\Steps\CommonSetup.cs" />
     <Compile Include="Specs\Steps\CreateNewGuestSteps.cs" />
     <Compile Include="Specs\Steps\CreateNewRewardGroupSteps.cs" />

@@ -20,12 +20,14 @@ namespace DailySoccer.Specs.Steps
             var accountDataAccess = mocks.Create<IAccountDataAccess>();
             var matchDataAccess = mocks.Create<IMatchDataAccess>();
             var rewardDataAccess = mocks.Create<IRewardDataAccess>();
+            var ticketDataAccess = mocks.Create<ITicketDataAccess>();
             ScenarioContext.Current.Set(accountDataAccess);
             ScenarioContext.Current.Set(matchDataAccess);
             ScenarioContext.Current.Set(rewardDataAccess);
+            ScenarioContext.Current.Set(ticketDataAccess);
 
             // Facade repositories
-            FacadeRepository.Instance.InitializeDataAccess(accountDataAccess.Object, matchDataAccess.Object, rewardDataAccess.Object);
+            FacadeRepository.Instance.InitializeDataAccess(accountDataAccess.Object, matchDataAccess.Object, rewardDataAccess.Object, ticketDataAccess.Object);
         }
 
         [Given(@"วันเวลาในปัจจุบันเป็น '(.*)'")]

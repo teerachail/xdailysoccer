@@ -9,6 +9,6 @@ namespace DailySoccer.Shared.Models
     public class BuyTicketRequest
     {
         public string UserId { get; set; }
-        public int amount { get; set; }
+        public int Amount { get; set; }
     }
 }
