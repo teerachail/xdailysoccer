@@ -31,8 +31,8 @@ namespace DailySoccer.Specs
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GetCurrentRewards", "In order to avoid silly mistakes\nAs a math idiot\nI want to be told the sum of two" +
-                    " numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GetCurrentRewards", "In order to avoid silly mistakes\r\nAs a math idiot\r\nI want to be told the sum of t" +
+                    "wo numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -97,7 +97,8 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "RequestPoints",
-                        "ExpiredDate"});
+                        "ExpiredDate",
+                        "RequestPoints"});
 #line 12
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table1, "Given ");
 #line hidden
@@ -146,11 +147,13 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "RequestPoints",
-                        "ExpiredDate"});
+                        "ExpiredDate",
+                        "RequestPoints"});
             table4.AddRow(new string[] {
                         "1",
                         "100",
-                        "1/1/2015 00:00"});
+                        "1/1/2015 00:00",
+                        "100"});
 #line 22
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table4, "Given ");
 #line hidden
@@ -177,6 +180,8 @@ this.FeatureBackground();
                         "ImagePath"});
 #line 28
  testRunner.Then("ระบบส่งรายการของรางวัลกลับไปเป็น", ((string)(null)), table6, "Then ");
+#line 30
+ testRunner.And("ราคา Ticket ของเดือนนี้คือ \'100\' Points", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -191,7 +196,7 @@ this.FeatureBackground();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอข้อมูลของรางวัลในตอนที่กลุ่มของรางวัลเดือนล่าสุดมีรายการของรางวัลครบ ระบบส่งราย" +
                     "การของรางวัลเดือนล่าสุดกลับไป", new string[] {
                         "mock"});
-#line 32
+#line 33
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
@@ -199,12 +204,14 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "RequestPoints",
-                        "ExpiredDate"});
+                        "ExpiredDate",
+                        "RequestPoints"});
             table7.AddRow(new string[] {
                         "1",
                         "100",
-                        "1/1/2015 00:00"});
-#line 33
+                        "1/1/2015 00:00",
+                        "100"});
+#line 34
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table7, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -239,9 +246,9 @@ this.FeatureBackground();
                         "15",
                         "15",
                         "iphone5S.jpg"});
-#line 36
+#line 37
  testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table8, "And ");
-#line 41
+#line 42
  testRunner.When("ขอข้อมูลของรางวัลในรอบล่าสุด", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
@@ -276,8 +283,10 @@ this.FeatureBackground();
                         "15",
                         "15",
                         "iphone5S.jpg"});
-#line 42
+#line 43
  testRunner.Then("ระบบส่งรายการของรางวัลกลับไปเป็น", ((string)(null)), table9, "Then ");
+#line 48
+ testRunner.And("ราคา Ticket ของเดือนนี้คือ \'100\' Points", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -292,7 +301,7 @@ this.FeatureBackground();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอข้อมูลของรางวัลในตอนที่กลุ่มของรางวัลเดือนล่าสุดยังไม่มีรายการของรางวัล แต่ข้อม" +
                     "ูลกลุ่มเดือนก่อนหน้ามีข้อมูลครบ ระบบส่งรายการของรางวัลเปล่ากลับไป", new string[] {
                         "mock"});
-#line 49
+#line 51
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
@@ -300,16 +309,19 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "RequestPoints",
-                        "ExpiredDate"});
+                        "ExpiredDate",
+                        "RequestPoints"});
             table10.AddRow(new string[] {
                         "1",
                         "100",
-                        "1/1/2015 00:00"});
+                        "1/1/2015 00:00",
+                        "100"});
             table10.AddRow(new string[] {
                         "2",
                         "200",
-                        "2/1/2015 00:00"});
-#line 50
+                        "2/1/2015 00:00",
+                        "200"});
+#line 52
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table10, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
@@ -344,9 +356,9 @@ this.FeatureBackground();
                         "15",
                         "15",
                         "iphone5S.jpg"});
-#line 54
+#line 56
  testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table11, "And ");
-#line 59
+#line 61
  testRunner.When("ขอข้อมูลของรางวัลในรอบล่าสุด", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
@@ -357,8 +369,10 @@ this.FeatureBackground();
                         "Amount",
                         "RemainingAmount",
                         "ImagePath"});
-#line 60
+#line 62
  testRunner.Then("ระบบส่งรายการของรางวัลกลับไปเป็น", ((string)(null)), table12, "Then ");
+#line 64
+ testRunner.And("ราคา Ticket ของเดือนนี้คือ \'200\' Points", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -373,7 +387,7 @@ this.FeatureBackground();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ขอข้อมูลของรางวัลในตอนที่กลุ่มของรางวัลเดือนล่าสุดและเดือนก่อนหน้ามีข้อมูลครับ แต" +
                     "่ข้อมูลกลุ่มเดือนก่อนหน้ามีข้อมูลครบ ระบบส่งรายการของรางวัลเดือนล่าสุดกลับไป", new string[] {
                         "mock"});
-#line 64
+#line 67
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
@@ -381,16 +395,19 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "RequestPoints",
-                        "ExpiredDate"});
+                        "ExpiredDate",
+                        "RequestPoints"});
             table13.AddRow(new string[] {
                         "1",
                         "100",
-                        "1/1/2015 00:00"});
+                        "1/1/2015 00:00",
+                        "100"});
             table13.AddRow(new string[] {
                         "2",
                         "200",
-                        "2/1/2015 00:00"});
-#line 65
+                        "2/1/2015 00:00",
+                        "200"});
+#line 68
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table13, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
@@ -441,9 +458,9 @@ this.FeatureBackground();
                         "200",
                         "120",
                         "xboxone.jpg"});
-#line 69
+#line 72
  testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table14, "And ");
-#line 76
+#line 79
  testRunner.When("ขอข้อมูลของรางวัลในรอบล่าสุด", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
@@ -470,8 +487,10 @@ this.FeatureBackground();
                         "200",
                         "120",
                         "xboxone.jpg"});
-#line 77
+#line 80
  testRunner.Then("ระบบส่งรายการของรางวัลกลับไปเป็น", ((string)(null)), table15, "Then ");
+#line 84
+ testRunner.And("ราคา Ticket ของเดือนนี้คือ \'200\' Points", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

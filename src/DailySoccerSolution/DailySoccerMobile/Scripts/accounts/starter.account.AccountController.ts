@@ -45,7 +45,7 @@
             var user = Ionic.User.current();
                 this.accountSvc.CreateNewGuest()
                     .then((respond: CreateNewGuestRespond): void => {
-                        user.id = respond.AccountInfo.SecrectCode;
+                        user.id = respond.AccountInfo.SecretCode;
                         user.set('isSkiped', 'true');
                         user.save();
                         console.log('Create new guest complete. #' + user.id);

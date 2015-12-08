@@ -5,7 +5,7 @@
     }
 
     export class AccountInformation {
-        public SecrectCode: string;
+        public SecretCode: string;
         public Points: number;
         public MaximumGuessAmount: number;
         public CurrentOrderedCoupon: number;

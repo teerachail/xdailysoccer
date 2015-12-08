@@ -43,5 +43,13 @@ namespace DailySoccer.Specs.Steps
                 Assert.AreEqual(expecteds[elementIndex].ImagePath, actuals[elementIndex].ImagePath, "ImagePath aren't equal" + errorMessage);
             }
         }
+
+        [Then(@"ราคา Ticket ของเดือนนี้คือ '(.*)' Points")]
+        public void ThenราคาTicketของเดอนนคอPoints(int expected)
+        {
+            var actual = ScenarioContext.Current.Get<GetCurrentRewardsRespond>().TicketCost;
+            Assert.AreEqual(expected, actual, "Point aren't equal");
+        }
+
     }
 }
