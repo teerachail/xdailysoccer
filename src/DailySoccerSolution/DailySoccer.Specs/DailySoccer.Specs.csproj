@@ -138,6 +138,7 @@
     <Compile Include="Specs\Steps\GetWinnersSteps.cs" />
     <Compile Include="Specs\Steps\GetYourRewardsSteps.cs" />
     <Compile Include="Specs\Steps\GuessMatchSteps.cs" />
+    <Compile Include="Specs\Steps\RequestConfirmPhoneNumberSteps.cs" />
     <Compile Include="Specs\Steps\SetFavoriteTeamSteps.cs" />
     <Compile Include="Specs\Steps\StepHelper.cs" />
   </ItemGroup>

@@ -75,30 +75,132 @@ namespace DailySoccer.Specs
 #line 8
  testRunner.Given("Setup mocking", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecretCode",
+                        "VerifyCode"});
+            table1.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        ""});
+            table1.AddRow(new string[] {
+                        "2",
+                        "s02",
+                        "+66914185555"});
+#line 9
+ testRunner.And("ผู้ใช้ในระบบมีดังนี้", ((string)(null)), table1, "And ");
+#line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add two numbers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ทำการขอยืนยันเบอร์โทรศัพท์ ระบบบันทึกเบอร์โทรแล้วส่งรหัสลับในการยืนยันกลับไ" +
+            "ป")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RequestConfirmPhoneNumber")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
-        public virtual void AddTwoNumbers()
+        public virtual void ผใชทำการขอยนยนเบอรโทรศพทระบบบนทกเบอรโทรแลวสงรหสลบในการยนยนกลบไป()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ทำการขอยืนยันเบอร์โทรศัพท์ ระบบบันทึกเบอร์โทรแล้วส่งรหัสลับในการยืนยันกลับไ" +
+                    "ป", new string[] {
                         "mock",
                         "mock"});
-#line 11
+#line 16
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 12
- testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 13
- testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 14
- testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 15
- testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 17
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอยืนยันเบอร์โทรศัพ \'+66914185500\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 18
+ testRunner.Then("ระบบบันทึกเบอร์โทร \'+66914185500\' ของผู้ใช้ UserId: \'s01\' แล้วส่งรหัสลับในการยืนย" +
+                    "ันกลับไป", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ทำการขอยืนยันเบอร์โทรศัพท์แต่เป็นเบอร์ที่ไม่ถูกต้อง (สั้นกว่า 6 หลัก) ระบบไ" +
+            "ม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RequestConfirmPhoneNumber")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชทำการขอยนยนเบอรโทรศพทแตเปนเบอรทไมถกตองสนกวา6หลกระบบไมทำการบนทกเบอรโทรและไมสงรหสลบกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ทำการขอยืนยันเบอร์โทรศัพท์แต่เป็นเบอร์ที่ไม่ถูกต้อง (สั้นกว่า 6 หลัก) ระบบไ" +
+                    "ม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", new string[] {
+                        "mock"});
+#line 21
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 22
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอยืนยันเบอร์โทรศัพ \'12345\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 23
+ testRunner.Then("ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ทำการขอยืนยันเบอร์โทรศัพท์แต่เป็นเบอร์ที่ไม่ถูกต้อง (ยาวกว่า 20 หลัก) ระบบไ" +
+            "ม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RequestConfirmPhoneNumber")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชทำการขอยนยนเบอรโทรศพทแตเปนเบอรทไมถกตองยาวกวา20หลกระบบไมทำการบนทกเบอรโทรและไมสงรหสลบกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ทำการขอยืนยันเบอร์โทรศัพท์แต่เป็นเบอร์ที่ไม่ถูกต้อง (ยาวกว่า 20 หลัก) ระบบไ" +
+                    "ม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", new string[] {
+                        "mock"});
+#line 26
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 27
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ขอยืนยันเบอร์โทรศัพ \'012345678901234567890\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 28
+ testRunner.Then("ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ที่เคยยืนยันเบอร์โทรเสร็จสมบูรณ์ไปแล้วขอทำการยืนยันเบอร์โทรอีกครั้ง ระบบไม่" +
+            "ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RequestConfirmPhoneNumber")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชทเคยยนยนเบอรโทรเสรจสมบรณไปแลวขอทำการยนยนเบอรโทรอกครงระบบไมทำการบนทกเบอรโทรและไมสงรหสลบกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่เคยยืนยันเบอร์โทรเสร็จสมบูรณ์ไปแล้วขอทำการยืนยันเบอร์โทรอีกครั้ง ระบบไม่" +
+                    "ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", new string[] {
+                        "mock"});
+#line 31
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 32
+ testRunner.When("ผู้ใช้ UserId: \'s02\' ขอยืนยันเบอร์โทรศัพ \'+66914185500\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 33
+ testRunner.Then("ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ที่ไม่มีในระบบขอยืนยันเบอร์โทรศัพ ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลั" +
+            "บกลับไป")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RequestConfirmPhoneNumber")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชทไมมในระบบขอยนยนเบอรโทรศพระบบไมทำการบนทกเบอรโทรและไมสงรหสลบกลบไป()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่ไม่มีในระบบขอยืนยันเบอร์โทรศัพ ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลั" +
+                    "บกลับไป", new string[] {
+                        "mock"});
+#line 36
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 37
+ testRunner.When("ผู้ใช้ UserId: \'unknow\' ขอยืนยันเบอร์โทรศัพ \'+66914185500\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 38
+ testRunner.Then("ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

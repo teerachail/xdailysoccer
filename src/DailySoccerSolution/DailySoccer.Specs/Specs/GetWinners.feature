@@ -7,10 +7,10 @@
 Background: Initialize
 	Given Setup mocking
 	And ผู้ใช้ในระบบมีดังนี้
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
-	| 1  | s01         | 0      | 5                  | 0                    |
-	| 2  | s02         | 0      | 5                  | 0                    |
-	| 3  | s03         | 0      | 5                  | 0                    |
+	| Id | SecretCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| 1  | s01        | 0      | 5                  | 0                    |
+	| 2  | s02        | 0      | 5                  | 0                    |
+	| 3  | s03        | 0      | 5                  | 0                    |
 
 @mock
 Scenario: ขอรายชื่อผู้โชคดีในตอนที่ไม่รางวัลในระบบ ระบบส่งรายชื่อผู้โชคดีเปล่ากลับไป

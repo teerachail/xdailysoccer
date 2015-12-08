@@ -220,8 +220,32 @@ namespace DailySoccer.Shared.Facades
 
         public RequestConfirmPhoneNumberRespond RequestConfirmPhoneNumber(RequestConfirmPhoneNumberRequest request)
         {
-            // TODO: ConfirmPhoneNumber
-            throw new NotImplementedException();
+            var invalidDataModel = new RequestConfirmPhoneNumberRespond { IsSuccessed = false };
+            var isArgumentValid = request != null
+                && !string.IsNullOrEmpty(request.UserId)
+                && !string.IsNullOrEmpty(request.PhoneNo);
+            if (!isArgumentValid) return invalidDataModel;
+
+            var phoneNumber = request.PhoneNo.Replace("-", string.Empty);
+            const int MinimumPhoneNumberRequired = 6;
+            const int MaximumPhoneNumberRequired = 20;
+            var isPhoneNumberValid = phoneNumber.Length >= MinimumPhoneNumberRequired && phoneNumber.Length <= MaximumPhoneNumberRequired;
+            if (!isPhoneNumberValid) return invalidDataModel;
+
+            var accountDac = FacadeRepository.Instance.AccountDataAccess;
+            var selectedAccount = accountDac.GetAccountBySecrectCode(request.UserId);
+            var isAccountValid = selectedAccount != null && string.IsNullOrEmpty(selectedAccount.VerifyCode);
+            if (!isAccountValid) return invalidDataModel;
+
+            var verificationCode = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 7);
+            accountDac.RequestConfirmPhoneNumber(request, verificationCode);
+
+            return new RequestConfirmPhoneNumberRespond
+            {
+                IsSuccessed = true,
+                ForPhoneNumber = request.PhoneNo,
+                VerificationCode = verificationCode
+            };
         }
 
         public ConfirmPhoneNumberRespond ConfirmPhoneNumber(ConfirmPhoneNumberRequest request)

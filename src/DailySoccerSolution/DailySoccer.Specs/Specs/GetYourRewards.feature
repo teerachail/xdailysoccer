@@ -7,9 +7,9 @@
 Background: Initialize
 	Given Setup mocking
 	And ผู้ใช้ในระบบมีดังนี้
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
-	| 1  | s01         | 0      | 5                  | 0                    |
-	| 2  | s02         | 0      | 5                  | 0                    |
+	| Id | SecretCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| 1  | s01        | 0      | 5                  | 0                    |
+	| 2  | s02        | 0      | 5                  | 0                    |
 
 @mock
 Scenario: ผู้ใช้ขอข้อมูลของรางวัลที่เคยได้ ในตอนที่ยังไม่เคยมีข้อมูลของรางวัล ระบบส่งรายการของรางวัลที่เคยได้เปล่ากลับไป

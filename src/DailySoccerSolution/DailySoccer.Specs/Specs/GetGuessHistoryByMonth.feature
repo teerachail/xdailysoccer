@@ -7,8 +7,8 @@
 Background: Initialize
 	Given Setup mocking
 	And ผู้ใช้ในระบบมีดังนี้
-	| Id | SecrectCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
-	| 1  | s01         | 0      | 5                  | 0                    |
+	| Id | SecretCode | Points | MaximumGuessAmount | CurrentOrderedCoupon |
+	| 1  | s01        | 0      | 5                  | 0                    |
 	And วันเวลาในปัจจุบันเป็น '1/1/2015 00:00'
 
 @mock

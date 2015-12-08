@@ -184,7 +184,7 @@ namespace DailySoccer.Shared.DAC
             }
         }
 
-        public void RequestConfirmPhoneNumber(RequestConfirmPhoneNumberRequest request)
+        public void RequestConfirmPhoneNumber(RequestConfirmPhoneNumberRequest request, string verificationCode)
         {
             // TODO: RequestConfirmPhoneNumber
             throw new NotImplementedException();
