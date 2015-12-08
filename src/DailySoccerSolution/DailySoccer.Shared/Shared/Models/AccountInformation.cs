@@ -9,6 +9,9 @@ namespace DailySoccer.Shared.Models
     public class AccountInformation
     {
         public string SecretCode { get; set; }
+        public string OAuthId { get; set; }
+        public string Email { get; set; }
+        public string VerifyCode { get; set; }
         public int Points { get; set; }
         public int MaximumGuessAmount { get; set; }
         public int CurrentOrderedCoupon { get; set; }

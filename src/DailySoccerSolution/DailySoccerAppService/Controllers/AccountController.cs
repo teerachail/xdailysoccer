@@ -23,5 +23,31 @@ namespace DailySoccerAppService.Controllers
             return result;
         }
 
+        [HttpGet]
+        public CreateNewGuestRespond CreateNewGuestWithFacebook(string OAuthId)
+        {
+            var accountFacade = new AccountFacade();
+            var email = "testuser@dailysoccer.com";
+            var result = accountFacade.CreateNewGuestWithFaceebook(OAuthId, email);
+            return result;
+        }
+
+        [HttpGet]
+        public bool UpdateAccountWithFacebook(string secretCode, string OAuthId)
+        {
+            var accountFacade = new AccountFacade();
+            var email = "testuser@dailysoccer.com";
+            accountFacade.UpdateAccountWithFacebook(secretCode, OAuthId, email);
+            return true;
+        }
+
+        [HttpGet]
+        public AccountInformation GetAccountByOAuthId(string OAuthId)
+        {
+            var accountFacade = new AccountFacade();
+            var result = accountFacade.GetAccountByOAuthId(OAuthId);
+            return result;
+        }
+
     }
 }

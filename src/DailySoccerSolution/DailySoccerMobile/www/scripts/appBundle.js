@@ -2,9 +2,10 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'azure-mobile-service.module', 'starter.shared', 'starter.account', 'starter.match', 'starter.reward', 'starter.history', 'bhResponsiveImages'])
+angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.module', 'starter.controllers', 'starter.shared', 'starter.account', 'starter.match', 'starter.reward', 'starter.history', 'bhResponsiveImages'])
     .constant('AzureMobileServiceClient', {
-    API_URL: 'https://dailysoccer.azurewebsites.net'
+    API_URL: 'https://dailysoccer.azurewebsites.net',
+    API_KEY: 'https://dailysoccerb2b9cb00dad1424394487af38c61ca1e.azurewebsites.net'
 })
     .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -312,13 +313,14 @@ var starter;
     (function (account) {
         'use strict';
         var AccountController = (function () {
-            function AccountController($scope, $timeout, $location, accountSvc) {
+            function AccountController($scope, $timeout, $location, accountSvc, Azureservice) {
                 this.$scope = $scope;
                 this.$timeout = $timeout;
                 this.$location = $location;
                 this.accountSvc = accountSvc;
+                this.Azureservice = Azureservice;
                 this._selectedTeamId = -1;
-                this.checkIonicUserData();
+                //this.checkIonicUserData();
                 this.GetAllLeague();
             }
             AccountController.prototype.GetAllLeague = function () {
@@ -347,26 +349,59 @@ var starter;
                     }
                 }
             };
-            AccountController.prototype.createIonicUserData = function () {
+            AccountController.prototype.createNewGuestUser = function (OAuthId) {
                 var _this = this;
+                if (OAuthId === void 0) { OAuthId = null; }
                 var user = Ionic.User.current();
                 this.accountSvc.CreateNewGuest()
                     .then(function (respond) {
                     user.id = respond.AccountInfo.SecretCode;
-                    user.set('isSkiped', 'true');
+                    user.set('IsSkiped', 'true');
+                    user.set('PhoneVerified', 'false');
+                    if (OAuthId != null)
+                        user.set('OAuthId', OAuthId);
                     user.save();
-                    console.log('Create new guest complete.');
+                    console.log('Create new guest complete. #' + user.id);
                     _this.$location.path('/account/favorite');
                 });
             };
             AccountController.prototype.SkipLogin = function () {
                 // TODO: Login with guest
-                this.createIonicUserData();
+                this.createNewGuestUser();
             };
             ;
+            AccountController.prototype.CreateNewGuestWithFacebook = function (oAuthId) {
+                var _this = this;
+                this.accountSvc.CreateNewGuestWithFacebook(oAuthId)
+                    .then(function (respond) {
+                    alert('createnew facebook account');
+                    var user = Ionic.User.current();
+                    user.id = respond.AccountInfo.SecretCode;
+                    user.set('IsSkiped', 'true');
+                    user.set('PhoneVerified', 'false');
+                    user.save();
+                    _this.$location.path('/matches/todaymatches');
+                });
+            };
             AccountController.prototype.LoginWithFacebook = function () {
+                var _this = this;
                 // TODO: Login with facebook
-                this.createIonicUserData();
+                this.Azureservice.login('facebook')
+                    .then(function () {
+                    var oAuthId = _this.Azureservice.getCurrentUser().userId;
+                    _this.accountSvc.GetAccountByOAuthId(oAuthId)
+                        .then(function (respond) {
+                        if (respond == null) {
+                            _this.CreateNewGuestWithFacebook(oAuthId);
+                        }
+                        else {
+                            alert('old facebook account');
+                        }
+                    });
+                    console.log('Login successful');
+                }, function (err) {
+                    console.error('Azure Error: ' + err);
+                });
             };
             ;
             AccountController.prototype.SelectFavoriteTeam = function (TeamId) {
@@ -389,7 +424,7 @@ var starter;
                 user.set('isSetFavoriteTeam', 'true');
                 user.save();
             };
-            AccountController.$inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices'];
+            AccountController.$inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice'];
             return AccountController;
         })();
         angular
@@ -453,6 +488,14 @@ var starter;
             AccountServices.prototype.SetFavoriteTeam = function (req) {
                 var requestUrl = "Favorite/SetFavoriteTeam?userId=" + req.UserId + "&selectedTeamId=" + req.SelectedTeamId;
                 this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            AccountServices.prototype.GetAccountByOAuthId = function (OAuthId) {
+                var requestUrl = "Account/GetAccountByOAuthId?OAuthId=" + OAuthId;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            AccountServices.prototype.CreateNewGuestWithFacebook = function (OAuthId) {
+                var requestUrl = "Account/CreateNewGuestWithFacebook?OAuthId=" + OAuthId;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
             AccountServices.$inject = ['starter.shared.QueryRemoteDataService'];
             return AccountServices;
@@ -942,7 +985,7 @@ var starter;
         var QueryRemoteDataService = (function () {
             function QueryRemoteDataService($http) {
                 this.$http = $http;
-                this.serviceURL = 'https://dailysoccer.azurewebsites.net/api/';
+                this.serviceURL = 'http://localhost:3728/api/';
             }
             QueryRemoteDataService.prototype.RemoteQuery = function (baseUrl) {
                 return this.$http({ method: 'GET', url: this.serviceURL + baseUrl })

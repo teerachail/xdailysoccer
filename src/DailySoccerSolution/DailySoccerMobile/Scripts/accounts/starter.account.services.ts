@@ -22,6 +22,21 @@
             this.queryRemoteSvc.RemoteQuery<SetFavoriteTeamRequest>(requestUrl);
         }
 
+        public GetAccountByOAuthId(OAuthId: string): ng.IPromise<AccountInformation> {
+            var requestUrl = "Account/GetAccountByOAuthId?OAuthId=" + OAuthId;
+            return this.queryRemoteSvc.RemoteQuery<AccountInformation>(requestUrl);
+        }
+
+        public CreateNewGuestWithFacebook(OAuthId: string): ng.IPromise<CreateNewGuestRespond> {
+            var requestUrl = "Account/CreateNewGuestWithFacebook?OAuthId=" + OAuthId;
+            return this.queryRemoteSvc.RemoteQuery<CreateNewGuestRespond>(requestUrl);
+        }
+
+        public UpdateAccoutWithFacebook(secretCode: string, OAuthId: string): ng.IPromise<Boolean> {
+            var requestUrl = "Account/UpdateAccoutWithFacebook?secretCode=" + secretCode + "&OAuthId=" + OAuthId;
+            return this.queryRemoteSvc.RemoteQuery<Boolean>(requestUrl);
+        }
+
     }
     angular
         .module('starter.account')

@@ -41,4 +41,6 @@
   </platform>
   <preference name="Orientation" value="portrait" />
   <preference name="Fullscreen" value="True" />
+  <vs:plugin name="org.apache.cordova.device" version="0.3.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" />
+  <vs:plugin name="org.apache.cordova.inappbrowser" version="0.6.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" />
 </widget>

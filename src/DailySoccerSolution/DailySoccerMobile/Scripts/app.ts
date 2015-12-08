@@ -4,9 +4,10 @@ declare var Ionic: any;
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ionic.service.core', 'starter.controllers', 'azure-mobile-service.module', 'starter.shared', 'starter.account', 'starter.match', 'starter.reward', 'starter.history', 'bhResponsiveImages'])
+angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.module', 'starter.controllers', 'starter.shared', 'starter.account', 'starter.match', 'starter.reward', 'starter.history', 'bhResponsiveImages'])
     .constant('AzureMobileServiceClient', {
-        API_URL: 'https://dailysoccer.azurewebsites.net'
+        API_URL: 'https://dailysoccer.azurewebsites.net',
+        API_KEY: 'https://dailysoccerb2b9cb00dad1424394487af38c61ca1e.azurewebsites.net'
     })
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {

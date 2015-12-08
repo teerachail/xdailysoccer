@@ -53,7 +53,10 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SecretCode" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="OAuthId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Points" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="VerifyCode" Type="nvarchar(max)" Nullable="true" />
     <Property Name="FavoriteTeam_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Matches">
@@ -283,11 +286,14 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SecretCode" Type="String" Nullable="false" Unicode="false" FixedLength="false" MaxLength="100" />
+          <Property Name="OAuthId" Type="String" Nullable="true" />
           <Property Name="Points" Type="Int32" Nullable="false" />
           <NavigationProperty Name="GuessMatches" Relationship="DailySoccerModel.AccountGuessMatch" FromRole="Account" ToRole="GuessMatch" />
           <NavigationProperty Name="FavoriteTeam" Relationship="DailySoccerModel.FavoriteTeamAccount" FromRole="Account" ToRole="FavoriteTeam" />
           <NavigationProperty Name="Winners" Relationship="DailySoccerModel.AccountWinner" FromRole="Account" ToRole="Winner" />
           <NavigationProperty Name="Tickets" Relationship="DailySoccerModel.AccountTicket" FromRole="Account" ToRole="Ticket" />
+          <Property Name="Email" Type="String" Nullable="true" />
+          <Property Name="VerifyCode" Type="String" Nullable="true" />
         </EntityType>
         <EntityType Name="Match">
           <Key>
@@ -479,7 +485,10 @@
         <MappingFragment StoreEntitySet="Accounts">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="SecretCode" ColumnName="SecretCode" />
+          <ScalarProperty Name="OAuthId" ColumnName="OAuthId" />
           <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="VerifyCode" ColumnName="VerifyCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

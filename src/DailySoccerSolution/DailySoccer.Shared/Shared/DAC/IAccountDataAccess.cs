@@ -10,7 +10,10 @@ namespace DailySoccer.Shared.DAC
     public interface IAccountDataAccess
     {
         AccountInformation CreateAccount();
+        AccountInformation CreateNewAccountWithFacebook(string OAuthId, string email);
+        void UpdateAccount(AccountInformation accountInfo);
         AccountInformation GetAccountBySecrectCode(string secrectCode);
+        AccountInformation GetAccountByOAuthId(string OAuthId);
         IEnumerable<GuessMatchInformation> GetGuessMatchsByAccountSecrectCode(string secrectCode);
         IEnumerable<LeagueInformation> GetAllLeagues();
         void SetFavoriteTeam(SetFavoriteTeamRequest request);

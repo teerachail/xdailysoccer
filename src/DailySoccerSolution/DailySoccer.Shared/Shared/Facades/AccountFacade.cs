@@ -28,6 +28,39 @@ namespace DailySoccer.Shared.Facades
             };
         }
 
+        public CreateNewGuestRespond CreateNewGuestWithFaceebook(string OAuthId, string email)
+        {
+            var facade = FacadeRepository.Instance;
+            var accountInfo = facade.AccountDataAccess.CreateNewAccountWithFacebook(OAuthId, email);
+            return new CreateNewGuestRespond()
+            {
+                AccountInfo = new AccountInformation
+                {
+                    SecretCode = accountInfo.SecretCode,
+                    Points = accountInfo.Points,
+                    CurrentOrderedCoupon = accountInfo.CurrentOrderedCoupon,
+                    MaximumGuessAmount = accountInfo.MaximumGuessAmount,
+                    OAuthId = accountInfo.OAuthId,
+                },
+                IsSuccessed = true
+            };
+        }
+
+        public void UpdateAccountWithFacebook(string secretCode,string OAuthId, string email)
+        {
+            var facade = FacadeRepository.Instance;
+            var accountInfo = facade.AccountDataAccess.GetAccountBySecrectCode(secretCode);
+            accountInfo.OAuthId = OAuthId;
+            accountInfo.Email = email;
+            facade.AccountDataAccess.UpdateAccount(accountInfo);
+        }
+
+        public AccountInformation GetAccountByOAuthId(string OAuthId)
+        {
+            var facade = FacadeRepository.Instance;
+            return facade.AccountDataAccess.GetAccountByOAuthId(OAuthId);
+        }
+
         public GetAllLeagueRespond GetAllLeagues()
         {
             var leagues = FacadeRepository.Instance.AccountDataAccess.GetAllLeagues();
