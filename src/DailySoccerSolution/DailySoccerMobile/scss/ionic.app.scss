@@ -193,7 +193,7 @@ a {
 }
 
 .bar .button {
-    padding: 8px 8px;
+    padding: 8px 8px !important;
 }
 
 .soccer-number {
@@ -261,7 +261,7 @@ hr{
     display: inherit;
 }
 .bar .button {
-    padding: 8px 8px;
+    padding: 8px 8px !important;
 }
 
 .tabs-dark.tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-dark.tabs-top.tabs-striped .tab-item.active, .tabs-dark.tabs-top.tabs-striped .tab-item.activated{
@@ -513,4 +513,10 @@ div.title.title-center div{
  .box-score{
     height: 52px;
     margin: 0;
+ }
+ .previous-title {
+     display:none !important;
+ }
+ ion-footer-bar{
+     border:none;
  }
