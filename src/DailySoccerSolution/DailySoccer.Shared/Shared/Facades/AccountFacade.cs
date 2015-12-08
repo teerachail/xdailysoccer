@@ -108,6 +108,7 @@ namespace DailySoccer.Shared.Facades
 
             return new GetAllGuessHistoryRespond
             {
+                CurrentDate = currentTime,
                 Histories = result
             };
         }
