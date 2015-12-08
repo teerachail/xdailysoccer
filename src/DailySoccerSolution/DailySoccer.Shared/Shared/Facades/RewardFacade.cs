@@ -21,6 +21,28 @@ namespace DailySoccer.Shared.Facades
             return rewardDac.GetRewardGroupById(id);
         }
 
+        public GetCurrentRewardsRespond GetCurrentRewards()
+        {
+            var rewardDac = FacadeRepository.Instance.RewardDataAccess;
+            var currentRewardGroup = rewardDac.GetRewardGroup()
+                .OrderByDescending(it => it.ExpiredDate)
+                .FirstOrDefault();
+
+            var result = new GetCurrentRewardsRespond
+            {
+                Rewards = Enumerable.Empty<RewardInformation>()
+            };
+
+            if (currentRewardGroup == null) return result;
+            else
+            {
+                result.TicketCost = currentRewardGroup.RequestPoints;
+                result.Rewards = currentRewardGroup.RewardInfo ?? Enumerable.Empty<RewardInformation>();
+            }
+
+            return result;
+        }
+
         public GetCurrentWinnersRespond GetCurrentWinners(DateTime currentTime)
         {
             var rewardDac = FacadeRepository.Instance.RewardDataAccess;

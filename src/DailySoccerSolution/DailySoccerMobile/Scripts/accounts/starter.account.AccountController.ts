@@ -48,7 +48,7 @@
                         user.id = respond.AccountInfo.SecrectCode;
                         user.set('isSkiped', 'true');
                         user.save();
-                        console.log('Create new guest complete.');
+                        console.log('Create new guest complete. #' + user.id);
                         
                         this.$location.path('/account/favorite');
                     });

@@ -79,6 +79,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GetAllLeague.feature</DependentUpon>
     </Compile>
+    <Compile Include="Specs\GetCurrentRewards.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetCurrentRewards.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\GetGuessHistoryByMonth.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,6 +121,7 @@
     <Compile Include="Specs\Steps\CreateNewRewardGroupSteps.cs" />
     <Compile Include="Specs\Steps\GetAllGuessHistorySteps.cs" />
     <Compile Include="Specs\Steps\GetAllLeagueSteps.cs" />
+    <Compile Include="Specs\Steps\GetCurrentRewardsSteps.cs" />
     <Compile Include="Specs\Steps\GetGuessHistoryByMonthSteps.cs" />
     <Compile Include="Specs\Steps\GetMatchesSteps.cs" />
     <Compile Include="Specs\Steps\GetWinnersSteps.cs" />
@@ -148,6 +154,10 @@
     <None Include="Specs\GetAllLeague.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GetAllLeague.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\GetCurrentRewards.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GetCurrentRewards.feature.cs</LastGenOutput>
     </None>
     <None Include="Specs\GetGuessHistoryByMonth.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
