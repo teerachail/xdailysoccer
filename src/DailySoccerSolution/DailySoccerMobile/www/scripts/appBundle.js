@@ -318,7 +318,7 @@ var starter;
                 this.$location = $location;
                 this.accountSvc = accountSvc;
                 this._selectedTeamId = -1;
-                //this.checkIonicUserData();
+                this.checkIonicUserData();
                 this.GetAllLeague();
             }
             AccountController.prototype.GetAllLeague = function () {
@@ -352,7 +352,7 @@ var starter;
                 var user = Ionic.User.current();
                 this.accountSvc.CreateNewGuest()
                     .then(function (respond) {
-                    user.id = respond.AccountInfo.SecrectCode;
+                    user.id = respond.AccountInfo.SecretCode;
                     user.set('isSkiped', 'true');
                     user.save();
                     console.log('Create new guest complete.');
@@ -815,6 +815,36 @@ var starter;
             return RewardInformation;
         })();
         reward.RewardInformation = RewardInformation;
+        var GetCurrentWinnersRespond = (function () {
+            function GetCurrentWinnersRespond() {
+            }
+            return GetCurrentWinnersRespond;
+        })();
+        reward.GetCurrentWinnersRespond = GetCurrentWinnersRespond;
+        var WinnerAwardInformation = (function () {
+            function WinnerAwardInformation() {
+            }
+            return WinnerAwardInformation;
+        })();
+        reward.WinnerAwardInformation = WinnerAwardInformation;
+        var GetYourRewardsRequest = (function () {
+            function GetYourRewardsRequest() {
+            }
+            return GetYourRewardsRequest;
+        })();
+        reward.GetYourRewardsRequest = GetYourRewardsRequest;
+        var GetYourRewardsRespond = (function () {
+            function GetYourRewardsRespond() {
+            }
+            return GetYourRewardsRespond;
+        })();
+        reward.GetYourRewardsRespond = GetYourRewardsRespond;
+        var YourRewardInformation = (function () {
+            function YourRewardInformation() {
+            }
+            return YourRewardInformation;
+        })();
+        reward.YourRewardInformation = YourRewardInformation;
     })(reward = starter.reward || (starter.reward = {}));
 })(starter || (starter = {}));
 var starter;
@@ -829,6 +859,8 @@ var starter;
                 this.CurrentOrderedCoupon = 2940;
                 this.UserCoupon = 0;
                 this.GetRewards();
+                this.GetWinners();
+                this.updateDisplayRewards();
             }
             RewardController.prototype.GetRewards = function () {
                 var _this = this;
@@ -836,6 +868,27 @@ var starter;
                     .then(function (respond) {
                     _this.RewardInfo = respond;
                     console.log('Get all rewards completed.');
+                });
+            };
+            RewardController.prototype.GetWinners = function () {
+                var _this = this;
+                this.rewardSvc.GetCurrentWinners()
+                    .then(function (respond) {
+                    _this.WinnersInfo = respond;
+                    console.log('Get all winners completed.');
+                });
+            };
+            RewardController.prototype.updateDisplayRewards = function () {
+                var _this = this;
+                var user = Ionic.User.current();
+                var getYourRewardsRequest = new reward.GetYourRewardsRequest();
+                getYourRewardsRequest.UserId = user.id;
+                this.rewardSvc.GetYourRewards(getYourRewardsRequest)
+                    .then(function (respond) {
+                    _this.ContactNo = respond.ContactNo;
+                    _this.CurrentRewards = respond.CurrentRewards;
+                    _this.AllRewards = respond.AllRewards;
+                    console.log('# update display rewards completed.');
                 });
             };
             RewardController.$inject = ['$scope', 'starter.reward.RewardServices'];
@@ -857,6 +910,14 @@ var starter;
             }
             RewardServices.prototype.GetCurrentRewards = function () {
                 var requestUrl = 'Reward/GetCurrentRewards';
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            RewardServices.prototype.GetCurrentWinners = function () {
+                var requestUrl = 'Reward/GetCurrentWinners';
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            RewardServices.prototype.GetYourRewards = function (req) {
+                var requestUrl = 'Reward/GetYourRewards?userId=' + req.UserId;
                 return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
             RewardServices.$inject = ['starter.shared.QueryRemoteDataService'];
@@ -881,7 +942,7 @@ var starter;
         var QueryRemoteDataService = (function () {
             function QueryRemoteDataService($http) {
                 this.$http = $http;
-                this.serviceURL = 'http://localhost:3728/api/';
+                this.serviceURL = 'https://dailysoccer.azurewebsites.net/api/';
             }
             QueryRemoteDataService.prototype.RemoteQuery = function (baseUrl) {
                 return this.$http({ method: 'GET', url: this.serviceURL + baseUrl })

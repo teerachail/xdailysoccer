@@ -10,7 +10,7 @@
 
         static $inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices'];
         constructor(private $scope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private accountSvc: starter.account.AccountServices){
-            //this.checkIonicUserData();
+            this.checkIonicUserData();
             this.GetAllLeague();
         }
 
