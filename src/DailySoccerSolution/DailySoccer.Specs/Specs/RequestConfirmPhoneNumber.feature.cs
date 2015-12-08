@@ -104,13 +104,13 @@ namespace DailySoccer.Specs
                     "ป", new string[] {
                         "mock",
                         "mock"});
-#line 16
+#line 15
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 17
+#line 16
  testRunner.When("ผู้ใช้ UserId: \'s01\' ขอยืนยันเบอร์โทรศัพ \'+66914185500\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 18
+#line 17
  testRunner.Then("ระบบบันทึกเบอร์โทร \'+66914185500\' ของผู้ใช้ UserId: \'s01\' แล้วส่งรหัสลับในการยืนย" +
                     "ันกลับไป", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -127,13 +127,13 @@ this.FeatureBackground();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ทำการขอยืนยันเบอร์โทรศัพท์แต่เป็นเบอร์ที่ไม่ถูกต้อง (สั้นกว่า 6 หลัก) ระบบไ" +
                     "ม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", new string[] {
                         "mock"});
-#line 21
+#line 20
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 22
+#line 21
  testRunner.When("ผู้ใช้ UserId: \'s01\' ขอยืนยันเบอร์โทรศัพ \'12345\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 23
+#line 22
  testRunner.Then("ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -149,13 +149,13 @@ this.FeatureBackground();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ทำการขอยืนยันเบอร์โทรศัพท์แต่เป็นเบอร์ที่ไม่ถูกต้อง (ยาวกว่า 20 หลัก) ระบบไ" +
                     "ม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", new string[] {
                         "mock"});
-#line 26
+#line 25
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 27
+#line 26
  testRunner.When("ผู้ใช้ UserId: \'s01\' ขอยืนยันเบอร์โทรศัพ \'012345678901234567890\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 28
+#line 27
  testRunner.Then("ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -171,13 +171,13 @@ this.FeatureBackground();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่เคยยืนยันเบอร์โทรเสร็จสมบูรณ์ไปแล้วขอทำการยืนยันเบอร์โทรอีกครั้ง ระบบไม่" +
                     "ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", new string[] {
                         "mock"});
-#line 31
+#line 30
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 32
+#line 31
  testRunner.When("ผู้ใช้ UserId: \'s02\' ขอยืนยันเบอร์โทรศัพ \'+66914185500\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 33
+#line 32
  testRunner.Then("ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -193,13 +193,13 @@ this.FeatureBackground();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่ไม่มีในระบบขอยืนยันเบอร์โทรศัพ ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลั" +
                     "บกลับไป", new string[] {
                         "mock"});
-#line 36
+#line 35
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 37
+#line 36
  testRunner.When("ผู้ใช้ UserId: \'unknow\' ขอยืนยันเบอร์โทรศัพ \'+66914185500\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 38
+#line 37
  testRunner.Then("ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
