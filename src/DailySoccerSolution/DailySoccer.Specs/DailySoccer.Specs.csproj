@@ -115,6 +115,11 @@
       <DependentUpon>GuessMatch.feature</DependentUpon>
     </Compile>
     <Compile Include="Specs\Hooks.cs" />
+    <Compile Include="Specs\RequestConfirmPhoneNumber.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequestConfirmPhoneNumber.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\SetFavoriteTeam.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -188,6 +193,10 @@
     <None Include="Specs\GuessMatch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GuessMatch.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\RequestConfirmPhoneNumber.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RequestConfirmPhoneNumber.feature.cs</LastGenOutput>
     </None>
     <None Include="Specs\SetFavoriteTeam.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
