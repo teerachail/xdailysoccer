@@ -183,5 +183,17 @@ namespace DailySoccer.Shared.DAC
                 dctx.SaveChanges();
             }
         }
+
+        public void RequestConfirmPhoneNumber(RequestConfirmPhoneNumberRequest request)
+        {
+            // TODO: RequestConfirmPhoneNumber
+            throw new NotImplementedException();
+        }
+
+        public void ConfirmPhoneNumber(string userId, string verificationCode)
+        {
+            // TODO: ConfirmPhoneNumber
+            throw new NotImplementedException();
+        }
     }
 }

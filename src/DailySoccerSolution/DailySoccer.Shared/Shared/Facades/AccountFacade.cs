@@ -217,5 +217,17 @@ namespace DailySoccer.Shared.Facades
                 Histories = result
             };
         }
+
+        public RequestConfirmPhoneNumberRespond RequestConfirmPhoneNumber(RequestConfirmPhoneNumberRequest request)
+        {
+            // TODO: ConfirmPhoneNumber
+            throw new NotImplementedException();
+        }
+
+        public ConfirmPhoneNumberRespond ConfirmPhoneNumber(ConfirmPhoneNumberRequest request)
+        {
+            // TODO: ConfirmPhoneNumber
+            throw new NotImplementedException();
+        }
     }
 }

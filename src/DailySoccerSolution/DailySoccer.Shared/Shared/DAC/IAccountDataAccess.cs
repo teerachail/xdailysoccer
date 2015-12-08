@@ -18,5 +18,7 @@ namespace DailySoccer.Shared.DAC
         IEnumerable<LeagueInformation> GetAllLeagues();
         void SetFavoriteTeam(SetFavoriteTeamRequest request);
         void ChargeFromBuyTicket(string secrectCode, int requiredPoints);
+        void RequestConfirmPhoneNumber(RequestConfirmPhoneNumberRequest request);
+        void ConfirmPhoneNumber(string userId, string verificationCode);
     }
 }

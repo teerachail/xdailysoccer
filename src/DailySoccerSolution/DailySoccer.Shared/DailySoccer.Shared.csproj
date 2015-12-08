@@ -68,6 +68,10 @@
     <Compile Include="Shared\Models\AccountInformation.cs" />
     <Compile Include="Shared\Models\BuyTicketRequest.cs" />
     <Compile Include="Shared\Models\BuyTicketRespond.cs" />
+    <Compile Include="Shared\Models\ConfirmPhoneNumberRequest.cs" />
+    <Compile Include="Shared\Models\ConfirmPhoneNumberRespond.cs" />
+    <Compile Include="Shared\Models\RequestConfirmPhoneNumberRequest.cs" />
+    <Compile Include="Shared\Models\RequestConfirmPhoneNumberRespond.cs" />
     <Compile Include="Shared\Models\CreateNewGuestRespond.cs" />
     <Compile Include="Shared\Models\GetAllGuessHistoryRequest.cs" />
     <Compile Include="Shared\Models\GetAllGuessHistoryRespond.cs" />
