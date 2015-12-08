@@ -97,8 +97,7 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "RequestPoints",
-                        "ExpiredDate",
-                        "RequestPoints"});
+                        "ExpiredDate"});
 #line 12
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table1, "Given ");
 #line hidden
@@ -147,13 +146,11 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "RequestPoints",
-                        "ExpiredDate",
-                        "RequestPoints"});
+                        "ExpiredDate"});
             table4.AddRow(new string[] {
                         "1",
                         "100",
-                        "1/1/2015 00:00",
-                        "100"});
+                        "1/1/2015 00:00"});
 #line 22
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table4, "Given ");
 #line hidden
@@ -204,13 +201,11 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "RequestPoints",
-                        "ExpiredDate",
-                        "RequestPoints"});
+                        "ExpiredDate"});
             table7.AddRow(new string[] {
                         "1",
                         "100",
-                        "1/1/2015 00:00",
-                        "100"});
+                        "1/1/2015 00:00"});
 #line 34
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table7, "Given ");
 #line hidden
@@ -309,18 +304,15 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "RequestPoints",
-                        "ExpiredDate",
-                        "RequestPoints"});
+                        "ExpiredDate"});
             table10.AddRow(new string[] {
                         "1",
                         "100",
-                        "1/1/2015 00:00",
-                        "100"});
+                        "1/1/2015 00:00"});
             table10.AddRow(new string[] {
                         "2",
                         "200",
-                        "2/1/2015 00:00",
-                        "200"});
+                        "2/1/2015 00:00"});
 #line 52
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table10, "Given ");
 #line hidden
@@ -395,18 +387,15 @@ this.FeatureBackground();
             TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "RequestPoints",
-                        "ExpiredDate",
-                        "RequestPoints"});
+                        "ExpiredDate"});
             table13.AddRow(new string[] {
                         "1",
                         "100",
-                        "1/1/2015 00:00",
-                        "100"});
+                        "1/1/2015 00:00"});
             table13.AddRow(new string[] {
                         "2",
                         "200",
-                        "2/1/2015 00:00",
-                        "200"});
+                        "2/1/2015 00:00"});
 #line 68
  testRunner.Given("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table13, "Given ");
 #line hidden

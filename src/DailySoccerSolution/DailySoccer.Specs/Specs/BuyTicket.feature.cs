@@ -87,6 +87,18 @@ namespace DailySoccer.Specs
                         "0",
                         "5",
                         "0"});
+            table1.AddRow(new string[] {
+                        "2",
+                        "s02",
+                        "100",
+                        "5",
+                        "0"});
+            table1.AddRow(new string[] {
+                        "3",
+                        "s03",
+                        "10000",
+                        "5",
+                        "0"});
 #line 9
  testRunner.And("ผู้ใช้ในระบบมีดังนี้", ((string)(null)), table1, "And ");
 #line hidden
@@ -102,24 +114,22 @@ namespace DailySoccer.Specs
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ซื้อคูปองแต่มีแต้มไม่พอ ระบบยกเลิกการสั่งซื้อ", new string[] {
                         "mock",
                         "mock"});
-#line 14
+#line 16
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 15
+#line 17
  testRunner.Given("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "RequestPoints",
-                        "ExpiredDate",
-                        "RequestPoints"});
+                        "ExpiredDate"});
             table2.AddRow(new string[] {
                         "1",
                         "100",
-                        "1/10/2015 00:00",
-                        "100"});
-#line 16
+                        "1/10/2015 00:00"});
+#line 18
  testRunner.And("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table2, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -154,14 +164,692 @@ this.FeatureBackground();
                         "15",
                         "15",
                         "iphone5S.jpg"});
-#line 19
+#line 21
  testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table3, "And ");
-#line 24
- testRunner.When("ผู้ใช้ UserId: \'s01\' สั่งซื้อคูปองจำนวน \'1\' คูปอง", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 25
- testRunner.Then("ระบบไม่ทำการบันทึกการสั่งซื้อ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 26
+ testRunner.When("ผู้ใช้ UserId: \'s01\' สั่งซื้อคูปองจำนวน \'1\' คูปอง", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 27
+ testRunner.Then("ระบบไม่ทำการบันทึกการสั่งซื้อ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 28
  testRunner.And("แต้มผู้ใช้ไม่ถูกหัก", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecretCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table4.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "0",
+                        "5",
+                        "0"});
+#line 29
+ testRunner.And("ข้อมูลผู้ใช้ที่ได้กลับมาจากเซิฟเวอร์เป็น", ((string)(null)), table4, "And ");
+#line 32
+ testRunner.And("ผลการสั่งซื้อสำเร็จเป็น \'false\' และเวลาหมดอายุของกลุ่มของรางวัลเป็น \'1/10/2015 00" +
+                    ":00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ซื้อคูปองมีแต้มพอดี ระบบทำการหักแต้มและบันทึกการสั่งซื้อ")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "BuyTicket")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ซอคปองมแตมพอดระบบทำการหกแตมและบนทกการสงซอ()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ซื้อคูปองมีแต้มพอดี ระบบทำการหักแต้มและบันทึกการสั่งซื้อ", new string[] {
+                        "mock"});
+#line 35
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 36
+ testRunner.Given("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+            table5.AddRow(new string[] {
+                        "1",
+                        "100",
+                        "1/10/2015 00:00"});
+#line 37
+ testRunner.And("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table5, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+            table6.AddRow(new string[] {
+                        "1",
+                        "1",
+                        "iPhone 6S",
+                        "iPhone 6S description",
+                        "5",
+                        "5",
+                        "iphone6S.jpg"});
+            table6.AddRow(new string[] {
+                        "2",
+                        "1",
+                        "iPhone 6",
+                        "iPhone 6 description",
+                        "10",
+                        "10",
+                        "iphone6.jpg"});
+            table6.AddRow(new string[] {
+                        "3",
+                        "1",
+                        "iPhone 5S",
+                        "iPhone 5S description",
+                        "15",
+                        "15",
+                        "iphone5S.jpg"});
+#line 40
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table6, "And ");
+#line 45
+ testRunner.When("ผู้ใช้ UserId: \'s02\' สั่งซื้อคูปองจำนวน \'1\' คูปอง", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 46
+ testRunner.Then("ระบบทำการบันทึกการสั่งซื้อคูปอง \'1\' คูปอง จากผู้ใช้ UserId: \'s02\' จากกลุ่มของรางว" +
+                    "ัลรหัส \'1\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 47
+ testRunner.And("ผู้ใช้ UserId: \'s02\' ถูกหักแต้มจำนวน \'100\' แต้ม", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecretCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table7.AddRow(new string[] {
+                        "2",
+                        "s02",
+                        "0",
+                        "5",
+                        "1"});
+#line 48
+ testRunner.And("ข้อมูลผู้ใช้ที่ได้กลับมาจากเซิฟเวอร์เป็น", ((string)(null)), table7, "And ");
+#line 51
+ testRunner.And("ผลการสั่งซื้อสำเร็จเป็น \'true\' และเวลาหมดอายุของกลุ่มของรางวัลเป็น \'1/10/2015 00:" +
+                    "00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ซื้อคูปองมีแต้มเกินกว่าที่ต้องการ ระบบทำการหักแต้มและบันทึกการสั่งซื้อ")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "BuyTicket")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ซอคปองมแตมเกนกวาทตองการระบบทำการหกแตมและบนทกการสงซอ()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ซื้อคูปองมีแต้มเกินกว่าที่ต้องการ ระบบทำการหักแต้มและบันทึกการสั่งซื้อ", new string[] {
+                        "mock"});
+#line 54
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 55
+ testRunner.Given("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+            table8.AddRow(new string[] {
+                        "1",
+                        "100",
+                        "1/10/2015 00:00"});
+#line 56
+ testRunner.And("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table8, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+            table9.AddRow(new string[] {
+                        "1",
+                        "1",
+                        "iPhone 6S",
+                        "iPhone 6S description",
+                        "5",
+                        "5",
+                        "iphone6S.jpg"});
+            table9.AddRow(new string[] {
+                        "2",
+                        "1",
+                        "iPhone 6",
+                        "iPhone 6 description",
+                        "10",
+                        "10",
+                        "iphone6.jpg"});
+            table9.AddRow(new string[] {
+                        "3",
+                        "1",
+                        "iPhone 5S",
+                        "iPhone 5S description",
+                        "15",
+                        "15",
+                        "iphone5S.jpg"});
+#line 59
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table9, "And ");
+#line 64
+ testRunner.When("ผู้ใช้ UserId: \'s03\' สั่งซื้อคูปองจำนวน \'10\' คูปอง", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 65
+ testRunner.Then("ระบบทำการบันทึกการสั่งซื้อคูปอง \'10\' คูปอง จากผู้ใช้ UserId: \'s03\' จากกลุ่มของราง" +
+                    "วัลรหัส \'1\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 66
+ testRunner.And("ผู้ใช้ UserId: \'s03\' ถูกหักแต้มจำนวน \'1000\' แต้ม", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecretCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table10.AddRow(new string[] {
+                        "3",
+                        "s03",
+                        "9000",
+                        "5",
+                        "10"});
+#line 67
+ testRunner.And("ข้อมูลผู้ใช้ที่ได้กลับมาจากเซิฟเวอร์เป็น", ((string)(null)), table10, "And ");
+#line 70
+ testRunner.And("ผลการสั่งซื้อสำเร็จเป็น \'true\' และเวลาหมดอายุของกลุ่มของรางวัลเป็น \'1/10/2015 00:" +
+                    "00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ซื้อคูปองตอนมีกลุ่มของรางวัลหลายชุด ระบบทำการหักแต้มและบันทึกการสั่งซื้อ")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "BuyTicket")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ซอคปองตอนมกลมของรางวลหลายชดระบบทำการหกแตมและบนทกการสงซอ()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ซื้อคูปองตอนมีกลุ่มของรางวัลหลายชุด ระบบทำการหักแต้มและบันทึกการสั่งซื้อ", new string[] {
+                        "mock"});
+#line 73
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 74
+ testRunner.Given("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+            table11.AddRow(new string[] {
+                        "1",
+                        "100",
+                        "1/10/2015 00:00"});
+            table11.AddRow(new string[] {
+                        "2",
+                        "30",
+                        "2/10/2015 00:00"});
+#line 75
+ testRunner.And("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table11, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+            table12.AddRow(new string[] {
+                        "1",
+                        "1",
+                        "iPhone 6S",
+                        "iPhone 6S description",
+                        "5",
+                        "5",
+                        "iphone6S.jpg"});
+            table12.AddRow(new string[] {
+                        "2",
+                        "1",
+                        "iPhone 6",
+                        "iPhone 6 description",
+                        "10",
+                        "10",
+                        "iphone6.jpg"});
+            table12.AddRow(new string[] {
+                        "3",
+                        "1",
+                        "iPhone 5S",
+                        "iPhone 5S description",
+                        "15",
+                        "15",
+                        "iphone5S.jpg"});
+            table12.AddRow(new string[] {
+                        "4",
+                        "2",
+                        "XBox 365",
+                        "XBox 365 description",
+                        "100",
+                        "110",
+                        "xbox365.jpg"});
+            table12.AddRow(new string[] {
+                        "5",
+                        "2",
+                        "XBoxOne",
+                        "XBoxOne description",
+                        "200",
+                        "120",
+                        "xboxone.jpg"});
+#line 79
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table12, "And ");
+#line 86
+ testRunner.When("ผู้ใช้ UserId: \'s02\' สั่งซื้อคูปองจำนวน \'3\' คูปอง", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 87
+ testRunner.Then("ระบบทำการบันทึกการสั่งซื้อคูปอง \'3\' คูปอง จากผู้ใช้ UserId: \'s02\' จากกลุ่มของรางว" +
+                    "ัลรหัส \'2\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 88
+ testRunner.And("ผู้ใช้ UserId: \'s02\' ถูกหักแต้มจำนวน \'90\' แต้ม", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecretCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table13.AddRow(new string[] {
+                        "2",
+                        "s02",
+                        "10",
+                        "5",
+                        "3"});
+#line 89
+ testRunner.And("ข้อมูลผู้ใช้ที่ได้กลับมาจากเซิฟเวอร์เป็น", ((string)(null)), table13, "And ");
+#line 92
+ testRunner.And("ผลการสั่งซื้อสำเร็จเป็น \'true\' และเวลาหมดอายุของกลุ่มของรางวัลเป็น \'2/10/2015 00:" +
+                    "00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ซื้อคูปองแต่จำนวนที่ต้องการไม่ถูกต้อง ระบบยกเลิกการสั่งซื้อ")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "BuyTicket")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ซอคปองแตจำนวนทตองการไมถกตองระบบยกเลกการสงซอ()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ซื้อคูปองแต่จำนวนที่ต้องการไม่ถูกต้อง ระบบยกเลิกการสั่งซื้อ", new string[] {
+                        "mock"});
+#line 95
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 96
+ testRunner.Given("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+            table14.AddRow(new string[] {
+                        "1",
+                        "100",
+                        "1/10/2015 00:00"});
+#line 97
+ testRunner.And("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table14, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+            table15.AddRow(new string[] {
+                        "1",
+                        "1",
+                        "iPhone 6S",
+                        "iPhone 6S description",
+                        "5",
+                        "5",
+                        "iphone6S.jpg"});
+            table15.AddRow(new string[] {
+                        "2",
+                        "1",
+                        "iPhone 6",
+                        "iPhone 6 description",
+                        "10",
+                        "10",
+                        "iphone6.jpg"});
+            table15.AddRow(new string[] {
+                        "3",
+                        "1",
+                        "iPhone 5S",
+                        "iPhone 5S description",
+                        "15",
+                        "15",
+                        "iphone5S.jpg"});
+#line 100
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table15, "And ");
+#line 105
+ testRunner.When("ผู้ใช้ UserId: \'s03\' สั่งซื้อคูปองจำนวน \'-1\' คูปอง", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 106
+ testRunner.Then("ระบบไม่ทำการบันทึกการสั่งซื้อ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 107
+ testRunner.And("แต้มผู้ใช้ไม่ถูกหัก", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecretCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table16.AddRow(new string[] {
+                        "3",
+                        "s03",
+                        "10000",
+                        "5",
+                        "0"});
+#line 108
+ testRunner.And("ข้อมูลผู้ใช้ที่ได้กลับมาจากเซิฟเวอร์เป็น", ((string)(null)), table16, "And ");
+#line 111
+ testRunner.And("ผลการสั่งซื้อสำเร็จเป็น \'false\' และเวลาหมดอายุของกลุ่มของรางวัลเป็น \'1/1/0001 00:" +
+                    "00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ซื้อคูปองแต่ระบบยังไม่มีกลุ่มของรางวัล ระบบยกเลิกการสั่งซื้อ")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "BuyTicket")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ซอคปองแตระบบยงไมมกลมของรางวลระบบยกเลกการสงซอ()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ซื้อคูปองแต่ระบบยังไม่มีกลุ่มของรางวัล ระบบยกเลิกการสั่งซื้อ", new string[] {
+                        "mock"});
+#line 114
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 115
+ testRunner.Given("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+#line 116
+ testRunner.And("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table17, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+#line 118
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table18, "And ");
+#line 120
+ testRunner.When("ผู้ใช้ UserId: \'s02\' สั่งซื้อคูปองจำนวน \'1\' คูปอง", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 121
+ testRunner.Then("ระบบไม่ทำการบันทึกการสั่งซื้อ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 122
+ testRunner.And("แต้มผู้ใช้ไม่ถูกหัก", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecretCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table19.AddRow(new string[] {
+                        "2",
+                        "s02",
+                        "100",
+                        "5",
+                        "0"});
+#line 123
+ testRunner.And("ข้อมูลผู้ใช้ที่ได้กลับมาจากเซิฟเวอร์เป็น", ((string)(null)), table19, "And ");
+#line 126
+ testRunner.And("ผลการสั่งซื้อสำเร็จเป็น \'false\' และเวลาหมดอายุของกลุ่มของรางวัลเป็น \'1/1/0001 00:" +
+                    "00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ซื้อคูปองแต่ยังไม่มีกลุ่มของรางวัลชุดใหม่ ระบบยกเลิกการสั่งซื้อ")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "BuyTicket")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ซอคปองแตยงไมมกลมของรางวลชดใหมระบบยกเลกการสงซอ()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ซื้อคูปองแต่ยังไม่มีกลุ่มของรางวัลชุดใหม่ ระบบยกเลิกการสั่งซื้อ", new string[] {
+                        "mock"});
+#line 129
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 130
+ testRunner.Given("วันเวลาในปัจจุบันเป็น \'1/11/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+            table20.AddRow(new string[] {
+                        "1",
+                        "100",
+                        "1/10/2015 00:00"});
+#line 131
+ testRunner.And("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table20, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+            table21.AddRow(new string[] {
+                        "1",
+                        "1",
+                        "iPhone 6S",
+                        "iPhone 6S description",
+                        "5",
+                        "5",
+                        "iphone6S.jpg"});
+            table21.AddRow(new string[] {
+                        "2",
+                        "1",
+                        "iPhone 6",
+                        "iPhone 6 description",
+                        "10",
+                        "10",
+                        "iphone6.jpg"});
+            table21.AddRow(new string[] {
+                        "3",
+                        "1",
+                        "iPhone 5S",
+                        "iPhone 5S description",
+                        "15",
+                        "15",
+                        "iphone5S.jpg"});
+#line 134
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table21, "And ");
+#line 139
+ testRunner.When("ผู้ใช้ UserId: \'s02\' สั่งซื้อคูปองจำนวน \'1\' คูปอง", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 140
+ testRunner.Then("ระบบไม่ทำการบันทึกการสั่งซื้อ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 141
+ testRunner.And("แต้มผู้ใช้ไม่ถูกหัก", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecretCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table22.AddRow(new string[] {
+                        "2",
+                        "s02",
+                        "100",
+                        "5",
+                        "0"});
+#line 142
+ testRunner.And("ข้อมูลผู้ใช้ที่ได้กลับมาจากเซิฟเวอร์เป็น", ((string)(null)), table22, "And ");
+#line 145
+ testRunner.And("ผลการสั่งซื้อสำเร็จเป็น \'false\' และเวลาหมดอายุของกลุ่มของรางวัลเป็น \'1/10/2015 00" +
+                    ":00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ซื้อคูปองแต่กลุ่มของรางวัลชุดใหม่ยังไม่มีรายการของรางวัล ระบบยกเลิกการสั่งซื้อ")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "BuyTicket")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ซอคปองแตกลมของรางวลชดใหมยงไมมรายการของรางวลระบบยกเลกการสงซอ()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ซื้อคูปองแต่กลุ่มของรางวัลชุดใหม่ยังไม่มีรายการของรางวัล ระบบยกเลิกการสั่งซื้อ", new string[] {
+                        "mock"});
+#line 148
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 149
+ testRunner.Given("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table23 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+            table23.AddRow(new string[] {
+                        "1",
+                        "100",
+                        "1/10/2015 00:00"});
+#line 150
+ testRunner.And("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table23, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table24 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+#line 153
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table24, "And ");
+#line 155
+ testRunner.When("ผู้ใช้ UserId: \'s02\' สั่งซื้อคูปองจำนวน \'1\' คูปอง", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 156
+ testRunner.Then("ระบบไม่ทำการบันทึกการสั่งซื้อ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 157
+ testRunner.And("แต้มผู้ใช้ไม่ถูกหัก", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table25 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "SecretCode",
+                        "Points",
+                        "MaximumGuessAmount",
+                        "CurrentOrderedCoupon"});
+            table25.AddRow(new string[] {
+                        "2",
+                        "s02",
+                        "100",
+                        "5",
+                        "0"});
+#line 158
+ testRunner.And("ข้อมูลผู้ใช้ที่ได้กลับมาจากเซิฟเวอร์เป็น", ((string)(null)), table25, "And ");
+#line 161
+ testRunner.And("ผลการสั่งซื้อสำเร็จเป็น \'false\' และเวลาหมดอายุของกลุ่มของรางวัลเป็น \'1/10/2015 00" +
+                    ":00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ที่ไม่มีในระบบทำการสั่งซื้อ ระบบยกเลิกการสั่งซื้อ")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "BuyTicket")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชทไมมในระบบทำการสงซอระบบยกเลกการสงซอ()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่ไม่มีในระบบทำการสั่งซื้อ ระบบยกเลิกการสั่งซื้อ", new string[] {
+                        "mock"});
+#line 164
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line 165
+ testRunner.Given("วันเวลาในปัจจุบันเป็น \'1/1/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table26 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RequestPoints",
+                        "ExpiredDate"});
+            table26.AddRow(new string[] {
+                        "1",
+                        "100",
+                        "1/10/2015 00:00"});
+#line 166
+ testRunner.And("กลุ่มของรางวัลทั้งหมดในระบบมีดังนี้", ((string)(null)), table26, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table27 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "RewardGroupId",
+                        "Name",
+                        "Description",
+                        "Amount",
+                        "RemainingAmount",
+                        "ImagePath"});
+            table27.AddRow(new string[] {
+                        "1",
+                        "1",
+                        "iPhone 6S",
+                        "iPhone 6S description",
+                        "5",
+                        "5",
+                        "iphone6S.jpg"});
+            table27.AddRow(new string[] {
+                        "2",
+                        "1",
+                        "iPhone 6",
+                        "iPhone 6 description",
+                        "10",
+                        "10",
+                        "iphone6.jpg"});
+            table27.AddRow(new string[] {
+                        "3",
+                        "1",
+                        "iPhone 5S",
+                        "iPhone 5S description",
+                        "15",
+                        "15",
+                        "iphone5S.jpg"});
+#line 169
+ testRunner.And("ของรางวัลในแต่ละกลุ่มเป็นดังนี้", ((string)(null)), table27, "And ");
+#line 174
+ testRunner.When("ผู้ใช้ UserId: \'unknow\' สั่งซื้อคูปองจำนวน \'1\' คูปอง", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 175
+ testRunner.Then("ระบบไม่ทำการบันทึกการสั่งซื้อ", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 176
+ testRunner.And("แต้มผู้ใช้ไม่ถูกหัก", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 177
+ testRunner.And("ผลการสั่งซื้อสำเร็จเป็น \'false\' และเวลาหมดอายุของกลุ่มของรางวัลเป็น \'1/1/0001 00:" +
+                    "00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
