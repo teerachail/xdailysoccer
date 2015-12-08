@@ -1,6 +1,7 @@
 ﻿using DailySoccer.Shared.DAC;
 using DailySoccer.Shared.Facades;
 using DailySoccer.Shared.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using TechTalk.SpecFlow;
@@ -32,6 +33,12 @@ namespace DailySoccer.Specs.Steps
             mockAccountDac.Verify(dac => dac.RequestConfirmPhoneNumber(It.Is<RequestConfirmPhoneNumberRequest>(
                 it => it.UserId == userId && it.PhoneNo == phoneNumber
                 ), It.IsAny<string>()), Times.Exactly(1));
+
+            var result = ScenarioContext.Current.Get<RequestConfirmPhoneNumberRespond>();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(phoneNumber, result.ForPhoneNumber);
+            Assert.IsNotNull(result.VerificationCode);
+            Assert.IsTrue(result.IsSuccessed);
         }
 
         [Then(@"ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป")]
@@ -39,6 +46,12 @@ namespace DailySoccer.Specs.Steps
         {
             var mockAccountDac = ScenarioContext.Current.Get<Moq.Mock<IAccountDataAccess>>();
             mockAccountDac.Verify(dac => dac.RequestConfirmPhoneNumber(It.IsAny<RequestConfirmPhoneNumberRequest>(), It.IsAny<string>()), Times.Never);
+
+            var result = ScenarioContext.Current.Get<RequestConfirmPhoneNumberRespond>();
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.ForPhoneNumber);
+            Assert.IsNull(result.VerificationCode);
+            Assert.IsFalse(result.IsSuccessed);
         }
     }
 }

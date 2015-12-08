@@ -93,27 +93,197 @@ namespace DailySoccer.Specs
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add two numbers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ที่ยังไม่เคยยืนยันรหัสลับขอทำการยืนยันรหัสลับข้อมูลถูกต้อง ระบบทำการบันทึกก" +
+            "ารยืนยันเบอร์โทรศัพเสร็จสิ้น")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ConfirmPhoneNumber")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
-        public virtual void AddTwoNumbers()
+        public virtual void ผใชทยงไมเคยยนยนรหสลบขอทำการยนยนรหสลบขอมลถกตองระบบทำการบนทกการยนยนเบอรโทรศพเสรจสน()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่ยังไม่เคยยืนยันรหัสลับขอทำการยืนยันรหัสลับข้อมูลถูกต้อง ระบบทำการบันทึกก" +
+                    "ารยืนยันเบอร์โทรศัพเสร็จสิ้น", new string[] {
                         "mock",
                         "mock"});
 #line 15
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "UserId",
+                        "VerificationCode",
+                        "PhoneNumber",
+                        "CompletedDate"});
+            table2.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1234567",
+                        "+66914185500",
+                        ""});
 #line 16
- testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 17
- testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
- testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("ข้อมูลการขอยืนยันเบอร์โทรทั้งหมดในระบบเป็น", ((string)(null)), table2, "Given ");
 #line 19
- testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ยืนยันรหัสลับ VerificationCode: \'1234567\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 20
+ testRunner.Then("ระบบทำการบันทึกการยืนยันเบอร์โทรศัพ \'+66914185500\' ให้กับผู้ใช้ UserId: \'s01\' เสร" +
+                    "็จสิ้น", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ที่ยังไม่เคยยืนยันรหัสลับขอทำการยืนยันรหัสลับข้อมูลไม่ถูกต้อง (รหัสลับไม่ถู" +
+            "ก) ระบบไม่ทำการบันทึกข้อมูลและแจ้งเตือนข้อผิดพลาด")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ConfirmPhoneNumber")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชทยงไมเคยยนยนรหสลบขอทำการยนยนรหสลบขอมลไมถกตองรหสลบไมถกระบบไมทำการบนทกขอมลและแจงเตอนขอผดพลาด()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่ยังไม่เคยยืนยันรหัสลับขอทำการยืนยันรหัสลับข้อมูลไม่ถูกต้อง (รหัสลับไม่ถู" +
+                    "ก) ระบบไม่ทำการบันทึกข้อมูลและแจ้งเตือนข้อผิดพลาด", new string[] {
+                        "mock"});
+#line 23
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "UserId",
+                        "VerificationCode",
+                        "PhoneNumber",
+                        "CompletedDate"});
+            table3.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1234567",
+                        "+66914185500",
+                        ""});
+#line 24
+ testRunner.Given("ข้อมูลการขอยืนยันเบอร์โทรทั้งหมดในระบบเป็น", ((string)(null)), table3, "Given ");
+#line 27
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ยืนยันรหัสลับ VerificationCode: \'missMatch\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 28
+ testRunner.Then("ระบบไม่ทำการบันทึกข้อมูลและแจ้งเตือนข้อผิดพลาด", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ที่ยังไม่เคยยืนยันรหัสลับขอทำการยืนยันรหัสลับข้อมูลไม่ถูกต้อง (ไม่มีรายการข" +
+            "อยืนยันเบอร์โทร) ระบบไม่ทำการบันทึกข้อมูลและแจ้งเตือนข้อผิดพลาด")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ConfirmPhoneNumber")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชทยงไมเคยยนยนรหสลบขอทำการยนยนรหสลบขอมลไมถกตองไมมรายการขอยนยนเบอรโทรระบบไมทำการบนทกขอมลและแจงเตอนขอผดพลาด()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่ยังไม่เคยยืนยันรหัสลับขอทำการยืนยันรหัสลับข้อมูลไม่ถูกต้อง (ไม่มีรายการข" +
+                    "อยืนยันเบอร์โทร) ระบบไม่ทำการบันทึกข้อมูลและแจ้งเตือนข้อผิดพลาด", new string[] {
+                        "mock"});
+#line 31
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "UserId",
+                        "VerificationCode",
+                        "PhoneNumber",
+                        "CompletedDate"});
+#line 32
+ testRunner.Given("ข้อมูลการขอยืนยันเบอร์โทรทั้งหมดในระบบเป็น", ((string)(null)), table4, "Given ");
+#line 34
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ยืนยันรหัสลับ VerificationCode: \'1234567\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 35
+ testRunner.Then("ระบบไม่ทำการบันทึกข้อมูลและแจ้งเตือนข้อผิดพลาด", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ที่ยังไม่เคยยืนยันรหัสลับขอทำการยืนยันรหัสลับข้อมูลถูกต้อง (มีรหัสลับที่ยัง" +
+            "ไม่ถูกยืนยันหลายรายการ) ระบบทำการบันทึกการยืนยันเบอร์โทรศัพเสร็จสิ้น")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ConfirmPhoneNumber")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชทยงไมเคยยนยนรหสลบขอทำการยนยนรหสลบขอมลถกตองมรหสลบทยงไมถกยนยนหลายรายการระบบทำการบนทกการยนยนเบอรโทรศพเสรจสน()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่ยังไม่เคยยืนยันรหัสลับขอทำการยืนยันรหัสลับข้อมูลถูกต้อง (มีรหัสลับที่ยัง" +
+                    "ไม่ถูกยืนยันหลายรายการ) ระบบทำการบันทึกการยืนยันเบอร์โทรศัพเสร็จสิ้น", new string[] {
+                        "mock"});
+#line 38
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "UserId",
+                        "VerificationCode",
+                        "PhoneNumber",
+                        "CompletedDate"});
+            table5.AddRow(new string[] {
+                        "1",
+                        "s01",
+                        "1234567",
+                        "+66914185500",
+                        ""});
+            table5.AddRow(new string[] {
+                        "2",
+                        "s01",
+                        "0000001",
+                        "+7700000001",
+                        "1/1/2015"});
+            table5.AddRow(new string[] {
+                        "3",
+                        "s01",
+                        "2222222",
+                        "+8800000001",
+                        ""});
+#line 39
+ testRunner.Given("ข้อมูลการขอยืนยันเบอร์โทรทั้งหมดในระบบเป็น", ((string)(null)), table5, "Given ");
+#line 44
+ testRunner.When("ผู้ใช้ UserId: \'s01\' ยืนยันรหัสลับ VerificationCode: \'2222222\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 45
+ testRunner.Then("ระบบทำการบันทึกการยืนยันเบอร์โทรศัพ \'+8800000001\' ให้กับผู้ใช้ UserId: \'s01\' เสร็" +
+                    "จสิ้น", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("ผู้ใช้ที่ยังเคยยืนยันรหัสลับขอทำการยืนยันรหัสลับข้อมูลถูกต้อง ระบบทำการบันทึกการย" +
+            "ืนยันเบอร์โทรศัพเสร็จสิ้น")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "ConfirmPhoneNumber")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
+        public virtual void ผใชทยงเคยยนยนรหสลบขอทำการยนยนรหสลบขอมลถกตองระบบทำการบนทกการยนยนเบอรโทรศพเสรจสน()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("ผู้ใช้ที่ยังเคยยืนยันรหัสลับขอทำการยืนยันรหัสลับข้อมูลถูกต้อง ระบบทำการบันทึกการย" +
+                    "ืนยันเบอร์โทรศัพเสร็จสิ้น", new string[] {
+                        "mock"});
+#line 48
+this.ScenarioSetup(scenarioInfo);
+#line 7
+this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "UserId",
+                        "VerificationCode",
+                        "PhoneNumber",
+                        "CompletedDate"});
+            table6.AddRow(new string[] {
+                        "1",
+                        "s02",
+                        "1234567",
+                        "+66914185500",
+                        ""});
+#line 49
+ testRunner.Given("ข้อมูลการขอยืนยันเบอร์โทรทั้งหมดในระบบเป็น", ((string)(null)), table6, "Given ");
+#line 52
+ testRunner.When("ผู้ใช้ UserId: \'s02\' ยืนยันรหัสลับ VerificationCode: \'1234567\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 53
+ testRunner.Then("ระบบทำการบันทึกการยืนยันเบอร์โทรศัพ \'+66914185500\' ให้กับผู้ใช้ UserId: \'s02\' เสร" +
+                    "็จสิ้น", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
