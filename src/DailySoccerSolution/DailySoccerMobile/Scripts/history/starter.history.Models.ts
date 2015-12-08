@@ -30,6 +30,7 @@
     }
 
     export class GetAllGuessHistoryRespond {
+        public CurrentDate: Date;
          public Histories: GuessHistoryMonthlyInformation[];
     }
 

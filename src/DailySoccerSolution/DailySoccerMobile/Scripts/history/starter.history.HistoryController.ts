@@ -6,7 +6,7 @@
         public HistoryInfo: history.GetAllGuessHistoryRespond;
         public HistoryByMonthInfo: history.GetGuessHistoryByMonthRespond;
         public shownGroup: GuessHistoryDailyInformation[];
-        public Year: number = 2015;
+        public Year: number;
 
 
         static $inject = ['$scope', 'starter.history.HistoryServices'];
@@ -22,6 +22,8 @@
             this.historySvc.GetAllGuessHistory(data)
                 .then((respond: GetAllGuessHistoryRespond): void => {
                     this.HistoryInfo = respond;
+                    var date = new Date(respond.CurrentDate.toString());
+                    this.Year = date.getFullYear();
                     console.log('Get all history completed.');
                 });
         }
@@ -30,8 +32,8 @@
             var user = Ionic.User.current();
             var data = new GetGuessHistoryByMonthRequest();
             data.UserId = user.id;
-            data.Year = this.Year;
             data.Month = month;
+            data.Year = this.Year;
             this.historySvc.GetGuessHistoryByMonth(data)
                 .then((respond: GetGuessHistoryByMonthRespond): void => {
                     this.HistoryByMonthInfo = respond;
@@ -41,6 +43,7 @@
         }
 
         public GetMonthString(month: number): Date {
+            month -= 1;
             var monthString = new Date(this.Year, month);
             return monthString;
         }

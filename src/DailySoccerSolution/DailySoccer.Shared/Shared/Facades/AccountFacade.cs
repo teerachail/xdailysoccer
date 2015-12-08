@@ -88,7 +88,11 @@ namespace DailySoccer.Shared.Facades
 
         public GetAllGuessHistoryRespond GetAllGuessHistory(GetAllGuessHistoryRequest request, DateTime currentTime)
         {
-            var invalidRespondData = new GetAllGuessHistoryRespond { Histories = Enumerable.Empty<GuessHistoryMonthlyInformation>() };
+            var invalidRespondData = new GetAllGuessHistoryRespond
+            {
+                CurrentDate = currentTime,
+                Histories = Enumerable.Empty<GuessHistoryMonthlyInformation>()
+            };
             var areArgumentsValid = request != null && !string.IsNullOrEmpty(request.UserId);
             if (!areArgumentsValid) return invalidRespondData;
 

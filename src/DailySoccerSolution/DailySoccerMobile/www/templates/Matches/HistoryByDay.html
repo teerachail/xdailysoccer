@@ -20,11 +20,12 @@
                     <div class="row padding-bottom" ng-repeat="match in history.Matches">
                         <div class="col col-40 item"
                              ng-class="{'item-stable': !match.TeamHome.IsSelected,
-                            'item-balanced': match.TeamHome.IsSelected && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore,
-                            'item-royal': match.TeamHome.IsSelected && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore,
-                            'item-draw-status': match.TeamHome.IsSelected && match.TeamHome.CurrentScore == match.TeamAway.CurrentScore}">
-                            <span class="status status-left bg-yellow" ng-show="match.TeamHome.IsSelected && match.TeamHome.CurrentScore >= match.TeamAway.CurrentScore">+{{ match.TeamAway.WinningPredictionPoints }}</span>
-                            <span class="status status-left bg-red" ng-show="match.TeamHome.IsSelected && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore">L</span>
+                     'item-calm': match.TeamHome.IsSelected && !match.CompletedDate,
+                     'item-balanced': match.TeamHome.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore,
+                     'item-royal': match.TeamHome.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore,
+                     'item-draw-status': match.TeamHome.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore == match.TeamAway.CurrentScore}">
+                            <span class="status status-left bg-yellow" ng-show="match.CompletedDate && match.TeamHome.IsSelected && match.TeamHome.CurrentScore >= match.TeamAway.CurrentScore">+{{ match.TeamAway.WinningPredictionPoints }}</span>
+                            <span class="status status-left bg-red" ng-show="match.CompletedDate && match.TeamHome.IsSelected && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore">L</span>
                             <div class="text-right row row-center no-padding">
                                 <div class="col col-20 col-center no-padding text-left">
                                     <span ng-show="match.TeamHome.IsSelected">
@@ -45,8 +46,11 @@
                         </div>
                         <div class="col col-20 col-center box-score item item-dark ">
                             <div class="col-center">
-                                <span class="status status-left">FT</span>
-                                <div class="text-center padding-vertical">
+                                <span class="status status-left" ng-class="{'energized': !match.CompletedDate, 'stable': match.CompletedDate}">{{ match.Status }}</span>
+                                <div class="text-center padding-vertical" ng-show="!match.StartedDate">
+                                    <span>{{ match.BeginDate | date : 'hh:mm'}}</span>
+                                </div>
+                                <div class="text-center padding-vertical" ng-show="match.StartedDate">
                                     <span>{{ match.TeamHome.CurrentScore }}</span>
                                     <span> - </span>
                                     <span>{{ match.TeamAway.CurrentScore }}</span>
@@ -55,12 +59,13 @@
                         </div>
                         <div class="col col-40 item"
                              ng-class="{'item-stable': !match.TeamAway.IsSelected,
-                            'item-calm': match.TeamAway.IsSelected && !match.CompletedDate,
-                            'item-balanced': match.TeamAway.IsSelected && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore,
-                            'item-royal': match.TeamAway.IsSelected && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore,
-                            'item-draw-status': match.TeamAway.IsSelected && match.TeamHome.CurrentScore == match.TeamAway.CurrentScore}">
-                            <span class="status status-right bg-yellow" ng-show="match.TeamAway.IsSelected && match.TeamHome.CurrentScore <= match.TeamAway.CurrentScore">+{{ match.TeamAway.WinningPredictionPoints }}</span>
-                            <span class="status status-right bg-red" ng-show="match.TeamAway.IsSelected && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore">L</span>
+                     'item-calm': match.TeamAway.IsSelected && !match.CompletedDate,
+                     'item-balanced': match.TeamAway.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore,
+                     'item-royal': match.TeamAway.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore,
+                     'item-draw-status': match.TeamAway.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore == match.TeamAway.CurrentScore}"
+                     ng-click="match.CompletedDate || !matchCtrl.IsTodayMatch(match) || matchCtrl.SelectTeam(match, match.TeamAway.Id)">
+                            <span class="status status-right bg-yellow" ng-show="match.CompletedDate && match.TeamAway.IsSelected && match.TeamHome.CurrentScore <= match.TeamAway.CurrentScore">+{{ match.TeamAway.WinningPredictionPoints }}</span>
+                            <span class="status status-right bg-red" ng-show="match.CompletedDate && match.TeamAway.IsSelected && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore">L</span>
                             <div class="text-left row row-center no-padding">
                                 <div class="col col-10 col-center no-padding">
                                     <span>
