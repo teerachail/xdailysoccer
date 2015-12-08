@@ -24,7 +24,7 @@
                     <img src="{{ reward.ImagePath }}" />
                     <p>
                         <i>
-                            {{ reward.ExpiredDate | date: 'longDate' }}
+                            วันที่ {{ reward.ExpiredDate | date: 'longDate' }}
                         </i>
                     </p>
                     <p>
@@ -54,11 +54,11 @@
             </div>
             <div class="padding" ng-repeat="reward in rewardCtrl.AllRewards">
                 <span>
-                    {{ reward.ExpiredDate | date: 'longDate' }}
+                    - วันที่ {{ reward.ExpiredDate | date: 'longDate' }}
                 </span>
                 <br />
                 <span>
-                    {{ reward.Description }}
+                    {{ reward.Description }} ( {{ reward.ReferenceCode }} )
                 </span>
             </div>
             <!-- ไม่มีของรางวัล -->
