@@ -19,6 +19,7 @@
         public localPoint: number;
         public facebookPoint: number;
         public CurrentPoints: number;
+        public CurrentOrderedCoupon: number;
 
         static $inject = ['$location', 'starter.account.AccountServices', 'Azureservice'];
         constructor(

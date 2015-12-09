@@ -7,7 +7,7 @@
                 </i>
             </div>
             <div class="col col-center">
-                แต้มสะสม {{rewardCtrl.CurrentOrderedCoupon}}
+                แต้มสะสม {{ rewardCtrl.accountManagementSvc.CurrentPoints }}
             </div>
             <div class="col col-center">
                 <a menu-close href="#/ticket/buyticket" class=" button button-full bg-yellow font-large">
@@ -17,7 +17,7 @@
         </ion-item>
         <div class="item item-stable no-border">
             <div class="">
-                แลกซื้อคูปองไปแล้วทั้งหมด {{rewardCtrl.UserCoupon}} ใบ
+                แลกซื้อคูปองไปแล้วทั้งหมด {{ rewardCtrl.accountManagementSvc.CurrentOrderedCoupon }} ใบ
             </div>
         </div>
         <div class="item no-border text-center no-padding-bottom">
@@ -28,10 +28,10 @@
 
         <div class="item no-border text-right" ng-repeat="reward in rewardCtrl.RewardInfo.Rewards">
             <div>
-                <img class="col" src="{{reward.ImagePath}}" />
+                <img class="col" src="{{ reward.ImagePath }}" />
             </div>
             <div class="">
-                จำนวน {{reward.RemainingAmount}} รางวัล
+                จำนวน {{ reward.RemainingAmount }} รางวัล
             </div>
         </div>
 

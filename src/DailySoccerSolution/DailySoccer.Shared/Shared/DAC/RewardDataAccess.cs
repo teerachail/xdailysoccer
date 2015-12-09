@@ -25,9 +25,10 @@ namespace DailySoccer.Shared.DAC
                         Name = reward.Name,
                         Description = reward.Description,
                         Amount = reward.Amount,
+                        RemainingAmount = reward.RemainingAmount.HasValue ? reward.RemainingAmount.Value : 0,
                         ImagePath = reward.ImagePath,
                         ThumbnailPath = reward.ThumbnailPath,
-                        RewardGroupId = reward.RewardGroupId
+                        RewardGroupId = reward.RewardGroupId,
                     })
                 }).ToList();
 
@@ -52,7 +53,7 @@ namespace DailySoccer.Shared.DAC
                         Name = reward.Name,
                         Description = reward.Description,
                         Amount = reward.Amount,
-                        RemainingAmount = reward.RemainingAmount.Value,
+                        RemainingAmount = reward.RemainingAmount.HasValue ? reward.RemainingAmount.Value : 0,
                         ImagePath = reward.ImagePath,
                         ThumbnailPath = reward.ThumbnailPath,
                         RewardGroupId = reward.RewardGroupId,
@@ -162,7 +163,7 @@ namespace DailySoccer.Shared.DAC
                         Description = it.Description,
                         ImagePath = it.ImagePath,
                         Name = it.Name,
-                        RemainingAmount = (int)it.RemainingAmount,
+                        RemainingAmount = it.RemainingAmount.HasValue ? it.RemainingAmount.Value : 0,
                         RewardGroupId = it.RewardGroupId,
                         ThumbnailPath = it.ThumbnailPath
                     }).ToList();

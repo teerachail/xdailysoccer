@@ -13,13 +13,16 @@
         public AccountInfo: account.AccountInformation;
         private _allMatches: MatchInformation[] = [];
 
-        static $inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal', '$ionicTabsDelegate'];
+        static $inject = ['$scope', 'starter.match.MatchServices',
+            '$location', '$ionicModal',
+            '$ionicTabsDelegate', 'starter.shared.IAccountManagementService'];
         constructor(private $scope,
             private matchSvc: starter.match.MatchServices,
             private $location: ng.ILocationService,
             private $ionicModal,
-            private $ionicTabsDelegate) {
-        
+            private $ionicTabsDelegate,
+            private accountManagementSvc: shared.AccountManagementService) {
+
             this.GetTodayMatches();
             this.$ionicModal.fromTemplateUrl('templates/Matches/MatchPopup.html',
                 {
@@ -44,7 +47,7 @@
             data.UserId = user.id;
             this.matchSvc.GetMatches(data)
                 .then((respond: GetMatchesRespond): void => {
-                    this.AccountInfo = respond.AccountInfo;
+                    this.updateAccountInformation(respond.AccountInfo);
                     this.updateDisplayDate(respond.CurrentDate);
                     this.updateDisplayMatches(respond.Matches);
                     this.updateRemainingGuessAmount();
@@ -84,7 +87,7 @@
 
             this.matchSvc.GuessMatch(request)
                 .then((respond: GuessMatchRespond): void => {
-                    this.AccountInfo = respond.AccountInfo;
+                    this.updateAccountInformation(respond.AccountInfo);
                     this.updateDisplayMatches(respond.Matches);
                     this.updateRemainingGuessAmount();
                     console.log('Send guess match completed.');
@@ -100,6 +103,12 @@
 
         public IsTodayMatch(match: MatchInformation): boolean {
             return this.dateAreEqual(match.BeginDate, this.CurrentDate);
+        }
+
+        private updateAccountInformation(accountInfo: account.AccountInformation): void {
+            this.AccountInfo = accountInfo;
+            this.accountManagementSvc.CurrentPoints = accountInfo.Points;
+            this.accountManagementSvc.CurrentOrderedCoupon = accountInfo.CurrentOrderedCoupon;
         }
 
         private dateAreEqual(firstDate: Date, secondDate: Date): boolean {

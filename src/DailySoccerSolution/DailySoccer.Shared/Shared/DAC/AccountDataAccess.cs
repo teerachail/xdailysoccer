@@ -72,13 +72,24 @@ namespace DailySoccer.Shared.DAC
 
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
-                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.GuestAccounts
-                .Any(guestAccount => guestAccount.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase)));
+                var selectedAccount = dctx.Accounts
+                    .Include("Tickets")
+                    .Where(it => it.GuestAccounts.Any(guestAccount => guestAccount.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase)))
+                    .FirstOrDefault();
                 if (selectedAccount == null) return null;
-                 
+
+                var currentRewardGroup = Facades.FacadeRepository.Instance.RewardDataAccess.GetRewardGroup()
+                    .OrderByDescending(it => it.ExpiredDate)
+                    .FirstOrDefault();
+
+                var currentOrderedCoupon = selectedAccount.Tickets
+                    .Where(it => it.RewardGroupId == currentRewardGroup.Id)
+                    .Count();
+
                 return new AccountInformation
                 {
-                    MaximumGuessAmount = 5,
+                    MaximumGuessAmount = 5, // HACK: Maximum guess amount
+                    CurrentOrderedCoupon = currentOrderedCoupon,
                     Points = selectedAccount.Points,
                     SecretCode = secrectCode,
                     OAuthId = selectedAccount.OAuthId,

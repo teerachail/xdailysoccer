@@ -3,8 +3,8 @@
 
     class RewardController {
 
-        public CurrentOrderedCoupon: number = 2940;
-        public UserCoupon: number = 0;
+        //public CurrentOrderedCoupon: number = 2940;
+        //public UserCoupon: number = 0;
         public RewardInfo: reward.GetCurrentRewardsRespond;
         public WinnersInfo: reward.GetCurrentWinnersRespond;
 
@@ -12,9 +12,8 @@
         public AllRewards: YourRewardInformation[];
         public ContactNo: string;
         
-        static $inject = ['$scope', 'starter.reward.RewardServices'];
-        constructor(private $scope,
-            private rewardSvc: starter.reward.RewardServices) {
+        static $inject = ['$scope', 'starter.reward.RewardServices', 'starter.shared.IAccountManagementService'];
+        constructor(private $scope, private rewardSvc: starter.reward.RewardServices, private accountManagementSvc: shared.AccountManagementService) {
             this.GetRewards();
             this.GetWinners();
             this.updateDisplayRewards();
