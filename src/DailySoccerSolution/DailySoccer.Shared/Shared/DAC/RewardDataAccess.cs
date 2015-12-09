@@ -82,8 +82,8 @@ namespace DailySoccer.Shared.DAC
                 return dctx.Winners.Select(it => new WinnerInformation
                 {
                     Id = it.Id,
-                    AccountFullName = "WinnerName", // HACK: AccountFullName
-                    //AccountSecrectCode = it.Account.SecretCode,
+                    AccountFullName = it.Account.DisplayName, 
+                    //AccountSecrectCode = it.Account.SecretCode, // TODO: Check this out
                     ReferenceCode = it.ReferenceCode,
                     RewardId = it.RewardId
                 }).ToList();
@@ -141,7 +141,7 @@ namespace DailySoccer.Shared.DAC
                     .Select(it => new WinnerInformation
                     {
                         Id = it.Id,
-                        AccountFullName = "WinnerName", // HACK: AccountFullName
+                        AccountFullName = it.Account.DisplayName,
                         AccountSecrectCode = userId,
                         ReferenceCode = it.ReferenceCode,
                         RewardId = it.RewardId

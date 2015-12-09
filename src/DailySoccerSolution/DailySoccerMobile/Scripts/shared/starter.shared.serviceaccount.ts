@@ -18,6 +18,7 @@
 
         public localPoint: number;
         public facebookPoint: number;
+        public CurrentPoints: number;
 
         static $inject = ['$location', 'starter.account.AccountServices', 'Azureservice'];
         constructor(
@@ -38,58 +39,39 @@
         }
 
         //สร้าง guestuser ใหม่
-        public CreateNewGuestUser(OAuthId: string = null) : void {
+        public CreateNewGuestUser(): void {
             var user = Ionic.User.current();
             this.accountSvc.CreateNewGuest()
                 .then((respond: starter.account.CreateNewGuestRespond): void => {
                     user.id = respond.AccountInfo.SecretCode;
                     user.set('IsSkiped', 'true');
                     user.set('PhoneVerified', 'false');
-                    if (OAuthId != null) user.set('OAuthId', OAuthId);
                     user.save();
-                    console.log('Create new guest complete. #' + user.id);
+
+                    console.log('Create new guest complete. #UserId: ' + user.id);
 
                     this.$location.path('/account/favorite');
                 });
         }
-
         //สร้างguestuserใหม่ และเชื่อมต่อfacebook 
-        public CreateNewGuestWithFacebook(oAuthId: string) : void {
+        public CreateNewGuestWithFacebook(oAuthId: string): void {
             this.accountSvc.CreateNewGuestWithFacebook(oAuthId)
                 .then((respond: starter.account.CreateNewGuestRespond): void => {
                     var user = Ionic.User.current();
                     user.id = respond.AccountInfo.SecretCode;
-                    user.set('OAuthId', respond.AccountInfo.OAuthId);
                     user.set('IsSkiped', 'true');
                     user.set('PhoneVerified', 'false');
+                    user.set('OAuthId', respond.AccountInfo.OAuthId);
                     user.save();
+
+                    console.log('Login with Facebook complete. #UserId: ' + user.id);
+
                     this.$location.path('/account/favorite');
                 });
         }
 
-        //ผูกfacebook เข้ากับ guestuser เดิม
-        public UpdateAccoutWithFacebook(secretCode: string, oAuthId: string) : void {
-            this.accountSvc.UpdateAccountWithFacebook(secretCode, oAuthId)
-                .then((respond: Boolean): void => {
-                    if (respond) {
-                        var user = Ionic.User.current();
-                        user.set('OAuthId', oAuthId);
-                        user.save();
-                        this.$location.path('/matches/todaymatches');
-                    }
-                });
-        }
 
-        public UpdateLocalStorageAccount(accountInfo: starter.account.AccountInformation): void {
-            var user = Ionic.User.current();
-            user.id = accountInfo.SecretCode;
-            var PhoneVerified = accountInfo.VerifiedPhoneNumber != null
-            user.set('OAuthId', accountInfo.OAuthId);
-            user.set('IsSkiped', 'true');
-            user.set('PhoneVerified', PhoneVerified);
-            user.save();
-        }
-
+        // Login
         public LoginWithFacebook(): void {
             this.Azureservice.login('facebook')
                 .then((): void => {
@@ -121,7 +103,30 @@
                     console.error('Azure Error: ' + err);
                 });
         }
+        //ผูก facebook เข้ากับ guest user เดิม
+        public UpdateAccoutWithFacebook(secretCode: string, oAuthId: string): void {
+            this.accountSvc.UpdateAccountWithFacebook(secretCode, oAuthId)
+                .then((respond: Boolean): void => {
+                    if (respond) {
+                        var user = Ionic.User.current();
+                        user.set('OAuthId', oAuthId);
+                        user.save();
+                        this.$location.path('/matches/todaymatches');
+                    }
+                });
+        }
+        public UpdateLocalStorageAccount(accountInfo: starter.account.AccountInformation): void {
+            var user = Ionic.User.current();
+            user.id = accountInfo.SecretCode;
+            var PhoneVerified = accountInfo.VerifiedPhoneNumber != null
+            user.set('OAuthId', accountInfo.OAuthId);
+            user.set('IsSkiped', 'true');
+            user.set('PhoneVerified', PhoneVerified);
+            user.save();
+        }
 
+
+        // Tie
         public TieFacebook(): void {
             this.Azureservice.login('facebook')
                 .then((): void => {
@@ -141,11 +146,9 @@
                     console.error('Azure Error: ' + err);
                 });
         }
-
         public TieFacbookWithFacebookData(): void {
-            
-        }
 
+        }
         public TieFacbookWithLocalData(): void {
             // TODO : TieFacbookWithLocalData
         }
