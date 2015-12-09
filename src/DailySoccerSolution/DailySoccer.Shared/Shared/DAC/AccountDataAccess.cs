@@ -186,26 +186,56 @@ namespace DailySoccer.Shared.DAC
 
         public void RequestConfirmPhoneNumber(RequestConfirmPhoneNumberRequest request, string verificationCode)
         {
-            // TODO: RequestConfirmPhoneNumber
-            throw new NotImplementedException();
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var newData = new PhoneVerification
+                {
+                    PhoneNumber = request.PhoneNo,
+                    UserId = request.UserId,
+                    VerificationCode = verificationCode
+                };
+                dctx.PhoneVerifications.Add(newData);
+                dctx.SaveChanges();
+            }
         }
 
-        public void ConfirmPhoneNumber(string userId, string verificationCode)
+        public VerificationPhoneInformation GetVerificationPhoneByVerificationCode(string userId, string verificationCode)
         {
-            // TODO: ConfirmPhoneNumber
-            throw new NotImplementedException();
-        }
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var result = dctx.PhoneVerifications
+                    .Where(it => it.UserId.Equals(userId, StringComparison.CurrentCultureIgnoreCase))
+                    .Where(it => it.VerificationCode.Equals(verificationCode, StringComparison.CurrentCultureIgnoreCase))
+                    .Select(it => new VerificationPhoneInformation
+                    {
+                        Id = it.Id,
+                        UserId = it.UserId,
+                        PhoneNumber = it.PhoneNumber,
+                        CompletedDate = it.CompletedDate,
+                        VerificationCode = it.VerificationCode
+                    }).FirstOrDefault();
 
-        public VerificationPhoneInformation GetVerificationPhoneByVerificationCode(string verificationCode)
-        {
-            // TODO: GetVerificationPhoneByVerificationCode
-            throw new NotImplementedException();
+                return result;
+            }
         }
 
         public void VerifyPhoneSuccess(string userId, string phoneNo, string verificationCode)
         {
-            // TODO: VerifyPhoneSuccess
-            throw new NotImplementedException();
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedVerification = dctx.PhoneVerifications
+                    .Where(it => it.UserId.Equals(userId, StringComparison.CurrentCultureIgnoreCase))
+                    .Where(it => it.VerificationCode.Equals(verificationCode, StringComparison.CurrentCultureIgnoreCase))
+                    .FirstOrDefault();
+                if (selectedVerification == null) return;
+
+                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.SecretCode.Equals(userId, StringComparison.CurrentCultureIgnoreCase));
+                if (selectedAccount == null) return;
+
+                selectedVerification.CompletedDate = DateTime.Now;
+                selectedAccount.VerifiedPhoneNumber = phoneNo;
+                dctx.SaveChanges();
+            }
         }
     }
 }

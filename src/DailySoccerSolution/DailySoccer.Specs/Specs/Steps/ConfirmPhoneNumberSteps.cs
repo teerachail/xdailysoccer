@@ -19,8 +19,8 @@ namespace DailySoccer.Specs.Steps
             var verifications = table.CreateSet<VerificationPhoneInformation>();
             var mockAccountDac = ScenarioContext.Current.Get<Moq.Mock<IAccountDataAccess>>();
             mockAccountDac.Setup(dac => dac.VerifyPhoneSuccess(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
-            mockAccountDac.Setup(dac => dac.GetVerificationPhoneByVerificationCode(It.IsAny<string>())).Returns<string>
-                (it => verifications.FirstOrDefault(v => v.VerificationCode.Equals(it, StringComparison.CurrentCultureIgnoreCase)));
+            mockAccountDac.Setup(dac => dac.GetVerificationPhoneByVerificationCode(It.IsAny<string>(), It.IsAny<string>())).Returns<string,string>
+                ((userId,verificationCode) => verifications.FirstOrDefault(v => v.VerificationCode.Equals(verificationCode, StringComparison.CurrentCultureIgnoreCase)));
         }
         
         [When(@"ผู้ใช้ UserId: '(.*)' ยืนยันรหัสลับ VerificationCode: '(.*)'")]
@@ -40,7 +40,7 @@ namespace DailySoccer.Specs.Steps
         {
             var mockAccountDac = ScenarioContext.Current.Get<Moq.Mock<IAccountDataAccess>>();
             mockAccountDac.Verify(dac => dac.VerifyPhoneSuccess(It.Is<string>(it => it == userId), It.Is<string>(it => it == phoneNumber), It.Is<string>(it => it == verificationCode)), Times.Exactly(1));
-            mockAccountDac.Verify(dac => dac.GetVerificationPhoneByVerificationCode(It.Is<string>(it => it == verificationCode)), Times.Exactly(1));
+            mockAccountDac.Verify(dac => dac.GetVerificationPhoneByVerificationCode(It.Is<string>(it => it == userId), It.Is<string>(it => it == verificationCode)), Times.Exactly(1));
 
             var result = ScenarioContext.Current.Get<ConfirmPhoneNumberRespond>();
             Assert.IsTrue(result.IsSuccessed);

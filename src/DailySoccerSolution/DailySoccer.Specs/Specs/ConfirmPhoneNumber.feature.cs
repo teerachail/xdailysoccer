@@ -78,7 +78,7 @@ namespace DailySoccer.Specs
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "SecretCode",
-                        "VerifyCode"});
+                        "VerifiedPhoneNumber"});
             table1.AddRow(new string[] {
                         "1",
                         "s01",

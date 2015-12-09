@@ -7,9 +7,9 @@
 Background: Initialize
 	Given Setup mocking
 	And ผู้ใช้ในระบบมีดังนี้
-	| Id | SecretCode | VerifyCode		|
-	| 1  | s01        |					|
-	| 2  | s02        | +66914185555	|
+	| Id | SecretCode | VerifiedPhoneNumber	|
+	| 1  | s01        |						|
+	| 2  | s02        | +66914185555		|
 
 @mock
 Scenario: ผู้ใช้ทำการขอยืนยันเบอร์โทรศัพท์ ระบบบันทึกเบอร์โทรแล้วส่งรหัสลับในการยืนยันกลับไป

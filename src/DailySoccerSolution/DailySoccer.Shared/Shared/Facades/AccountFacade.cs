@@ -237,7 +237,8 @@ namespace DailySoccer.Shared.Facades
             var isAccountValid = selectedAccount != null && string.IsNullOrEmpty(selectedAccount.VerifiedPhoneNumber);
             if (!isAccountValid) return invalidDataModel;
 
-            var verificationCode = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 7);
+            const int RequiredVerificationDigits = 10;
+            var verificationCode = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, RequiredVerificationDigits).ToUpper();
             accountDac.RequestConfirmPhoneNumber(request, verificationCode);
 
             return new RequestConfirmPhoneNumberRespond
@@ -255,7 +256,7 @@ namespace DailySoccer.Shared.Facades
             if (!isArgumentsValid) return confirmationFailed;
 
             var accountDac = FacadeRepository.Instance.AccountDataAccess;
-            var selectedVerification = accountDac.GetVerificationPhoneByVerificationCode(request.VerificationCode);
+            var selectedVerification = accountDac.GetVerificationPhoneByVerificationCode(request.UserId, request.VerificationCode);
 
             var isVerificationPass = selectedVerification != null
                 && !selectedVerification.CompletedDate.HasValue
