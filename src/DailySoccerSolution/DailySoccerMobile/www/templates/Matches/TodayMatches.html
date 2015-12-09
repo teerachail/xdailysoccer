@@ -1,4 +1,4 @@
-﻿<ion-view view-title="DAILY SOCCER<br><div>พฤษจิกายน</div>">
+﻿<ion-view view-title="DAILY SOCCER<br><div> {{ matchCtrl.CurrentDate | date: 'MMMM' }} </div>">
     <ion-content class="has-subheader today-match">
         <div ng-include src="'templates/Matches/_matchHeaderAds.html'"></div>
         <div ng-include src="'templates/Matches/_matchHeaderScore.html'"></div>

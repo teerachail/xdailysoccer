@@ -16,11 +16,11 @@
             </p>
             <div class="col row">
                 <p>
-                    <input type="number" class=" col col-50 input-number block-center no-padding" />
+                    <input type="number" class=" col col-50 input-number block-center no-padding" ng-model="amountCoupon" />
                 </p>
             </div>
             <div class="col row">
-                <a href="#/buyticketcompleted/buyticketcompleted" class="button bg-yellow col col-50 button-small block-center ">
+                <a href="#" class="button bg-yellow col col-50 button-small block-center" ng-click="TicketCtrl.BuyTicket(amountCoupon)">
                     ส่งคูปองลุ้นรางวัล
                 </a>
             </div>
