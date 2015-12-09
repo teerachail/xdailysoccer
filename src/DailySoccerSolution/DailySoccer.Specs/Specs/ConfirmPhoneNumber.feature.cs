@@ -31,8 +31,8 @@ namespace DailySoccer.Specs
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ConfirmPhoneNumber", "In order to avoid silly mistakes\nAs a math idiot\nI want to be told the sum of two" +
-                    " numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ConfirmPhoneNumber", "In order to avoid silly mistakes\r\nAs a math idiot\r\nI want to be told the sum of t" +
+                    "wo numbers", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -126,8 +126,8 @@ this.FeatureBackground();
 #line 19
  testRunner.When("ผู้ใช้ UserId: \'s01\' ยืนยันรหัสลับ VerificationCode: \'1234567\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 20
- testRunner.Then("ระบบทำการบันทึกการยืนยันเบอร์โทรศัพ \'+66914185500\' ให้กับผู้ใช้ UserId: \'s01\' เสร" +
-                    "็จสิ้น", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("ระบบทำการบันทึกการยืนยันเบอร์โทรศัพ \'+66914185500\' และ VerificationCode: \'1234567" +
+                    "\' ให้กับผู้ใช้ UserId: \'s01\' เสร็จสิ้น", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -244,8 +244,8 @@ this.FeatureBackground();
 #line 44
  testRunner.When("ผู้ใช้ UserId: \'s01\' ยืนยันรหัสลับ VerificationCode: \'2222222\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 45
- testRunner.Then("ระบบทำการบันทึกการยืนยันเบอร์โทรศัพ \'+8800000001\' ให้กับผู้ใช้ UserId: \'s01\' เสร็" +
-                    "จสิ้น", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("ระบบทำการบันทึกการยืนยันเบอร์โทรศัพ \'+8800000001\' และ VerificationCode: \'2222222\'" +
+                    " ให้กับผู้ใช้ UserId: \'s01\' เสร็จสิ้น", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -282,8 +282,8 @@ this.FeatureBackground();
 #line 52
  testRunner.When("ผู้ใช้ UserId: \'s02\' ยืนยันรหัสลับ VerificationCode: \'1234567\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 53
- testRunner.Then("ระบบทำการบันทึกการยืนยันเบอร์โทรศัพ \'+66914185500\' ให้กับผู้ใช้ UserId: \'s02\' เสร" +
-                    "็จสิ้น", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("ระบบทำการบันทึกการยืนยันเบอร์โทรศัพ \'+66914185500\' และ VerificationCode: \'1234567" +
+                    "\' ให้กับผู้ใช้ UserId: \'s02\' เสร็จสิ้น", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

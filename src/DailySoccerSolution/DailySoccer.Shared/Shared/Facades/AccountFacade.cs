@@ -250,8 +250,22 @@ namespace DailySoccer.Shared.Facades
 
         public ConfirmPhoneNumberRespond ConfirmPhoneNumber(ConfirmPhoneNumberRequest request)
         {
-            // TODO: ConfirmPhoneNumber
-            throw new NotImplementedException();
+            var confirmationFailed = new ConfirmPhoneNumberRespond();
+            var isArgumentsValid = request != null && !string.IsNullOrEmpty(request.UserId) && !string.IsNullOrEmpty(request.VerificationCode);
+            if (!isArgumentsValid) return confirmationFailed;
+
+            var accountDac = FacadeRepository.Instance.AccountDataAccess;
+            var selectedVerification = accountDac.GetVerificationPhoneByVerificationCode(request.VerificationCode);
+
+            var isVerificationPass = selectedVerification != null
+                && !selectedVerification.CompletedDate.HasValue
+                && selectedVerification.UserId.Equals(request.UserId, StringComparison.CurrentCultureIgnoreCase)
+                && selectedVerification.VerificationCode.Equals(request.VerificationCode, StringComparison.CurrentCultureIgnoreCase)
+                && !string.IsNullOrEmpty(selectedVerification.PhoneNumber);
+            if (!isVerificationPass) return confirmationFailed;
+
+            accountDac.VerifyPhoneSuccess(request.UserId, selectedVerification.PhoneNumber, request.VerificationCode);
+            return new ConfirmPhoneNumberRespond { IsSuccessed = true };
         }
     }
 }

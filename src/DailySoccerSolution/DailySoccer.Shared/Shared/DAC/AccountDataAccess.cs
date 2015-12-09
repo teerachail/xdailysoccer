@@ -195,5 +195,17 @@ namespace DailySoccer.Shared.DAC
             // TODO: ConfirmPhoneNumber
             throw new NotImplementedException();
         }
+
+        public VerificationPhoneInformation GetVerificationPhoneByVerificationCode(string verificationCode)
+        {
+            // TODO: GetVerificationPhoneByVerificationCode
+            throw new NotImplementedException();
+        }
+
+        public void VerifyPhoneSuccess(string userId, string phoneNo, string verificationCode)
+        {
+            // TODO: VerifyPhoneSuccess
+            throw new NotImplementedException();
+        }
     }
 }

@@ -95,6 +95,7 @@
     <Compile Include="Shared\Models\RewardInformation.cs" />
     <Compile Include="Shared\Models\SetFavoriteTeamRequest.cs" />
     <Compile Include="Shared\Models\TeamInformation.cs" />
+    <Compile Include="Shared\Models\VerificationPhoneInformation.cs" />
     <Compile Include="Shared\Models\WinnerAwardInformation.cs" />
     <Compile Include="Shared\Models\WinnerInformation.cs" />
     <Compile Include="Shared\Models\YourRewardInformation.cs" />

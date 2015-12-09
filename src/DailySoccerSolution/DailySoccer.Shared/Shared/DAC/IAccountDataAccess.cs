@@ -20,5 +20,7 @@ namespace DailySoccer.Shared.DAC
         void ChargeFromBuyTicket(string secrectCode, int requiredPoints);
         void RequestConfirmPhoneNumber(RequestConfirmPhoneNumberRequest request, string verificationCode);
         void ConfirmPhoneNumber(string userId, string verificationCode);
+        VerificationPhoneInformation GetVerificationPhoneByVerificationCode(string verificationCode);
+        void VerifyPhoneSuccess(string userId, string phoneNo, string verificationCode);
     }
 }
