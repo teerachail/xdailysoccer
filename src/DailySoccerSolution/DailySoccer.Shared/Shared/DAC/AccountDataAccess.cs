@@ -19,7 +19,13 @@ namespace DailySoccer.Shared.DAC
                 dctx.Accounts.Add(new Account
                 {
                     Points = 0,
-                    SecretCode = SecrectCode,
+                    GuestAccounts = new List<GuestAccount>()
+                    {
+                        new GuestAccount
+                        {
+                            SecretCode = SecrectCode
+                        }
+                    }
                 });
                 dctx.SaveChanges();
 
@@ -38,10 +44,16 @@ namespace DailySoccer.Shared.DAC
 
                 dctx.Accounts.Add(new Account
                 {
-                    SecretCode = SecrectCode,
                     Points = 0,
                     Email = email,
-                    OAuthId = OAuthId, 
+                    OAuthId = OAuthId,
+                    GuestAccounts = new List<GuestAccount>()
+                    {
+                        new GuestAccount
+                        {
+                            SecretCode = SecrectCode
+                        }
+                    }
                 });
                 dctx.SaveChanges();
 
@@ -60,15 +72,15 @@ namespace DailySoccer.Shared.DAC
 
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
-                var selectedAccount = dctx.Accounts
-                    .FirstOrDefault(it => it.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase));
+                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.GuestAccounts
+                .Any(guestAccount => guestAccount.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase)));
                 if (selectedAccount == null) return null;
-
+                 
                 return new AccountInformation
                 {
                     MaximumGuessAmount = 5,
                     Points = selectedAccount.Points,
-                    SecretCode = selectedAccount.SecretCode,
+                    SecretCode = secrectCode,
                     OAuthId = selectedAccount.OAuthId,
                     Email = selectedAccount.Email,
                     VerifiedPhoneNumber = selectedAccount.VerifiedPhoneNumber
@@ -90,7 +102,6 @@ namespace DailySoccer.Shared.DAC
                 return new AccountInformation
                 {
                     Points = selectedAccount.Points,
-                    SecretCode = selectedAccount.SecretCode,
                     OAuthId = selectedAccount.OAuthId,
                     Email = selectedAccount.Email,
                     VerifiedPhoneNumber = selectedAccount.VerifiedPhoneNumber
@@ -102,14 +113,14 @@ namespace DailySoccer.Shared.DAC
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
-                var account = dctx.Accounts.FirstOrDefault(it => it.SecretCode == accountInfo.SecretCode);
-                if (account != null)
+                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.GuestAccounts
+                .Any(guestAccount => guestAccount.SecretCode.Equals(accountInfo.SecretCode, StringComparison.CurrentCultureIgnoreCase)));
+                if (selectedAccount != null)
                 {
-                    account.SecretCode = accountInfo.SecretCode;
-                    account.OAuthId = accountInfo.OAuthId;
-                    account.Email = accountInfo.Email;
-                    account.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber;
-                    account.Points = accountInfo.Points;
+                    selectedAccount.OAuthId = accountInfo.OAuthId;
+                    selectedAccount.Email = accountInfo.Email;
+                    selectedAccount.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber;
+                    selectedAccount.Points = accountInfo.Points;
                     dctx.SaveChanges();
                 }
             }
@@ -124,7 +135,7 @@ namespace DailySoccer.Shared.DAC
             {
                 var selectedAccount = dctx.Accounts
                     .Include("GuessMatches")
-                    .Where(it => it.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase))
+                    .Where(it => it.GuestAccounts.Any(guestAccount => guestAccount.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase)))
                     .FirstOrDefault();
                 if (selectedAccount == null) return Enumerable.Empty<GuessMatchInformation>();
 
@@ -132,7 +143,7 @@ namespace DailySoccer.Shared.DAC
                     .Select(it => new GuessMatchInformation
                     {
                         Id = it.Id,
-                        AccountSecrectCode = it.Account.SecretCode,
+                        AccountSecrectCode = secrectCode,
                         GuessTeamId = it.GuessTeamId,
                         MatchId = it.MatchId,
                         PredictionPoints = it.PredictionPoints
@@ -161,7 +172,8 @@ namespace DailySoccer.Shared.DAC
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
-                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.SecretCode.Equals(request.UserId, StringComparison.CurrentCultureIgnoreCase));
+                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.GuestAccounts
+                .Any(guestAccount => guestAccount.SecretCode.Equals(request.UserId, StringComparison.CurrentCultureIgnoreCase)));
                 if (selectedAccount == null) return;
 
                 var selectedTeam = dctx.FavoriteTeams.FirstOrDefault(it => it.Id == request.SelectedTeamId);
@@ -176,7 +188,8 @@ namespace DailySoccer.Shared.DAC
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
-                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase));
+                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.GuestAccounts
+                .Any(guestAccount => guestAccount.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase)));
                 if (selectedAccount == null) return;
 
                 selectedAccount.Points -= requiredPoints;
@@ -229,7 +242,8 @@ namespace DailySoccer.Shared.DAC
                     .FirstOrDefault();
                 if (selectedVerification == null) return;
 
-                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.SecretCode.Equals(userId, StringComparison.CurrentCultureIgnoreCase));
+                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.GuestAccounts
+                .Any(guestAccount => guestAccount.SecretCode.Equals(userId, StringComparison.CurrentCultureIgnoreCase)));
                 if (selectedAccount == null) return;
 
                 selectedVerification.CompletedDate = DateTime.Now;

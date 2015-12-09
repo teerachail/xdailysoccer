@@ -85,6 +85,14 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                     }
                 }
             })
+            .state('account.tiefacebook', {
+                url: '/tiefacebook',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/Accounts/SyncData.html',
+                    }
+                }
+            })
             .state('account.favorite', {
                 url: '/favorite',
                 views: {

@@ -20,10 +20,10 @@ namespace DailySoccer.DAC.EF
             this.GuessMatches = new HashSet<GuessMatch>();
             this.Winners = new HashSet<Winner>();
             this.Tickets = new HashSet<Ticket>();
+            this.GuestAccounts = new HashSet<GuestAccount>();
         }
     
         public int Id { get; set; }
-        public string SecretCode { get; set; }
         public string OAuthId { get; set; }
         public int Points { get; set; }
         public string Email { get; set; }
@@ -37,5 +37,7 @@ namespace DailySoccer.DAC.EF
         public virtual ICollection<Winner> Winners { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Tickets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GuestAccount> GuestAccounts { get; set; }
     }
 }

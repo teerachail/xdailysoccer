@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="191cc90f7b0d42188bd939f155dde9ac" Name="Diagram1" >
+      <Diagram DiagramId="191cc90f7b0d42188bd939f155dde9ac" Name="Diagram1" ZoomLevel="111" >
         <EntityTypeShape EntityType="DailySoccerModel.Account" Width="1.75" PointX="3" PointY="1.375" />
         <EntityTypeShape EntityType="DailySoccerModel.Match" Width="1.75" PointX="7.75" PointY="0.5" />
         <EntityTypeShape EntityType="DailySoccerModel.GuessMatch" Width="1.5" PointX="5.5" PointY="0.5" />
@@ -22,6 +22,8 @@
         <AssociationConnector Association="DailySoccerModel.AccountTicket" />
         <EntityTypeShape EntityType="DailySoccerModel.PhoneVerification" Width="1.75" PointX="0.5" PointY="2.875" />
         <AssociationConnector Association="DailySoccerModel.RewardGroupReward" />
+        <EntityTypeShape EntityType="DailySoccerModel.GuestAccount" Width="1.5" PointX="0.75" PointY="5.625" />
+        <AssociationConnector Association="DailySoccerModel.AccountGuestAccount" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

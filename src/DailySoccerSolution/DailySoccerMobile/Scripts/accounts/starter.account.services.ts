@@ -22,6 +22,11 @@
             this.queryRemoteSvc.RemoteQuery<SetFavoriteTeamRequest>(requestUrl);
         }
 
+        public GetAccountBySecretCode(secretCode: string): ng.IPromise<AccountInformation> {
+            var requestUrl = "Account/GetAccountBySecretCode?secretCode=" + secretCode;
+            return this.queryRemoteSvc.RemoteQuery<AccountInformation>(requestUrl);
+        }
+
         public GetAccountByOAuthId(OAuthId: string): ng.IPromise<AccountInformation> {
             var requestUrl = "Account/GetAccountByOAuthId?OAuthId=" + OAuthId;
             return this.queryRemoteSvc.RemoteQuery<AccountInformation>(requestUrl);

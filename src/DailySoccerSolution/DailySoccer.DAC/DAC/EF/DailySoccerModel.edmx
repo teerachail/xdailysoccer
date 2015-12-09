@@ -15,6 +15,7 @@
     <EntitySet Name="Winners" EntityType="DailySoccerModel.Store.Winners" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Tickets" EntityType="DailySoccerModel.Store.Tickets" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PhoneVerifications" EntityType="DailySoccerModel.Store.PhoneVerifications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GuestAccounts" EntityType="DailySoccerModel.Store.GuestAccounts" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AccountGuessMatch" Association="DailySoccerModel.Store.AccountGuessMatch">
       <End Role="Account" EntitySet="Accounts" />
       <End Role="GuessMatch" EntitySet="GuessMatches" />
@@ -47,13 +48,16 @@
       <End Role="RewardGroup" EntitySet="RewardGroups" />
       <End Role="Reward" EntitySet="Rewards" />
     </AssociationSet>
+    <AssociationSet Name="AccountGuestAccount" Association="DailySoccerModel.Store.AccountGuestAccount">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="GuestAccount" EntitySet="GuestAccounts" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accounts">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SecretCode" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="OAuthId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Points" Type="int" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
@@ -149,6 +153,14 @@
     <Property Name="VerificationCode" Type="varchar" Nullable="false" MaxLength="10" />
     <Property Name="PhoneNumber" Type="varchar" Nullable="false" MaxLength="20" />
     <Property Name="CompletedDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="GuestAccounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SecretCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="AccountGuessMatch">
     <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
@@ -246,6 +258,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="AccountGuestAccount">
+    <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
+    <End Role="GuestAccount" Type="DailySoccerModel.Store.GuestAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GuestAccount">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -292,13 +316,17 @@
             <End Role="RewardGroup" EntitySet="RewardGroups" />
             <End Role="Reward" EntitySet="Rewards" />
           </AssociationSet>
+          <EntitySet Name="GuestAccounts" EntityType="DailySoccerModel.GuestAccount" />
+          <AssociationSet Name="AccountGuestAccount" Association="DailySoccerModel.AccountGuestAccount">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="GuestAccount" EntitySet="GuestAccounts" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SecretCode" Type="String" Nullable="false" Unicode="false" FixedLength="false" MaxLength="100" />
           <Property Name="OAuthId" Type="String" Nullable="true" />
           <Property Name="Points" Type="Int32" Nullable="false" />
           <NavigationProperty Name="GuessMatches" Relationship="DailySoccerModel.AccountGuessMatch" FromRole="Account" ToRole="GuessMatch" />
@@ -308,6 +336,7 @@
           <Property Name="Email" Type="String" Nullable="true" />
           <Property Name="VerifiedPhoneNumber" Type="String" Nullable="true" />
           <Property Name="DisplayName" Type="String" Nullable="true" />
+          <NavigationProperty Name="GuestAccounts" Relationship="DailySoccerModel.AccountGuestAccount" FromRole="Account" ToRole="GuestAccount" />
         </EntityType>
         <EntityType Name="Match">
           <Key>
@@ -498,6 +527,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="GuestAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SecretCode" Type="String" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="DailySoccerModel.AccountGuestAccount" FromRole="GuestAccount" ToRole="Account" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="AccountGuestAccount">
+          <End Type="DailySoccerModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="DailySoccerModel.GuestAccount" Role="GuestAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuestAccount">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -508,7 +558,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(DailySoccerModel.Account)">
         <MappingFragment StoreEntitySet="Accounts">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="SecretCode" ColumnName="SecretCode" />
           <ScalarProperty Name="OAuthId" ColumnName="OAuthId" />
           <ScalarProperty Name="Points" ColumnName="Points" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -615,6 +664,15 @@
           <ScalarProperty Name="VerificationCode" ColumnName="VerificationCode" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GuestAccounts">
+      <EntityTypeMapping TypeName="IsTypeOf(DailySoccerModel.GuestAccount)">
+        <MappingFragment StoreEntitySet="GuestAccounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SecretCode" ColumnName="SecretCode" />
+          <ScalarProperty Name="AccountId" ColumnName="AccountId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

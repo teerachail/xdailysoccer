@@ -50,6 +50,14 @@ namespace DailySoccerAppService.Controllers
         }
 
         [HttpGet]
+        public AccountInformation GetAccountBySecretCode(string secretCode)
+        {
+            var accountFacade = new AccountFacade();
+            var result = accountFacade.GetAccountBySecretCode(secretCode);
+            return result;
+        }
+
+        [HttpGet]
         public RequestConfirmPhoneNumberRespond RequestConfirmPhoneNumber(string userId, string phoneNo)
         {
             var request = new RequestConfirmPhoneNumberRequest

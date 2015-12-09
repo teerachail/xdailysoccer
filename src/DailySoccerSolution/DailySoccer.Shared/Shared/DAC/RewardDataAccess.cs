@@ -83,7 +83,7 @@ namespace DailySoccer.Shared.DAC
                 {
                     Id = it.Id,
                     AccountFullName = "WinnerName", // HACK: AccountFullName
-                    AccountSecrectCode = it.Account.SecretCode,
+                    //AccountSecrectCode = it.Account.SecretCode,
                     ReferenceCode = it.ReferenceCode,
                     RewardId = it.RewardId
                 }).ToList();
@@ -137,12 +137,12 @@ namespace DailySoccer.Shared.DAC
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
                 var result = dctx.Winners
-                    .Where(it => it.Account.SecretCode.Equals(userId, StringComparison.CurrentCultureIgnoreCase))
+                    .Where(it => it.Account.GuestAccounts.Any(guestAccount => guestAccount.SecretCode.Equals(userId, StringComparison.CurrentCultureIgnoreCase)))
                     .Select(it => new WinnerInformation
                     {
                         Id = it.Id,
                         AccountFullName = "WinnerName", // HACK: AccountFullName
-                        AccountSecrectCode = it.Account.SecretCode,
+                        AccountSecrectCode = userId,
                         ReferenceCode = it.ReferenceCode,
                         RewardId = it.RewardId
                     }).ToList();

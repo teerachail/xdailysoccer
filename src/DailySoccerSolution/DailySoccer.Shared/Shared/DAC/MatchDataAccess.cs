@@ -45,13 +45,14 @@ namespace DailySoccer.Shared.DAC
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
                 var selectedLastGuessed = dctx.GuessMatches
-                    .Where(it => it.Account.SecretCode.Equals(guess.AccountSecrectCode, StringComparison.CurrentCultureIgnoreCase))
+                    .Where(it => it.Account.GuestAccounts.Any(guestAccount => guestAccount.SecretCode.Equals(guess.AccountSecrectCode, StringComparison.CurrentCultureIgnoreCase)))
                     .Where(it => it.MatchId == guess.MatchId)
                     .FirstOrDefault();
                 var isNewGuess = selectedLastGuessed == null;
                 if (isNewGuess)
                 {
-                    var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.SecretCode.Equals(guess.AccountSecrectCode, StringComparison.CurrentCultureIgnoreCase));
+                    var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.GuestAccounts
+                    .Any(guestAccount => guestAccount.SecretCode.Equals(guess.AccountSecrectCode, StringComparison.CurrentCultureIgnoreCase)));
                     if (selectedAccount == null) return;
                     dctx.GuessMatches.Add(new DailySoccer.DAC.EF.GuessMatch
                     {

@@ -13,7 +13,8 @@ namespace DailySoccer.Shared.DAC
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
-                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase));
+                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.GuestAccounts
+                 .Any(guestAccount => guestAccount.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase)));
                 if (selectedAccount == null) return;
 
                 var selectedRewardGroup = dctx.RewardGroups.FirstOrDefault(it => it.Id == rewardGroup);

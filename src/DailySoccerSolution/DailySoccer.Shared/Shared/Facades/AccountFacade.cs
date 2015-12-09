@@ -55,6 +55,12 @@ namespace DailySoccer.Shared.Facades
             facade.AccountDataAccess.UpdateAccount(accountInfo);
         }
 
+        public AccountInformation GetAccountBySecretCode(string secretCode)
+        {
+            var facade = FacadeRepository.Instance;
+            return facade.AccountDataAccess.GetAccountBySecrectCode(secretCode);
+        }
+
         public AccountInformation GetAccountByOAuthId(string OAuthId)
         {
             var facade = FacadeRepository.Instance;

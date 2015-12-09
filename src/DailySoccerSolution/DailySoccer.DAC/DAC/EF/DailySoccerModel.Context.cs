@@ -34,5 +34,6 @@ namespace DailySoccer.DAC.EF
         public virtual DbSet<Winner> Winners { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }
         public virtual DbSet<PhoneVerification> PhoneVerifications { get; set; }
+        public virtual DbSet<GuestAccount> GuestAccounts { get; set; }
     }
 }

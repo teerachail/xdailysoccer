@@ -1,5 +1,5 @@
 ﻿<ion-view class="bg-main scroll-middle">
-    <ion-content class="text-white text-center ">
+    <ion-content class="text-white text-center " ng-init="accountCtrl.ShowFacebookData()">
         <div class="row row-center">
             <div class="col col-center">
                 <div class="col-67 block-center">
@@ -14,7 +14,7 @@
                     ข้อมูลที่อยู่ใน Facebook จะถูกใช้แทนข้อมูลที่อยู่ในเครื่อง
                 </div>
                 <i class="font-large text-green">
-                    2500 แต้ม
+                    {{ accountCtrl.facebookPoint }} แต้ม
                 </i>
             </div>
         </div>
@@ -27,7 +27,7 @@
                     ใช้ข้อมูลที่มีอยู่ในเครื่อง
                 </div>
                 <i class="font-large text-green">
-                    30000 แต้ม
+                    {{ accountCtrl.localPoint }} แต้ม
                 </i>
             </div>
         </div>

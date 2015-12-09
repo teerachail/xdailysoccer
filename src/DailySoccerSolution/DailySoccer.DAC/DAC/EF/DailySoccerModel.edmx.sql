@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/09/2015 11:18:21
+-- Date Created: 12/09/2015 16:04:10
 -- Generated from EDMX file: C:\Users\joker\Documents\Git\dailysoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
@@ -23,9 +23,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_MatchGuessMatch]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[GuessMatches] DROP CONSTRAINT [FK_MatchGuessMatch];
 GO
-IF OBJECT_ID(N'[dbo].[FK_RewardGroupReward]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Rewards] DROP CONSTRAINT [FK_RewardGroupReward];
-GO
 IF OBJECT_ID(N'[dbo].[FK_FavoriteTeamAccount]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Accounts] DROP CONSTRAINT [FK_FavoriteTeamAccount];
 GO
@@ -40,6 +37,9 @@ IF OBJECT_ID(N'[dbo].[FK_RewardGroupTicket]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_AccountTicket]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Tickets] DROP CONSTRAINT [FK_AccountTicket];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RewardGroupReward]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Rewards] DROP CONSTRAINT [FK_RewardGroupReward];
 GO
 
 -- --------------------------------------------------
@@ -70,6 +70,9 @@ GO
 IF OBJECT_ID(N'[dbo].[Tickets]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Tickets];
 GO
+IF OBJECT_ID(N'[dbo].[PhoneVerifications]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PhoneVerifications];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -78,7 +81,6 @@ GO
 -- Creating table 'Accounts'
 CREATE TABLE [dbo].[Accounts] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [SecretCode] varchar(100)  NOT NULL,
     [OAuthId] nvarchar(max)  NULL,
     [Points] int  NOT NULL,
     [Email] nvarchar(max)  NULL,
@@ -136,8 +138,7 @@ CREATE TABLE [dbo].[Rewards] (
     [RemainingAmount] int  NULL,
     [ThumbnailPath] nvarchar(max)  NULL,
     [ImagePath] nvarchar(max)  NULL,
-    [RewardGroupId] int  NOT NULL,
-    [RewardGroup_Id] int  NOT NULL
+    [RewardGroupId] int  NOT NULL
 );
 GO
 
@@ -175,6 +176,14 @@ CREATE TABLE [dbo].[PhoneVerifications] (
     [VerificationCode] varchar(10)  NOT NULL,
     [PhoneNumber] varchar(20)  NOT NULL,
     [CompletedDate] datetime  NULL
+);
+GO
+
+-- Creating table 'GuestAccounts'
+CREATE TABLE [dbo].[GuestAccounts] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [SecretCode] nvarchar(max)  NOT NULL,
+    [AccountId] int  NOT NULL
 );
 GO
 
@@ -236,6 +245,12 @@ ADD CONSTRAINT [PK_PhoneVerifications]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'GuestAccounts'
+ALTER TABLE [dbo].[GuestAccounts]
+ADD CONSTRAINT [PK_GuestAccounts]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -268,21 +283,6 @@ GO
 CREATE INDEX [IX_FK_MatchGuessMatch]
 ON [dbo].[GuessMatches]
     ([MatchId]);
-GO
-
--- Creating foreign key on [RewardGroup_Id] in table 'Rewards'
-ALTER TABLE [dbo].[Rewards]
-ADD CONSTRAINT [FK_RewardGroupReward]
-    FOREIGN KEY ([RewardGroup_Id])
-    REFERENCES [dbo].[RewardGroups]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_RewardGroupReward'
-CREATE INDEX [IX_FK_RewardGroupReward]
-ON [dbo].[Rewards]
-    ([RewardGroup_Id]);
 GO
 
 -- Creating foreign key on [FavoriteTeam_Id] in table 'Accounts'
@@ -357,6 +357,36 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_AccountTicket'
 CREATE INDEX [IX_FK_AccountTicket]
 ON [dbo].[Tickets]
+    ([AccountId]);
+GO
+
+-- Creating foreign key on [RewardGroupId] in table 'Rewards'
+ALTER TABLE [dbo].[Rewards]
+ADD CONSTRAINT [FK_RewardGroupReward]
+    FOREIGN KEY ([RewardGroupId])
+    REFERENCES [dbo].[RewardGroups]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RewardGroupReward'
+CREATE INDEX [IX_FK_RewardGroupReward]
+ON [dbo].[Rewards]
+    ([RewardGroupId]);
+GO
+
+-- Creating foreign key on [AccountId] in table 'GuestAccounts'
+ALTER TABLE [dbo].[GuestAccounts]
+ADD CONSTRAINT [FK_AccountGuestAccount]
+    FOREIGN KEY ([AccountId])
+    REFERENCES [dbo].[Accounts]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_AccountGuestAccount'
+CREATE INDEX [IX_FK_AccountGuestAccount]
+ON [dbo].[GuestAccounts]
     ([AccountId]);
 GO
 
