@@ -18,9 +18,9 @@
                         - ไม่มีผู้โชคดีได้รับรางวัล
                     </i>
                 </p>
-                <p ng-repeat="winners in reward.Winners">
+                <p ng-repeat="winners in reward.Winners track by $index">
                     <i>
-                        - {{winners}}
+                        - {{reward.Winners[$index]}}
                     </i>
                 </p>
             </div>
