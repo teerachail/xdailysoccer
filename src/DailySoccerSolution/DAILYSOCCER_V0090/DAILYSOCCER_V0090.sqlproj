@@ -74,5 +74,6 @@
     <Build Include="dbo\Tables\FavoriteTeams.sql" />
     <Build Include="dbo\Tables\Winners.sql" />
     <Build Include="dbo\Tables\Tickets.sql" />
+    <Build Include="dbo\Tables\PhoneVerifications.sql" />
   </ItemGroup>
 </Project>

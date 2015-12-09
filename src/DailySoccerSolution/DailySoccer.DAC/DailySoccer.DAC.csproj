@@ -78,6 +78,9 @@
     <Compile Include="DAC\EF\Match.cs">
       <DependentUpon>DailySoccerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAC\EF\PhoneVerification.cs">
+      <DependentUpon>DailySoccerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAC\EF\Reward.cs">
       <DependentUpon>DailySoccerModel.tt</DependentUpon>
     </Compile>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/07/2015 20:00:28
+-- Date Created: 12/09/2015 11:03:31
 -- Generated from EDMX file: E:\gits\TheS\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
@@ -79,7 +79,11 @@ GO
 CREATE TABLE [dbo].[Accounts] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [SecretCode] varchar(100)  NOT NULL,
+    [OAuthId] nvarchar(max)  NULL,
     [Points] int  NOT NULL,
+    [Email] nvarchar(max)  NULL,
+    [VerifiedPhoneNumber] nvarchar(max)  NULL,
+    [DisplayName] nvarchar(max)  NULL,
     [FavoriteTeam_Id] int  NULL
 );
 GO
@@ -132,7 +136,8 @@ CREATE TABLE [dbo].[Rewards] (
     [RemainingAmount] int  NULL,
     [ThumbnailPath] nvarchar(max)  NULL,
     [ImagePath] nvarchar(max)  NULL,
-    [RewardGroupId] int  NOT NULL
+    [RewardGroupId] int  NOT NULL,
+    [RewardGroup_Id] int  NOT NULL
 );
 GO
 
@@ -160,6 +165,16 @@ CREATE TABLE [dbo].[Tickets] (
     [CreatedDate] datetime  NOT NULL,
     [RewardGroupId] int  NOT NULL,
     [AccountId] int  NOT NULL
+);
+GO
+
+-- Creating table 'PhoneVerifications'
+CREATE TABLE [dbo].[PhoneVerifications] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [UserId] varchar(100)  NOT NULL,
+    [VerificationCode] varchar(10)  NOT NULL,
+    [PhoneNumber] varchar(20)  NOT NULL,
+    [CompletedDate] datetime  NULL
 );
 GO
 
@@ -215,6 +230,12 @@ ADD CONSTRAINT [PK_Tickets]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'PhoneVerifications'
+ALTER TABLE [dbo].[PhoneVerifications]
+ADD CONSTRAINT [PK_PhoneVerifications]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -249,10 +270,10 @@ ON [dbo].[GuessMatches]
     ([MatchId]);
 GO
 
--- Creating foreign key on [RewardGroupId] in table 'Rewards'
+-- Creating foreign key on [RewardGroup_Id] in table 'Rewards'
 ALTER TABLE [dbo].[Rewards]
 ADD CONSTRAINT [FK_RewardGroupReward]
-    FOREIGN KEY ([RewardGroupId])
+    FOREIGN KEY ([RewardGroup_Id])
     REFERENCES [dbo].[RewardGroups]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -261,7 +282,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_RewardGroupReward'
 CREATE INDEX [IX_FK_RewardGroupReward]
 ON [dbo].[Rewards]
-    ([RewardGroupId]);
+    ([RewardGroup_Id]);
 GO
 
 -- Creating foreign key on [FavoriteTeam_Id] in table 'Accounts'

@@ -14,6 +14,7 @@
     <EntitySet Name="FavoriteTeams" EntityType="DailySoccerModel.Store.FavoriteTeams" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Winners" EntityType="DailySoccerModel.Store.Winners" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Tickets" EntityType="DailySoccerModel.Store.Tickets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhoneVerifications" EntityType="DailySoccerModel.Store.PhoneVerifications" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="AccountGuessMatch" Association="DailySoccerModel.Store.AccountGuessMatch">
       <End Role="Account" EntitySet="Accounts" />
       <End Role="GuessMatch" EntitySet="GuessMatches" />
@@ -139,6 +140,16 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="RewardGroupId" Type="int" Nullable="false" />
     <Property Name="AccountId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhoneVerifications">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="VerificationCode" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="PhoneNumber" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="CompletedDate" Type="datetime" Nullable="true" />
   </EntityType>
   <Association Name="AccountGuessMatch">
     <End Role="Account" Type="DailySoccerModel.Store.Accounts" Multiplicity="1" />
@@ -281,6 +292,7 @@
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Ticket" EntitySet="Tickets" />
           </AssociationSet>
+          <EntitySet Name="PhoneVerifications" EntityType="DailySoccerModel.PhoneVerification" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -469,6 +481,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PhoneVerification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VerificationCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CompletedDate" Type="DateTime" Nullable="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -575,6 +597,17 @@
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="RewardGroupId" ColumnName="RewardGroupId" />
           <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhoneVerifications">
+      <EntityTypeMapping TypeName="IsTypeOf(DailySoccerModel.PhoneVerification)">
+        <MappingFragment StoreEntitySet="PhoneVerifications">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="VerificationCode" ColumnName="VerificationCode" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

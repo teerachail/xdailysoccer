@@ -5,22 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="191cc90f7b0d42188bd939f155dde9ac" Name="Diagram1" >
-        <EntityTypeShape EntityType="DailySoccerModel.Account" Width="1.5" PointX="2.75" PointY="3.25" />
-        <EntityTypeShape EntityType="DailySoccerModel.Match" Width="1.5" PointX="7" PointY="3.25" />
-        <EntityTypeShape EntityType="DailySoccerModel.GuessMatch" Width="1.5" PointX="4.875" PointY="3.25" />
+        <EntityTypeShape EntityType="DailySoccerModel.Account" Width="1.75" PointX="3" PointY="1.375" />
+        <EntityTypeShape EntityType="DailySoccerModel.Match" Width="1.75" PointX="7.75" PointY="0.5" />
+        <EntityTypeShape EntityType="DailySoccerModel.GuessMatch" Width="1.5" PointX="5.5" PointY="0.5" />
         <AssociationConnector Association="DailySoccerModel.AccountGuessMatch" />
         <AssociationConnector Association="DailySoccerModel.MatchGuessMatch" />
-        <EntityTypeShape EntityType="DailySoccerModel.RewardGroup" Width="1.5" PointX="8.875" PointY="3.25" FillColor="DarkRed" />
-        <EntityTypeShape EntityType="DailySoccerModel.Reward" Width="1.5" PointX="8.875" PointY="6.375" FillColor="Maroon" />
+        <EntityTypeShape EntityType="DailySoccerModel.RewardGroup" Width="1.75" PointX="7.75" PointY="3.625" FillColor="DarkRed" />
+        <EntityTypeShape EntityType="DailySoccerModel.Reward" Width="1.75" PointX="10.25" PointY="3.625" FillColor="Maroon" />
         <AssociationConnector Association="DailySoccerModel.RewardGroupReward" />
-        <EntityTypeShape EntityType="DailySoccerModel.FavoriteTeam" Width="1.5" PointX="0.5" PointY="3.25" />
+        <EntityTypeShape EntityType="DailySoccerModel.FavoriteTeam" Width="1.75" PointX="0.5" PointY="0.5" />
         <AssociationConnector Association="DailySoccerModel.FavoriteTeamAccount" />
-        <EntityTypeShape EntityType="DailySoccerModel.Winner" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DailySoccerModel.Winner" Width="1.75" PointX="3" PointY="5.25" />
         <AssociationConnector Association="DailySoccerModel.AccountWinner" />
         <AssociationConnector Association="DailySoccerModel.RewardWinner" />
-        <EntityTypeShape EntityType="DailySoccerModel.Ticket" Width="1.5" PointX="5.625" PointY="0.5" />
+        <EntityTypeShape EntityType="DailySoccerModel.Ticket" Width="1.5" PointX="5.5" PointY="3.625" />
         <AssociationConnector Association="DailySoccerModel.RewardGroupTicket" />
         <AssociationConnector Association="DailySoccerModel.AccountTicket" />
+        <EntityTypeShape EntityType="DailySoccerModel.PhoneVerification" Width="1.75" PointX="0.5" PointY="2.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
