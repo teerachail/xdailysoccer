@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/09/2015 11:30:08
--- Generated from EDMX file: E:\gits\TheS\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
+-- Date Created: 12/09/2015 11:18:21
+-- Generated from EDMX file: C:\Users\joker\Documents\Git\dailysoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -69,9 +69,6 @@ IF OBJECT_ID(N'[dbo].[Winners]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Tickets]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Tickets];
-GO
-IF OBJECT_ID(N'[dbo].[PhoneVerifications]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[PhoneVerifications];
 GO
 
 -- --------------------------------------------------
@@ -139,7 +136,8 @@ CREATE TABLE [dbo].[Rewards] (
     [RemainingAmount] int  NULL,
     [ThumbnailPath] nvarchar(max)  NULL,
     [ImagePath] nvarchar(max)  NULL,
-    [RewardGroupId] int  NOT NULL
+    [RewardGroupId] int  NOT NULL,
+    [RewardGroup_Id] int  NOT NULL
 );
 GO
 
@@ -272,6 +270,21 @@ ON [dbo].[GuessMatches]
     ([MatchId]);
 GO
 
+-- Creating foreign key on [RewardGroup_Id] in table 'Rewards'
+ALTER TABLE [dbo].[Rewards]
+ADD CONSTRAINT [FK_RewardGroupReward]
+    FOREIGN KEY ([RewardGroup_Id])
+    REFERENCES [dbo].[RewardGroups]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RewardGroupReward'
+CREATE INDEX [IX_FK_RewardGroupReward]
+ON [dbo].[Rewards]
+    ([RewardGroup_Id]);
+GO
+
 -- Creating foreign key on [FavoriteTeam_Id] in table 'Accounts'
 ALTER TABLE [dbo].[Accounts]
 ADD CONSTRAINT [FK_FavoriteTeamAccount]
@@ -345,21 +358,6 @@ GO
 CREATE INDEX [IX_FK_AccountTicket]
 ON [dbo].[Tickets]
     ([AccountId]);
-GO
-
--- Creating foreign key on [RewardGroupId] in table 'Rewards'
-ALTER TABLE [dbo].[Rewards]
-ADD CONSTRAINT [FK_RewardGroupReward]
-    FOREIGN KEY ([RewardGroupId])
-    REFERENCES [dbo].[RewardGroups]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_RewardGroupReward'
-CREATE INDEX [IX_FK_RewardGroupReward]
-ON [dbo].[Rewards]
-    ([RewardGroupId]);
 GO
 
 -- --------------------------------------------------

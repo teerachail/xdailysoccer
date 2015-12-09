@@ -5,8 +5,8 @@
 
         private isLogin: Boolean;
 
-        static $inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices','Azureservice'];
-        constructor(private $scope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private accountSvc: starter.account.AccountServices, private Azureservice: any){
+        static $inject = ['$scope', '$timeout', '$location', 'Azureservice'];
+        constructor(private $scope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private Azureservice: any){
             this.checkCurrenUserLogin();
         }
 
@@ -19,7 +19,7 @@
                 this.isLogin = false;
             }
 
-            alert(OAuthId);
+            //alert(this.isLogin);
         }
 
     }
