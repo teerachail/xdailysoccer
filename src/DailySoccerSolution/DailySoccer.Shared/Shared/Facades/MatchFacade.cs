@@ -123,10 +123,30 @@ namespace DailySoccer.Shared.Facades
                     WinnerTeamId = winnerTeamId,
                 };
                 return result;
-            });
+            }).ToList();
 
             if (!gameResults.Any()) return;
 
+            var requiredMatchIds = gameResults.Select(it => it.MatchId).ToList();
+            FacadeRepository.Instance.MatchDataAccess.UpdateCalculatedGameResult(requiredMatchIds);
+
+            var accountDac = FacadeRepository.Instance.AccountDataAccess;
+            foreach (var matchId in requiredMatchIds)
+            {
+                var guessMatches = accountDac.GetGuessMatchsByMatchId(matchId).Where(it => it.GuessTeamId.HasValue);
+                foreach (var guessMatch in guessMatches)
+                {
+                    var selectedMatchResult = gameResults.FirstOrDefault(it => it.MatchId == guessMatch.MatchId);
+                    if (selectedMatchResult == null) continue;
+
+                    var isGuessCorrect = selectedMatchResult.IsTie ? true : guessMatch.GuessTeamId.Value == selectedMatchResult.WinnerTeamId;
+                    var gotPoints = isGuessCorrect ? (selectedMatchResult.IsTie ? (int)(guessMatch.PredictionPoints / 2) : guessMatch.PredictionPoints) : 0;
+                    accountDac.UpdateGuessResult(matchId, isGuessCorrect, gotPoints);
+
+                    const int MinimumUpdatePoints = 1;
+                    if (gotPoints >= MinimumUpdatePoints) accountDac.UpdateAccountPoints(guessMatch.AccountId, gotPoints);
+                }
+            }
         }
     }
 }

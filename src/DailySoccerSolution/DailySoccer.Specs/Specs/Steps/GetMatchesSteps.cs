@@ -32,6 +32,11 @@ namespace DailySoccer.Specs.Steps
             mockAccountDac
                 .Setup(it => it.GetGuessMatchsByAccountSecrectCode(It.IsAny<string>()))
                 .Returns<string>(it => guesses.Where(g => g.AccountSecrectCode == it));
+
+            mockAccountDac
+                .Setup(dac => dac.GetGuessMatchsByMatchId(It.IsAny<int>()))
+                .Returns<int>(matchId => guesses.Where(it => it.MatchId == matchId));
+
         }
 
         [When(@"ผู้ใช้ UserId: '(.*)' ขอข้อมูลแมช์, เวลาในขณะนั้นเป็น '(.*)'")]

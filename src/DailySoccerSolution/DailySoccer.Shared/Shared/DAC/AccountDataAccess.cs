@@ -153,6 +153,30 @@ namespace DailySoccer.Shared.DAC
             }
         }
 
+        public IEnumerable<GuessMatchInformation> GetGuessMatchsByMatchId(int matchId)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedMatch = dctx.Matches
+                    .Include("GuessMatches.Account")
+                    .Where(it => it.Id == matchId)
+                    .FirstOrDefault();
+                if (selectedMatch == null) return Enumerable.Empty<GuessMatchInformation>();
+
+                var result = selectedMatch.GuessMatches
+                    .Select(it => new GuessMatchInformation
+                    {
+                        Id = it.Id,
+                        AccountId = it.AccountId,
+                        GuessTeamId = it.GuessTeamId,
+                        MatchId = it.MatchId,
+                        PredictionPoints = it.PredictionPoints
+                    }).ToList();
+
+                return result;
+            }
+        }
+
         public IEnumerable<LeagueInformation> GetAllLeagues()
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
@@ -265,14 +289,14 @@ namespace DailySoccer.Shared.DAC
             }
         }
 
-        public void UpdateAccountPoints(int accountId, int currentPoints)
+        public void UpdateAccountPoints(int accountId, int additionPoints)
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
                 var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.Id == accountId);
                 if (selectedAccount == null) return;
 
-                selectedAccount.Points = currentPoints;
+                selectedAccount.Points += additionPoints;
                 dctx.SaveChanges();
             }
         }

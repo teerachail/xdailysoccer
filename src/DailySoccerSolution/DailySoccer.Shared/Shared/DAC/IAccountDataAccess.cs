@@ -15,6 +15,7 @@ namespace DailySoccer.Shared.DAC
         AccountInformation GetAccountBySecrectCode(string secrectCode);
         AccountInformation GetAccountByOAuthId(string OAuthId);
         IEnumerable<GuessMatchInformation> GetGuessMatchsByAccountSecrectCode(string secrectCode);
+        IEnumerable<GuessMatchInformation> GetGuessMatchsByMatchId(int matchId);
         IEnumerable<LeagueInformation> GetAllLeagues();
         void SetFavoriteTeam(SetFavoriteTeamRequest request);
         void ChargeFromBuyTicket(string secrectCode, int requiredPoints);
@@ -22,6 +23,6 @@ namespace DailySoccer.Shared.DAC
         VerificationPhoneInformation GetVerificationPhoneByVerificationCode(string userId, string verificationCode);
         void VerifyPhoneSuccess(string userId, string phoneNo, string verificationCode);
         void UpdateGuessResult(int guessMatchId, bool isGuessCorrect, int gotPoints);
-        void UpdateAccountPoints(int accountId, int currentPoints);
+        void UpdateAccountPoints(int accountId, int additionPoints);
     }
 }

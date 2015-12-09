@@ -35,6 +35,7 @@ namespace DailySoccer.Specs.Steps
                 BeginDate = it.ConvertToDateTime("BeginDate"),
                 CompletedDate = it.ConvertToNullableDateTime("CompletedDate"),
                 StartedDate = it.ConvertToNullableDateTime("StartedDate"),
+                CalculatedDate = it.ConvertToNullableDateTime("CalculatedDate"),
                 TeamAway = new TeamInformation
                 {
                     Id = it.ConvertToInt("TeamAway.Id"),
