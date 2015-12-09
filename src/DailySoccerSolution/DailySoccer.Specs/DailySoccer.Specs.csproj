@@ -64,6 +64,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BuyTicket.feature</DependentUpon>
     </Compile>
+    <Compile Include="Specs\CalculateGameResult.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalculateGameResult.feature</DependentUpon>
+    </Compile>
     <Compile Include="Specs\ConfirmPhoneNumber.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -160,6 +165,10 @@
     <None Include="Specs\BuyTicket.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>BuyTicket.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\CalculateGameResult.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CalculateGameResult.feature.cs</LastGenOutput>
     </None>
     <None Include="Specs\ConfirmPhoneNumber.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
