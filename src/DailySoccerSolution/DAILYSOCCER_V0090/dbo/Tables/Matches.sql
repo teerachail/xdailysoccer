@@ -5,6 +5,7 @@ CREATE TABLE [dbo].[Matches] (
     [BeginDate] datetime  NOT NULL,
     [StartedDate] datetime  NULL,
     [CompletedDate] datetime  NULL,
+    [CalculatedDate] datetime  NULL,
     [Status] varchar(10)  NOT NULL,
     [TeamHome_Id] int  NOT NULL,
     [TeamHome_Name] nvarchar(255)  NOT NULL,

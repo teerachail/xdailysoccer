@@ -5,7 +5,6 @@
 -- Creating table 'Accounts'
 CREATE TABLE [dbo].[Accounts] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [SecretCode] varchar(100)  NOT NULL,
     [OAuthId] nvarchar(max)  NULL,
     [Points] int  NOT NULL,
     [Email] nvarchar(max)  NULL,

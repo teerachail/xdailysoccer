@@ -74,6 +74,7 @@
     <Property Name="BeginDate" Type="datetime" Nullable="false" />
     <Property Name="StartedDate" Type="datetime" Nullable="true" />
     <Property Name="CompletedDate" Type="datetime" Nullable="true" />
+    <Property Name="CalculatedDate" Type="datetime" Nullable="true" />
     <Property Name="Status" Type="varchar" Nullable="false" MaxLength="10" />
     <Property Name="TeamHome_Id" Type="int" Nullable="false" />
     <Property Name="TeamHome_Name" Type="nvarchar" Nullable="false" MaxLength="255" />
@@ -347,6 +348,7 @@
           <Property Name="BeginDate" Type="DateTime" Nullable="false" />
           <Property Name="StartedDate" Type="DateTime" Nullable="true" />
           <Property Name="CompletedDate" Type="DateTime" Nullable="true" />
+          <Property Name="CalculatedDate" Type="DateTime" Nullable="true" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TeamHome" Type="DailySoccerModel.Team" Nullable="false" />
           <Property Name="TeamAway" Type="DailySoccerModel.Team" Nullable="false" />
@@ -574,6 +576,7 @@
           <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
           <ScalarProperty Name="StartedDate" ColumnName="StartedDate" />
           <ScalarProperty Name="CompletedDate" ColumnName="CompletedDate" />
+          <ScalarProperty Name="CalculatedDate" ColumnName="CalculatedDate" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ComplexProperty Name="TeamHome" TypeName="DailySoccerModel.Team">
             <ScalarProperty Name="Id" ColumnName="TeamHome_Id" />

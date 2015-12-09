@@ -76,10 +76,11 @@ namespace DailySoccer.Shared.DAC
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
+                var now = DateTime.Now;
                 var selectedMatches = dctx.Matches.Where(it => matchIds.Contains(it.Id));
                 foreach (var item in selectedMatches)
                 {
-                    // TODO: Update calculated date
+                    item.CalculatedDate = now;
                 }
                 dctx.SaveChanges();
             }

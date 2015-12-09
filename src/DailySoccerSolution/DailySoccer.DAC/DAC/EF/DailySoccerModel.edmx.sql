@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/09/2015 16:04:10
--- Generated from EDMX file: C:\Users\joker\Documents\Git\dailysoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
+-- Date Created: 12/09/2015 23:53:59
+-- Generated from EDMX file: E:\TheS\gits\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -41,6 +41,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_RewardGroupReward]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Rewards] DROP CONSTRAINT [FK_RewardGroupReward];
 GO
+IF OBJECT_ID(N'[dbo].[FK_AccountGuestAccount]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GuestAccounts] DROP CONSTRAINT [FK_AccountGuestAccount];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -73,6 +76,9 @@ GO
 IF OBJECT_ID(N'[dbo].[PhoneVerifications]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PhoneVerifications];
 GO
+IF OBJECT_ID(N'[dbo].[GuestAccounts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[GuestAccounts];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -97,6 +103,7 @@ CREATE TABLE [dbo].[Matches] (
     [BeginDate] datetime  NOT NULL,
     [StartedDate] datetime  NULL,
     [CompletedDate] datetime  NULL,
+    [CalculatedDate] datetime  NULL,
     [Status] varchar(10)  NOT NULL,
     [TeamHome_Id] int  NOT NULL,
     [TeamHome_Name] nvarchar(255)  NOT NULL,
