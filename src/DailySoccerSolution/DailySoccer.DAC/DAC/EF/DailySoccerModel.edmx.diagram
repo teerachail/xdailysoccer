@@ -12,7 +12,6 @@
         <AssociationConnector Association="DailySoccerModel.MatchGuessMatch" />
         <EntityTypeShape EntityType="DailySoccerModel.RewardGroup" Width="1.75" PointX="7.75" PointY="3.625" FillColor="DarkRed" />
         <EntityTypeShape EntityType="DailySoccerModel.Reward" Width="1.75" PointX="10.25" PointY="3.625" FillColor="Maroon" />
-        <AssociationConnector Association="DailySoccerModel.RewardGroupReward" />
         <EntityTypeShape EntityType="DailySoccerModel.FavoriteTeam" Width="1.75" PointX="0.5" PointY="0.5" />
         <AssociationConnector Association="DailySoccerModel.FavoriteTeamAccount" />
         <EntityTypeShape EntityType="DailySoccerModel.Winner" Width="1.75" PointX="3" PointY="5.25" />
@@ -22,6 +21,7 @@
         <AssociationConnector Association="DailySoccerModel.RewardGroupTicket" />
         <AssociationConnector Association="DailySoccerModel.AccountTicket" />
         <EntityTypeShape EntityType="DailySoccerModel.PhoneVerification" Width="1.75" PointX="0.5" PointY="2.875" />
+        <AssociationConnector Association="DailySoccerModel.RewardGroupReward" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

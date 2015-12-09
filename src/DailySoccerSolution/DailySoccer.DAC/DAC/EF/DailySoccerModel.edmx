@@ -23,10 +23,6 @@
       <End Role="Match" EntitySet="Matches" />
       <End Role="GuessMatch" EntitySet="GuessMatches" />
     </AssociationSet>
-    <AssociationSet Name="RewardGroupReward" Association="DailySoccerModel.Store.RewardGroupReward">
-      <End Role="RewardGroup" EntitySet="RewardGroups" />
-      <End Role="Reward" EntitySet="Rewards" />
-    </AssociationSet>
     <AssociationSet Name="FavoriteTeamAccount" Association="DailySoccerModel.Store.FavoriteTeamAccount">
       <End Role="FavoriteTeam" EntitySet="FavoriteTeams" />
       <End Role="Account" EntitySet="Accounts" />
@@ -46,6 +42,10 @@
     <AssociationSet Name="AccountTicket" Association="DailySoccerModel.Store.AccountTicket">
       <End Role="Account" EntitySet="Accounts" />
       <End Role="Ticket" EntitySet="Tickets" />
+    </AssociationSet>
+    <AssociationSet Name="RewardGroupReward" Association="DailySoccerModel.Store.RewardGroupReward">
+      <End Role="RewardGroup" EntitySet="RewardGroups" />
+      <End Role="Reward" EntitySet="Rewards" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accounts">
@@ -112,7 +112,6 @@
     <Property Name="ThumbnailPath" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ImagePath" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RewardGroupId" Type="int" Nullable="false" />
-    <Property Name="RewardGroup_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="FavoriteTeams">
     <Key>
@@ -172,18 +171,6 @@
       </Principal>
       <Dependent Role="GuessMatch">
         <PropertyRef Name="MatchId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="RewardGroupReward">
-    <End Role="RewardGroup" Type="DailySoccerModel.Store.RewardGroups" Multiplicity="1" />
-    <End Role="Reward" Type="DailySoccerModel.Store.Rewards" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RewardGroup">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Reward">
-        <PropertyRef Name="RewardGroup_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -247,6 +234,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="RewardGroupReward">
+    <End Role="RewardGroup" Type="DailySoccerModel.Store.RewardGroups" Multiplicity="1" />
+    <End Role="Reward" Type="DailySoccerModel.Store.Rewards" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RewardGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reward">
+        <PropertyRef Name="RewardGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -265,10 +264,6 @@
           </AssociationSet>
           <EntitySet Name="RewardGroups" EntityType="DailySoccerModel.RewardGroup" />
           <EntitySet Name="Rewards" EntityType="DailySoccerModel.Reward" />
-          <AssociationSet Name="RewardGroupReward" Association="DailySoccerModel.RewardGroupReward">
-            <End Role="RewardGroup" EntitySet="RewardGroups" />
-            <End Role="Reward" EntitySet="Rewards" />
-          </AssociationSet>
           <EntitySet Name="FavoriteTeams" EntityType="DailySoccerModel.FavoriteTeam" />
           <AssociationSet Name="FavoriteTeamAccount" Association="DailySoccerModel.FavoriteTeamAccount">
             <End Role="FavoriteTeam" EntitySet="FavoriteTeams" />
@@ -293,6 +288,10 @@
             <End Role="Ticket" EntitySet="Tickets" />
           </AssociationSet>
           <EntitySet Name="PhoneVerifications" EntityType="DailySoccerModel.PhoneVerification" />
+          <AssociationSet Name="RewardGroupReward" Association="DailySoccerModel.RewardGroupReward">
+            <End Role="RewardGroup" EntitySet="RewardGroups" />
+            <End Role="Reward" EntitySet="Rewards" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -375,28 +374,24 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RequestPoints" Type="Int32" Nullable="false" />
           <Property Name="ExpiredDate" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="Rewards" Relationship="DailySoccerModel.RewardGroupReward" FromRole="RewardGroup" ToRole="Reward" />
           <NavigationProperty Name="Tickets" Relationship="DailySoccerModel.RewardGroupTicket" FromRole="RewardGroup" ToRole="Ticket" />
+          <NavigationProperty Name="Rewards" Relationship="DailySoccerModel.RewardGroupReward" FromRole="RewardGroup" ToRole="Reward" />
         </EntityType>
         <EntityType Name="Reward">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="RewardGroup" Relationship="DailySoccerModel.RewardGroupReward" FromRole="Reward" ToRole="RewardGroup" />
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
           <Property Name="RemainingAmount" Type="Int32" Nullable="true" />
           <Property Name="ThumbnailPath" Type="String" Nullable="true" />
           <Property Name="ImagePath" Type="String" Nullable="true" />
-          <Property Name="RewardGroupId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Winners" Relationship="DailySoccerModel.RewardWinner" FromRole="Reward" ToRole="Winner" />
+          <NavigationProperty Name="RewardGroup" Relationship="DailySoccerModel.RewardGroupReward" FromRole="Reward" ToRole="RewardGroup" />
+          <Property Name="RewardGroupId" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="RewardGroupReward">
-          <End Type="DailySoccerModel.RewardGroup" Role="RewardGroup" Multiplicity="1" />
-          <End Type="DailySoccerModel.Reward" Role="Reward" Multiplicity="*" />
-        </Association>
         <EntityType Name="FavoriteTeam">
           <Key>
             <PropertyRef Name="Id" />
@@ -491,6 +486,18 @@
           <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CompletedDate" Type="DateTime" Nullable="true" />
         </EntityType>
+        <Association Name="RewardGroupReward">
+          <End Type="DailySoccerModel.RewardGroup" Role="RewardGroup" Multiplicity="1" />
+          <End Type="DailySoccerModel.Reward" Role="Reward" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RewardGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reward">
+              <PropertyRef Name="RewardGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -611,14 +618,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="RewardGroupReward" TypeName="DailySoccerModel.RewardGroupReward" StoreEntitySet="Rewards">
-      <EndProperty Name="RewardGroup">
-        <ScalarProperty Name="Id" ColumnName="RewardGroup_Id" />
-      </EndProperty>
-      <EndProperty Name="Reward">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="FavoriteTeamAccount" TypeName="DailySoccerModel.FavoriteTeamAccount" StoreEntitySet="Accounts">
       <EndProperty Name="FavoriteTeam">
         <ScalarProperty Name="Id" ColumnName="FavoriteTeam_Id" />

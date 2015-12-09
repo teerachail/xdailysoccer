@@ -7,14 +7,13 @@ CREATE TABLE [dbo].[Rewards] (
     [RemainingAmount] int  NULL,
     [ThumbnailPath] nvarchar(max)  NULL,
     [ImagePath] nvarchar(max)  NULL,
-    [RewardGroupId] int  NOT NULL,
-    [RewardGroup_Id] int  NOT NULL
+    [RewardGroupId] int  NOT NULL
 );
 GO
--- Creating foreign key on [RewardGroup_Id] in table 'Rewards'
+-- Creating foreign key on [RewardGroupId] in table 'Rewards'
 ALTER TABLE [dbo].[Rewards]
 ADD CONSTRAINT [FK_RewardGroupReward]
-    FOREIGN KEY ([RewardGroup_Id])
+    FOREIGN KEY ([RewardGroupId])
     REFERENCES [dbo].[RewardGroups]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -27,4 +26,4 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_RewardGroupReward'
 CREATE INDEX [IX_FK_RewardGroupReward]
 ON [dbo].[Rewards]
-    ([RewardGroup_Id]);
+    ([RewardGroupId]);

@@ -17,8 +17,8 @@ namespace DailySoccer.DAC.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RewardGroup()
         {
-            this.Rewards = new HashSet<Reward>();
             this.Tickets = new HashSet<Ticket>();
+            this.Rewards = new HashSet<Reward>();
         }
     
         public int Id { get; set; }
@@ -26,8 +26,8 @@ namespace DailySoccer.DAC.EF
         public System.DateTime ExpiredDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reward> Rewards { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Tickets { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reward> Rewards { get; set; }
     }
 }

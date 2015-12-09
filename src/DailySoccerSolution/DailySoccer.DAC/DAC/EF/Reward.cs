@@ -29,8 +29,8 @@ namespace DailySoccer.DAC.EF
         public string ImagePath { get; set; }
         public int RewardGroupId { get; set; }
     
-        public virtual RewardGroup RewardGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Winner> Winners { get; set; }
+        public virtual RewardGroup RewardGroup { get; set; }
     }
 }
