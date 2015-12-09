@@ -96,7 +96,7 @@ Scenario: ผู้ใช้ขอข้อมูลการทายผลร�
 	| Id | LeagueName     | BeginDate      | StartedDate    | CompletedDate  | TeamHome.Id | TeamHome.Name   | TeamHome.CurrentScore | TeamHome.WinningPredictionPoints | TeamHome.IsSelected | TeamAway.Id | TeamAway.Name    | TeamAway.CurrentScore | TeamAway.WinningPredictionPoints |
 	| 1  | Premier league | 1/1/2015 01:00 | 1/1/2015 01:00 | 1/1/2015 02:30 | 1           | Brentford       | 0                     | 10                               | true                | 2           | Hull City        | 1                     | 5                                |
 	| 2  | Premier league | 1/2/2015 01:00 | 1/2/2015 01:00 | 1/2/2015 02:30 | 3           | Birmingham City | 1                     | 10                               | true                | 4           | Blackburn Rovers | 0                     | 5                                |
-	| 3  | Premier league | 1/3/2015 01:00 | 1/3/2015 01:00 | 1/3/2015 02:30 | 5           | FC Astana       | 0                     | 7                                | true                | 6           | Atletico Madrid  | 0                     | 5                                |
+	| 3  | Premier league | 1/3/2015 01:00 | 1/3/2015 01:00 | 1/3/2015 02:30 | 5           | FC Astana       | 0                     | 3                                | true                | 6           | Atletico Madrid  | 0                     | 5                                |
 	And ระบบส่งผลการทายผลรายเดือนในส่วนของวันกลับไปเป็น
 	| Day            | TotalPoints |
 	| 1/1/2015 01:00 | 0           |

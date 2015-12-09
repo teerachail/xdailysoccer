@@ -24,7 +24,7 @@
                      'item-balanced': match.TeamHome.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore > match.TeamAway.CurrentScore,
                      'item-royal': match.TeamHome.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore,
                      'item-draw-status': match.TeamHome.IsSelected && match.CompletedDate && match.TeamHome.CurrentScore == match.TeamAway.CurrentScore}">
-                            <span class="status status-left bg-yellow" ng-show="match.CompletedDate && match.TeamHome.IsSelected && match.TeamHome.CurrentScore >= match.TeamAway.CurrentScore">+{{ match.TeamAway.WinningPredictionPoints }}</span>
+                            <span class="status status-left bg-yellow" ng-show="match.CompletedDate && match.TeamHome.IsSelected && match.TeamHome.CurrentScore >= match.TeamAway.CurrentScore">+{{ match.TeamHome.WinningPredictionPoints }}</span>
                             <span class="status status-left bg-red" ng-show="match.CompletedDate && match.TeamHome.IsSelected && match.TeamHome.CurrentScore < match.TeamAway.CurrentScore">L</span>
                             <div class="text-right row row-center no-padding">
                                 <div class="col col-20 col-center no-padding text-left">
@@ -86,8 +86,6 @@
                     </div>
                 </ion-item>
             </div>
-
-
         </ion-list>
     </ion-content>
 </ion-view>

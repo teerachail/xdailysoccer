@@ -745,7 +745,7 @@ this.FeatureBackground();
                         "5",
                         "FC Astana",
                         "0",
-                        "7",
+                        "3",
                         "true",
                         "6",
                         "Atletico Madrid",

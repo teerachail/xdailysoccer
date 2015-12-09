@@ -133,7 +133,7 @@ namespace DailySoccer.Shared.Facades
             foreach (var item in qry)
             {
                 var DateGroup = item.First().BeginDate;
-                var totalPoints = (int)item.Sum(it =>
+                var totalPoints = (int)item.Where(it => it.CompletedDate.HasValue).Sum(it =>
                 {
                     var selectedTeam = it.TeamAway.IsSelected ? it.TeamAway : it.TeamHome;
                     var opponentTeam = it.TeamAway.IsSelected ? it.TeamHome : it.TeamAway;
@@ -201,7 +201,7 @@ namespace DailySoccer.Shared.Facades
             foreach (var item in qry)
             {
                 var day = item.First().BeginDate;
-                var totalPoints = (int)item.Sum(it =>
+                var totalPoints = (int)item.Where(it => it.CompletedDate.HasValue).Sum(it =>
                 {
                     var selectedTeam = it.TeamAway.IsSelected ? it.TeamAway : it.TeamHome;
                     var opponentTeam = it.TeamAway.IsSelected ? it.TeamHome : it.TeamAway;
@@ -210,18 +210,27 @@ namespace DailySoccer.Shared.Facades
                     else if (selectedTeam.CurrentScore == opponentTeam.CurrentScore) return (int)(selectedTeam.WinningPredictionPoints / 2);
                     else return 0;
                 });
+
+                var selectedMatches = matches.Where(it => it.BeginDate.Date == day.Date).ToList();
+                foreach (var match in selectedMatches)
+                {
+                    var selectedGuessMatch = guessedMatches.FirstOrDefault(it => it.MatchId == match.Id);
+                    var isSelectedTeamHome = selectedGuessMatch.GuessTeamId == match.TeamHome.Id;
+                    var selectedMatch = isSelectedTeamHome ? match.TeamHome : match.TeamAway;
+                    var isTieMatch = match.CompletedDate.HasValue ? match.TeamHome.CurrentScore == match.TeamAway.CurrentScore : false;
+                    var displayScore = isTieMatch ? selectedGuessMatch.PredictionPoints / 2 : selectedGuessMatch.PredictionPoints;
+                    selectedMatch.WinningPredictionPoints = displayScore;
+                }
+
                 result.Add(new GuessHistoryDailyInformation
                 {
                     Day = day,
                     TotalPoints = totalPoints,
-                    Matches = matches.Where(it => it.BeginDate.Date == day.Date)
+                    Matches = selectedMatches
                 });
             }
 
-            return new GetGuessHistoryByMonthRespond
-            {
-                Histories = result
-            };
+            return new GetGuessHistoryByMonthRespond { Histories = result };
         }
 
         public RequestConfirmPhoneNumberRespond RequestConfirmPhoneNumber(RequestConfirmPhoneNumberRequest request)
