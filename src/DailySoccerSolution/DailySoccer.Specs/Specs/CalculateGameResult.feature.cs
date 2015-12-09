@@ -89,31 +89,56 @@ namespace DailySoccer.Specs
                         "0"});
 #line 9
  testRunner.And("ผู้ใช้ในระบบมีดังนี้", ((string)(null)), table1, "And ");
+#line 12
+ testRunner.And("วันเวลาในปัจจุบันเป็น \'1/10/2015 00:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add two numbers")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("คำนวณผลคะแนนในตอนที่ไม่มีข้อมูลแมช์ ระบบไม่ทำการคำนวณผลคะแนน")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CalculateGameResult")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mock")]
-        public virtual void AddTwoNumbers()
+        public virtual void คำนวณผลคะแนนในตอนทไมมขอมลแมชระบบไมทำการคำนวณผลคะแนน()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("คำนวณผลคะแนนในตอนที่ไม่มีข้อมูลแมช์ ระบบไม่ทำการคำนวณผลคะแนน", new string[] {
                         "mock",
                         "mock"});
-#line 14
+#line 15
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
-#line 15
- testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "LeagueName",
+                        "BeginDate",
+                        "StartedDate",
+                        "CompletedDate",
+                        "TeamHome.Id",
+                        "TeamHome.Name",
+                        "TeamHome.CurrentScore",
+                        "TeamHome.CurrentPredictionPoints",
+                        "TeamHome.WinningPredictionPoints",
+                        "TeamAway.Id",
+                        "TeamAway.Name",
+                        "TeamAway.CurrentScore",
+                        "TeamAway.CurrentPredictionPoints",
+                        "TeamAway.WinningPredictionPoints"});
 #line 16
- testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
- testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("ในระบบมีข้อมูลแมช์เป็น", ((string)(null)), table2, "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "AccountSecrectCode",
+                        "MatchId",
+                        "GuessTeamId"});
 #line 18
- testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("ในระบบมีข้อมูลการทายเป็น", ((string)(null)), table3, "And ");
+#line 20
+ testRunner.When("เริ่มคำนวณผลคะแนน", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 21
+ testRunner.Then("ระบบไม่ทำการคำนวณผลคะแนน", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

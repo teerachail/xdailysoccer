@@ -9,15 +9,17 @@ Background: Initialize
 	And ผู้ใช้ในระบบมีดังนี้
 	| Id | SecretCode  | Points | MaximumGuessAmount | CurrentOrderedCoupon |
 	| 1  | s01         | 0      | 5                  | 0                    |
-	
-@mock
-Scenario: Add two numbers
-	Given I have entered 50 into the calculator
-	And I have entered 70 into the calculator
-	When I press add
-	Then the result should be 120 on the screen
+	And วันเวลาในปัจจุบันเป็น '1/10/2015 00:00'
 
-#คำนวณผลคะแนนในตอนที่ไม่มีข้อมูลแมช์ ระบบไม่ทำการคำนวณผลคะแนน
+@mock
+Scenario: คำนวณผลคะแนนในตอนที่ไม่มีข้อมูลแมช์ ระบบไม่ทำการคำนวณผลคะแนน
+	Given ในระบบมีข้อมูลแมช์เป็น
+	| Id | LeagueName | BeginDate | StartedDate | CompletedDate | TeamHome.Id | TeamHome.Name | TeamHome.CurrentScore | TeamHome.CurrentPredictionPoints | TeamHome.WinningPredictionPoints | TeamAway.Id | TeamAway.Name | TeamAway.CurrentScore | TeamAway.CurrentPredictionPoints | TeamAway.WinningPredictionPoints |
+	And ในระบบมีข้อมูลการทายเป็น
+	| Id | AccountSecrectCode | MatchId | GuessTeamId |
+	When เริ่มคำนวณผลคะแนน
+	Then ระบบไม่ทำการคำนวณผลคะแนน
+
 #คำนวณผลคะแนนในตอนที่มีแต่แมช์ในอดีตที่คำนวณผลคะแนนไปแล้ว ระบบไม่ทำการคำนวณผลคะแนน
 #คำนวณผลคะแนนในตอนที่มีแต่แมช์ในอนาคต ระบบไม่ทำการคำนวณผลคะแนน
 #คำนวณผลคะแนนในตอนที่มีแต่แมช์ปัจจุบันที่ยังไม่จบ ระบบไม่ทำการคำนวณผลคะแนน

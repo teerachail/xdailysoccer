@@ -11,5 +11,6 @@ namespace DailySoccer.Shared.DAC
     {
         IEnumerable<MatchInformation> GetAllMatches();
         void SaveGuess(GuessMatchInformation guess);
+        void UpdateCalculatedGameResult(IEnumerable<int> matchIds);
     }
 }

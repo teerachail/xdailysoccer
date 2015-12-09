@@ -21,5 +21,7 @@ namespace DailySoccer.Shared.DAC
         void RequestConfirmPhoneNumber(RequestConfirmPhoneNumberRequest request, string verificationCode);
         VerificationPhoneInformation GetVerificationPhoneByVerificationCode(string userId, string verificationCode);
         void VerifyPhoneSuccess(string userId, string phoneNo, string verificationCode);
+        void UpdateGuessResult(int guessMatchId, bool isGuessCorrect, int gotPoints);
+        void UpdateAccountPoints(int accountId, int currentPoints);
     }
 }

@@ -103,5 +103,30 @@ namespace DailySoccer.Shared.Facades
                 Matches = respond.Matches
             };
         }
+
+        public void CalculateGameResults(DateTime currentTime)
+        {
+            var uncalculatedMatches = FacadeRepository.Instance.MatchDataAccess.GetAllMatches()
+                .Where(it => it.StartedDate.HasValue)
+                .Where(it => it.CompletedDate.HasValue)
+                .Where(it => !it.CalculatedDate.HasValue);
+
+            var gameResults = uncalculatedMatches.Select(it =>
+            {
+                var isTie = it.TeamHome.CurrentScore == it.TeamAway.CurrentScore;
+                var isTeamHomeWin = it.TeamHome.CurrentScore > it.TeamAway.CurrentScore;
+                var winnerTeamId = isTeamHomeWin ? it.TeamHome.Id : it.TeamAway.Id;
+                var result = new
+                {
+                    MatchId = it.Id,
+                    IsTie = isTie,
+                    WinnerTeamId = winnerTeamId,
+                };
+                return result;
+            });
+
+            if (!gameResults.Any()) return;
+
+        }
     }
 }

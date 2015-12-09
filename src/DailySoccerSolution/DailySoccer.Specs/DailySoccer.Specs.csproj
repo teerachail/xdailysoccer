@@ -137,6 +137,7 @@
     </Compile>
     <Compile Include="Specs\Steps\BackgroundSteps.cs" />
     <Compile Include="Specs\Steps\BuyTicketSteps.cs" />
+    <Compile Include="Specs\Steps\CalculateGameResultSteps.cs" />
     <Compile Include="Specs\Steps\CommonSetup.cs" />
     <Compile Include="Specs\Steps\ConfirmPhoneNumberSteps.cs" />
     <Compile Include="Specs\Steps\CreateNewGuestSteps.cs" />

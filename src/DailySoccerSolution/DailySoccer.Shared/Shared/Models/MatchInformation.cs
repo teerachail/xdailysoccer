@@ -13,6 +13,7 @@ namespace DailySoccer.Shared.Models
         public string LeagueName { get; set; }
         public DateTime? StartedDate { get; set; }
         public DateTime? CompletedDate { get; set; }
+        public DateTime? CalculatedDate { get; set; }
         public string Status { get; set; }
         public TeamInformation TeamHome { get; set; }
         public TeamInformation TeamAway { get; set; }

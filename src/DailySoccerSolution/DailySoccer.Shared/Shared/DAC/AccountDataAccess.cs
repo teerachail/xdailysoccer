@@ -251,5 +251,30 @@ namespace DailySoccer.Shared.DAC
                 dctx.SaveChanges();
             }
         }
+
+        public void UpdateGuessResult(int guessMatchId, bool isGuessCorrect, int gotPoints)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedGuessMatch = dctx.GuessMatches.FirstOrDefault(it => it.Id == guessMatchId);
+                if (selectedGuessMatch == null) return;
+
+                selectedGuessMatch.IsWinner = isGuessCorrect;
+                selectedGuessMatch.WinnerPoints = gotPoints;
+                dctx.SaveChanges();
+            }
+        }
+
+        public void UpdateAccountPoints(int accountId, int currentPoints)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedAccount = dctx.Accounts.FirstOrDefault(it => it.Id == accountId);
+                if (selectedAccount == null) return;
+
+                selectedAccount.Points = currentPoints;
+                dctx.SaveChanges();
+            }
+        }
     }
 }

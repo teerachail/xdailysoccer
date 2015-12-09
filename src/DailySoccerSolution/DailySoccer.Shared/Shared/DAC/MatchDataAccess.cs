@@ -71,5 +71,18 @@ namespace DailySoccer.Shared.DAC
                 }
             }
         }
+
+        public void UpdateCalculatedGameResult(IEnumerable<int> matchIds)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedMatches = dctx.Matches.Where(it => matchIds.Contains(it.Id));
+                foreach (var item in selectedMatches)
+                {
+                    // TODO: Update calculated date
+                }
+                dctx.SaveChanges();
+            }
+        }
     }
 }
