@@ -3,7 +3,7 @@
 
     class SideMenuController {
 
-        private isLogin: Boolean;
+        private isLogedin: Boolean;
 
         static $inject = ['$scope', '$timeout', '$location', 'Azureservice'];
         constructor(private $scope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private Azureservice: any){
@@ -14,12 +14,10 @@
             var user = Ionic.User.current();
             var OAuthId = user.get('OAuthId');
             if (OAuthId) {
-                this.isLogin = true;
+                this.isLogedin = true;
             } else {
-                this.isLogin = false;
+                this.isLogedin = false;
             }
-
-            //alert(this.isLogin);
         }
 
     }

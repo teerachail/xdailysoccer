@@ -32,8 +32,8 @@
             return this.queryRemoteSvc.RemoteQuery<CreateNewGuestRespond>(requestUrl);
         }
 
-        public UpdateAccoutWithFacebook(secretCode: string, OAuthId: string): ng.IPromise<Boolean> {
-            var requestUrl = "Account/UpdateAccoutWithFacebook?secretCode=" + secretCode + "&OAuthId=" + OAuthId;
+        public UpdateAccountWithFacebook(secretCode: string, OAuthId: string): ng.IPromise<Boolean> {
+            var requestUrl = "Account/UpdateAccountWithFacebook?secretCode=" + secretCode + "&OAuthId=" + OAuthId;
             return this.queryRemoteSvc.RemoteQuery<Boolean>(requestUrl);
         }
 

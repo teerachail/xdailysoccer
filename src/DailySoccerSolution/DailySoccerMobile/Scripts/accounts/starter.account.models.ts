@@ -11,6 +11,7 @@
         public Points: number;
         public MaximumGuessAmount: number;
         public CurrentOrderedCoupon: number;
+        public VerifiedPhoneNumber: string;
     }
 
     export class CreateNewGuestRespond {
