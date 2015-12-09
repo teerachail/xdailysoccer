@@ -1,4 +1,4 @@
-﻿module starter.account {
+﻿module starter.sidemenu {
     'use strict';
 
     class SideMenuController {
@@ -7,7 +7,7 @@
 
         static $inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices','Azureservice'];
         constructor(private $scope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private accountSvc: starter.account.AccountServices, private Azureservice: any){
-
+            this.checkCurrenUserLogin();
         }
 
         public checkCurrenUserLogin() {
@@ -18,11 +18,13 @@
             } else {
                 this.isLogin = false;
             }
+
+            alert(OAuthId);
         }
 
     }
 
     angular
-        .module('starter.account', [])
-        .controller('starter.account.SideMenuController', SideMenuController);
+        .module('starter.sidemenu', [])
+        .controller('starter.sidemenu.SideMenuController', SideMenuController);
 }
