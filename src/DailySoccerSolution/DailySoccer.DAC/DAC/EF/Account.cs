@@ -27,7 +27,8 @@ namespace DailySoccer.DAC.EF
         public string OAuthId { get; set; }
         public int Points { get; set; }
         public string Email { get; set; }
-        public string VerifyCode { get; set; }
+        public string VerifiedPhoneNumber { get; set; }
+        public string DisplayName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GuessMatch> GuessMatches { get; set; }

@@ -65,6 +65,13 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
             }
         }
     })
+        .state('sidemenu', {
+        url: '/sidemenu',
+        abstract: true,
+        cache: false,
+        templateUrl: 'templates/SideMenu.html',
+        controller: 'starter.account.SideMenuController as sidemenuCtrl'
+    })
         .state('account', {
         url: '/account',
         abstract: true,
@@ -349,6 +356,12 @@ var starter;
                     }
                 }
             };
+            AccountController.prototype.SkipLogin = function () {
+                // TODO: Login with guest
+                this.createNewGuestUser();
+            };
+            ;
+            //สร้าง guestuser ใหม่
             AccountController.prototype.createNewGuestUser = function (OAuthId) {
                 var _this = this;
                 if (OAuthId === void 0) { OAuthId = null; }
@@ -365,22 +378,30 @@ var starter;
                     _this.$location.path('/account/favorite');
                 });
             };
-            AccountController.prototype.SkipLogin = function () {
-                // TODO: Login with guest
-                this.createNewGuestUser();
-            };
-            ;
+            //สร้างguestuserใหม่ และเชื่อมต่อfacebook 
             AccountController.prototype.CreateNewGuestWithFacebook = function (oAuthId) {
                 var _this = this;
                 this.accountSvc.CreateNewGuestWithFacebook(oAuthId)
                     .then(function (respond) {
-                    alert('createnew facebook account');
                     var user = Ionic.User.current();
                     user.id = respond.AccountInfo.SecretCode;
+                    user.set('OAuthId', respond.AccountInfo.OAuthId);
                     user.set('IsSkiped', 'true');
                     user.set('PhoneVerified', 'false');
                     user.save();
                     _this.$location.path('/matches/todaymatches');
+                });
+            };
+            //ผูกfacebook เข้ากับ guestuser เดิม
+            AccountController.prototype.UpdateAccoutWithFacebook = function (secretCode, oAuthId) {
+                var _this = this;
+                this.accountSvc.UpdateAccoutWithFacebook(secretCode, oAuthId)
+                    .then(function (respond) {
+                    if (respond) {
+                        var user = Ionic.User.current();
+                        user.set('OAuthId', oAuthId);
+                        _this.$location.path('/matches/todaymatches');
+                    }
                 });
             };
             AccountController.prototype.LoginWithFacebook = function () {
@@ -392,10 +413,13 @@ var starter;
                     _this.accountSvc.GetAccountByOAuthId(oAuthId)
                         .then(function (respond) {
                         if (respond == null) {
-                            _this.CreateNewGuestWithFacebook(oAuthId);
-                        }
-                        else {
-                            alert('old facebook account');
+                            var user = Ionic.User.current();
+                            if (user.id && user.id != 'empty') {
+                                _this.UpdateAccoutWithFacebook(user.id, oAuthId);
+                            }
+                            else {
+                                _this.CreateNewGuestWithFacebook(oAuthId);
+                            }
                         }
                     });
                     console.log('Login successful');
@@ -497,6 +521,10 @@ var starter;
                 var requestUrl = "Account/CreateNewGuestWithFacebook?OAuthId=" + OAuthId;
                 return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
+            AccountServices.prototype.UpdateAccoutWithFacebook = function (secretCode, OAuthId) {
+                var requestUrl = "Account/UpdateAccoutWithFacebook?secretCode=" + secretCode + "&OAuthId=" + OAuthId;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
             AccountServices.$inject = ['starter.shared.QueryRemoteDataService'];
             return AccountServices;
         })();
@@ -515,7 +543,6 @@ var starter;
             function HistoryController($scope, historySvc) {
                 this.$scope = $scope;
                 this.historySvc = historySvc;
-                this.Year = 2015;
                 this.GetHistories();
             }
             HistoryController.prototype.GetHistories = function () {
@@ -526,6 +553,8 @@ var starter;
                 this.historySvc.GetAllGuessHistory(data)
                     .then(function (respond) {
                     _this.HistoryInfo = respond;
+                    var date = new Date(respond.CurrentDate.toString());
+                    _this.Year = date.getFullYear();
                     console.log('Get all history completed.');
                 });
             };
@@ -534,8 +563,8 @@ var starter;
                 var user = Ionic.User.current();
                 var data = new history.GetGuessHistoryByMonthRequest();
                 data.UserId = user.id;
-                data.Year = this.Year;
                 data.Month = month;
+                data.Year = this.Year;
                 this.historySvc.GetGuessHistoryByMonth(data)
                     .then(function (respond) {
                     _this.HistoryByMonthInfo = respond;
@@ -544,6 +573,7 @@ var starter;
                 });
             };
             HistoryController.prototype.GetMonthString = function (month) {
+                month -= 1;
                 var monthString = new Date(this.Year, month);
                 return monthString;
             };
@@ -999,5 +1029,48 @@ var starter;
             .module('starter.shared')
             .service('starter.shared.QueryRemoteDataService', QueryRemoteDataService);
     })(shared = starter.shared || (starter.shared = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var account;
+    (function (account) {
+        'use strict';
+        var SideMenuController = (function () {
+            function SideMenuController($scope, $timeout, $location, accountSvc, Azureservice) {
+                this.$scope = $scope;
+                this.$timeout = $timeout;
+                this.$location = $location;
+                this.accountSvc = accountSvc;
+                this.Azureservice = Azureservice;
+            }
+            SideMenuController.prototype.checkCurrenUserLogin = function () {
+                var user = Ionic.User.current();
+                var OAuthId = user.get('OAuthId');
+                if (OAuthId) {
+                    this.isLogin = true;
+                }
+                else {
+                    this.isLogin = false;
+                }
+            };
+            SideMenuController.$inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice'];
+            return SideMenuController;
+        })();
+        angular
+            .module('starter.account', [])
+            .controller('starter.account.SideMenuController', SideMenuController);
+    })(account = starter.account || (starter.account = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var sidemenu;
+    (function (sidemenu) {
+        var AccountInformation = (function () {
+            function AccountInformation() {
+            }
+            return AccountInformation;
+        })();
+        sidemenu.AccountInformation = AccountInformation;
+    })(sidemenu = starter.sidemenu || (starter.sidemenu = {}));
 })(starter || (starter = {}));
 //# sourceMappingURL=appBundle.js.map

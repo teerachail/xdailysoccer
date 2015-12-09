@@ -70,7 +70,13 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                     }
                 }
             })
-
+            .state('sidemenu', {
+                url: '/sidemenu',
+                abstract: true,
+                cache: false,
+                templateUrl: 'templates/SideMenu.html',
+                controller: 'starter.account.SideMenuController as sidemenuCtrl'
+            })
             .state('account', {
                 url: '/account',
                 abstract: true,

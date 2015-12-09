@@ -56,7 +56,8 @@
     <Property Name="OAuthId" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Points" Type="int" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="VerifyCode" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="VerifiedPhoneNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="DisplayName" Type="nvarchar(max)" Nullable="true" />
     <Property Name="FavoriteTeam_Id" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Matches">
@@ -110,6 +111,7 @@
     <Property Name="ThumbnailPath" Type="nvarchar(max)" Nullable="true" />
     <Property Name="ImagePath" Type="nvarchar(max)" Nullable="true" />
     <Property Name="RewardGroupId" Type="int" Nullable="false" />
+    <Property Name="RewardGroup_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="FavoriteTeams">
     <Key>
@@ -170,7 +172,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Reward">
-        <PropertyRef Name="RewardGroupId" />
+        <PropertyRef Name="RewardGroup_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -293,7 +295,8 @@
           <NavigationProperty Name="Winners" Relationship="DailySoccerModel.AccountWinner" FromRole="Account" ToRole="Winner" />
           <NavigationProperty Name="Tickets" Relationship="DailySoccerModel.AccountTicket" FromRole="Account" ToRole="Ticket" />
           <Property Name="Email" Type="String" Nullable="true" />
-          <Property Name="VerifyCode" Type="String" Nullable="true" />
+          <Property Name="VerifiedPhoneNumber" Type="String" Nullable="true" />
+          <Property Name="DisplayName" Type="String" Nullable="true" />
         </EntityType>
         <EntityType Name="Match">
           <Key>
@@ -381,14 +384,6 @@
         <Association Name="RewardGroupReward">
           <End Type="DailySoccerModel.RewardGroup" Role="RewardGroup" Multiplicity="1" />
           <End Type="DailySoccerModel.Reward" Role="Reward" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RewardGroup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Reward">
-              <PropertyRef Name="RewardGroupId" />
-            </Dependent>
-          </ReferentialConstraint>
         </Association>
         <EntityType Name="FavoriteTeam">
           <Key>
@@ -488,7 +483,8 @@
           <ScalarProperty Name="OAuthId" ColumnName="OAuthId" />
           <ScalarProperty Name="Points" ColumnName="Points" />
           <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="VerifyCode" ColumnName="VerifyCode" />
+          <ScalarProperty Name="VerifiedPhoneNumber" ColumnName="VerifiedPhoneNumber" />
+          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -582,6 +578,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="RewardGroupReward" TypeName="DailySoccerModel.RewardGroupReward" StoreEntitySet="Rewards">
+      <EndProperty Name="RewardGroup">
+        <ScalarProperty Name="Id" ColumnName="RewardGroup_Id" />
+      </EndProperty>
+      <EndProperty Name="Reward">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
     <AssociationSetMapping Name="FavoriteTeamAccount" TypeName="DailySoccerModel.FavoriteTeamAccount" StoreEntitySet="Accounts">
       <EndProperty Name="FavoriteTeam">
         <ScalarProperty Name="Id" ColumnName="FavoriteTeam_Id" />

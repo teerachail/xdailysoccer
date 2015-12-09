@@ -15,7 +15,7 @@
         <AssociationConnector Association="DailySoccerModel.RewardGroupReward" />
         <EntityTypeShape EntityType="DailySoccerModel.FavoriteTeam" Width="1.5" PointX="0.5" PointY="3.25" />
         <AssociationConnector Association="DailySoccerModel.FavoriteTeamAccount" />
-        <EntityTypeShape EntityType="DailySoccerModel.Winner" Width="1.5" PointX="2.75" PointY="6.375" />
+        <EntityTypeShape EntityType="DailySoccerModel.Winner" Width="1.5" PointX="2.75" PointY="6.75" />
         <AssociationConnector Association="DailySoccerModel.AccountWinner" />
         <AssociationConnector Association="DailySoccerModel.RewardWinner" />
         <EntityTypeShape EntityType="DailySoccerModel.Ticket" Width="1.5" PointX="5.625" PointY="0.5" />

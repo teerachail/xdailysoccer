@@ -17,6 +17,7 @@
     }
 
 
+
     angular
         .module('starter.shared')
         .service('starter.shared.QueryRemoteDataService', QueryRemoteDataService);

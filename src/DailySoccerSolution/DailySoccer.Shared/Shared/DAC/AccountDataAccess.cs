@@ -71,7 +71,7 @@ namespace DailySoccer.Shared.DAC
                     SecretCode = selectedAccount.SecretCode,
                     OAuthId = selectedAccount.OAuthId,
                     Email = selectedAccount.Email,
-                    VerifyCode = selectedAccount.VerifyCode
+                    VerifiedPhoneNumber = selectedAccount.VerifiedPhoneNumber
                 };
             }
         }
@@ -93,7 +93,7 @@ namespace DailySoccer.Shared.DAC
                     SecretCode = selectedAccount.SecretCode,
                     OAuthId = selectedAccount.OAuthId,
                     Email = selectedAccount.Email,
-                    VerifyCode = selectedAccount.VerifyCode
+                    VerifiedPhoneNumber = selectedAccount.VerifiedPhoneNumber
                 };
             }
         }
@@ -108,7 +108,7 @@ namespace DailySoccer.Shared.DAC
                     account.SecretCode = accountInfo.SecretCode;
                     account.OAuthId = accountInfo.OAuthId;
                     account.Email = accountInfo.Email;
-                    account.VerifyCode = accountInfo.VerifyCode;
+                    account.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber;
                     account.Points = accountInfo.Points;
                     dctx.SaveChanges();
                 }

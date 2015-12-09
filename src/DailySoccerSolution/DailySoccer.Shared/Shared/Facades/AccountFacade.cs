@@ -234,7 +234,7 @@ namespace DailySoccer.Shared.Facades
 
             var accountDac = FacadeRepository.Instance.AccountDataAccess;
             var selectedAccount = accountDac.GetAccountBySecrectCode(request.UserId);
-            var isAccountValid = selectedAccount != null && string.IsNullOrEmpty(selectedAccount.VerifyCode);
+            var isAccountValid = selectedAccount != null && string.IsNullOrEmpty(selectedAccount.VerifiedPhoneNumber);
             if (!isAccountValid) return invalidDataModel;
 
             var verificationCode = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, 7);
