@@ -42,6 +42,9 @@
             return this.queryRemoteSvc.RemoteQuery<Boolean>(requestUrl);
         }
 
+        public TieFacbookWithFacebookData(secretCode: string, OAuthId: string): ng.IPromise<Boolean> {
+            var requestUrl = "Account/TieFacbookWithFacebookData?secretCode=" + secretCode + "&OAuthId=" + OAuthId;
+            return this.queryRemoteSvc.RemoteQuery<Boolean>(requestUrl);
         }
 
         public TieFacbookWithLocalData(secretCode: string, OAuthId: string): ng.IPromise<Boolean> {
@@ -49,13 +52,12 @@
             return this.queryRemoteSvc.RemoteQuery<Boolean>(requestUrl);
         }
 
-    }
         public ConfirmPhoneNumber(request: ConfirmPhoneNumberRequest): ng.IPromise<ConfirmPhoneNumberRespond> {
             var requestUrl = "Account/ConfirmPhoneNumber?userId=" + request.UserId + "&verificationCode=" + request.VerificationCode;
             return this.queryRemoteSvc.RemoteQuery<ConfirmPhoneNumberRespond>(requestUrl);
         }
-
     }
+
     angular
         .module('starter.account')
         .service('starter.account.AccountServices', AccountServices);
