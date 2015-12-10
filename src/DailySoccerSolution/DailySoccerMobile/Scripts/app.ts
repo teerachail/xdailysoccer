@@ -194,13 +194,13 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                 url: '/buyticketcompleted',
                 abstract: true,
                 templateUrl: 'templates/_fullpageTemplate.html',
-                //controller: 'AppCtrl'
             })
             .state('buyticketcompleted.buyticketcompleted', {
-                url: '/buyticketcompleted',
+                url: '/buyticketcompleted/:remainingPoints/:expiredDate',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Rewards/BuyTicketCompleted.html',
+                        controller: 'starter.ticket.TicketController as ticketCtrl'
                     }
                 }
             })

@@ -4,10 +4,10 @@
             คุณเหลือแต้มที่ใช้ได้
         </p>
         <p class="font-large">
-            125 แต้ม
+            {{ ticketCtrl.RemainingPoints }} แต้ม
         </p>
         <br />
-        <p>รอประกาศผลรายชื่อผู้โชคดี <br /> ในวันที่ 20 ธันวาคม 2558 <br /> ขอบพระคุณที่ร่วมสนุกกับเรา</p>
+        <p>รอประกาศผลรายชื่อผู้โชคดี <br /> ในวันที่ {{ ticketCtrl.ExpiredDate }} <br /> ขอบพระคุณที่ร่วมสนุกกับเรา</p>
     </ion-content>
     <ion-footer-bar align-title="left" class="bar-balanced">
         <h1 class="title text-right">

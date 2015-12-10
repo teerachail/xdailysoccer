@@ -5,9 +5,14 @@
 
         public AccountInfo: account.AccountInformation;
         public DisplayRewardResultDate: Date;
+        public RemainingPoints: number;
+        public ExpiredDate: Date;
 
-        static $inject = ['$scope', '$timeout', '$location', '$ionicModal', 'starter.ticket.TicketServices', 'starter.shared.IAccountManagementService'];
-        constructor(private $scope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private $ionicModal, private ticketSvc: starter.ticket.TicketServices, private accountSvc: shared.AccountManagementService) {
+        static $inject = ['$scope', '$stateParams', '$timeout', '$location', '$ionicModal', 'starter.ticket.TicketServices', 'starter.shared.IAccountManagementService'];
+        constructor(private $scope, private $stateParams, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private $ionicModal, private ticketSvc: starter.ticket.TicketServices, private accountSvc: shared.AccountManagementService) {
+            
+            this.RemainingPoints = this.$stateParams.remainingPoints;
+            this.ExpiredDate = this.$stateParams.expiredDate;
 
             this.$ionicModal.fromTemplateUrl('templates/Rewards/BuyTicketPopup.html',
                 {
@@ -54,11 +59,11 @@
                         this.AccountInfo = respond.AccountInfo;
                         this.DisplayRewardResultDate = new Date(respond.RewardResultDate.toString());
                         console.log('Buy ticket completed.')
-                        this.$location.path('/buyticketcompleted/buyticketcompleted');
+                        this.$location.path('/buyticketcompleted/buyticketcompleted/' + respond.AccountInfo.Points + '/' + respond.RewardResultDate);
                     }
                     else {
                         // TODO: Buy ticket failed
-                        console.log('Buy ticket failed.')
+                        console.log('Buy ticket failed.');
                     }
                 });
         }
