@@ -52,13 +52,11 @@
                 } 
             }
         }
-
        
         public SkipLogin(): void {
             // TODO: Login with guest
             this.AccountManagementService.CreateNewGuestUser();     
         };        
-
 
         public LoginWithFacebook(): void {
             this.AccountManagementService.LoginWithFacebook();

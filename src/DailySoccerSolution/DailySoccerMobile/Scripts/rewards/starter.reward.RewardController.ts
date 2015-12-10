@@ -12,7 +12,7 @@
         public AllRewards: YourRewardInformation[];
         public ContactNo: string;
         
-        static $inject = ['$scope', 'starter.reward.RewardServices', 'starter.shared.IAccountManagementService'];
+        static $inject = ['$scope', 'starter.reward.RewardServices', 'starter.shared.AccountManagementService'];
         constructor(private $scope, private rewardSvc: starter.reward.RewardServices, private accountManagementSvc: shared.AccountManagementService) {
             this.GetRewards();
             this.GetWinners();

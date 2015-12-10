@@ -2,7 +2,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.module', 'starter.controllers', 'starter.shared', 'starter.account', 'starter.match', 'starter.reward', 'starter.sidemenu', 'starter.history', 'bhResponsiveImages'])
+angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.module', 'starter.controllers', 'starter.shared', 'starter.account', 'starter.match', 'starter.reward', 'starter.sidemenu', 'starter.history', 'bhResponsiveImages', 'starter.ticket'])
     .constant('AzureMobileServiceClient', {
     API_URL: 'https://dailysoccer.azurewebsites.net',
     API_KEY: 'https://dailysoccerb2b9cb00dad1424394487af38c61ca1e.azurewebsites.net'
@@ -167,6 +167,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
         url: '/ticket',
         abstract: true,
         templateUrl: 'templates/_basicTemplate.html',
+        controller: 'starter.ticket.TicketController as TicketCtrl'
     })
         .state('ticket.buyticket', {
         url: '/buyticket',
@@ -329,9 +330,10 @@ var starter;
                 this.Azureservice = Azureservice;
                 this.AccountManagementService = AccountManagementService;
                 this._selectedTeamId = -1;
-                this.AccountManagementService.ClearGuestData();
-                //this.checkLocalStorageAccount();
+                this.checkLocalStorageAccount();
                 this.GetAllLeague();
+                //Clear local storage for test only!
+                //this.AccountManagementService.ClearGuestData();
             }
             AccountController.prototype.GetAllLeague = function () {
                 var _this = this;
@@ -368,6 +370,12 @@ var starter;
                 this.AccountManagementService.LoginWithFacebook();
             };
             ;
+            AccountController.prototype.TieFacbookWithFacebookData = function () {
+                this.AccountManagementService.TieFacbookWithFacebookData();
+            };
+            AccountController.prototype.TieFacbookWithLocalData = function () {
+                this.AccountManagementService.TieFacbookWithLocalData();
+            };
             AccountController.prototype.SelectFavoriteTeam = function (TeamId) {
                 this._selectedTeamId = TeamId;
                 console.log('Set favorite team completed.');
@@ -392,7 +400,7 @@ var starter;
                 this.facebookPoint = this.AccountManagementService.facebookPoint;
                 this.localPoint = this.AccountManagementService.localPoint;
             };
-            AccountController.$inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice', 'starter.shared.IAccountManagementService'];
+            AccountController.$inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice', 'starter.shared.AccountManagementService'];
             return AccountController;
         })();
         angular
@@ -471,6 +479,14 @@ var starter;
             };
             AccountServices.prototype.UpdateAccountWithFacebook = function (secretCode, OAuthId) {
                 var requestUrl = "Account/UpdateAccountWithFacebook?secretCode=" + secretCode + "&OAuthId=" + OAuthId;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            AccountServices.prototype.TieFacbookWithFacebookData = function (secretCode, OAuthId) {
+                var requestUrl = "Account/TieFacbookWithFacebookData?secretCode=" + secretCode + "&OAuthId=" + OAuthId;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            AccountServices.prototype.TieFacbookWithLocalData = function (secretCode, OAuthId) {
+                var requestUrl = "Account/TieFacbookWithLocalData?secretCode=" + secretCode + "&OAuthId=" + OAuthId;
                 return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
             AccountServices.$inject = ['starter.shared.QueryRemoteDataService'];
@@ -633,12 +649,13 @@ var starter;
     (function (match_1) {
         'use strict';
         var MatchController = (function () {
-            function MatchController($scope, matchSvc, $location, $ionicModal, $ionicTabsDelegate) {
+            function MatchController($scope, matchSvc, $location, $ionicModal, $ionicTabsDelegate, accountManagementSvc) {
                 this.$scope = $scope;
                 this.matchSvc = matchSvc;
                 this.$location = $location;
                 this.$ionicModal = $ionicModal;
                 this.$ionicTabsDelegate = $ionicTabsDelegate;
+                this.accountManagementSvc = accountManagementSvc;
                 this.PastOneDaysDate = new Date();
                 this.PastTwoDaysDate = new Date();
                 this.FutureOneDaysDate = new Date();
@@ -665,7 +682,7 @@ var starter;
                 data.UserId = user.id;
                 this.matchSvc.GetMatches(data)
                     .then(function (respond) {
-                    _this.AccountInfo = respond.AccountInfo;
+                    _this.updateAccountInformation(respond.AccountInfo);
                     _this.updateDisplayDate(respond.CurrentDate);
                     _this.updateDisplayMatches(respond.Matches);
                     _this.updateRemainingGuessAmount();
@@ -701,7 +718,7 @@ var starter;
                 request.IsCancel = ((selectedTeamId == selectedTeam.Id) && (beforeChange)) ? true : false;
                 this.matchSvc.GuessMatch(request)
                     .then(function (respond) {
-                    _this.AccountInfo = respond.AccountInfo;
+                    _this.updateAccountInformation(respond.AccountInfo);
                     _this.updateDisplayMatches(respond.Matches);
                     _this.updateRemainingGuessAmount();
                     console.log('Send guess match completed.');
@@ -715,6 +732,11 @@ var starter;
             };
             MatchController.prototype.IsTodayMatch = function (match) {
                 return this.dateAreEqual(match.BeginDate, this.CurrentDate);
+            };
+            MatchController.prototype.updateAccountInformation = function (accountInfo) {
+                this.AccountInfo = accountInfo;
+                this.accountManagementSvc.CurrentPoints = accountInfo.Points;
+                this.accountManagementSvc.CurrentOrderedCoupon = accountInfo.CurrentOrderedCoupon;
             };
             MatchController.prototype.dateAreEqual = function (firstDate, secondDate) {
                 var first = new Date(firstDate.toString());
@@ -744,7 +766,9 @@ var starter;
                 var selectedMatchesQry = this._allMatches.filter(function (it) { return (it.TeamHome.IsSelected || it.TeamAway.IsSelected) && _this.dateAreEqual(it.BeginDate, _this.CurrentDate); });
                 return selectedMatchesQry;
             };
-            MatchController.$inject = ['$scope', 'starter.match.MatchServices', '$location', '$ionicModal', '$ionicTabsDelegate'];
+            MatchController.$inject = ['$scope', 'starter.match.MatchServices',
+                '$location', '$ionicModal',
+                '$ionicTabsDelegate', 'starter.shared.AccountManagementService'];
             return MatchController;
         })();
         angular
@@ -874,11 +898,10 @@ var starter;
     (function (reward) {
         'use strict';
         var RewardController = (function () {
-            function RewardController($scope, rewardSvc) {
+            function RewardController($scope, rewardSvc, accountManagementSvc) {
                 this.$scope = $scope;
                 this.rewardSvc = rewardSvc;
-                this.CurrentOrderedCoupon = 2940;
-                this.UserCoupon = 0;
+                this.accountManagementSvc = accountManagementSvc;
                 this.GetRewards();
                 this.GetWinners();
                 this.updateDisplayRewards();
@@ -912,7 +935,7 @@ var starter;
                     console.log('# update display rewards completed.');
                 });
             };
-            RewardController.$inject = ['$scope', 'starter.reward.RewardServices'];
+            RewardController.$inject = ['$scope', 'starter.reward.RewardServices', 'starter.shared.AccountManagementService'];
             return RewardController;
         })();
         angular
@@ -969,27 +992,52 @@ var starter;
             //For test only (remove when run on production)
             AccountManagementService.prototype.ClearGuestData = function () {
                 var user = Ionic.User.current();
-                user.id = '';
+                user.id = 'empty';
                 user.unset('points');
                 user.unset('IsSkiped');
                 user.unset('PhoneVerified');
                 user.unset('OAuthId');
                 user.save();
             };
-            //สร้าง guestuser ใหม่
-            AccountManagementService.prototype.CreateNewGuestUser = function (OAuthId) {
+            //// Login Facebook ////
+            AccountManagementService.prototype.LoginWithFacebook = function () {
                 var _this = this;
-                if (OAuthId === void 0) { OAuthId = null; }
+                this.Azureservice.login('facebook')
+                    .then(function () {
+                    var oAuthId = _this.Azureservice.getCurrentUser().userId;
+                    _this.accountSvc.GetAccountByOAuthId(oAuthId)
+                        .then(function (respond) {
+                        if (respond == null) {
+                            var user = Ionic.User.current();
+                            if (!user.id || user.id == 'empty') {
+                                // ทำการ login ด้วย facebook ที่ยังไม่เคยใช้งานระบบมาก่อน
+                                _this.CreateNewGuestWithFacebook(oAuthId);
+                            }
+                        }
+                        else {
+                            // ทำการ login ด้วย facebook ที่เคยใช้งานระบบแล้ว
+                            _this.UpdateLocalStorageAccountWithFacebookData(respond);
+                            _this.$location.path('/matches/todaymatches');
+                        }
+                    }).catch(function () {
+                        alert('cannot connect to server');
+                    });
+                    console.log('Login successful');
+                }, function (err) {
+                    console.error('Azure Error: ' + err);
+                });
+            };
+            //สร้าง guestuser ใหม่
+            AccountManagementService.prototype.CreateNewGuestUser = function () {
+                var _this = this;
                 var user = Ionic.User.current();
                 this.accountSvc.CreateNewGuest()
                     .then(function (respond) {
                     user.id = respond.AccountInfo.SecretCode;
                     user.set('IsSkiped', 'true');
                     user.set('PhoneVerified', 'false');
-                    if (OAuthId != null)
-                        user.set('OAuthId', OAuthId);
                     user.save();
-                    console.log('Create new guest complete. #' + user.id);
+                    console.log('Create new guest complete. #UserId: ' + user.id);
                     _this.$location.path('/account/favorite');
                 });
             };
@@ -1000,15 +1048,84 @@ var starter;
                     .then(function (respond) {
                     var user = Ionic.User.current();
                     user.id = respond.AccountInfo.SecretCode;
-                    user.set('OAuthId', respond.AccountInfo.OAuthId);
                     user.set('IsSkiped', 'true');
                     user.set('PhoneVerified', 'false');
+                    user.set('OAuthId', respond.AccountInfo.OAuthId);
                     user.save();
+                    console.log('Login with Facebook complete. #UserId: ' + user.id);
                     _this.$location.path('/account/favorite');
                 });
             };
-            //ผูกfacebook เข้ากับ guestuser เดิม
-            AccountManagementService.prototype.UpdateAccoutWithFacebook = function (secretCode, oAuthId) {
+            // ดึงข้อมูลจาก facebook มาเก็บไว้ที่ storage account
+            AccountManagementService.prototype.UpdateLocalStorageAccountWithFacebookData = function (accountInfo) {
+                var user = Ionic.User.current();
+                user.id = accountInfo.SecretCode;
+                var PhoneVerified = accountInfo.VerifiedPhoneNumber != null;
+                user.set('OAuthId', accountInfo.OAuthId);
+                user.set('IsSkiped', 'true');
+                user.set('PhoneVerified', PhoneVerified);
+                user.save();
+            };
+            //// Tie Facebook ////
+            AccountManagementService.prototype.TieFacebook = function () {
+                var _this = this;
+                this.Azureservice.login('facebook')
+                    .then(function () {
+                    var oAuthId = _this.Azureservice.getCurrentUser().userId;
+                    _this.accountSvc.GetAccountByOAuthId(oAuthId)
+                        .then(function (respond) {
+                        var user = Ionic.User.current();
+                        if (respond == null) {
+                            // TODO : tie facebook ที่ยังไม่เคยใช้งานระบบมาก่อน
+                            _this.TieAccoutWithNewFacebook(user.id, oAuthId);
+                        }
+                        else {
+                            // facebook ที่เคยใช้งานระบบแล้ว ให้ผู้ใช้เลือกข้อมูล
+                            _this.facebookPoint = respond.Points;
+                            _this.OAuthId = oAuthId;
+                            _this.accountSvc.GetAccountBySecretCode(user.id)
+                                .then(function (respond) {
+                                _this.localPoint = respond.Points;
+                                _this.$location.path('/account/tiefacebook');
+                            });
+                        }
+                    });
+                }, function (err) {
+                    console.error('Azure Error: ' + err);
+                });
+            };
+            AccountManagementService.prototype.TieFacbookWithFacebookData = function () {
+                var _this = this;
+                var user = Ionic.User.current();
+                this.accountSvc.TieFacbookWithFacebookData(user.id, this.OAuthId)
+                    .then(function (respond) {
+                    _this.accountSvc.GetAccountByOAuthId(_this.OAuthId)
+                        .then(function (accountInfo) {
+                        var PhoneVerified = accountInfo.VerifiedPhoneNumber != null;
+                        user.set('OAuthId', _this.OAuthId);
+                        user.set('PhoneVerified', PhoneVerified);
+                        user.save();
+                        _this.$location.path('/matches/todaymatches');
+                    });
+                });
+            };
+            AccountManagementService.prototype.TieFacbookWithLocalData = function () {
+                var _this = this;
+                var user = Ionic.User.current();
+                this.accountSvc.TieFacbookWithLocalData(user.id, this.OAuthId)
+                    .then(function (respond) {
+                    _this.accountSvc.GetAccountByOAuthId(_this.OAuthId)
+                        .then(function (accountInfo) {
+                        var PhoneVerified = accountInfo.VerifiedPhoneNumber != null;
+                        user.set('OAuthId', _this.OAuthId);
+                        user.set('PhoneVerified', PhoneVerified);
+                        user.save();
+                        _this.$location.path('/matches/todaymatches');
+                    });
+                });
+            };
+            //ผูก facebook เข้ากับ guest user เดิม
+            AccountManagementService.prototype.TieAccoutWithNewFacebook = function (secretCode, oAuthId) {
                 var _this = this;
                 this.accountSvc.UpdateAccountWithFacebook(secretCode, oAuthId)
                     .then(function (respond) {
@@ -1020,77 +1137,13 @@ var starter;
                     }
                 });
             };
-            AccountManagementService.prototype.UpdateLocalStorageAccount = function (accountInfo) {
-                var user = Ionic.User.current();
-                user.id = accountInfo.SecretCode;
-                var PhoneVerified = accountInfo.VerifiedPhoneNumber != null;
-                user.set('OAuthId', accountInfo.OAuthId);
-                user.set('IsSkiped', 'true');
-                user.set('PhoneVerified', PhoneVerified);
-                user.save();
-            };
-            AccountManagementService.prototype.LoginWithFacebook = function () {
-                var _this = this;
-                this.Azureservice.login('facebook')
-                    .then(function () {
-                    var oAuthId = _this.Azureservice.getCurrentUser().userId;
-                    _this.accountSvc.GetAccountByOAuthId(oAuthId)
-                        .then(function (respond) {
-                        if (respond == null) {
-                            var user = Ionic.User.current();
-                            if (user.id && user.id != 'empty') {
-                                // TODO: userguestที่ทำการloginด้วยfacebook
-                                _this.UpdateAccoutWithFacebook(user.id, oAuthId);
-                            }
-                            else {
-                                // TODO: facebook ใหม่ที่ยังไม่เคยใช้งานระบบ
-                                _this.CreateNewGuestWithFacebook(oAuthId);
-                            }
-                        }
-                        else {
-                            // TODO: userที่มีอยู่ในระบบแล้ว
-                            _this.UpdateLocalStorageAccount(respond);
-                            _this.$location.path('/matches/todaymatches');
-                        }
-                    }).catch(function () {
-                        alert('cannot connect to server');
-                    });
-                    console.log('Login successful');
-                }, function (err) {
-                    console.error('Azure Error: ' + err);
-                });
-            };
-            AccountManagementService.prototype.TieFacebook = function () {
-                var _this = this;
-                this.Azureservice.login('facebook')
-                    .then(function () {
-                    var oAuthId = _this.Azureservice.getCurrentUser().userId;
-                    _this.accountSvc.GetAccountByOAuthId(oAuthId)
-                        .then(function (respond) {
-                        var user = Ionic.User.current();
-                        _this.facebookPoint = respond.Points;
-                        _this.accountSvc.GetAccountBySecretCode(user.id)
-                            .then(function (respond) {
-                            _this.localPoint = respond.Points;
-                            _this.$location.path('/account/tiefacebook');
-                        });
-                    });
-                }, function (err) {
-                    console.error('Azure Error: ' + err);
-                });
-            };
-            AccountManagementService.prototype.TieFacbookWithFacebookData = function () {
-            };
-            AccountManagementService.prototype.TieFacbookWithLocalData = function () {
-                // TODO : TieFacbookWithLocalData
-            };
             AccountManagementService.$inject = ['$location', 'starter.account.AccountServices', 'Azureservice'];
             return AccountManagementService;
         })();
         shared.AccountManagementService = AccountManagementService;
         angular
             .module('starter.shared')
-            .service('starter.shared.IAccountManagementService', AccountManagementService);
+            .service('starter.shared.AccountManagementService', AccountManagementService);
     })(shared = starter.shared || (starter.shared = {}));
 })(starter || (starter = {}));
 var starter;
@@ -1152,7 +1205,7 @@ var starter;
                     this.isLogedin = false;
                 }
             };
-            SideMenuController.$inject = ['$scope', '$timeout', '$location', '$ionicModal', 'Azureservice', 'starter.shared.IAccountManagementService'];
+            SideMenuController.$inject = ['$scope', '$timeout', '$location', '$ionicModal', 'Azureservice', 'starter.shared.AccountManagementService'];
             return SideMenuController;
         })();
         angular
@@ -1171,5 +1224,39 @@ var starter;
         })();
         sidemenu.AccountInformation = AccountInformation;
     })(sidemenu = starter.sidemenu || (starter.sidemenu = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var ticket;
+    (function (ticket) {
+        'use strict';
+        var TicketController = (function () {
+            function TicketController($scope, $timeout, $location, $ionicModal) {
+                this.$scope = $scope;
+                this.$timeout = $timeout;
+                this.$location = $location;
+                this.$ionicModal = $ionicModal;
+                this.$ionicModal.fromTemplateUrl('templates/Rewards/BuyTicketPopup.html', {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                }).then(function (modal) { $scope.MatchPopup = modal; });
+            }
+            TicketController.prototype.BuyTicket = function (amount) {
+                // TODO: ตรวจสอบ account ว่าผูก Facebook แล้วหรือยัง
+                // TODO: ตรวจสอบ account ว่ายืนยันเบอร์โทรศัพแล้วหรือยัง
+                var MinimumAmount = 1;
+                if (amount < MinimumAmount) {
+                }
+                // TODO: ตรวจสอบแต้มเพียงพอที่จะสั่งซื้อหรือไม่
+                // TODO: ส่ง Request ในการขอซื้อ Ticket
+                console.log("Buy ticket!!");
+            };
+            TicketController.$inject = ['$scope', '$timeout', '$location', '$ionicModal'];
+            return TicketController;
+        })();
+        angular
+            .module('starter.ticket', [])
+            .controller('starter.ticket.TicketController', TicketController);
+    })(ticket = starter.ticket || (starter.ticket = {}));
 })(starter || (starter = {}));
 //# sourceMappingURL=appBundle.js.map

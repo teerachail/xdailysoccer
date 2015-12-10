@@ -82,16 +82,16 @@ namespace DailySoccerAppService.Controllers
         }
 
         [HttpGet]
-        public bool TieFacbookWithFacebookData(string secrectCode, string OAuthId)
+        public bool TieFacbookWithFacebookData(string secretCode, string OAuthId)
         {
-            var result = FacadeRepository.Instance.AccountFacade.TieFacbookWithFacebookData(secrectCode, OAuthId);
+            var result = FacadeRepository.Instance.AccountFacade.TieFacbookWithFacebookData(secretCode, OAuthId);
             return result;
         }
 
         [HttpGet]
-        public bool TieFacbookWithLocalData(string secrectCode, string OAuthId)
+        public bool TieFacbookWithLocalData(string secretCode, string OAuthId)
         {
-            var result = FacadeRepository.Instance.AccountFacade.TieFacbookWithLocalData(secrectCode, OAuthId);
+            var result = FacadeRepository.Instance.AccountFacade.TieFacbookWithLocalData(secretCode, OAuthId);
             return result;
         }
 

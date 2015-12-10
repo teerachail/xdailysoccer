@@ -288,6 +288,7 @@ namespace DailySoccer.Shared.Facades
 
         public bool TieFacbookWithFacebookData(string secrectCode, string OAuthId)
         {
+            if (secrectCode == null && OAuthId == null) return false;
             var accountDac = FacadeRepository.Instance.AccountDataAccess;
             accountDac.TieFacbookWithFacebookData(secrectCode, OAuthId);
             return true;
@@ -295,6 +296,7 @@ namespace DailySoccer.Shared.Facades
 
         public bool TieFacbookWithLocalData(string secrectCode, string OAuthId)
         {
+            if (secrectCode == null && OAuthId == null) return false;
             var accountDac = FacadeRepository.Instance.AccountDataAccess;
             accountDac.TieFacbookWithLocalData(secrectCode, OAuthId);
             return true;

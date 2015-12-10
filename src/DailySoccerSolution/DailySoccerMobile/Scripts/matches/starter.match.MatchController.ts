@@ -15,7 +15,7 @@
 
         static $inject = ['$scope', 'starter.match.MatchServices',
             '$location', '$ionicModal',
-            '$ionicTabsDelegate', 'starter.shared.IAccountManagementService'];
+            '$ionicTabsDelegate', 'starter.shared.AccountManagementService'];
         constructor(private $scope,
             private matchSvc: starter.match.MatchServices,
             private $location: ng.ILocationService,

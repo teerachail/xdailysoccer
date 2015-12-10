@@ -32,7 +32,7 @@
         //For test only (remove when run on production)
         public ClearGuestData(): void {
             var user = Ionic.User.current();
-            user.id = '';
+            user.id = 'empty';
             user.unset('points');
             user.unset('IsSkiped');
             user.unset('PhoneVerified');

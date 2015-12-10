@@ -5,7 +5,7 @@
 
         private isLogedin: Boolean;
 
-        static $inject = ['$scope', '$timeout', '$location', '$ionicModal', 'Azureservice', 'starter.shared.IAccountManagementService'];
+        static $inject = ['$scope', '$timeout', '$location', '$ionicModal', 'Azureservice', 'starter.shared.AccountManagementService'];
         constructor(private $scope,
             private $timeout: ng.ITimeoutService,
             private $location: ng.ILocationService,

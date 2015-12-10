@@ -329,12 +329,16 @@ namespace DailySoccer.Shared.DAC
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
-                var selectedFacebookAccount = dctx.Accounts.FirstOrDefault(it => it.OAuthId.Equals(OAuthId, StringComparison.CurrentCultureIgnoreCase));                
+                var selectedFacebookAccount = dctx.Accounts.FirstOrDefault(it => it.OAuthId.Equals(OAuthId, StringComparison.CurrentCultureIgnoreCase));
+                if (selectedFacebookAccount == null) return;
                 var selectedGuestAccount = dctx.GuestAccounts.FirstOrDefault(it => it.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase)).Account;
+                if (selectedGuestAccount == null) return;
 
                 selectedGuestAccount.OAuthId = selectedFacebookAccount.OAuthId;
-                selectedFacebookAccount.OAuthId = string.Empty;
-                selectedFacebookAccount.GuestAccounts.Select(it => it.AccountId = selectedGuestAccount.Id);
+                selectedFacebookAccount.OAuthId = null;
+                var guestAccout = selectedFacebookAccount.GuestAccounts.ToList();
+                guestAccout.ForEach(it => it.AccountId = selectedGuestAccount.Id);
+
                 dctx.SaveChanges();
             }
         }
