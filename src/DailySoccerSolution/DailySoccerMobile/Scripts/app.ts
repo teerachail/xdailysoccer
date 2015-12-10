@@ -212,15 +212,16 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                 controller: 'starter.account.AccountController as accountCtrl'
             })
             .state('verify.verifyphonenumber', {
-                url: '/verifyphonenumber',
+                url: '/verifyphonenumber/:buyTicketAmount',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Accounts/VerifyPhoneNumber.html',
+                        controller: 'starter.account.AccountController as accountCtrl'
                     }
                 }
             })
             .state('verify.verifycode', {
-                url: '/verifycode/:phoneNumber',
+                url: '/verifycode/:phoneNumber/:buyTicketAmount',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Accounts/VerifyCode.html',

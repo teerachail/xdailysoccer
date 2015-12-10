@@ -9,16 +9,21 @@
         public DisplayLeague: LeagueInformation[];
         private _allLeague: LeagueInformation[];
         private _selectedTeamId: number = -1;
+        private _buyTicketAmount: number;
 
-        static $inject = ['$scope', '$stateParams', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice', 'starter.shared.AccountManagementService'];
+        static $inject = ['$scope', '$stateParams', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice', 'starter.shared.AccountManagementService', 'starter.ticket.TicketServices'];
         constructor(private $scope,
             private $stateParams,
             private $timeout: ng.ITimeoutService,
             private $location: ng.ILocationService,
             private accountSvc: starter.account.AccountServices,
             private Azureservice: any,
-            private AccountManagementService: starter.shared.AccountManagementService) {
+            private AccountManagementService: starter.shared.AccountManagementService,
+            private ticketSvc: starter.ticket.TicketServices) {
 
+            if (this.$stateParams.buyTicketAmount) {
+                this._buyTicketAmount = this.$stateParams.buyTicketAmount;
+            }
             //this.checkLocalStorageAccount();
 
             //Clear local storage for test only!
@@ -112,9 +117,9 @@
                     if (respond.IsSuccessed) {
                         console.log("#RequestConfirmPhoneNumber successed.");
                         if (isRequireReload) {
-                            this.$location.path('/verify/verifycode/' + respond.ForPhoneNumber);
+                            this.$location.path('/verify/verifycode/' + respond.ForPhoneNumber + '/' + this._buyTicketAmount);
                         }
-                        //TODO: Not navigate to another page (#Currently,it naviagated to another page)
+                        //TODO: Do not navigate to another page (# Currently,it naviagated to another page)
                     }
                     else {
                         
@@ -133,7 +138,24 @@
                     .then((respond: ConfirmPhoneNumberRespond) => {
                         if (respond.IsSuccessed) {
 
-                            //TODO: Navigate to next step
+                            this.AccountManagementService.SetPhoneVerified();
+                            var request = new starter.ticket.BuyTicketRequest();
+                            request.UserId = userId;
+                            request.Amount = this._buyTicketAmount;
+                            this.ticketSvc.BuyTicket(request).
+                                then((respond: starter.ticket.BuyTicketRespond) => {
+                                    if (respond.IsSuccessed) {
+                                        this.AccountManagementService.CurrentPoints = respond.AccountInfo.Points;
+                                        this.AccountManagementService.CurrentOrderedCoupon = respond.AccountInfo.CurrentOrderedCoupon;
+                                        console.log('Buy ticket completed.')
+                                        this.$location.path('/buyticketcompleted/buyticketcompleted/' + respond.AccountInfo.Points + '/' + respond.RewardResultDate);
+                                    }
+                                    else {
+                                        console.log('Buy ticket failed.')
+                                        this.$location.path('/ticket/buyticket');
+                                    }
+                                });
+
                             console.log("#RequestVerificationCode successed.");
                         }
                         else {

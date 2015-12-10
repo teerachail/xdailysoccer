@@ -55,6 +55,13 @@
             user.save();
         }
 
+        //Set phone be verified
+        public SetPhoneVerified() {
+            var user = Ionic.User.current();
+            user.set('PhoneVerified', 'true');
+            user.save();
+        }
+
         
         //// Login Facebook ////
         public LoginWithFacebook(): void {

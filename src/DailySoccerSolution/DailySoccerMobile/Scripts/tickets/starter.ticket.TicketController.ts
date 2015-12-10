@@ -49,7 +49,7 @@
 
             var isVerifiedPhoneNumber = (accountInformation.VerifiedPhoneNumber == 'true');
             if (!isVerifiedPhoneNumber) {
-                this.$location.path('/verify/verifyphonenumber');
+                this.$location.path('/verify/verifyphonenumber/' + amount);
                 return;
             }
 
