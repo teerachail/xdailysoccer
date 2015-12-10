@@ -17,6 +17,9 @@ namespace DailySoccer.Specs.Steps
             var mockAccountDac = ScenarioContext.Current.Get<Moq.Mock<IAccountDataAccess>>();
             mockAccountDac.Setup(dac => dac.RequestConfirmPhoneNumber(It.IsAny<RequestConfirmPhoneNumberRequest>(), It.IsAny<string>()));
 
+            var mockSMSSender = ScenarioContext.Current.Get<Moq.Mock<ISMSSender>>();
+            mockSMSSender.Setup(dac => dac.Send(It.IsAny<string>(), It.IsAny<string>()));
+
             var request = new Shared.Models.RequestConfirmPhoneNumberRequest
             {
                 UserId = userId,
@@ -25,7 +28,7 @@ namespace DailySoccer.Specs.Steps
             var result = FacadeRepository.Instance.AccountFacade.RequestConfirmPhoneNumber(request);
             ScenarioContext.Current.Set(result);
         }
-        
+
         [Then(@"ระบบบันทึกเบอร์โทร '(.*)' ของผู้ใช้ UserId: '(.*)' แล้วส่งรหัสลับในการยืนยันกลับไป")]
         public void ThenระบบบนทกเบอรโทรของผใชUserIdแลวสงรหสลบในการยนยนกลบไป(string phoneNumber, string userId)
         {
@@ -39,6 +42,12 @@ namespace DailySoccer.Specs.Steps
             Assert.AreEqual(phoneNumber, result.ForPhoneNumber);
             Assert.IsNotNull(result.VerificationCode);
             Assert.IsTrue(result.IsSuccessed);
+
+            var mockSMSSender = ScenarioContext.Current.Get<Moq.Mock<ISMSSender>>();
+            mockSMSSender.Verify(dac => dac.Send(
+                It.Is<string>(it => it.Equals(phoneNumber, StringComparison.CurrentCultureIgnoreCase)),
+                It.IsAny<string>()),
+                Times.Exactly(1));
         }
 
         [Then(@"ระบบไม่ทำการบันทึกเบอร์โทรและไม่ส่งรหัสลับกลับไป")]
@@ -52,6 +61,9 @@ namespace DailySoccer.Specs.Steps
             Assert.IsNull(result.ForPhoneNumber);
             Assert.IsNull(result.VerificationCode);
             Assert.IsFalse(result.IsSuccessed);
+
+            var mockSMSSender = ScenarioContext.Current.Get<Moq.Mock<ISMSSender>>();
+            mockSMSSender.Verify(dac => dac.Send(It.IsAny<string>(), It.IsAny<string>()), Times.Never());
         }
     }
 }

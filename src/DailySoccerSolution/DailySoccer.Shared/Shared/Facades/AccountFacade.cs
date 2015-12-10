@@ -255,6 +255,7 @@ namespace DailySoccer.Shared.Facades
             const int RequiredVerificationDigits = 10;
             var verificationCode = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, RequiredVerificationDigits).ToUpper();
             accountDac.RequestConfirmPhoneNumber(request, verificationCode);
+            FacadeRepository.Instance.PhoneVerificationFacade.SendMessage(request.PhoneNo, verificationCode);
 
             return new RequestConfirmPhoneNumberRespond
             {

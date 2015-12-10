@@ -34,4 +34,20 @@
         public SelectedTeamId: number;
     }
 
+    export class RequestConfirmPhoneNumberRequest {
+        public UserId: string;
+        public PhoneNo: string;
+    }
+    export class RequestConfirmPhoneNumberRespond {
+        public IsSuccessed: boolean;
+        public ForPhoneNumber: string;
+    }
+    export class ConfirmPhoneNumberRequest {
+        public UserId: string;
+        public VerificationCode: string;
+    }
+    export class ConfirmPhoneNumberRespond {
+        public IsSuccessed: boolean;
+    }
+
 }

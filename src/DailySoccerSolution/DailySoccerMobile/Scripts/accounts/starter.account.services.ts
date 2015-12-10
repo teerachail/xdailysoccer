@@ -42,6 +42,15 @@
             return this.queryRemoteSvc.RemoteQuery<Boolean>(requestUrl);
         }
 
+        public RequestConfirmPhoneNumber(request: RequestConfirmPhoneNumberRequest): ng.IPromise<RequestConfirmPhoneNumberRespond> {
+            var requestUrl = "Account/RequestConfirmPhoneNumber?userId=" + request.UserId + "&phoneNo=" + request.PhoneNo;
+            return this.queryRemoteSvc.RemoteQuery<RequestConfirmPhoneNumberRespond>(requestUrl);
+        }
+        public ConfirmPhoneNumber(request: ConfirmPhoneNumberRequest): ng.IPromise<ConfirmPhoneNumberRespond> {
+            var requestUrl = "Account/ConfirmPhoneNumber?userId=" + request.UserId + "&verificationCode=" + request.VerificationCode;
+            return this.queryRemoteSvc.RemoteQuery<ConfirmPhoneNumberRespond>(requestUrl);
+        }
+
     }
     angular
         .module('starter.account')
