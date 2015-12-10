@@ -209,7 +209,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                 url: '/verify',
                 abstract: true,
                 templateUrl: 'templates/_basicTemplate.html',
-                //controller: 'AppCtrl'
+                controller: 'starter.account.AccountController as accountCtrl'
             })
             .state('verify.verifyphonenumber', {
                 url: '/verifyphonenumber',
@@ -227,6 +227,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                     }
                 }
             })
+
             .state('underconstruction', {
                 url: '/underconstruction',
                 abstract: true,
