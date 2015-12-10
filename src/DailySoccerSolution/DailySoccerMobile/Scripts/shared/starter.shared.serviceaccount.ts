@@ -197,7 +197,7 @@
                         var user = Ionic.User.current();
                         user.set('OAuthId', oAuthId);
                         user.save();
-                        this.$location.path('/matches/todaymatches');
+                        this.$location.path('/ticket/buyticket');
                     }
                 });
         }

@@ -167,7 +167,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
         url: '/ticket',
         abstract: true,
         templateUrl: 'templates/_basicTemplate.html',
-        controller: 'starter.ticket.TicketController as TicketCtrl'
+        controller: 'starter.ticket.TicketController as sidemenuCtrl'
     })
         .state('ticket.buyticket', {
         url: '/buyticket',
@@ -183,10 +183,11 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
         templateUrl: 'templates/_fullpageTemplate.html',
     })
         .state('buyticketcompleted.buyticketcompleted', {
-        url: '/buyticketcompleted',
+        url: '/buyticketcompleted/:remainingPoints/:expiredDate',
         views: {
             'MainContent': {
                 templateUrl: 'templates/Rewards/BuyTicketCompleted.html',
+                controller: 'starter.ticket.TicketController as ticketCtrl'
             }
         }
     })
@@ -194,6 +195,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
         url: '/verify',
         abstract: true,
         templateUrl: 'templates/_basicTemplate.html',
+        controller: 'starter.account.AccountController as accountCtrl'
     })
         .state('verify.verifyphonenumber', {
         url: '/verifyphonenumber',
@@ -323,6 +325,8 @@ var starter;
         'use strict';
         var AccountController = (function () {
             function AccountController($scope, $timeout, $location, accountSvc, Azureservice, AccountManagementService) {
+                //this.checkLocalStorageAccount();
+                //this.GetAllLeague();
                 this.$scope = $scope;
                 this.$timeout = $timeout;
                 this.$location = $location;
@@ -330,8 +334,6 @@ var starter;
                 this.Azureservice = Azureservice;
                 this.AccountManagementService = AccountManagementService;
                 this._selectedTeamId = -1;
-                this.checkLocalStorageAccount();
-                this.GetAllLeague();
                 //Clear local storage for test only!
                 //this.AccountManagementService.ClearGuestData();
             }
@@ -442,6 +444,30 @@ var starter;
             return SetFavoriteTeamRequest;
         })();
         account.SetFavoriteTeamRequest = SetFavoriteTeamRequest;
+        var RequestConfirmPhoneNumberRequest = (function () {
+            function RequestConfirmPhoneNumberRequest() {
+            }
+            return RequestConfirmPhoneNumberRequest;
+        })();
+        account.RequestConfirmPhoneNumberRequest = RequestConfirmPhoneNumberRequest;
+        var RequestConfirmPhoneNumberRespond = (function () {
+            function RequestConfirmPhoneNumberRespond() {
+            }
+            return RequestConfirmPhoneNumberRespond;
+        })();
+        account.RequestConfirmPhoneNumberRespond = RequestConfirmPhoneNumberRespond;
+        var ConfirmPhoneNumberRequest = (function () {
+            function ConfirmPhoneNumberRequest() {
+            }
+            return ConfirmPhoneNumberRequest;
+        })();
+        account.ConfirmPhoneNumberRequest = ConfirmPhoneNumberRequest;
+        var ConfirmPhoneNumberRespond = (function () {
+            function ConfirmPhoneNumberRespond() {
+            }
+            return ConfirmPhoneNumberRespond;
+        })();
+        account.ConfirmPhoneNumberRespond = ConfirmPhoneNumberRespond;
     })(account = starter.account || (starter.account = {}));
 })(starter || (starter = {}));
 var starter;
@@ -487,6 +513,10 @@ var starter;
             };
             AccountServices.prototype.TieFacbookWithLocalData = function (secretCode, OAuthId) {
                 var requestUrl = "Account/TieFacbookWithLocalData?secretCode=" + secretCode + "&OAuthId=" + OAuthId;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            AccountServices.prototype.ConfirmPhoneNumber = function (request) {
+                var requestUrl = "Account/ConfirmPhoneNumber?userId=" + request.UserId + "&verificationCode=" + request.VerificationCode;
                 return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
             AccountServices.$inject = ['starter.shared.QueryRemoteDataService'];
@@ -911,6 +941,7 @@ var starter;
                 this.rewardSvc.GetCurrentRewards()
                     .then(function (respond) {
                     _this.RewardInfo = respond;
+                    _this.accountManagementSvc.CurrentTicketCost = respond.TicketCost;
                     console.log('Get all rewards completed.');
                 });
             };
@@ -989,6 +1020,18 @@ var starter;
                 this.accountSvc = accountSvc;
                 this.Azureservice = Azureservice;
             }
+            AccountManagementService.prototype.GetAccountInformation = function () {
+                var user = Ionic.User.current();
+                var accountInfo = new starter.account.AccountInformation();
+                //accountInfo.CurrentOrderedCoupon
+                //accountInfo.Email
+                //accountInfo.MaximumGuessAmount
+                accountInfo.OAuthId = user.get('OAuthId');
+                accountInfo.Points = this.CurrentPoints;
+                accountInfo.SecretCode = user.id;
+                accountInfo.VerifiedPhoneNumber = user.get('PhoneVerified');
+                return accountInfo;
+            };
             //For test only (remove when run on production)
             AccountManagementService.prototype.ClearGuestData = function () {
                 var user = Ionic.User.current();
@@ -1133,7 +1176,7 @@ var starter;
                         var user = Ionic.User.current();
                         user.set('OAuthId', oAuthId);
                         user.save();
-                        _this.$location.path('/matches/todaymatches');
+                        _this.$location.replace();
                     }
                 });
             };
@@ -1208,6 +1251,7 @@ var starter;
             SideMenuController.$inject = ['$scope', '$timeout', '$location', '$ionicModal', 'Azureservice', 'starter.shared.AccountManagementService'];
             return SideMenuController;
         })();
+        sidemenu.SideMenuController = SideMenuController;
         angular
             .module('starter.sidemenu', [])
             .controller('starter.sidemenu.SideMenuController', SideMenuController);
@@ -1231,32 +1275,114 @@ var starter;
     (function (ticket) {
         'use strict';
         var TicketController = (function () {
-            function TicketController($scope, $timeout, $location, $ionicModal) {
+            function TicketController($scope, $stateParams, $timeout, $location, $ionicModal, ticketSvc, accountSvc) {
                 this.$scope = $scope;
+                this.$stateParams = $stateParams;
                 this.$timeout = $timeout;
                 this.$location = $location;
                 this.$ionicModal = $ionicModal;
+                this.ticketSvc = ticketSvc;
+                this.accountSvc = accountSvc;
+                this.RemainingPoints = this.$stateParams.remainingPoints;
+                this.ExpiredDate = this.$stateParams.expiredDate;
                 this.$ionicModal.fromTemplateUrl('templates/Rewards/BuyTicketPopup.html', {
                     scope: $scope,
                     animation: 'slide-in-up'
-                }).then(function (modal) { $scope.MatchPopup = modal; });
+                }).then(function (modal) { $scope.ErrorPopup = modal; });
+                this.$ionicModal.fromTemplateUrl('templates/Accounts/TieFacebookPopup.html', {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                }).then(function (modal) { $scope.TieFacebookPopup = modal; });
             }
-            TicketController.prototype.BuyTicket = function (amount) {
-                // TODO: ตรวจสอบ account ว่าผูก Facebook แล้วหรือยัง
-                // TODO: ตรวจสอบ account ว่ายืนยันเบอร์โทรศัพแล้วหรือยัง
-                var MinimumAmount = 1;
-                if (amount < MinimumAmount) {
-                }
-                // TODO: ตรวจสอบแต้มเพียงพอที่จะสั่งซื้อหรือไม่
-                // TODO: ส่ง Request ในการขอซื้อ Ticket
-                console.log("Buy ticket!!");
+            TicketController.prototype.LoginWithFacebook = function () {
+                this.$scope.TieFacebookPopup.hide();
+                this.accountSvc.TieFacebook();
             };
-            TicketController.$inject = ['$scope', '$timeout', '$location', '$ionicModal'];
+            TicketController.prototype.BuyTicket = function (amount) {
+                var _this = this;
+                var accountInformation = this.accountSvc.GetAccountInformation();
+                var MinimumAmount = 1;
+                var canBuyTicket = (amount >= MinimumAmount) && (accountInformation.Points >= amount * this.accountSvc.CurrentTicketCost);
+                if (!canBuyTicket) {
+                    this.$scope.ErrorPopup.show();
+                    return;
+                }
+                var isTieWithFacaebookAlready = (accountInformation.OAuthId != null) && (accountInformation.SecretCode != null);
+                if (!isTieWithFacaebookAlready) {
+                    this.$scope.TieFacebookPopup.show();
+                    return;
+                }
+                var isVerifiedPhoneNumber = (accountInformation.VerifiedPhoneNumber == 'true');
+                if (!isVerifiedPhoneNumber) {
+                    this.$location.path('/verify/verifyphonenumber');
+                    return;
+                }
+                console.log('#Begin send buy ticket request.');
+                var user = Ionic.User.current();
+                var request = new ticket.BuyTicketRequest();
+                request.UserId = user.id;
+                request.Amount = amount;
+                this.ticketSvc.BuyTicket(request)
+                    .then(function (respond) {
+                    if (respond.IsSuccessed) {
+                        _this.AccountInfo = respond.AccountInfo;
+                        _this.DisplayRewardResultDate = new Date(respond.RewardResultDate.toString());
+                        console.log('Buy ticket completed.');
+                        _this.$location.path('/buyticketcompleted/buyticketcompleted/' + respond.AccountInfo.Points + '/' + respond.RewardResultDate);
+                    }
+                    else {
+                        // TODO: Buy ticket failed
+                        console.log('Buy ticket failed.');
+                    }
+                });
+            };
+            TicketController.$inject = ['$scope', '$stateParams', '$timeout', '$location', '$ionicModal', 'starter.ticket.TicketServices', 'starter.shared.AccountManagementService'];
             return TicketController;
         })();
         angular
             .module('starter.ticket', [])
             .controller('starter.ticket.TicketController', TicketController);
+    })(ticket = starter.ticket || (starter.ticket = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var ticket;
+    (function (ticket) {
+        var BuyTicketRespond = (function () {
+            function BuyTicketRespond() {
+            }
+            return BuyTicketRespond;
+        })();
+        ticket.BuyTicketRespond = BuyTicketRespond;
+        var BuyTicketRequest = (function () {
+            function BuyTicketRequest() {
+            }
+            return BuyTicketRequest;
+        })();
+        ticket.BuyTicketRequest = BuyTicketRequest;
+    })(ticket = starter.ticket || (starter.ticket = {}));
+})(starter || (starter = {}));
+var starter;
+(function (starter) {
+    var ticket;
+    (function (ticket) {
+        'use strict';
+        var TicketServices = (function () {
+            function TicketServices(queryRemoteSvc) {
+                this.queryRemoteSvc = queryRemoteSvc;
+            }
+            TicketServices.prototype.BuyTicket = function (req) {
+                var requestUrl = "BuyTicket/BuyTicket?userId=" + req.UserId + "&amount=" + req.Amount;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            ;
+            TicketServices.$inject = ['starter.shared.QueryRemoteDataService'];
+            return TicketServices;
+        })();
+        ticket.TicketServices = TicketServices;
+        angular
+            .module('starter.ticket')
+            .service('starter.ticket.TicketServices', TicketServices);
     })(ticket = starter.ticket || (starter.ticket = {}));
 })(starter || (starter = {}));
 //# sourceMappingURL=appBundle.js.map
