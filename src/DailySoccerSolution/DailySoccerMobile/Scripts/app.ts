@@ -180,7 +180,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                 url: '/ticket',
                 abstract: true,
                 templateUrl: 'templates/_basicTemplate.html',
-                controller: 'starter.ticket.TicketController as ticketCtrl'
+                controller: 'starter.ticket.TicketController as sidemenuCtrl'
             })
             .state('ticket.buyticket', {
                 url: '/buyticket',

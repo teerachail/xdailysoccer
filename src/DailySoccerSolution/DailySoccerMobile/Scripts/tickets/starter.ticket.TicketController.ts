@@ -8,7 +8,7 @@
         public RemainingPoints: number;
         public ExpiredDate: Date;
 
-        static $inject = ['$scope', '$stateParams', '$timeout', '$location', '$ionicModal', 'starter.ticket.TicketServices', 'starter.shared.IAccountManagementService'];
+        static $inject = ['$scope', '$stateParams', '$timeout', '$location', '$ionicModal', 'starter.ticket.TicketServices', 'starter.shared.AccountManagementService'];
         constructor(private $scope, private $stateParams, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private $ionicModal, private ticketSvc: starter.ticket.TicketServices, private accountSvc: shared.AccountManagementService) {
             
             this.RemainingPoints = this.$stateParams.remainingPoints;
@@ -25,6 +25,11 @@
                     scope: $scope,
                     animation: 'slide-in-up'
                 }).then(function (modal): void { $scope.TieFacebookPopup = modal; });
+        }
+
+        public LoginWithFacebook(): void {
+            this.$scope.TieFacebookPopup.hide();
+            this.accountSvc.TieFacebook();
         }
 
         public BuyTicket(amount: number): void {
