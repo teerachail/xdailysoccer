@@ -19,14 +19,14 @@
             private AccountManagementService: starter.shared.AccountManagementService) {
 
             //this.checkLocalStorageAccount();
-            this.GetAllLeague();
+            //this.GetAllLeague();
 
             //Clear local storage for test only!
             //this.AccountManagementService.ClearGuestData();
         }
 
 
-        private GetAllLeague(): void {
+        public GetAllLeague(): void {
             this.accountSvc.GetAllLeague()
                 .then((respond: GetAllLeagueRespond): void => {
                     this.updateDisplayLeague(respond.Leagues);
