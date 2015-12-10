@@ -14,7 +14,7 @@
             </div>
             <br />
             <div class="col block-center row text-center">
-                <a href="#/verify/verifycode" class="button button-balanced col col-50 button-small block-center">
+                <a href="#/verify/verifycode" class="button button-balanced col col-50 button-small block-center" ng-click="accountCtrl.SendRequestVerifyPhoneNumber(accountCtrl.$stateParams.phoneNumber, false)">
                     ขอรหัสใหม่อีกครั้ง
                 </a>
             </div>
@@ -26,11 +26,11 @@
             </p>
             <div class="col row">
                 <p>
-                    <input type="text" class=" col col-50 input-number block-center no-padding" />
+                    <input type="text" class=" col col-50 input-number block-center no-padding"  ng-model="verificationCode"/>
                 </p>
             </div>
             <div class="col row">
-                <a href="#" class="button bg-yellow col col-50 button-small block-center ">
+                <a href="#" class="button bg-yellow col col-50 button-small block-center " ng-click="accountCtrl.ConfirmPhoneNumber(verificationCode)">
                     ยืนยันรหัส
                 </a>
             </div>

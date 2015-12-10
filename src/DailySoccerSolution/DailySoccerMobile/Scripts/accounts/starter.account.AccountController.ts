@@ -97,24 +97,50 @@
             this.localPoint = this.AccountManagementService.localPoint;
         }
 
-        public SendRequestVerifyPhoneNumber(phoneNumber: string): void {
+        public SendRequestVerifyPhoneNumber(phoneNumber: string, isRequireReload: boolean = true): void {
+            console.log('Call SendRequestVerifyPhoneNumber');
             var userId = this.AccountManagementService.GetAccountInformation().SecretCode;
             var areArgumentValid = phoneNumber != null && userId != null;
             if (!areArgumentValid) return;
 
+            console.log('Begin SendRequestVerifyPhoneNumber');
             var request = new RequestConfirmPhoneNumberRequest();
             request.UserId = userId;
             request.PhoneNo = phoneNumber;
             this.accountSvc.RequestConfirmPhoneNumber(request)
                 .then((respond: RequestConfirmPhoneNumberRespond): void => {
                     if (respond.IsSuccessed) {
-                        console.log("#RequestConfirmPhoneNumber success.");
-                        this.$location.path('/verify/verifycode/' + respond.ForPhoneNumber);
+                        console.log("#RequestConfirmPhoneNumber successed.");
+                        if (isRequireReload) {
+                            this.$location.path('/verify/verifycode/' + respond.ForPhoneNumber);
+                        }
+                        //TODO: Not navigate to another page (#Currently,it naviagated to another page)
                     }
                     else {
+                        
                         console.log("#RequestConfirmPhoneNumber failed.");
                     }
                 });
+        }
+
+        public ConfirmPhoneNumber(verificationCode: string): void {
+            var userId = this.AccountManagementService.GetAccountInformation().SecretCode;
+            if (verificationCode != null) {
+                var request = new ConfirmPhoneNumberRequest();
+                request.UserId = userId;
+                request.VerificationCode = verificationCode;
+                this.accountSvc.ConfirmPhoneNumber(request)
+                    .then((respond: ConfirmPhoneNumberRespond) => {
+                        if (respond.IsSuccessed) {
+
+                            //TODO: Navigate to next step
+                            console.log("#RequestVerificationCode successed.");
+                        }
+                        else {
+                            console.log("#RequestVerificationCode failed.");
+                        }
+                    });
+            }
         }
     }
 
