@@ -6,46 +6,59 @@
         public AccountInfo: account.AccountInformation;
         public DisplayRewardResultDate: Date;
 
-        static $inject = ['$scope', '$timeout', '$location', '$ionicModal', 'starter.ticket.TicketServices'];
-        constructor(private $scope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private $ionicModal, private ticketSvc: starter.ticket.TicketServices) {
+        static $inject = ['$scope', '$timeout', '$location', '$ionicModal', 'starter.ticket.TicketServices', 'starter.shared.IAccountManagementService'];
+        constructor(private $scope, private $timeout: ng.ITimeoutService, private $location: ng.ILocationService, private $ionicModal, private ticketSvc: starter.ticket.TicketServices, private accountSvc: shared.AccountManagementService) {
 
             this.$ionicModal.fromTemplateUrl('templates/Rewards/BuyTicketPopup.html',
                 {
                     scope: $scope,
                     animation: 'slide-in-up'
-                }).then(function (modal): void { $scope.MatchPopup = modal; });
+                }).then(function (modal): void { $scope.ErrorPopup = modal; });
 
+            this.$ionicModal.fromTemplateUrl('templates/Accounts/TieFacebookPopup.html',
+                {
+                    scope: $scope,
+                    animation: 'slide-in-up'
+                }).then(function (modal): void { $scope.TieFacebookPopup = modal; });
         }
 
         public BuyTicket(amount: number): void {
-
-            // TODO: ตรวจสอบ account ว่าผูก Facebook แล้วหรือยัง
-            // TODO: ตรวจสอบ account ว่ายืนยันเบอร์โทรศัพแล้วหรือยัง
-
+            var accountInformation = this.accountSvc.GetAccountInformation();
             const MinimumAmount = 1;
-            if (amount < MinimumAmount) {
-                // TODO: ตรวจสอบทศนิยมได้
-                this.$scope.MatchPopup.show();
+            var canBuyTicket = (amount >= MinimumAmount) && (accountInformation.Points >= amount * this.accountSvc.CurrentTicketCost);
+            if (!canBuyTicket) {
+                this.$scope.ErrorPopup.show();
                 return;
             }
-            
 
-            // TODO: ตรวจสอบแต้มเพียงพอที่จะสั่งซื้อหรือไม่
+            var isTieWithFacaebookAlready = (accountInformation.OAuthId != null) && (accountInformation.SecretCode != null);
+            if (!isTieWithFacaebookAlready) {
+                this.$scope.TieFacebookPopup.show();
+                return;
+            }
 
+            var isVerifiedPhoneNumber = (accountInformation.VerifiedPhoneNumber == 'true');
+            if (!isVerifiedPhoneNumber) {
+                this.$location.path('/verify/verifyphonenumber');
+                return;
+            }
 
-            //ส่ง Request ในการขอซื้อ Ticket
+            console.log('#Begin send buy ticket request.')
             var user = Ionic.User.current();
             var request = new BuyTicketRequest();
             request.UserId = user.id;
             request.Amount = amount;
             this.ticketSvc.BuyTicket(request)
                 .then((respond: BuyTicketRespond): void => {
-                    
                     if (respond.IsSuccessed) {
                         this.AccountInfo = respond.AccountInfo;
                         this.DisplayRewardResultDate = new Date(respond.RewardResultDate.toString());
                         console.log('Buy ticket completed.')
                         this.$location.path('/buyticketcompleted/buyticketcompleted');
+                    }
+                    else {
+                        // TODO: Buy ticket failed
+                        console.log('Buy ticket failed.')
                     }
                 });
         }

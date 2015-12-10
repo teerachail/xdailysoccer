@@ -23,6 +23,7 @@
             this.rewardSvc.GetCurrentRewards()
                 .then((respond: GetCurrentRewardsRespond): void => {
                     this.RewardInfo = respond;
+                    this.accountManagementSvc.CurrentTicketCost = respond.TicketCost;
                     console.log('Get all rewards completed.');
                 });
         }

@@ -3,10 +3,10 @@
         <br />
         <div class="col col-80 col-offset-10">
             <p>
-                แต้มสะสมทั้งหมด 7500 คะแนน
+                แต้มสะสมทั้งหมด {{ ticketCtrl.accountSvc.CurrentPoints }} คะแนน
             </p>
             <p>
-                แลกคูปองได้สูงสุด 25 ใบ
+                แลกคูปองได้สูงสุด {{ ticketCtrl.accountSvc.CurrentPoints / ticketCtrl.accountSvc.CurrentTicketCost | number : 0 }} ใบ
             </p>            
         </div>
         <br />
@@ -20,9 +20,9 @@
                 </p>
             </div>
             <div class="col row">
-                <a href="#" class="button bg-yellow col col-50 button-small block-center" ng-click="TicketCtrl.BuyTicket(amountCoupon)">
+                <div class="button bg-yellow col col-50 button-small block-center" ng-click="ticketCtrl.BuyTicket(amountCoupon)">
                     ส่งคูปองลุ้นรางวัล
-                </a>
+                </div>
             </div>
         </form>
     </ion-content>

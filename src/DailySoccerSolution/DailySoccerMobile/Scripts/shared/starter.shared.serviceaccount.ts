@@ -20,6 +20,7 @@
         public facebookPoint: number;
         public CurrentPoints: number;
         public CurrentOrderedCoupon: number;
+        public CurrentTicketCost: number;
         public OAuthId: string;
 
         static $inject = ['$location', 'starter.account.AccountServices', 'Azureservice'];
@@ -27,6 +28,20 @@
             private $location: ng.ILocationService,
             private accountSvc: starter.account.AccountServices,
             private Azureservice: any) {
+        }
+
+        public GetAccountInformation(): account.AccountInformation {
+            var user = Ionic.User.current();
+
+            var accountInfo = new account.AccountInformation();
+            //accountInfo.CurrentOrderedCoupon
+            //accountInfo.Email
+            //accountInfo.MaximumGuessAmount
+            accountInfo.OAuthId = user.get('OAuthId');
+            accountInfo.Points = this.CurrentPoints;
+            accountInfo.SecretCode = user.id;
+            accountInfo.VerifiedPhoneNumber = user.get('PhoneVerified');
+            return accountInfo;
         }
 
         //For test only (remove when run on production)
