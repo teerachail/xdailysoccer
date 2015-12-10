@@ -224,6 +224,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Accounts/VerifyCode.html',
+                        controller: 'starter.account.AccountController as accountCtrl'
                     }
                 }
             })
