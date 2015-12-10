@@ -10,8 +10,9 @@
         private _allLeague: LeagueInformation[];
         private _selectedTeamId: number = -1;
 
-        static $inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice', 'starter.shared.AccountManagementService'];
+        static $inject = ['$scope', '$stateParams', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice', 'starter.shared.AccountManagementService'];
         constructor(private $scope,
+            private $stateParams,
             private $timeout: ng.ITimeoutService,
             private $location: ng.ILocationService,
             private accountSvc: starter.account.AccountServices,
@@ -19,7 +20,6 @@
             private AccountManagementService: starter.shared.AccountManagementService) {
 
             //this.checkLocalStorageAccount();
-            //this.GetAllLeague();
 
             //Clear local storage for test only!
             //this.AccountManagementService.ClearGuestData();
@@ -95,6 +95,26 @@
         public ShowFacebookData(): void {
             this.facebookPoint = this.AccountManagementService.facebookPoint;
             this.localPoint = this.AccountManagementService.localPoint;
+        }
+
+        public SendRequestVerifyPhoneNumber(phoneNumber: string): void {
+            var userId = this.AccountManagementService.GetAccountInformation().SecretCode;
+            var areArgumentValid = phoneNumber != null && userId != null;
+            if (!areArgumentValid) return;
+
+            var request = new RequestConfirmPhoneNumberRequest();
+            request.UserId = userId;
+            request.PhoneNo = phoneNumber;
+            this.accountSvc.RequestConfirmPhoneNumber(request)
+                .then((respond: RequestConfirmPhoneNumberRespond): void => {
+                    if (respond.IsSuccessed) {
+                        console.log("#RequestConfirmPhoneNumber success.");
+                        this.$location.path('/verify/verifycode/' + respond.ForPhoneNumber);
+                    }
+                    else {
+                        console.log("#RequestConfirmPhoneNumber failed.");
+                    }
+                });
         }
     }
 

@@ -220,7 +220,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                 }
             })
             .state('verify.verifycode', {
-                url: '/verifycode',
+                url: '/verifycode/:phoneNumber',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Accounts/VerifyCode.html',

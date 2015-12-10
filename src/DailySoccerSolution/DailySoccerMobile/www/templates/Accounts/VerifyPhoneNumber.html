@@ -9,13 +9,13 @@
                     <p>
                         <span class="text-white col col-67 block-center no-padding text-left">กรอกเบอร์โทร</span>
                         <br />
-                        <input type="tel" class=" col col-67 input-number block-center no-padding" />
+                        <input type="tel" class=" col col-67 input-number block-center no-padding" ng-model="phoneNumber" />
                     </p>
                 </div>
                 <div class="col col-67 block-center row">
-                    <a href="#/verify/verifycode" class="button button-balanced col col-50 col-offset-50 button-small  ">
+                    <div class="button button-balanced col col-50 col-offset-50 button-small ng-click="accountCtrl.SendRequestVerifyPhoneNumber(phoneNumber)">
                         รับรหัสผ่าน
-                    </a>
+                    </div>
                 </div>
             </form>
         </ion-item>
