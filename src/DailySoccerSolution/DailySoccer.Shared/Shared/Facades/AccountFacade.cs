@@ -46,6 +46,7 @@ namespace DailySoccer.Shared.Facades
             };
         }
 
+
         public void UpdateAccountWithFacebook(string secretCode,string OAuthId, string email)
         {
             var facade = FacadeRepository.Instance;
@@ -283,6 +284,20 @@ namespace DailySoccer.Shared.Facades
 
             accountDac.VerifyPhoneSuccess(request.UserId, selectedVerification.PhoneNumber, request.VerificationCode);
             return new ConfirmPhoneNumberRespond { IsSuccessed = true };
+        }
+
+        public bool TieFacbookWithFacebookData(string secrectCode, string OAuthId)
+        {
+            var accountDac = FacadeRepository.Instance.AccountDataAccess;
+            accountDac.TieFacbookWithFacebookData(secrectCode, OAuthId);
+            return true;
+        }
+
+        public bool TieFacbookWithLocalData(string secrectCode, string OAuthId)
+        {
+            var accountDac = FacadeRepository.Instance.AccountDataAccess;
+            accountDac.TieFacbookWithLocalData(secrectCode, OAuthId);
+            return true;
         }
     }
 }

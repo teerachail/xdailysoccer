@@ -24,5 +24,7 @@ namespace DailySoccer.Shared.DAC
         void VerifyPhoneSuccess(string userId, string phoneNo, string verificationCode);
         void UpdateGuessResult(int guessMatchId, bool isGuessCorrect, int gotPoints);
         void UpdateAccountPoints(int accountId, int additionPoints);
+        void TieFacbookWithFacebookData(string secrectCode, string OAuthId);
+        void TieFacbookWithLocalData(string secrectCode, string OAuthId);
     }
 }

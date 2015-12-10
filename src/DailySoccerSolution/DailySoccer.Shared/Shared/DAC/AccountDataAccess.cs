@@ -115,7 +115,8 @@ namespace DailySoccer.Shared.DAC
                     Points = selectedAccount.Points,
                     OAuthId = selectedAccount.OAuthId,
                     Email = selectedAccount.Email,
-                    VerifiedPhoneNumber = selectedAccount.VerifiedPhoneNumber
+                    VerifiedPhoneNumber = selectedAccount.VerifiedPhoneNumber,
+                    SecretCode = selectedAccount.GuestAccounts.First().SecretCode
                 };
             }
         }
@@ -308,6 +309,32 @@ namespace DailySoccer.Shared.DAC
                 if (selectedAccount == null) return;
 
                 selectedAccount.Points += additionPoints;
+                dctx.SaveChanges();
+            }
+        }
+
+        public void TieFacbookWithFacebookData(string secrectCode, string OAuthId)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedFacebookAccount = dctx.Accounts.FirstOrDefault(it => it.OAuthId.Equals(OAuthId, StringComparison.CurrentCultureIgnoreCase));
+                var selectedGuest = dctx.GuestAccounts.FirstOrDefault(it => it.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase));
+
+                selectedGuest.AccountId = selectedFacebookAccount.Id;
+                dctx.SaveChanges();
+            }
+        }
+
+        public void TieFacbookWithLocalData(string secrectCode, string OAuthId)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedFacebookAccount = dctx.Accounts.FirstOrDefault(it => it.OAuthId.Equals(OAuthId, StringComparison.CurrentCultureIgnoreCase));                
+                var selectedGuestAccount = dctx.GuestAccounts.FirstOrDefault(it => it.SecretCode.Equals(secrectCode, StringComparison.CurrentCultureIgnoreCase)).Account;
+
+                selectedGuestAccount.OAuthId = selectedFacebookAccount.OAuthId;
+                selectedFacebookAccount.OAuthId = string.Empty;
+                selectedFacebookAccount.GuestAccounts.Select(it => it.AccountId = selectedGuestAccount.Id);
                 dctx.SaveChanges();
             }
         }

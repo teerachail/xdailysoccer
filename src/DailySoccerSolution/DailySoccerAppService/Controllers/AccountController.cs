@@ -80,5 +80,20 @@ namespace DailySoccerAppService.Controllers
             var result = FacadeRepository.Instance.AccountFacade.ConfirmPhoneNumber(request);
             return result;
         }
+
+        [HttpGet]
+        public bool TieFacbookWithFacebookData(string secrectCode, string OAuthId)
+        {
+            var result = FacadeRepository.Instance.AccountFacade.TieFacbookWithFacebookData(secrectCode, OAuthId);
+            return result;
+        }
+
+        [HttpGet]
+        public bool TieFacbookWithLocalData(string secrectCode, string OAuthId)
+        {
+            var result = FacadeRepository.Instance.AccountFacade.TieFacbookWithLocalData(secrectCode, OAuthId);
+            return result;
+        }
+
     }
 }

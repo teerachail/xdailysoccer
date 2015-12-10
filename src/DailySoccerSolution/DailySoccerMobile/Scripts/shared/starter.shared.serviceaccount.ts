@@ -4,12 +4,12 @@
     export interface IAccountManagementService{
         CreateNewGuestUser(): void;
         CreateNewGuestWithFacebook(oAuthId: string): void;
-        UpdateAccoutWithFacebook(secretCode: string, oAuthId: string): void;
-        UpdateLocalStorageAccount(accountInfo: starter.account.AccountInformation): void;
+        UpdateLocalStorageAccountWithFacebookData(accountInfo: starter.account.AccountInformation): void;
         LoginWithFacebook(): void;
         TieFacebook(): void;
         TieFacbookWithFacebookData(): void;
         TieFacbookWithLocalData(): void;
+        TieAccoutWithNewFacebook(secretCode: string, oAuthId: string): void;
 
         ClearGuestData(): void;
     }
@@ -20,6 +20,7 @@
         public facebookPoint: number;
         public CurrentPoints: number;
         public CurrentOrderedCoupon: number;
+        public OAuthId: string;
 
         static $inject = ['$location', 'starter.account.AccountServices', 'Azureservice'];
         constructor(
@@ -39,6 +40,36 @@
             user.save();
         }
 
+        
+        //// Login Facebook ////
+        public LoginWithFacebook(): void {
+            this.Azureservice.login('facebook')
+                .then((): void => {
+                    var oAuthId = this.Azureservice.getCurrentUser().userId;
+                    this.accountSvc.GetAccountByOAuthId(oAuthId)
+                        .then((respond: starter.account.AccountInformation): void => {
+                            if (respond == null) {
+                                var user = Ionic.User.current();
+                                if (!user.id || user.id == 'empty') {
+                                    // ทำการ login ด้วย facebook ที่ยังไม่เคยใช้งานระบบมาก่อน
+                                    this.CreateNewGuestWithFacebook(oAuthId);
+                                }
+                            }
+                            else {
+                                // ทำการ login ด้วย facebook ที่เคยใช้งานระบบแล้ว
+                                this.UpdateLocalStorageAccountWithFacebookData(respond);
+                                this.$location.path('/matches/todaymatches');
+                            }
+                        }).catch((): void => {
+                            alert('cannot connect to server');
+                        });
+
+                    console.log('Login successful');
+                }, (err): void => {
+                    console.error('Azure Error: ' + err);
+                });
+        }
+
         //สร้าง guestuser ใหม่
         public CreateNewGuestUser(): void {
             var user = Ionic.User.current();
@@ -54,6 +85,7 @@
                     this.$location.path('/account/favorite');
                 });
         }
+
         //สร้างguestuserใหม่ และเชื่อมต่อfacebook 
         public CreateNewGuestWithFacebook(oAuthId: string): void {
             this.accountSvc.CreateNewGuestWithFacebook(oAuthId)
@@ -69,54 +101,10 @@
 
                     this.$location.path('/account/favorite');
                 });
-        }
+        }       
 
-
-        // Login
-        public LoginWithFacebook(): void {
-            this.Azureservice.login('facebook')
-                .then((): void => {
-                    var oAuthId = this.Azureservice.getCurrentUser().userId;
-                    this.accountSvc.GetAccountByOAuthId(oAuthId)
-                        .then((respond: starter.account.AccountInformation): void => {
-                            if (respond == null) {
-                                var user = Ionic.User.current();
-                                if (user.id && user.id != 'empty') {
-                                    // TODO: userguestที่ทำการloginด้วยfacebook
-                                    this.UpdateAccoutWithFacebook(user.id, oAuthId);
-                                }
-                                else {
-                                    // TODO: facebook ใหม่ที่ยังไม่เคยใช้งานระบบ
-                                    this.CreateNewGuestWithFacebook(oAuthId);
-                                }
-                            }
-                            else {
-                                // TODO: userที่มีอยู่ในระบบแล้ว
-                                this.UpdateLocalStorageAccount(respond);
-                                this.$location.path('/matches/todaymatches');
-                            }
-                        }).catch((): void => {
-                            alert('cannot connect to server');
-                        });
-
-                    console.log('Login successful');
-                }, (err): void => {
-                    console.error('Azure Error: ' + err);
-                });
-        }
-        //ผูก facebook เข้ากับ guest user เดิม
-        public UpdateAccoutWithFacebook(secretCode: string, oAuthId: string): void {
-            this.accountSvc.UpdateAccountWithFacebook(secretCode, oAuthId)
-                .then((respond: Boolean): void => {
-                    if (respond) {
-                        var user = Ionic.User.current();
-                        user.set('OAuthId', oAuthId);
-                        user.save();
-                        this.$location.path('/matches/todaymatches');
-                    }
-                });
-        }
-        public UpdateLocalStorageAccount(accountInfo: starter.account.AccountInformation): void {
+        // ดึงข้อมูลจาก facebook มาเก็บไว้ที่ storage account
+        public UpdateLocalStorageAccountWithFacebookData(accountInfo: starter.account.AccountInformation): void {
             var user = Ionic.User.current();
             user.id = accountInfo.SecretCode;
             var PhoneVerified = accountInfo.VerifiedPhoneNumber != null
@@ -127,7 +115,7 @@
         }
 
 
-        // Tie
+        //// Tie Facebook ////
         public TieFacebook(): void {
             this.Azureservice.login('facebook')
                 .then((): void => {
@@ -135,27 +123,72 @@
                     this.accountSvc.GetAccountByOAuthId(oAuthId)
                         .then((respond: starter.account.AccountInformation): void => {
                             var user = Ionic.User.current();
-                            this.facebookPoint = respond.Points;
-                            this.accountSvc.GetAccountBySecretCode(user.id)
-                                .then((respond: starter.account.AccountInformation): void => {
-                                    this.localPoint = respond.Points;
-                                    this.$location.path('/account/tiefacebook');
-                                });
+                            if (respond == null) {
+                                // TODO : tie facebook ที่ยังไม่เคยใช้งานระบบมาก่อน
+                                this.TieAccoutWithNewFacebook(user.id, oAuthId);
+                            }
+                            else {
+                                // facebook ที่เคยใช้งานระบบแล้ว ให้ผู้ใช้เลือกข้อมูล
+                                this.facebookPoint = respond.Points;
+                                this.OAuthId = oAuthId;
+                                this.accountSvc.GetAccountBySecretCode(user.id)
+                                    .then((respond: starter.account.AccountInformation): void => {
+                                        this.localPoint = respond.Points;
+                                        this.$location.path('/account/tiefacebook');
+                                    });
+                            }                           
                         });
 
                 }, (err): void => {
                     console.error('Azure Error: ' + err);
                 });
         }
-        public TieFacbookWithFacebookData(): void {
 
+        public TieFacbookWithFacebookData(): void {
+            var user = Ionic.User.current();
+            this.accountSvc.TieFacbookWithFacebookData(user.id, this.OAuthId)
+                .then((respond: Boolean): void => {
+                    this.accountSvc.GetAccountByOAuthId(this.OAuthId)
+                        .then((accountInfo: starter.account.AccountInformation): void => {
+                            var PhoneVerified = accountInfo.VerifiedPhoneNumber != null
+                            user.set('OAuthId', this.OAuthId);
+                            user.set('PhoneVerified', PhoneVerified);
+                            user.save();
+                            this.$location.path('/matches/todaymatches');
+                        });
+                });
         }
+
         public TieFacbookWithLocalData(): void {
-            // TODO : TieFacbookWithLocalData
+            var user = Ionic.User.current();
+            this.accountSvc.TieFacbookWithLocalData(user.id, this.OAuthId)
+                .then((respond: Boolean): void => {
+                    this.accountSvc.GetAccountByOAuthId(this.OAuthId)
+                        .then((accountInfo: starter.account.AccountInformation): void => {
+                            var PhoneVerified = accountInfo.VerifiedPhoneNumber != null
+                            user.set('OAuthId', this.OAuthId);
+                            user.set('PhoneVerified', PhoneVerified);
+                            user.save();
+                            this.$location.path('/matches/todaymatches');
+                        });
+                });
+        }
+
+        //ผูก facebook เข้ากับ guest user เดิม
+        public TieAccoutWithNewFacebook(secretCode: string, oAuthId: string): void {
+            this.accountSvc.UpdateAccountWithFacebook(secretCode, oAuthId)
+                .then((respond: Boolean): void => {
+                    if (respond) {
+                        var user = Ionic.User.current();
+                        user.set('OAuthId', oAuthId);
+                        user.save();
+                        this.$location.path('/matches/todaymatches');
+                    }
+                });
         }
     }
 
     angular
         .module('starter.shared')
-        .service('starter.shared.IAccountManagementService', AccountManagementService);
+        .service('starter.shared.AccountManagementService', AccountManagementService);
 }

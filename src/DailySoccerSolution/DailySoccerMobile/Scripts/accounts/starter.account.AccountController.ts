@@ -10,7 +10,7 @@
         private _allLeague: LeagueInformation[];
         private _selectedTeamId: number = -1;
 
-        static $inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice', 'starter.shared.IAccountManagementService'];
+        static $inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice', 'starter.shared.AccountManagementService'];
         constructor(private $scope,
             private $timeout: ng.ITimeoutService,
             private $location: ng.ILocationService,
@@ -63,6 +63,14 @@
         public LoginWithFacebook(): void {
             this.AccountManagementService.LoginWithFacebook();
         };
+
+        public TieFacbookWithFacebookData(): void {
+            this.AccountManagementService.TieFacbookWithFacebookData();
+        }
+
+        public TieFacbookWithLocalData(): void {
+            this.AccountManagementService.TieFacbookWithLocalData();
+        }
 
         public SelectFavoriteTeam(TeamId: number) {
             this._selectedTeamId = TeamId;
