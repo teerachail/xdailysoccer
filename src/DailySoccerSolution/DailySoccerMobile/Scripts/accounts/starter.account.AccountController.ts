@@ -46,15 +46,10 @@
         }
 
         public CheckLocalStorageAccount() {
-            var user = Ionic.User.current();
-            if (user.id && user.id != 'empty') {
-                this.$location.path('/matches/todaymatches');
-            } else {
-                var isSkiped = user.get('isSkiped');
-                if (isSkiped) {
-                    this.isHideSkipButton = true;
-                } 
-            }
+            var accountInfo = this.AccountManagementService.GetAccountInformation();
+            var isLogedIn = accountInfo.SecretCode != null && accountInfo.SecretCode != 'empty';
+            if (isLogedIn) this.$location.path('/matches/todaymatches');
+            this.isHideSkipButton = accountInfo.IsSkiped == 'true';
         }
        
         public SkipLogin(): void {
@@ -80,20 +75,16 @@
         }
 
         public SetFavoriteTeam() {
-            var user = Ionic.User.current();
             if (this._selectedTeamId > -1) {
                 var favoriteTeam = new SetFavoriteTeamRequest();
-                favoriteTeam.UserId = user.id;
+                favoriteTeam.UserId = this.AccountManagementService.GetAccountInformation().SecretCode;
                 favoriteTeam.SelectedTeamId = this._selectedTeamId;
                 this.accountSvc.SetFavoriteTeam(favoriteTeam);
                 console.log('Send favorite team completed.');
             }
-            else {
-                console.log('Skip to send favorite team completed.');
-            }
+            else console.log('Skip to send favorite team completed.');
+
             this.$location.path('/matches/todaymatches');
-            user.set('isSetFavoriteTeam', 'true');
-            user.save();
         }
 
         public ShowFacebookData(): void {
