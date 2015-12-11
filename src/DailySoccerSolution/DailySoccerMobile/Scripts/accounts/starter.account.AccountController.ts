@@ -144,8 +144,10 @@
                             this.ticketSvc.BuyTicket(request).
                                 then((respond: starter.ticket.BuyTicketRespond) => {
                                     if (respond.IsSuccessed) {
-                                        this.AccountManagementService.CurrentPoints = respond.AccountInfo.Points;
-                                        this.AccountManagementService.CurrentOrderedCoupon = respond.AccountInfo.CurrentOrderedCoupon;
+                                        var memoryAccountInfo = this.AccountManagementService.GetAccountInformation();
+                                        memoryAccountInfo.Points = respond.AccountInfo.Points;
+                                        memoryAccountInfo.CurrentOrderedCoupon = respond.AccountInfo.CurrentOrderedCoupon;
+                                        this.AccountManagementService.SetAccountInformation(memoryAccountInfo);
                                         console.log('Buy ticket completed.')
                                         this.$location.path('/buyticketcompleted/buyticketcompleted/' + respond.AccountInfo.Points + '/' + respond.RewardResultDate);
                                     }

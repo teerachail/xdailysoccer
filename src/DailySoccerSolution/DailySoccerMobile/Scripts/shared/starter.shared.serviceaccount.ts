@@ -18,10 +18,9 @@
 
         public localPoint: number;
         public facebookPoint: number;
-        public CurrentPoints: number;
-        public CurrentOrderedCoupon: number;
-        public CurrentTicketCost: number;
         public OAuthId: string;
+
+        public CurrentTicketCost: number;
 
         static $inject = ['$location', 'starter.account.AccountServices', 'Azureservice'];
         constructor(
@@ -40,7 +39,6 @@
             accountInfo.VerifiedPhoneNumber = user.get('PhoneVerified');
             return accountInfo;
         }
-
         public SetAccountInformation(accountInfo: account.AccountInformation): void {
             var user = Ionic.User.current();
             user.id = accountInfo.SecretCode;

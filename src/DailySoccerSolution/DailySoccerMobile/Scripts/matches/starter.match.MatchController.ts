@@ -101,8 +101,10 @@
 
         private updateAccountInformation(accountInfo: account.AccountInformation): void {
             this.AccountInfo = accountInfo;
-            this.accountManagementSvc.CurrentPoints = accountInfo.Points;
-            this.accountManagementSvc.CurrentOrderedCoupon = accountInfo.CurrentOrderedCoupon;
+            var memoryAccountInfo = this.accountManagementSvc.GetAccountInformation();
+            memoryAccountInfo.Points = accountInfo.Points;
+            memoryAccountInfo.CurrentOrderedCoupon = accountInfo.CurrentOrderedCoupon;
+            this.accountManagementSvc.SetAccountInformation(memoryAccountInfo);
         }
 
         private dateAreEqual(firstDate: Date, secondDate: Date): boolean {

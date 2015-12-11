@@ -7,7 +7,7 @@
                 </i>
             </div>
             <div class="col col-center">
-                แต้มสะสม {{ rewardCtrl.accountManagementSvc.CurrentPoints }}
+                แต้มสะสม {{ rewardCtrl.accountManagementSvc.GetAccountInformation().Points }}
             </div>
             <div class="col col-center">
                 <a menu-close href="#/ticket/buyticket" class=" button button-full bg-yellow font-large">
@@ -17,7 +17,7 @@
         </ion-item>
         <div class="item item-stable no-border">
             <div class="">
-                แลกซื้อคูปองไปแล้วทั้งหมด {{ rewardCtrl.accountManagementSvc.CurrentOrderedCoupon }} ใบ
+                แลกซื้อคูปองไปแล้วทั้งหมด {{ rewardCtrl.accountManagementSvc.GetAccountInformation().CurrentOrderedCoupon }} ใบ
             </div>
         </div>
         <div class="item no-border text-center no-padding-bottom">
