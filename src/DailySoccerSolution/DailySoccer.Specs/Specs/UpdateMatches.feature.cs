@@ -89,13 +89,28 @@ namespace DailySoccer.Specs
 this.ScenarioSetup(scenarioInfo);
 #line 7
 this.FeatureBackground();
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "ReferenceMatchId",
+                        "LeagueName",
+                        "BeginDate",
+                        "Status",
+                        "CurrentMatchTime",
+                        "ReferenceTeamHomeId",
+                        "TeamHomeName",
+                        "TeamHomeScore",
+                        "TeamHomeRank",
+                        "ReferenceTeamAwayId",
+                        "TeamAwayName",
+                        "TeamAwayScore",
+                        "TeamAwayRank"});
 #line 11
- testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 12
- testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("ข้อมูลแมช์ที่ไปขอมาเป็น", ((string)(null)), table1, "Given ");
 #line 13
- testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("ข้อมูลแมช์ในระบบเป็น", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
+ testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 15
  testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

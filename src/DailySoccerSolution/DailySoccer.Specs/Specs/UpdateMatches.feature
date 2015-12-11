@@ -8,8 +8,9 @@ Background: Initialize
 	Given Setup mocking
 
 Scenario: Add two numbers
-	Given I have entered 50 into the calculator
-	And I have entered 70 into the calculator
+	Given ข้อมูลแมช์ที่ไปขอมาเป็น
+	| ReferenceMatchId | LeagueName | BeginDate | Status | CurrentMatchTime | ReferenceTeamHomeId | TeamHomeName | TeamHomeScore | TeamHomeRank | ReferenceTeamAwayId | TeamAwayName | TeamAwayScore | TeamAwayRank |
+	And ข้อมูลแมช์ในระบบเป็น
 	When I press add
 	Then the result should be 120 on the screen
 

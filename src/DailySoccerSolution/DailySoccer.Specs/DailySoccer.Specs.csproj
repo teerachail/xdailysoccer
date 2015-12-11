@@ -153,6 +153,11 @@
     <Compile Include="Specs\Steps\RequestConfirmPhoneNumberSteps.cs" />
     <Compile Include="Specs\Steps\SetFavoriteTeamSteps.cs" />
     <Compile Include="Specs\Steps\StepHelper.cs" />
+    <Compile Include="Specs\UpdateMatches.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateMatches.feature</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DailySoccer.Shared\DailySoccer.Shared.csproj">
@@ -222,6 +227,10 @@
     <None Include="Specs\SetFavoriteTeam.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SetFavoriteTeam.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Specs\UpdateMatches.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UpdateMatches.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup />
