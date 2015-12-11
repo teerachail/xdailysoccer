@@ -12,6 +12,8 @@
         public MaximumGuessAmount: number;
         public CurrentOrderedCoupon: number;
         public VerifiedPhoneNumber: string;
+
+        public IsSkiped: string;
     }
 
     export class CreateNewGuestRespond {

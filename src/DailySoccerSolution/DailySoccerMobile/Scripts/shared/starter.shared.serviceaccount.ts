@@ -32,16 +32,32 @@
 
         public GetAccountInformation(): account.AccountInformation {
             var user = Ionic.User.current();
-
             var accountInfo = new account.AccountInformation();
-            //accountInfo.CurrentOrderedCoupon
-            //accountInfo.Email
-            //accountInfo.MaximumGuessAmount
-            accountInfo.OAuthId = user.get('OAuthId');
-            accountInfo.Points = this.CurrentPoints;
             accountInfo.SecretCode = user.id;
+            accountInfo.Points = user.get('points');
+            accountInfo.OAuthId = user.get('OAuthId');
+            accountInfo.IsSkiped = user.get('IsSkiped');
             accountInfo.VerifiedPhoneNumber = user.get('PhoneVerified');
             return accountInfo;
+        }
+
+        public SetAccountInformation(accountInfo: account.AccountInformation): void {
+            var user = Ionic.User.current();
+            user.id = accountInfo.SecretCode;
+            user.set('points', accountInfo.Points);
+            user.set('OAuthId', accountInfo.OAuthId);
+            user.set('IsSkiped', accountInfo.IsSkiped);
+            user.set('PhoneVerified', accountInfo.VerifiedPhoneNumber);
+            user.save();
+        }
+
+        public Logout(): void {
+            var user = Ionic.User.current();
+            user.id = 'empty';
+            user.unset('OAuthId');
+            user.unset('points');
+            user.unset('PhoneVerified');
+            user.save();
         }
 
         //For test only (remove when run on production)
@@ -57,9 +73,9 @@
 
         //Set phone be verified
         public SetPhoneVerified() {
-            var user = Ionic.User.current();
-            user.set('PhoneVerified', 'true');
-            user.save();
+            var accountInfo = this.GetAccountInformation();
+            accountInfo.VerifiedPhoneNumber = 'true';
+            this.SetAccountInformation(accountInfo);
         }
 
         

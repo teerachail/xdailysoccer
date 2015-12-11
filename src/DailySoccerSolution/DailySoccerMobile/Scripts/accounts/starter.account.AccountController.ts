@@ -24,7 +24,6 @@
             if (this.$stateParams.buyTicketAmount) {
                 this._buyTicketAmount = this.$stateParams.buyTicketAmount;
             }
-            this.checkLocalStorageAccount();
 
             //Clear local storage for test only!
             //this.AccountManagementService.ClearGuestData();
@@ -46,7 +45,7 @@
             console.log('# Update league completed.');
         }
 
-        private checkLocalStorageAccount() {
+        public CheckLocalStorageAccount() {
             var user = Ionic.User.current();
             if (user.id && user.id != 'empty') {
                 this.$location.path('/matches/todaymatches');
