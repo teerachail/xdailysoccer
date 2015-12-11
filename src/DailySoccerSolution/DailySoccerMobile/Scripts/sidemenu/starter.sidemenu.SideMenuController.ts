@@ -26,9 +26,17 @@
             this.$scope.TieFacebookPopup.show();
         }
 
+
         public LoginWithFacebook(): void {
             this.$scope.TieFacebookPopup.hide();
             this.AccountManagementService.TieFacebook();
+        }
+
+        public Logout(): void {
+            var user = Ionic.User.current();
+            user.id = 'empty';
+            user.save();
+            this.$location.path('/account/login');
         }
 
         public checkCurrenUserLogin() {

@@ -56,12 +56,6 @@
                 });
         }
 
-        public Logout(): void {
-            var user = Ionic.User.current();
-            user.id = 'empty';
-            user.save();
-            this.$location.path('/account/login');
-        }
 
         public SelectTeam(selectedMatch: MatchInformation, selectedTeamId: number) {
             var isChangingValid = this.AccountInfo.MaximumGuessAmount > this.getSelectedTodayMatches().length
