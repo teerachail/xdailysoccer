@@ -62,7 +62,7 @@ namespace DailySoccerAppService.Controllers
         {
             var request = new RequestConfirmPhoneNumberRequest
             {
-                PhoneNo = string.Format("+{0}", phoneNo),
+                PhoneNo = phoneNo,
                 UserId = userId
             };
             var result = FacadeRepository.Instance.AccountFacade.RequestConfirmPhoneNumber(request);

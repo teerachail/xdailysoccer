@@ -242,10 +242,14 @@ namespace DailySoccer.Shared.Facades
                 && !string.IsNullOrEmpty(request.PhoneNo);
             if (!isArgumentValid) return invalidDataModel;
 
-            var phoneNumber = request.PhoneNo.Replace("-", string.Empty);
+            request.PhoneNo = request.PhoneNo.Replace("-", string.Empty);
+            if (request.PhoneNo.StartsWith("0", StringComparison.CurrentCultureIgnoreCase))
+            {
+                request.PhoneNo = string.Format("+66{0}", request.PhoneNo.Substring(1, request.PhoneNo.Length-1));
+            }
             const int MinimumPhoneNumberRequired = 6;
             const int MaximumPhoneNumberRequired = 20;
-            var isPhoneNumberValid = phoneNumber.Length >= MinimumPhoneNumberRequired && phoneNumber.Length <= MaximumPhoneNumberRequired;
+            var isPhoneNumberValid = request.PhoneNo.Length >= MinimumPhoneNumberRequired && request.PhoneNo.Length <= MaximumPhoneNumberRequired;
             if (!isPhoneNumberValid) return invalidDataModel;
 
             var accountDac = FacadeRepository.Instance.AccountDataAccess;
