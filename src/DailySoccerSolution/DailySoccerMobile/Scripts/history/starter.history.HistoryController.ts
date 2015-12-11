@@ -4,21 +4,19 @@
     class HistoryController {
         
         public HistoryInfo: history.GetAllGuessHistoryRespond;
-        public HistoryByMonthInfo: history.GetGuessHistoryByMonthRespond;
         public shownGroup: GuessHistoryDailyInformation[];
         public Year: number;
 
-
-        static $inject = ['$scope', 'starter.history.HistoryServices'];
+        static $inject = ['$scope', 'starter.history.HistoryServices', 'starter.shared.AccountManagementService'];
         constructor(private $scope,
-            private historySvc: starter.history.HistoryServices) {
-            this.GetHistories();
+            private historySvc: starter.history.HistoryServices,
+            private accountManagerSvc: shared.AccountManagementService) {
         }
 
         public GetHistories(): void {
-            var user = Ionic.User.current();
+            var accountInfo = this.accountManagerSvc.GetAccountInformation();
             var data = new GetAllGuessHistoryRequest();
-            data.UserId = user.id;
+            data.UserId = accountInfo.SecretCode;
             this.historySvc.GetAllGuessHistory(data)
                 .then((respond: GetAllGuessHistoryRespond): void => {
                     this.HistoryInfo = respond;
@@ -28,24 +26,39 @@
                 });
         }
 
-        public GetHistoriesByMonth(month: number): void {
-            var user = Ionic.User.current();
+        public GetMonthString(month: number): Date {
+            month -= 1;
+            var monthString = new Date(this.Year, month);
+            return monthString;
+        }
+    }
+
+    class HistoryDailyController {
+
+        public HistoryByMonthInfo: history.GetGuessHistoryByMonthRespond;
+        public shownGroup: GuessHistoryDailyInformation[];
+
+        static $inject = ['$scope', '$stateParams', 'starter.history.HistoryServices', 'starter.shared.AccountManagementService'];
+        constructor(private $scope,
+            private $stateParams,
+            private historySvc: starter.history.HistoryServices,
+            private accountManagerSvc: shared.AccountManagementService) {
+
+            this.getHistoriesByMonth(this.$stateParams.month, this.$stateParams.year);
+        }
+
+        private getHistoriesByMonth(month: number, year: number): void {
+            var accountInfo = this.accountManagerSvc.GetAccountInformation();
             var data = new GetGuessHistoryByMonthRequest();
-            data.UserId = user.id;
+            data.UserId = accountInfo.SecretCode;
             data.Month = month;
-            data.Year = this.Year;
+            data.Year = year;
             this.historySvc.GetGuessHistoryByMonth(data)
                 .then((respond: GetGuessHistoryByMonthRespond): void => {
                     this.HistoryByMonthInfo = respond;
                     console.log('Get all history by month completed.');
                     console.log(month);
                 });
-        }
-
-        public GetMonthString(month: number): Date {
-            month -= 1;
-            var monthString = new Date(this.Year, month);
-            return monthString;
         }
 
         public toggleGroup(group: GuessHistoryDailyInformation[]): void {
@@ -65,5 +78,6 @@
 
     angular
         .module('starter.history', [])
-        .controller('starter.history.HistoryController', HistoryController);
+        .controller('starter.history.HistoryController', HistoryController)
+        .controller('starter.history.HistoryDailyController', HistoryDailyController);
 }

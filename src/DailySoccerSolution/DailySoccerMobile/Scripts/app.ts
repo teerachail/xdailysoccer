@@ -156,22 +156,22 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
             .state('history', {
                 url: '/history',
                 abstract: true,
-                templateUrl: 'templates/_basicTemplate.html',
-                controller: 'starter.history.HistoryController as historyCtrl'
+                templateUrl: 'templates/_basicTemplate.html'
             })
             .state('history.historybymonth', {
                 url: '/historybymonth',
                 views: {
                     'MainContent': {
-                        templateUrl: 'templates/Matches/HistoryByMonth.html',
+                        controller: 'starter.history.HistoryController as historyCtrl',
+                        templateUrl: 'templates/Matches/HistoryByMonth.html'
                     }
                 }
             })
             .state('history.historybyday', {
-                url: '/historybyday',
+                url: '/historybyday/:month/:year',
                 views: {
                     'MainContent': {
-                        templateUrl: 'templates/Matches/HistoryByDay.html',
+                        templateUrl: 'templates/Matches/HistoryByDay.html'
                     }
                 }
             })
@@ -187,6 +187,14 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Rewards/BuyTicket.html',
+                    }
+                }
+            })
+            .state('ticket.buyticket.processing', {
+                url: '/processing/:buyAmount',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/Rewards/BuyTicketProcessing.html',
                     }
                 }
             })
@@ -264,5 +272,5 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
 
         // if none of the above states are matched, use this as the fallback
         //$urlRouterProvider.otherwise('/app/playlists');
-        $urlRouterProvider.otherwise('/account/login');
+        $urlRouterProvider.otherwise('/matches/todaymatches');
     });

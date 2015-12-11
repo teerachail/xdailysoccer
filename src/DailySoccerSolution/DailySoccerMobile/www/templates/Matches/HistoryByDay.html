@@ -1,5 +1,5 @@
 ﻿<ion-view view-title="DAILY SOCCER">
-    <ion-content class="today-match">
+    <ion-content class="today-match" ng-controller="starter.history.HistoryDailyController as historyCtrl">
         <div ng-include src="'templates/Matches/_matchHeaderAds.html'" class="padding-bottom"></div>
         <ion-list>
             <div ng-repeat="history in historyCtrl.HistoryByMonthInfo.Histories" class="padding-bottom">

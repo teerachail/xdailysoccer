@@ -1,9 +1,9 @@
-﻿<ion-view view-title="DAILY SOCCER">
+﻿<ion-view view-title="DAILY SOCCER" ng-init="historyCtrl.GetHistories()">
     <ion-content class="history">
         <div ng-include src="'templates/Matches/_matchHeaderAds.html'"></div>
         <div class="list">
             <div class="row padding-bottom line-height-small" ng-hide="historyCtrl.HistoryInfo.Histories.length==0" ng-repeat="history in historyCtrl.HistoryInfo.Histories">
-                <a class="row item item-stable no-border no-padding" href="#/history/historybyday" ng-click="historyCtrl.GetHistoriesByMonth(history.Month)">
+                <a class="row item item-stable no-border no-padding" href="#/history/historybyday/{{ history.Month }}/{{historyCtrl.Year}}">
                     <div class=" item item-royal col col-20 col-center text-center">
                         <b>+{{history.TotalPoints}}</b>
                     </div>
