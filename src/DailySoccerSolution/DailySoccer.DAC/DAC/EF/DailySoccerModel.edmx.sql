@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/11/2015 14:09:09
--- Generated from EDMX file: C:\Users\joker\Documents\Git\dailysoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
+-- Date Created: 12/11/2015 20:16:54
+-- Generated from EDMX file: E:\gits\TheS\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -99,6 +99,7 @@ GO
 -- Creating table 'Matches'
 CREATE TABLE [dbo].[Matches] (
     [Id] int IDENTITY(1,1) NOT NULL,
+    [ReferenceMatchId] nvarchar(10)  NOT NULL,
     [LeagueName] varchar(255)  NOT NULL,
     [BeginDate] datetime  NOT NULL,
     [StartedDate] datetime  NULL,
@@ -109,10 +110,12 @@ CREATE TABLE [dbo].[Matches] (
     [TeamHome_Name] nvarchar(255)  NOT NULL,
     [TeamHome_CurrentScore] int  NOT NULL,
     [TeamHome_CurrentPredictionPoints] int  NOT NULL,
+    [TeamHome_ReferenceTeamId] nvarchar(10)  NOT NULL,
     [TeamAway_Id] int  NOT NULL,
     [TeamAway_Name] nvarchar(255)  NOT NULL,
     [TeamAway_CurrentScore] int  NOT NULL,
-    [TeamAway_CurrentPredictionPoints] int  NOT NULL
+    [TeamAway_CurrentPredictionPoints] int  NOT NULL,
+    [TeamAway_ReferenceTeamId] nvarchar(10)  NOT NULL
 );
 GO
 

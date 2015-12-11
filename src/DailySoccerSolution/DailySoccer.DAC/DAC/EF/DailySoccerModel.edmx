@@ -70,6 +70,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReferenceMatchId" Type="nvarchar" Nullable="false" MaxLength="10" />
     <Property Name="LeagueName" Type="varchar" Nullable="false" MaxLength="255" />
     <Property Name="BeginDate" Type="datetime" Nullable="false" />
     <Property Name="StartedDate" Type="datetime" Nullable="true" />
@@ -80,10 +81,12 @@
     <Property Name="TeamHome_Name" Type="nvarchar" Nullable="false" MaxLength="255" />
     <Property Name="TeamHome_CurrentScore" Type="int" Nullable="false" />
     <Property Name="TeamHome_CurrentPredictionPoints" Type="int" Nullable="false" />
+    <Property Name="TeamHome_ReferenceTeamId" Type="nvarchar" Nullable="false" MaxLength="10" />
     <Property Name="TeamAway_Id" Type="int" Nullable="false" />
     <Property Name="TeamAway_Name" Type="nvarchar" Nullable="false" MaxLength="255" />
     <Property Name="TeamAway_CurrentScore" Type="int" Nullable="false" />
     <Property Name="TeamAway_CurrentPredictionPoints" Type="int" Nullable="false" />
+    <Property Name="TeamAway_ReferenceTeamId" Type="nvarchar" Nullable="false" MaxLength="10" />
   </EntityType>
   <EntityType Name="GuessMatches">
     <Key>
@@ -346,6 +349,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReferenceMatchId" Type="String" Nullable="false" MaxLength="10" />
           <Property Name="LeagueName" Type="String" Nullable="false" FixedLength="false" Unicode="false" MaxLength="255" />
           <Property Name="BeginDate" Type="DateTime" Nullable="false" />
           <Property Name="StartedDate" Type="DateTime" Nullable="true" />
@@ -355,7 +359,6 @@
           <Property Name="TeamHome" Type="DailySoccerModel.Team" Nullable="false" />
           <Property Name="TeamAway" Type="DailySoccerModel.Team" Nullable="false" />
           <NavigationProperty Name="GuessMatches" Relationship="DailySoccerModel.MatchGuessMatch" FromRole="Match" ToRole="GuessMatch" />
-          <Property Name="ReferenceMatchId" Type="String" Nullable="false" MaxLength="10" />
         </EntityType>
         <ComplexType Name="Team" >
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -578,6 +581,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(DailySoccerModel.Match)">
         <MappingFragment StoreEntitySet="Matches">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReferenceMatchId" ColumnName="ReferenceMatchId" />
           <ScalarProperty Name="LeagueName" ColumnName="LeagueName" />
           <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
           <ScalarProperty Name="StartedDate" ColumnName="StartedDate" />
@@ -589,12 +593,14 @@
             <ScalarProperty Name="Name" ColumnName="TeamHome_Name" />
             <ScalarProperty Name="CurrentScore" ColumnName="TeamHome_CurrentScore" />
             <ScalarProperty Name="CurrentPredictionPoints" ColumnName="TeamHome_CurrentPredictionPoints" />
+            <ScalarProperty Name="ReferenceTeamId" ColumnName="TeamHome_ReferenceTeamId" />
           </ComplexProperty>
           <ComplexProperty Name="TeamAway" TypeName="DailySoccerModel.Team">
             <ScalarProperty Name="Id" ColumnName="TeamAway_Id" />
             <ScalarProperty Name="Name" ColumnName="TeamAway_Name" />
             <ScalarProperty Name="CurrentScore" ColumnName="TeamAway_CurrentScore" />
             <ScalarProperty Name="CurrentPredictionPoints" ColumnName="TeamAway_CurrentPredictionPoints" />
+            <ScalarProperty Name="ReferenceTeamId" ColumnName="TeamAway_ReferenceTeamId" />
           </ComplexProperty>
         </MappingFragment>
       </EntityTypeMapping>

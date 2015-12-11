@@ -23,13 +23,13 @@ namespace DailySoccer.DAC.EF
         }
     
         public int Id { get; set; }
+        public string ReferenceMatchId { get; set; }
         public string LeagueName { get; set; }
         public System.DateTime BeginDate { get; set; }
         public Nullable<System.DateTime> StartedDate { get; set; }
         public Nullable<System.DateTime> CompletedDate { get; set; }
         public Nullable<System.DateTime> CalculatedDate { get; set; }
         public string Status { get; set; }
-        public string ReferenceMatchId { get; set; }
     
         public Team TeamHome { get; set; }
         public Team TeamAway { get; set; }
