@@ -144,6 +144,8 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="RewardGroupId" Type="int" Nullable="false" />
     <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="ManualSelectedDate" Type="datetime" Nullable="true" />
+    <Property Name="RandomSelectedDate" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="PhoneVerifications">
     <Key>
@@ -353,12 +355,14 @@
           <Property Name="TeamHome" Type="DailySoccerModel.Team" Nullable="false" />
           <Property Name="TeamAway" Type="DailySoccerModel.Team" Nullable="false" />
           <NavigationProperty Name="GuessMatches" Relationship="DailySoccerModel.MatchGuessMatch" FromRole="Match" ToRole="GuessMatch" />
+          <Property Name="ReferenceMatchId" Type="String" Nullable="false" MaxLength="10" />
         </EntityType>
         <ComplexType Name="Team" >
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" Unicode="true" FixedLength="false" MaxLength="255" />
           <Property Type="Int32" Name="CurrentScore" Nullable="false" />
           <Property Type="Int32" Name="CurrentPredictionPoints" Nullable="false" />
+          <Property Type="String" Name="ReferenceTeamId" Nullable="false" MaxLength="10" />
         </ComplexType>
         <EntityType Name="GuessMatch">
           <Key>
@@ -482,6 +486,8 @@
           <Property Name="RewardGroupId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Account" Relationship="DailySoccerModel.AccountTicket" FromRole="Ticket" ToRole="Account" />
           <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="ManualSelectedDate" Type="DateTime" Nullable="true" />
+          <Property Name="RandomSelectedDate" Type="DateTime" Nullable="true" />
         </EntityType>
         <Association Name="RewardGroupTicket">
           <End Type="DailySoccerModel.RewardGroup" Role="RewardGroup" Multiplicity="1" />
@@ -656,6 +662,8 @@
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="RewardGroupId" ColumnName="RewardGroupId" />
           <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+          <ScalarProperty Name="ManualSelectedDate" ColumnName="ManualSelectedDate" />
+          <ScalarProperty Name="RandomSelectedDate" ColumnName="RandomSelectedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

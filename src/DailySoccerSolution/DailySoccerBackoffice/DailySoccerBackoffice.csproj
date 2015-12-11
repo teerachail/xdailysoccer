@@ -236,6 +236,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RewardController.cs" />
+    <Compile Include="Controllers\WinnerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -313,6 +314,7 @@
     <Content Include="Views\Reward\Details.cshtml" />
     <Content Include="Views\Reward\Edit.cshtml" />
     <Content Include="Views\Reward\CreateReward.cshtml" />
+    <Content Include="Views\Winner\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

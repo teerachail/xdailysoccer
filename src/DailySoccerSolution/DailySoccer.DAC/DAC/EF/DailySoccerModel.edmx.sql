@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/09/2015 23:53:59
--- Generated from EDMX file: E:\TheS\gits\DailySoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
+-- Date Created: 12/11/2015 14:09:09
+-- Generated from EDMX file: C:\Users\joker\Documents\Git\dailysoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -172,7 +172,9 @@ CREATE TABLE [dbo].[Tickets] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [CreatedDate] datetime  NOT NULL,
     [RewardGroupId] int  NOT NULL,
-    [AccountId] int  NOT NULL
+    [AccountId] int  NOT NULL,
+    [ManualSelectedDate] datetime  NULL,
+    [RandomSelectedDate] datetime  NULL
 );
 GO
 

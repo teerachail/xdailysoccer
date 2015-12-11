@@ -24,11 +24,13 @@ namespace DailySoccer.Shared.Facades
         public IMatchDataAccess MatchDataAccess { get; private set; }
         public IRewardDataAccess RewardDataAccess { get; private set; }
         public ITicketDataAccess TicketDataAccess { get; private set; }
+        public IWinnerDataAccess WinnerDataAccess { get; private set; }
 
         public MatchFacade MatchFacade { get; private set; }
         public AccountFacade AccountFacade { get; private set; }
         public RewardFacade RewardFacade { get; private set; }
         public TicketFacade TicketFacade { get; private set; }
+        public WinnerFacade WinnerFacade { get; private set; }
         public PhoneVerificationFacade PhoneVerificationFacade { get; private set; }
 
         private FacadeRepository()
@@ -37,11 +39,13 @@ namespace DailySoccer.Shared.Facades
             MatchDataAccess = new MatchDataAccess();
             RewardDataAccess = new RewardDataAccess();
             TicketDataAccess = new TicketDataAccess();
+            WinnerDataAccess = new WinnerDataAccess();
 
             MatchFacade = new MatchFacade();
             AccountFacade = new AccountFacade();
             RewardFacade = new RewardFacade();
             TicketFacade = new TicketFacade();
+            WinnerFacade = new WinnerFacade();
             PhoneVerificationFacade = new PhoneVerificationFacade(new TwilioSMSSender());
         }
 

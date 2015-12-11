@@ -17,5 +17,6 @@ namespace DailySoccer.DAC.EF
         public string Name { get; set; }
         public int CurrentScore { get; set; }
         public int CurrentPredictionPoints { get; set; }
+        public string ReferenceTeamId { get; set; }
     }
 }

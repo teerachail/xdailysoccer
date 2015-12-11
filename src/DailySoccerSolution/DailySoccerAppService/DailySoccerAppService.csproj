@@ -240,6 +240,7 @@
     <Compile Include="Controllers\RewardController.cs" />
     <Compile Include="Controllers\TestAPIController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
+    <Compile Include="Controllers\WinnerController.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
     <Compile Include="Global.asax.cs">

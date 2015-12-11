@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="DailySoccerModel.Winner" Width="1.75" PointX="3" PointY="5.25" />
         <AssociationConnector Association="DailySoccerModel.AccountWinner" />
         <AssociationConnector Association="DailySoccerModel.RewardWinner" />
-        <EntityTypeShape EntityType="DailySoccerModel.Ticket" Width="1.5" PointX="5.5" PointY="3.625" />
+        <EntityTypeShape EntityType="DailySoccerModel.Ticket" Width="1.75" PointX="5.5" PointY="3.625" />
         <AssociationConnector Association="DailySoccerModel.RewardGroupTicket" />
         <AssociationConnector Association="DailySoccerModel.AccountTicket" />
         <EntityTypeShape EntityType="DailySoccerModel.PhoneVerification" Width="1.75" PointX="0.5" PointY="2.875" />

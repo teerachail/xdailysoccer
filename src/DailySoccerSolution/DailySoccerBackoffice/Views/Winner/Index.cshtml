@@ -1,0 +1,39 @@
+﻿@model DailySoccer.Shared.Models.GetSelectedTicketRespond
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>GetSelectedTicketRespond</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RewardRemainingAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RewardRemainingAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TicketAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TicketAmount)
+        </dd>
+
+    </dl>
+    @foreach (var ticket in Model.SelectedTicket)
+    {
+        <div>@ticket.Id</div>
+        <div>@ticket.IsManualSelected</div>
+        <div>@ticket.IsRandomSelected</div>
+    }
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

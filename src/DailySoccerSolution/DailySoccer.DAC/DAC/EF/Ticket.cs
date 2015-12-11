@@ -18,6 +18,8 @@ namespace DailySoccer.DAC.EF
         public System.DateTime CreatedDate { get; set; }
         public int RewardGroupId { get; set; }
         public int AccountId { get; set; }
+        public Nullable<System.DateTime> ManualSelectedDate { get; set; }
+        public Nullable<System.DateTime> RandomSelectedDate { get; set; }
     
         public virtual RewardGroup RewardGroup { get; set; }
         public virtual Account Account { get; set; }

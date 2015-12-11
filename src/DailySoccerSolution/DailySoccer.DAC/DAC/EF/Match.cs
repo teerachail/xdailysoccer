@@ -29,6 +29,7 @@ namespace DailySoccer.DAC.EF
         public Nullable<System.DateTime> CompletedDate { get; set; }
         public Nullable<System.DateTime> CalculatedDate { get; set; }
         public string Status { get; set; }
+        public string ReferenceMatchId { get; set; }
     
         public Team TeamHome { get; set; }
         public Team TeamAway { get; set; }

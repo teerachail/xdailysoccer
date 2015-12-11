@@ -198,18 +198,20 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
         controller: 'starter.account.AccountController as accountCtrl'
     })
         .state('verify.verifyphonenumber', {
-        url: '/verifyphonenumber',
+        url: '/verifyphonenumber/:buyTicketAmount',
         views: {
             'MainContent': {
                 templateUrl: 'templates/Accounts/VerifyPhoneNumber.html',
+                controller: 'starter.account.AccountController as accountCtrl'
             }
         }
     })
         .state('verify.verifycode', {
-        url: '/verifycode',
+        url: '/verifycode/:phoneNumber/:buyTicketAmount',
         views: {
             'MainContent': {
                 templateUrl: 'templates/Accounts/VerifyCode.html',
+                controller: 'starter.account.AccountController as accountCtrl'
             }
         }
     })
@@ -324,16 +326,20 @@ var starter;
     (function (account) {
         'use strict';
         var AccountController = (function () {
-            function AccountController($scope, $timeout, $location, accountSvc, Azureservice, AccountManagementService) {
-                //this.checkLocalStorageAccount();
-                //this.GetAllLeague();
+            function AccountController($scope, $stateParams, $timeout, $location, accountSvc, Azureservice, AccountManagementService, ticketSvc) {
                 this.$scope = $scope;
+                this.$stateParams = $stateParams;
                 this.$timeout = $timeout;
                 this.$location = $location;
                 this.accountSvc = accountSvc;
                 this.Azureservice = Azureservice;
                 this.AccountManagementService = AccountManagementService;
+                this.ticketSvc = ticketSvc;
                 this._selectedTeamId = -1;
+                if (this.$stateParams.buyTicketAmount) {
+                    this._buyTicketAmount = this.$stateParams.buyTicketAmount;
+                }
+                this.checkLocalStorageAccount();
                 //Clear local storage for test only!
                 //this.AccountManagementService.ClearGuestData();
             }
@@ -402,7 +408,67 @@ var starter;
                 this.facebookPoint = this.AccountManagementService.facebookPoint;
                 this.localPoint = this.AccountManagementService.localPoint;
             };
-            AccountController.$inject = ['$scope', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice', 'starter.shared.AccountManagementService'];
+            AccountController.prototype.SendRequestVerifyPhoneNumber = function (phoneNumber, isRequireReload) {
+                var _this = this;
+                if (isRequireReload === void 0) { isRequireReload = true; }
+                console.log('Call SendRequestVerifyPhoneNumber');
+                var userId = this.AccountManagementService.GetAccountInformation().SecretCode;
+                var areArgumentValid = phoneNumber != null && userId != null;
+                if (!areArgumentValid)
+                    return;
+                console.log('Begin SendRequestVerifyPhoneNumber');
+                var request = new account.RequestConfirmPhoneNumberRequest();
+                request.UserId = userId;
+                request.PhoneNo = phoneNumber;
+                this.accountSvc.RequestConfirmPhoneNumber(request)
+                    .then(function (respond) {
+                    if (respond.IsSuccessed) {
+                        console.log("#RequestConfirmPhoneNumber successed.");
+                        if (isRequireReload) {
+                            _this.$location.path('/verify/verifycode/' + respond.ForPhoneNumber + '/' + _this._buyTicketAmount);
+                        }
+                    }
+                    else {
+                        console.log("#RequestConfirmPhoneNumber failed.");
+                    }
+                });
+            };
+            AccountController.prototype.ConfirmPhoneNumber = function (verificationCode) {
+                var _this = this;
+                var userId = this.AccountManagementService.GetAccountInformation().SecretCode;
+                if (verificationCode != null) {
+                    var request = new account.ConfirmPhoneNumberRequest();
+                    request.UserId = userId;
+                    request.VerificationCode = verificationCode;
+                    this.accountSvc.ConfirmPhoneNumber(request)
+                        .then(function (respond) {
+                        if (respond.IsSuccessed) {
+                            _this.AccountManagementService.SetPhoneVerified();
+                            var request = new starter.ticket.BuyTicketRequest();
+                            request.UserId = userId;
+                            request.Amount = _this._buyTicketAmount;
+                            _this.ticketSvc.BuyTicket(request).
+                                then(function (respond) {
+                                if (respond.IsSuccessed) {
+                                    _this.AccountManagementService.CurrentPoints = respond.AccountInfo.Points;
+                                    _this.AccountManagementService.CurrentOrderedCoupon = respond.AccountInfo.CurrentOrderedCoupon;
+                                    console.log('Buy ticket completed.');
+                                    _this.$location.path('/buyticketcompleted/buyticketcompleted/' + respond.AccountInfo.Points + '/' + respond.RewardResultDate);
+                                }
+                                else {
+                                    console.log('Buy ticket failed.');
+                                    _this.$location.path('/ticket/buyticket');
+                                }
+                            });
+                            console.log("#RequestVerificationCode successed.");
+                        }
+                        else {
+                            console.log("#RequestVerificationCode failed.");
+                        }
+                    });
+                }
+            };
+            AccountController.$inject = ['$scope', '$stateParams', '$timeout', '$location', 'starter.account.AccountServices', 'Azureservice', 'starter.shared.AccountManagementService', 'starter.ticket.TicketServices'];
             return AccountController;
         })();
         angular
@@ -513,6 +579,10 @@ var starter;
             };
             AccountServices.prototype.TieFacbookWithLocalData = function (secretCode, OAuthId) {
                 var requestUrl = "Account/TieFacbookWithLocalData?secretCode=" + secretCode + "&OAuthId=" + OAuthId;
+                return this.queryRemoteSvc.RemoteQuery(requestUrl);
+            };
+            AccountServices.prototype.RequestConfirmPhoneNumber = function (request) {
+                var requestUrl = "Account/RequestConfirmPhoneNumber?userId=" + request.UserId + "&phoneNo=" + request.PhoneNo;
                 return this.queryRemoteSvc.RemoteQuery(requestUrl);
             };
             AccountServices.prototype.ConfirmPhoneNumber = function (request) {
@@ -719,12 +789,6 @@ var starter;
                     _this.$ionicTabsDelegate.$getByHandle('calendarTabs').select(2);
                     console.log('Get all matches completed.');
                 });
-            };
-            MatchController.prototype.Logout = function () {
-                var user = Ionic.User.current();
-                user.id = 'empty';
-                user.save();
-                this.$location.path('/account/login');
             };
             MatchController.prototype.SelectTeam = function (selectedMatch, selectedTeamId) {
                 var _this = this;
@@ -1042,6 +1106,12 @@ var starter;
                 user.unset('OAuthId');
                 user.save();
             };
+            //Set phone be verified
+            AccountManagementService.prototype.SetPhoneVerified = function () {
+                var user = Ionic.User.current();
+                user.set('PhoneVerified', 'true');
+                user.save();
+            };
             //// Login Facebook ////
             AccountManagementService.prototype.LoginWithFacebook = function () {
                 var _this = this;
@@ -1176,7 +1246,7 @@ var starter;
                         var user = Ionic.User.current();
                         user.set('OAuthId', oAuthId);
                         user.save();
-                        _this.$location.replace();
+                        _this.$location.path('/ticket/buyticket');
                     }
                 });
             };
@@ -1238,6 +1308,12 @@ var starter;
                 this.$scope.TieFacebookPopup.hide();
                 this.AccountManagementService.TieFacebook();
             };
+            SideMenuController.prototype.Logout = function () {
+                var user = Ionic.User.current();
+                user.id = 'empty';
+                user.save();
+                this.$location.path('/account/login');
+            };
             SideMenuController.prototype.checkCurrenUserLogin = function () {
                 var user = Ionic.User.current();
                 var OAuthId = user.get('OAuthId');
@@ -1251,7 +1327,6 @@ var starter;
             SideMenuController.$inject = ['$scope', '$timeout', '$location', '$ionicModal', 'Azureservice', 'starter.shared.AccountManagementService'];
             return SideMenuController;
         })();
-        sidemenu.SideMenuController = SideMenuController;
         angular
             .module('starter.sidemenu', [])
             .controller('starter.sidemenu.SideMenuController', SideMenuController);
@@ -1314,7 +1389,7 @@ var starter;
                 }
                 var isVerifiedPhoneNumber = (accountInformation.VerifiedPhoneNumber == 'true');
                 if (!isVerifiedPhoneNumber) {
-                    this.$location.path('/verify/verifyphonenumber');
+                    this.$location.path('/verify/verifyphonenumber/' + amount);
                     return;
                 }
                 console.log('#Begin send buy ticket request.');
