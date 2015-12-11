@@ -24,7 +24,7 @@
             if (this.$stateParams.buyTicketAmount) {
                 this._buyTicketAmount = this.$stateParams.buyTicketAmount;
             }
-            //this.checkLocalStorageAccount();
+            this.checkLocalStorageAccount();
 
             //Clear local storage for test only!
             //this.AccountManagementService.ClearGuestData();
