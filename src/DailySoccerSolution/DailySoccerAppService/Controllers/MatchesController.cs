@@ -48,5 +48,20 @@ namespace DailySoccerAppService.Controllers
             var result = FacadeRepository.Instance.MatchFacade.GuessMatch(request, DateTime.Now);
             return result;
         }
+
+        [HttpGet]
+        public string CalculateGameResult()
+        {
+            var now = DateTime.Now;
+            try
+            {
+                FacadeRepository.Instance.MatchFacade.CalculateGameResults(now);
+                return string.Format("Completed: {0}", now);
+            }
+            catch (Exception e)
+            {
+                return string.Format("Failed: {0}, Message: {1}", now, e.ToString());
+            }
+        }
     }
 }
