@@ -54,9 +54,8 @@
             }
 
             console.log('#Begin send buy ticket request.')
-            var user = Ionic.User.current();
             var request = new BuyTicketRequest();
-            request.UserId = user.id;
+            request.UserId = accountInformation.SecretCode;
             request.Amount = amount;
             this.ticketSvc.BuyTicket(request)
                 .then((respond: BuyTicketRespond): void => {

@@ -38,13 +38,8 @@
         }
 
         public checkCurrenUserLogin() {
-            var user = Ionic.User.current();
-            var OAuthId = user.get('OAuthId');
-            if (OAuthId) {
-                this.isLogedin = true;
-            } else {
-                this.isLogedin = false;
-            }
+            var accountInfo = this.AccountManagementService.GetAccountInformation();
+            this.isLogedin = accountInfo.OAuthId != null;
         }
 
     }

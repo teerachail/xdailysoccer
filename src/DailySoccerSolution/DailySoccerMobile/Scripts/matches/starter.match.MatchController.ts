@@ -42,9 +42,9 @@
         }
 
         public GetTodayMatches(): void {
-            var user = Ionic.User.current();
+            var accountInfo = this.accountManagementSvc.GetAccountInformation();
             var data = new GetMatchesRequest();
-            data.UserId = user.id;
+            data.UserId = accountInfo.SecretCode;
             this.matchSvc.GetMatches(data)
                 .then((respond: GetMatchesRespond): void => {
                     this.updateAccountInformation(respond.AccountInfo);
@@ -73,8 +73,9 @@
             selectedTeam.IsSelected = !selectedTeam.IsSelected;
             unselectedTeam.IsSelected = false;
 
+            var accountInfo = this.accountManagementSvc.GetAccountInformation();
             var request = new GuessMatchRequest();
-            request.UserId = Ionic.User.current().id;
+            request.UserId = accountInfo.SecretCode;
             request.MatchId = selectedMatch.Id;
             request.IsHome = isSelectedTeamHome;
             request.IsCancel = ((selectedTeamId == selectedTeam.Id) && (beforeChange)) ? true : false;
