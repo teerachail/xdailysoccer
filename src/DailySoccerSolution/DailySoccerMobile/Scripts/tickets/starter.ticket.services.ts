@@ -13,7 +13,12 @@
         };
     }
 
+    export class BuyTicketManagerService {
+
+    }
+
     angular
         .module('starter.ticket')
-        .service('starter.ticket.TicketServices', TicketServices);
+        .service('starter.ticket.TicketServices', TicketServices)
+        .service('starter.ticket.BuyTicketManagerService', BuyTicketManagerService);
 }
