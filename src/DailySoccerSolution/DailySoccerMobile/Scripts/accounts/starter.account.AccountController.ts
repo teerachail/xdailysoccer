@@ -45,11 +45,11 @@
             console.log('# Update league completed.');
         }
 
-        public CheckLocalStorageAccount() {
+        public CheckLocalStorageAccount(): void {
             var accountInfo = this.AccountManagementService.GetAccountInformation();
             var isLogedIn = accountInfo.SecretCode != null && accountInfo.SecretCode != 'empty';
             if (isLogedIn) this.$location.path('/matches/todaymatches');
-            this.isHideSkipButton = accountInfo.IsSkiped == 'true';
+            this.isHideSkipButton = accountInfo.IsSkiped != null;
         }
        
         public SkipLogin(): void {
