@@ -3,7 +3,7 @@
 
     class SideMenuController {
 
-        private isLogedin: Boolean;
+        private isLogedin: boolean;
 
         static $inject = ['$scope', '$timeout', '$location', '$ionicModal', 'Azureservice', 'starter.shared.AccountManagementService'];
         constructor(private $scope,
@@ -12,8 +12,6 @@
             private $ionicModal,
             private Azureservice: any,
             private AccountManagementService: starter.shared.AccountManagementService) {
-
-            this.checkCurrenUserLogin();
 
             this.$ionicModal.fromTemplateUrl('templates/Accounts/TieFacebookPopup.html',
                 {
@@ -26,7 +24,6 @@
             this.$scope.TieFacebookPopup.show();
         }
 
-
         public LoginWithFacebook(): void {
             this.$scope.TieFacebookPopup.hide();
             this.AccountManagementService.TieFacebook();
@@ -37,11 +34,11 @@
             this.$location.path('/account/login');
         }
 
-        public checkCurrenUserLogin() {
+        public IsLogedIn(): boolean {
             var accountInfo = this.AccountManagementService.GetAccountInformation();
-            this.isLogedin = accountInfo.OAuthId != null;
+            var isLogedIn = accountInfo.OAuthId != null;
+            return isLogedIn;
         }
-
     }
 
     angular
