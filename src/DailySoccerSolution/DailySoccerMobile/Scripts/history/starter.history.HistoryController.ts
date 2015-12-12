@@ -48,6 +48,7 @@
         }
 
         private getHistoriesByMonth(month: number, year: number): void {
+            console.log("Call getHistoriesByMonth, month: " + month + ", year: " + year);
             var accountInfo = this.accountManagerSvc.GetAccountInformation();
             var data = new GetGuessHistoryByMonthRequest();
             data.UserId = accountInfo.SecretCode;
@@ -56,8 +57,7 @@
             this.historySvc.GetGuessHistoryByMonth(data)
                 .then((respond: GetGuessHistoryByMonthRespond): void => {
                     this.HistoryByMonthInfo = respond;
-                    console.log('Get all history by month completed.');
-                    console.log(month);
+                    console.log('Get all history by month completed, month: ' + month);
                 });
         }
 
@@ -71,7 +71,6 @@
 
 
         public isGroupShown(group: GuessHistoryDailyInformation[]): boolean {
-            console.log(this.shownGroup == group);
             return this.shownGroup == group;
         };
     }

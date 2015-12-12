@@ -70,6 +70,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                     }
                 }
             })
+
             .state('account', {
                 url: '/account',
                 abstract: true,
@@ -168,6 +169,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                 }
             })
             .state('history.historybyday', {
+                cache: false,
                 url: '/historybyday/:month/:year',
                 views: {
                     'MainContent': {

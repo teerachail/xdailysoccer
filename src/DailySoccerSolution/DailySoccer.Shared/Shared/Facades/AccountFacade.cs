@@ -115,7 +115,8 @@ namespace DailySoccer.Shared.Facades
             foreach (var match in matches)
             {
                 var guess = guessedMatches.First(it => it.MatchId == match.Id);
-                if (guess == null) continue;
+                var isPlayerGuessMatch = guess != null && guess.GuessTeamId.HasValue;
+                if (!isPlayerGuessMatch) continue;
 
                 var isSelectionGuessValid = guess.GuessTeamId.Value == match.TeamHome.Id || guess.GuessTeamId.Value == match.TeamAway.Id;
                 if (!isSelectionGuessValid) continue;
@@ -171,7 +172,9 @@ namespace DailySoccer.Shared.Facades
             if (!areArgumentsValid) return invalidRespondData;
 
             var accountDac = FacadeRepository.Instance.AccountDataAccess;
-            var guessedMatches = accountDac.GetGuessMatchsByAccountSecrectCode(request.UserId);
+            var guessedMatches = accountDac.GetGuessMatchsByAccountSecrectCode(request.UserId)
+                .Where(it => it.GuessTeamId.HasValue)
+                .ToList();
             if (guessedMatches == null) return invalidRespondData;
 
             var matches = FacadeRepository.Instance.MatchDataAccess.GetAllMatches()

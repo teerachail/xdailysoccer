@@ -37,9 +37,8 @@
         }
 
         private updateDisplayRewards() {
-            var user = Ionic.User.current();
             var getYourRewardsRequest = new GetYourRewardsRequest();
-            getYourRewardsRequest.UserId = user.id;
+            getYourRewardsRequest.UserId = this.accountManagementSvc.GetAccountInformation().SecretCode;
             this.rewardSvc.GetYourRewards(getYourRewardsRequest)
                 .then((respond: GetYourRewardsRespond): void => {
                     this.ContactNo = respond.ContactNo;
