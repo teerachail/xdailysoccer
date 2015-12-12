@@ -6,7 +6,7 @@
                 แต้มสะสมทั้งหมด {{ sidemenuCtrl.accountSvc.GetAccountInformation().Points }} คะแนน
             </p>
             <p>
-                แลกคูปองได้สูงสุด {{ sidemenuCtrl.accountSvc.GetAccountInformation().Points / sidemenuCtrl.accountSvc.CurrentTicketCost | number : 0 }} ใบ
+                แลกคูปองได้สูงสุด {{ sidemenuCtrl.CalculateBuyTicket() | number : 0 }} ใบ
             </p>            
         </div>
         <br />

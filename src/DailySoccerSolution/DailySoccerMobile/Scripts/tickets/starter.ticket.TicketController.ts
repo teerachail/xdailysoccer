@@ -27,6 +27,11 @@
                 }).then(function (modal): void { $scope.TieFacebookPopup = modal; });
         }
 
+        public CalculateBuyTicket(): number {
+            var result = Math.floor(this.accountSvc.GetAccountInformation().Points / this.accountSvc.CurrentTicketCost);
+            return result;
+        }
+
         public LoginWithFacebook(): void {
             this.$scope.TieFacebookPopup.hide();
             this.accountSvc.TieFacebook();
