@@ -5,7 +5,8 @@ CREATE TABLE [dbo].[Tickets] (
     [RewardGroupId] int  NOT NULL,
     [AccountId] int  NOT NULL,
     [ManualSelectedDate] datetime  NULL,
-    [RandomSelectedDate] datetime  NULL
+    [RandomSelectedDate] datetime  NULL,
+    [SelectedRewardId] int  NULL
 );
 GO
 -- Creating foreign key on [RewardGroupId] in table 'Tickets'
