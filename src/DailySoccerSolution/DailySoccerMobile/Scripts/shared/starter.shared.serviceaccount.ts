@@ -33,10 +33,10 @@
             var user = Ionic.User.current();
             var accountInfo = new account.AccountInformation();
             accountInfo.SecretCode = user.id;
-            accountInfo.Points = user.get('points');
-            accountInfo.OAuthId = user.get('OAuthId');
-            accountInfo.IsSkiped = user.get('IsSkiped');
-            accountInfo.VerifiedPhoneNumber = user.get('PhoneVerified');
+            accountInfo.Points = user.get('points', 0);
+            accountInfo.OAuthId = user.get('OAuthId', null);
+            accountInfo.IsSkiped = user.get('IsSkiped', null);
+            accountInfo.VerifiedPhoneNumber = user.get('PhoneVerified', null);
             return accountInfo;
         }
         public SetAccountInformation(accountInfo: account.AccountInformation): void {
@@ -46,7 +46,7 @@
             user.set('OAuthId', accountInfo.OAuthId);
             user.set('IsSkiped', accountInfo.IsSkiped);
             user.set('PhoneVerified', accountInfo.VerifiedPhoneNumber);
-            user.save();
+            user.save(() => { console.log('saved user data'); }, () => { console.log('fail to save user data'); });
         }
 
         public Logout(): void {
@@ -55,7 +55,7 @@
             user.unset('OAuthId');
             user.unset('points');
             user.unset('PhoneVerified');
-            user.save();
+            user.save(() => { console.log('saved user data'); }, () => { console.log('fail to save user data'); });
         }
 
         //For test only (remove when run on production)
