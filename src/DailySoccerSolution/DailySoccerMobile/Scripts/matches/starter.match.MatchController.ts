@@ -105,6 +105,8 @@
             var memoryAccountInfo = this.accountManagementSvc.GetAccountInformation();
             memoryAccountInfo.Points = accountInfo.Points;
             memoryAccountInfo.CurrentOrderedCoupon = accountInfo.CurrentOrderedCoupon;
+            memoryAccountInfo.OAuthId = accountInfo.OAuthId;
+            memoryAccountInfo.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber;
             this.accountManagementSvc.SetAccountInformation(memoryAccountInfo);
         }
 

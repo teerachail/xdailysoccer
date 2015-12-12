@@ -16,9 +16,29 @@
         }
     }
 
+    export class BuyTicketProcessingService {
+        public isFirstTimeRequestFacaebookLogin: boolean;
+        public isFirstTimeRequestPhoneNumber: boolean;
+        public buyAmount: number;
 
+        static $inject = ['starter.shared.AccountManagementService'];
+        constructor(private accountManagementSvc: starter.shared.AccountManagementService) { }
+
+        public CheckVerificationFacebookAccountComplete(): boolean {
+            var accountInfo = this.accountManagementSvc.GetAccountInformation();
+            var result = accountInfo.OAuthId != null;
+            return result;
+        }
+
+        public CheckVerificationPhoneNumberComplete(): boolean {
+            var accountInfo = this.accountManagementSvc.GetAccountInformation();
+            var result = accountInfo.VerifiedPhoneNumber != null;
+            return result;
+        }
+    }
 
     angular
         .module('starter.shared')
-        .service('starter.shared.QueryRemoteDataService', QueryRemoteDataService);
+        .service('starter.shared.QueryRemoteDataService', QueryRemoteDataService)
+        .service('starter.shared.BuyTicketProcessingService', BuyTicketProcessingService);
 }

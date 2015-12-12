@@ -182,60 +182,56 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
                 url: '/ticket',
                 abstract: true,
                 templateUrl: 'templates/_basicTemplate.html',
-                controller: 'starter.ticket.TicketController as sidemenuCtrl'
             })
             .state('ticket.buyticket', {
                 url: '/buyticket',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Rewards/BuyTicket.html',
+                        controller: 'starter.ticket.TicketController as ticketCtrl'
                     }
                 }
             })
-            .state('ticket.buyticket.processing', {
-                url: '/processing/:buyAmount',
+            .state('ticket.buyticketprocessing', {
+                url: '/buyticketprocessing',
+                cache: false,
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Rewards/BuyTicketProcessing.html',
+                        controller: 'starter.ticket.TicketProcessingController as sidemenuCtrl'
                     }
                 }
             })
+            .state('ticket.verifyphonenumber', {
+                url: '/verifyphonenumber',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/Accounts/VerifyPhoneNumber.html',
+                        controller: 'starter.ticket.PhoneVerificationController as phoneVerificationCtrl'
+                    }
+                }
+            })
+            .state('ticket.verifycode', {
+                url: '/verifycode/:phoneNumber',
+                views: {
+                    'MainContent': {
+                        templateUrl: 'templates/Accounts/VerifyCode.html',
+                        controller: 'starter.ticket.CodeVerificationController as codeVerificationCtrl'
+                    }
+                }
+            })
+
             .state('buyticketcompleted', {
                 url: '/buyticketcompleted',
                 abstract: true,
                 templateUrl: 'templates/_fullpageTemplate.html',
             })
             .state('buyticketcompleted.buyticketcompleted', {
-                url: '/buyticketcompleted/:remainingPoints/:expiredDate',
+                url: '/buyticketcompleted/:expiredDate',
                 views: {
                     'MainContent': {
                         templateUrl: 'templates/Rewards/BuyTicketCompleted.html',
-                        controller: 'starter.ticket.TicketController as ticketCtrl'
-                    }
-                }
-            })
-
-            .state('verify', {
-                url: '/verify',
-                abstract: true,
-                templateUrl: 'templates/_basicTemplate.html',
-                controller: 'starter.account.AccountController as accountCtrl'
-            })
-            .state('verify.verifyphonenumber', {
-                url: '/verifyphonenumber/:buyTicketAmount',
-                views: {
-                    'MainContent': {
-                        templateUrl: 'templates/Accounts/VerifyPhoneNumber.html',
-                        controller: 'starter.account.AccountController as accountCtrl'
-                    }
-                }
-            })
-            .state('verify.verifycode', {
-                url: '/verifycode/:phoneNumber/:buyTicketAmount',
-                views: {
-                    'MainContent': {
-                        templateUrl: 'templates/Accounts/VerifyCode.html',
-                        controller: 'starter.account.AccountController as accountCtrl'
+                        controller: 'starter.ticket.BuyTicketCompleteController as buyTicketCompleteCtrl'
                     }
                 }
             })

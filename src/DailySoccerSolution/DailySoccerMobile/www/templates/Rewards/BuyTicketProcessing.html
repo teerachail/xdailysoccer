@@ -1,29 +1,6 @@
 ﻿<ion-view view-title="DAILY SOCCER">
     <ion-content>
-        <br />
-        <div class="col col-80 col-offset-10">
-            <p>
-                แต้มสะสมทั้งหมด {{ sidemenuCtrl.accountSvc.GetAccountInformation().Points }} คะแนน
-            </p>
-            <p>
-                แลกคูปองได้สูงสุด {{ sidemenuCtrl.accountSvc.GetAccountInformation().Points / sidemenuCtrl.accountSvc.CurrentTicketCost | number : 0 }} ใบ
-            </p>            
-        </div>
-        <br />
-        <form class="text-center">
-            <p class="col row row ">
-               <b>ซื้อคูปอง จำนวน</b> 
-            </p>
-            <div class="col row">
-                <p>
-                    <input type="number" class=" col col-50 input-number block-center no-padding" ng-model="amountCoupon" />
-                </p>
-            </div>
-            <div class="col row">
-                <div class="button bg-yellow col col-50 button-small block-center" ng-click="sidemenuCtrl.BuyTicket(amountCoupon)">
-                    ส่งคูปองลุ้นรางวัล
-                </div>
-            </div>
-        </form>
+        <p>Processing</p>
+        <ion-spinner icon="ripple" class="spinner-assertive"></ion-spinner>
     </ion-content>
 </ion-view>

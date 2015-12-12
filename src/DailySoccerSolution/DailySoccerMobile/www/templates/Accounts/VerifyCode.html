@@ -8,13 +8,13 @@
                     </i>
                     <br />
                     <i class="font-large">
-                        {{ accountCtrl.$stateParams.phoneNumber }}
+                        {{ codeVerificationCtrl.$stateParams.phoneNumber }}
                     </i>
                 </span>
             </div>
             <br />
             <div class="col block-center row text-center">
-                <a href="#/verify/verifycode" class="button button-balanced col col-50 button-small block-center" ng-click="accountCtrl.SendRequestVerifyPhoneNumber(accountCtrl.$stateParams.phoneNumber, false)">
+                <a href="#" class="button button-balanced col col-50 button-small block-center" ng-click="codeVerificationCtrl.ResendVerificationCode()">
                     ขอรหัสใหม่อีกครั้ง
                 </a>
             </div>
@@ -30,7 +30,7 @@
                 </p>
             </div>
             <div class="col row">
-                <a href="#" class="button bg-yellow col col-50 button-small block-center " ng-click="accountCtrl.ConfirmPhoneNumber(verificationCode)">
+                <a href="#" class="button bg-yellow col col-50 button-small block-center " ng-click="codeVerificationCtrl.ConfirmPhoneNumber(verificationCode)">
                     ยืนยันรหัส
                 </a>
             </div>
