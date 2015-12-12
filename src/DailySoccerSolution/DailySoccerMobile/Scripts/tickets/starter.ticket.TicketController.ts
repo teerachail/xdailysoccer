@@ -65,7 +65,10 @@
             this.ticketSvc.BuyTicket(request)
                 .then((respond: BuyTicketRespond): void => {
                     if (respond.IsSuccessed) {
-                        this.AccountInfo = respond.AccountInfo;
+                        var accountInfo = this.accountSvc.GetAccountInformation();
+                        accountInfo.Points = respond.AccountInfo.Points;
+                        accountInfo.CurrentOrderedCoupon = respond.AccountInfo.CurrentOrderedCoupon;
+                        this.accountSvc.SetAccountInformation(accountInfo);
                         this.DisplayRewardResultDate = new Date(respond.RewardResultDate.toString());
                         console.log('Buy ticket completed.')
                         this.$location.path('/buyticketcompleted/buyticketcompleted/' + respond.AccountInfo.Points + '/' + respond.RewardResultDate);
