@@ -27,7 +27,7 @@ namespace DailySoccerBackoffice.Controllers
             using (var serviceEngine = new ServiceHelper())
             {
                 var response = await serviceEngine.Client.GetAsync<RewardGroupInformation>("/Reward/GetRewardGroupById?id=" + id);
-                return View(response);
+                return View("RewardList",response);
             }
         }
 

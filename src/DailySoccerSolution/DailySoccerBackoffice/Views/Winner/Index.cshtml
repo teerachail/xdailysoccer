@@ -29,9 +29,9 @@
     </dl>
     @foreach (var ticket in Model.SelectedTicket)
     {
-        <div>@ticket.Id</div>
-        <div>@ticket.IsManualSelected</div>
-        <div>@ticket.IsRandomSelected</div>
+        <span>@ticket.Id</span>
+        <span>@ticket.DisplayName</span>
+        <br />
     }
 </div>
 <p>

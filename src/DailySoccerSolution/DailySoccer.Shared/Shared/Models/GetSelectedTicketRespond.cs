@@ -10,6 +10,7 @@ namespace DailySoccer.Shared.Models
     {
         public int RewardRemainingAmount { get; set; }
         public int TicketAmount { get; set; }
+        public IEnumerable<TicketInformation> AllTicket { get; set; }
         public IEnumerable<TicketInformation> SelectedTicket { get; set; }
     }
 }

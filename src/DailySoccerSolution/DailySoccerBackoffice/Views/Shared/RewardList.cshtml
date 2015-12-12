@@ -1,0 +1,54 @@
+﻿@model DailySoccer.Shared.Models.RewardGroupInformation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RewardGroupInformation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            วันที่สิ้นสุดการส่ง
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpiredDate)
+        </dd>
+        <dt>
+            คะแนนที่ใช้ในการแลก
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RequestPoints)
+        </dd>
+
+    </dl>
+    <br />
+    <div class="pull-right"><a class="btn btn-info btn-lg" href="@Url.Action("CreateReward", new { id = Model.Id })">เพิ่ม</a></div>
+    <div class="clearfix"></div>
+    <br />
+    <br />
+
+    @foreach (var reward in Model.RewardInfo)
+    {
+        <div class="row">
+            <div class="col-xs-2">
+                <a href="#" class="thumbnail">
+                    <img src="@reward.ThumbnailPath" />
+                </a>
+            </div>
+            <div class="col-xs-10">
+                <div>ชื่อ: @reward.Name</div>
+                <div>รายละเอียด: @reward.Description</div>
+                <div>จำนวน: @reward.Amount</div>
+                <div>จำนวนคงเหลือ: @reward.RemainingAmount</div>
+            </div>
+        </div>
+        <br />
+        <br />
+    }
+
+</div>

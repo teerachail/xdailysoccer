@@ -37,15 +37,23 @@ namespace DailySoccerAppService.Controllers
         }
 
         [HttpGet]
-        public void SelectWinner(int ticketId)
+        public void SelectTicket(int rewardId, int ticketId)
         {
-            // TODO : Implement SelectWinner
+            var selectedDate = DateTime.Now;
+            FacadeRepository.Instance.WinnerFacade.SelectTicket(rewardId, ticketId, selectedDate);
         }
 
         [HttpGet]
-        public void SubmitSelectedWinner(int ticketId)
+        public void CancelSelectedTicket(int rewardId, int ticketId)
         {
-            // TODO : Implement SelectWinner
+            var selectedDate = DateTime.Now;
+            FacadeRepository.Instance.WinnerFacade.CancelSelectedTicket(rewardId, ticketId);
+        }
+
+        [HttpGet]
+        public void SubmitSelectedWinner(int rewardId)
+        {
+            FacadeRepository.Instance.WinnerFacade.SubmitSelectedWinner(rewardId);
         }
     }
 }

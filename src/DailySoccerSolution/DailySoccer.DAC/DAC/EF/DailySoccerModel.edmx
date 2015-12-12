@@ -149,6 +149,7 @@
     <Property Name="AccountId" Type="int" Nullable="false" />
     <Property Name="ManualSelectedDate" Type="datetime" Nullable="true" />
     <Property Name="RandomSelectedDate" Type="datetime" Nullable="true" />
+    <Property Name="SelectedRewardId" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="PhoneVerifications">
     <Key>
@@ -491,6 +492,7 @@
           <Property Name="AccountId" Type="Int32" Nullable="false" />
           <Property Name="ManualSelectedDate" Type="DateTime" Nullable="true" />
           <Property Name="RandomSelectedDate" Type="DateTime" Nullable="true" />
+          <Property Name="SelectedRewardId" Type="Int32" Nullable="true" />
         </EntityType>
         <Association Name="RewardGroupTicket">
           <End Type="DailySoccerModel.RewardGroup" Role="RewardGroup" Multiplicity="1" />
@@ -670,6 +672,7 @@
           <ScalarProperty Name="AccountId" ColumnName="AccountId" />
           <ScalarProperty Name="ManualSelectedDate" ColumnName="ManualSelectedDate" />
           <ScalarProperty Name="RandomSelectedDate" ColumnName="RandomSelectedDate" />
+          <ScalarProperty Name="SelectedRewardId" ColumnName="SelectedRewardId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
