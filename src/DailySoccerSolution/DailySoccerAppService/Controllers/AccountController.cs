@@ -18,42 +18,37 @@ namespace DailySoccerAppService.Controllers
         [HttpGet]
         public CreateNewGuestRespond CreateNewGuest()
         {
-            var accountFacade = new AccountFacade();
-            var result = accountFacade.CreateNewGuest();
+            var result = FacadeRepository.Instance.AccountFacade.CreateNewGuest();
             return result;
         }
 
         [HttpGet]
         public CreateNewGuestRespond CreateNewGuestWithFacebook(string OAuthId)
         {
-            var accountFacade = new AccountFacade();
             var email = "testuser@dailysoccer.com";
-            var result = accountFacade.CreateNewGuestWithFaceebook(OAuthId, email);
+            var result = FacadeRepository.Instance.AccountFacade.CreateNewGuestWithFaceebook(OAuthId, email);
             return result;
         }
 
         [HttpGet]
         public bool UpdateAccountWithFacebook(string secretCode, string OAuthId)
         {
-            var accountFacade = new AccountFacade();
             var email = "testuser@dailysoccer.com";
-            accountFacade.UpdateAccountWithFacebook(secretCode, OAuthId, email);
+            FacadeRepository.Instance.AccountFacade.UpdateAccountWithFacebook(secretCode, OAuthId, email);
             return true;
         }
 
         [HttpGet]
         public AccountInformation GetAccountByOAuthId(string OAuthId)
         {
-            var accountFacade = new AccountFacade();
-            var result = accountFacade.GetAccountByOAuthId(OAuthId);
+            var result = FacadeRepository.Instance.AccountFacade.GetAccountByOAuthId(OAuthId);
             return result;
         }
 
         [HttpGet]
         public AccountInformation GetAccountBySecretCode(string secretCode)
         {
-            var accountFacade = new AccountFacade();
-            var result = accountFacade.GetAccountBySecretCode(secretCode);
+            var result = FacadeRepository.Instance.AccountFacade.GetAccountBySecretCode(secretCode);
             return result;
         }
 
