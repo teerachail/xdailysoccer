@@ -37,6 +37,7 @@
             accountInfo.OAuthId = user.get('OAuthId', null);
             accountInfo.IsSkiped = user.get('IsSkiped', null);
             accountInfo.VerifiedPhoneNumber = user.get('PhoneVerified', null);
+            accountInfo.CurrentOrderedCoupon = user.get('CurrentOrderedCoupon', 0);
             return accountInfo;
         }
         public SetAccountInformation(accountInfo: account.AccountInformation): void {
@@ -46,6 +47,7 @@
             user.set('OAuthId', accountInfo.OAuthId);
             user.set('IsSkiped', accountInfo.IsSkiped);
             user.set('PhoneVerified', accountInfo.VerifiedPhoneNumber);
+            user.set('CurrentOrderedCoupon', accountInfo.CurrentOrderedCoupon);
             user.save(() => { console.log('saved user data'); }, () => { console.log('fail to save user data'); });
         }
 
