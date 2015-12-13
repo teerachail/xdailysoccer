@@ -22,53 +22,64 @@
 
         public CurrentTicketCost: number;
 
-        static $inject = ['$location', 'starter.account.AccountServices', 'Azureservice'];
+        static $inject = ['$location', 'starter.account.AccountServices', 'Azureservice', '$window'];
         constructor(
             private $location: ng.ILocationService,
             private accountSvc: starter.account.AccountServices,
-            private Azureservice: any) {
+            private Azureservice: any,
+            private $window) {
+        }
+
+        public getStringData(key: string): string {
+            var result = this.$window.localStorage[key] || null;
+            return result;
+        }
+
+        public getNumberData(key: string): number {
+            var result = this.$window.localStorage[key] || 0;
+            return result;
+        }
+
+        public setData(key: string, value: string): void {
+            if (value == null) this.$window.localStorage.removeItem(key);
+            else this.$window.localStorage[key] = value;
         }
 
         public GetAccountInformation(): account.AccountInformation {
-            var user = Ionic.User.current();
             var accountInfo = new account.AccountInformation();
-            accountInfo.SecretCode = user.id;
-            accountInfo.Points = user.get('points', 0);
-            accountInfo.OAuthId = user.get('OAuthId', null);
-            accountInfo.IsSkiped = user.get('IsSkiped', null);
-            accountInfo.VerifiedPhoneNumber = user.get('PhoneVerified', null);
-            accountInfo.CurrentOrderedCoupon = user.get('CurrentOrderedCoupon', 0);
+            accountInfo.SecretCode = this.getStringData('SecretCode');
+            accountInfo.Points = this.getNumberData('Points');
+            accountInfo.OAuthId = this.getStringData('OAuthId');
+            accountInfo.IsSkiped = this.getStringData('IsSkiped');
+            accountInfo.VerifiedPhoneNumber = this.getStringData('VerifiedPhoneNumber');
+            accountInfo.CurrentOrderedCoupon = this.getNumberData('CurrentOrderedCoupon');
             return accountInfo;
         }
         public SetAccountInformation(accountInfo: account.AccountInformation): void {
-            var user = Ionic.User.current();
-            user.id = accountInfo.SecretCode;
-            user.set('points', accountInfo.Points);
-            user.set('OAuthId', accountInfo.OAuthId);
-            user.set('IsSkiped', accountInfo.IsSkiped);
-            user.set('PhoneVerified', accountInfo.VerifiedPhoneNumber);
-            user.set('CurrentOrderedCoupon', accountInfo.CurrentOrderedCoupon);
-            user.save(() => { console.log('saved user data'); }, () => { console.log('fail to save user data'); });
+            this.setData('SecretCode', accountInfo.SecretCode);
+            this.$window.localStorage['Points'] = accountInfo.Points;
+            this.setData('OAuthId', accountInfo.OAuthId);
+            this.setData('IsSkiped', accountInfo.IsSkiped);
+            this.setData('VerifiedPhoneNumber', accountInfo.VerifiedPhoneNumber);
+            this.$window.localStorage['CurrentOrderedCoupon'] = accountInfo.CurrentOrderedCoupon;
         }
 
         public Logout(): void {
-            var user = Ionic.User.current();
-            user.id = 'empty';
-            user.unset('OAuthId');
-            user.unset('points');
-            user.unset('PhoneVerified');
-            user.save(() => { console.log('saved user data'); }, () => { console.log('fail to save user data'); });
+            this.$window.localStorage['SecretCode'] = 'empty';
+            this.$window.localStorage.removeItem('Points');
+            this.$window.localStorage.removeItem('OAuthId');
+            this.$window.localStorage.removeItem('VerifiedPhoneNumber');
+            this.$window.localStorage.removeItem('CurrentOrderedCoupon');
         }
 
         //For test only (remove when run on production)
         public ClearGuestData(): void {
-            var user = Ionic.User.current();
-            user.id = 'empty';
-            user.unset('points');
-            user.unset('IsSkiped');
-            user.unset('PhoneVerified');
-            user.unset('OAuthId');
-            user.save();
+            this.$window.localStorage['SecretCode'] = 'empty';
+            this.$window.localStorage.removeItem('Points');
+            this.$window.localStorage.removeItem('OAuthId');
+            this.$window.localStorage.removeItem('VerifiedPhoneNumber');
+            this.$window.localStorage.removeItem('IsSkiped');
+            this.$window.localStorage.removeItem('CurrentOrderedCoupon');
         }
 
         //Set phone be verified
@@ -87,8 +98,8 @@
                     this.accountSvc.GetAccountByOAuthId(oAuthId)
                         .then((respond: starter.account.AccountInformation): void => {
                             if (respond == null) {
-                                var user = Ionic.User.current();
-                                if (!user.id || user.id == 'empty') {
+                                var memoryAccountInfo = this.GetAccountInformation();
+                                if (memoryAccountInfo.SecretCode == null || memoryAccountInfo.SecretCode == 'empty') {
                                     // ทำการ login ด้วย facebook ที่ยังไม่เคยใช้งานระบบมาก่อน
                                     this.CreateNewGuestWithFacebook(oAuthId);
                                 }
@@ -110,15 +121,15 @@
 
         //สร้าง guestuser ใหม่
         public CreateNewGuestUser(): void {
-            var user = Ionic.User.current();
             this.accountSvc.CreateNewGuest()
                 .then((respond: starter.account.CreateNewGuestRespond): void => {
-                    user.id = respond.AccountInfo.SecretCode;
-                    user.set('IsSkiped', 'true');
-                    user.set('PhoneVerified', 'false');
-                    user.save();
+                    var memoryAccountInfo = this.GetAccountInformation();
+                    memoryAccountInfo.SecretCode = respond.AccountInfo.SecretCode;
+                    memoryAccountInfo.IsSkiped = 'true';
+                    memoryAccountInfo.VerifiedPhoneNumber = null;
+                    this.SetAccountInformation(memoryAccountInfo);
 
-                    console.log('Create new guest complete. #UserId: ' + user.id);
+                    console.log('Create new guest complete. #UserId: ' + memoryAccountInfo.SecretCode);
 
                     this.$location.path('/account/favorite');
                 });
@@ -128,14 +139,14 @@
         public CreateNewGuestWithFacebook(oAuthId: string): void {
             this.accountSvc.CreateNewGuestWithFacebook(oAuthId)
                 .then((respond: starter.account.CreateNewGuestRespond): void => {
-                    var user = Ionic.User.current();
-                    user.id = respond.AccountInfo.SecretCode;
-                    user.set('IsSkiped', 'true');
-                    user.set('PhoneVerified', 'false');
-                    user.set('OAuthId', respond.AccountInfo.OAuthId);
-                    user.save();
+                    var memoryAccountInfo = this.GetAccountInformation();
+                    memoryAccountInfo.SecretCode = respond.AccountInfo.SecretCode;
+                    memoryAccountInfo.IsSkiped = 'true';
+                    memoryAccountInfo.VerifiedPhoneNumber = null;
+                    memoryAccountInfo.OAuthId = respond.AccountInfo.OAuthId;
+                    this.SetAccountInformation(memoryAccountInfo);
 
-                    console.log('Login with Facebook complete. #UserId: ' + user.id);
+                    console.log('Login with Facebook complete. #UserId: ' + memoryAccountInfo.SecretCode);
 
                     this.$location.path('/account/favorite');
                 });
@@ -143,13 +154,12 @@
 
         // ดึงข้อมูลจาก facebook มาเก็บไว้ที่ storage account
         public UpdateLocalStorageAccountWithFacebookData(accountInfo: starter.account.AccountInformation): void {
-            var user = Ionic.User.current();
-            user.id = accountInfo.SecretCode;
-            var PhoneVerified = accountInfo.VerifiedPhoneNumber != null
-            user.set('OAuthId', accountInfo.OAuthId);
-            user.set('IsSkiped', 'true');
-            user.set('PhoneVerified', PhoneVerified);
-            user.save();
+            var memoryAccountInfo = this.GetAccountInformation();
+            memoryAccountInfo.SecretCode = accountInfo.SecretCode;
+            memoryAccountInfo.OAuthId = accountInfo.OAuthId;
+            memoryAccountInfo.IsSkiped = 'true';
+            memoryAccountInfo.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber != null ? 'true' : null;
+            this.SetAccountInformation(memoryAccountInfo);
         }
 
 
@@ -160,16 +170,16 @@
                     var oAuthId = this.Azureservice.getCurrentUser().userId;
                     this.accountSvc.GetAccountByOAuthId(oAuthId)
                         .then((respond: starter.account.AccountInformation): void => {
-                            var user = Ionic.User.current();
+                            var memoryAccountInfo = this.GetAccountInformation();
                             if (respond == null) {
                                 // TODO : tie facebook ที่ยังไม่เคยใช้งานระบบมาก่อน
-                                this.TieAccoutWithNewFacebook(user.id, oAuthId);
+                                this.TieAccoutWithNewFacebook(memoryAccountInfo.SecretCode, oAuthId);
                             }
                             else {
                                 // facebook ที่เคยใช้งานระบบแล้ว ให้ผู้ใช้เลือกข้อมูล
                                 this.facebookPoint = respond.Points;
                                 this.OAuthId = oAuthId;
-                                this.accountSvc.GetAccountBySecretCode(user.id)
+                                this.accountSvc.GetAccountBySecretCode(memoryAccountInfo.SecretCode)
                                     .then((respond: starter.account.AccountInformation): void => {
                                         this.localPoint = respond.Points;
                                         this.$location.path('/account/tiefacebook');
@@ -183,30 +193,28 @@
         }
 
         public TieFacbookWithFacebookData(): void {
-            var user = Ionic.User.current();
-            this.accountSvc.TieFacbookWithFacebookData(user.id, this.OAuthId)
+            var memoryAccountInfo = this.GetAccountInformation();
+            this.accountSvc.TieFacbookWithFacebookData(memoryAccountInfo.SecretCode, this.OAuthId)
                 .then((respond: Boolean): void => {
                     this.accountSvc.GetAccountByOAuthId(this.OAuthId)
                         .then((accountInfo: starter.account.AccountInformation): void => {
-                            var PhoneVerified = accountInfo.VerifiedPhoneNumber != null
-                            user.set('OAuthId', this.OAuthId);
-                            user.set('PhoneVerified', PhoneVerified);
-                            user.save();
+                            memoryAccountInfo.OAuthId = this.OAuthId;
+                            memoryAccountInfo.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber != null ? 'true' : null;
+                            this.SetAccountInformation(memoryAccountInfo);
                             this.$location.path('/matches/todaymatches');
                         });
                 });
         }
 
         public TieFacbookWithLocalData(): void {
-            var user = Ionic.User.current();
-            this.accountSvc.TieFacbookWithLocalData(user.id, this.OAuthId)
+            var memoryAccountInfo = this.GetAccountInformation();
+            this.accountSvc.TieFacbookWithLocalData(memoryAccountInfo.SecretCode, this.OAuthId)
                 .then((respond: Boolean): void => {
                     this.accountSvc.GetAccountByOAuthId(this.OAuthId)
                         .then((accountInfo: starter.account.AccountInformation): void => {
-                            var PhoneVerified = accountInfo.VerifiedPhoneNumber != null
-                            user.set('OAuthId', this.OAuthId);
-                            user.set('PhoneVerified', PhoneVerified);
-                            user.save();
+                            memoryAccountInfo.OAuthId = this.OAuthId;
+                            memoryAccountInfo.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber != null ? 'true' : null;
+                            this.SetAccountInformation(memoryAccountInfo);
                             this.$location.path('/matches/todaymatches');
                         });
                 });
@@ -217,9 +225,9 @@
             this.accountSvc.UpdateAccountWithFacebook(secretCode, oAuthId)
                 .then((respond: Boolean): void => {
                     if (respond) {
-                        var user = Ionic.User.current();
-                        user.set('OAuthId', oAuthId);
-                        user.save();
+                        var memoryAccountInfo = this.GetAccountInformation();
+                        memoryAccountInfo.OAuthId = oAuthId;
+                        this.SetAccountInformation(memoryAccountInfo);
                         this.$location.path('/ticket/buyticket');
                     }
                 });
