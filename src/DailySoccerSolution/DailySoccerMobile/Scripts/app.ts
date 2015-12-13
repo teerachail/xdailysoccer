@@ -161,6 +161,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
             })
             .state('history.historybymonth', {
                 url: '/historybymonth',
+                cache: false,
                 views: {
                     'MainContent': {
                         controller: 'starter.history.HistoryController as historyCtrl',
