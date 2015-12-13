@@ -62,7 +62,13 @@
                         <tr>
                             <td>@ticket.Id</td>
                             <td>@ticket.DisplayName</td>
-                            <td><a class="btn btn-default pull-right" href="@Url.Action("CalcelSelectedTicket", new { rewardId = ViewBag.RewardId, ticketId = ticket.Id })">ยกเลิก</a></td>
+                            <td>
+                            @if (!ticket.IsApproveWinner)
+                            {
+                                <a class="btn btn-default pull-right" href="@Url.Action("CalcelSelectedTicket", new { rewardId = ViewBag.RewardId, ticketId = ticket.Id })">ยกเลิก</a>
+                            }
+                            </td>
+    
                         </tr>
                     }
                 </table>
@@ -74,5 +80,5 @@
 </div>
 }
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "RewardList", new { id = ViewBag.RewardId })
 </p>
