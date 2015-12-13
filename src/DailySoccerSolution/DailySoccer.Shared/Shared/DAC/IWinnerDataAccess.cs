@@ -12,6 +12,6 @@ namespace DailySoccer.Shared.DAC
         GetSelectedTicketRespond GetSelectedTicket(int rewarGroupId);
         void SelectTicket(int rewardId, int ticketId, DateTime selectedDate);
         void CancelSelectedTicket(int rewardId, int ticketId);
-        void SubmitSelectedWinner(int rewardId);
+        void SubmitSelectedWinner(int rewardId, DateTime approveDate);
     }
 }

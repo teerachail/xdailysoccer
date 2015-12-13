@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/12/2015 13:56:13
+-- Date Created: 12/13/2015 13:59:13
 -- Generated from EDMX file: C:\Users\joker\Documents\Git\dailysoccer\src\DailySoccerSolution\DailySoccer.DAC\DAC\EF\DailySoccerModel.edmx
 -- --------------------------------------------------
 
@@ -178,7 +178,8 @@ CREATE TABLE [dbo].[Tickets] (
     [AccountId] int  NOT NULL,
     [ManualSelectedDate] datetime  NULL,
     [RandomSelectedDate] datetime  NULL,
-    [SelectedRewardId] int  NULL
+    [SelectedRewardId] int  NULL,
+    [ApproveWinnerDate] datetime  NULL
 );
 GO
 

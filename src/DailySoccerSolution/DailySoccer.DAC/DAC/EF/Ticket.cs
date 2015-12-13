@@ -21,6 +21,7 @@ namespace DailySoccer.DAC.EF
         public Nullable<System.DateTime> ManualSelectedDate { get; set; }
         public Nullable<System.DateTime> RandomSelectedDate { get; set; }
         public Nullable<int> SelectedRewardId { get; set; }
+        public Nullable<System.DateTime> ApproveWinnerDate { get; set; }
     
         public virtual RewardGroup RewardGroup { get; set; }
         public virtual Account Account { get; set; }

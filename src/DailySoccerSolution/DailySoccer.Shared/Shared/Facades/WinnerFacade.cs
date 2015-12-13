@@ -27,10 +27,10 @@ namespace DailySoccer.Shared.Facades
             winnerdDac.CancelSelectedTicket(rewardId, ticketId);
         }
 
-        public void SubmitSelectedWinner(int rewardId)
+        public void SubmitSelectedWinner(int rewardId, DateTime approveDate)
         {
             var winnerdDac = FacadeRepository.Instance.WinnerDataAccess;
-            winnerdDac.SubmitSelectedWinner(rewardId);
+            winnerdDac.SubmitSelectedWinner(rewardId, approveDate);
         }
     }
 }

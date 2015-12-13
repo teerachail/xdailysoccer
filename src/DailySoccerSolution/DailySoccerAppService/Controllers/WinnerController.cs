@@ -53,7 +53,8 @@ namespace DailySoccerAppService.Controllers
         [HttpGet]
         public void SubmitSelectedWinner(int rewardId)
         {
-            FacadeRepository.Instance.WinnerFacade.SubmitSelectedWinner(rewardId);
+            var approveWinnerDate = DateTime.Now;
+            FacadeRepository.Instance.WinnerFacade.SubmitSelectedWinner(rewardId, approveWinnerDate);
         }
     }
 }

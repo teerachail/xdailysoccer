@@ -12,5 +12,6 @@ namespace DailySoccer.Shared.Models
         public string DisplayName { get; set; }
         public bool IsManualSelected { get; set; }
         public bool IsRandomSelected { get; set; }
+        public bool IsApproveWinner { get; set; }
     }
 }

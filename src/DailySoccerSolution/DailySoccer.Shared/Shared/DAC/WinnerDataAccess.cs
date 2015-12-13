@@ -26,15 +26,16 @@ namespace DailySoccer.Shared.DAC
                 var allowSelectTicket = new List<TicketInformation>();
                 if (selectedTicket != null)
                 {
-                    var allTicketUnSelected = selectedTicket.Where(it => it.SelectedRewardId == null);
-                    ticketInfo = (from ticket in selectedWinner
+                    var allTicketUnSelected = selectedTicket.Where(it => it.SelectedRewardId == null && it.Account.GuestAccounts.Any());
+                    ticketInfo = (from ticket in selectedWinner.OrderBy(it => it.ApproveWinnerDate)
                                   let account = dctx.Accounts.FirstOrDefault(it => it.Id == ticket.AccountId)
                                   select new TicketInformation
                                   {
                                       Id = ticket.Id,
                                       DisplayName = account.VerifiedPhoneNumber,
                                       IsManualSelected = ticket.ManualSelectedDate.HasValue,
-                                      IsRandomSelected = ticket.RandomSelectedDate.HasValue
+                                      IsRandomSelected = ticket.RandomSelectedDate.HasValue,
+                                      IsApproveWinner = ticket.ApproveWinnerDate.HasValue
                                   }).ToList();
                     
                     allowSelectTicket = (from ticket in allTicketUnSelected
@@ -83,21 +84,24 @@ namespace DailySoccer.Shared.DAC
             }
         }
 
-        public void SubmitSelectedWinner(int rewardId)
+        public void SubmitSelectedWinner(int rewardId, DateTime approveDate)
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
             {
+                const int RequiredVerificationDigits = 10;
+                var verificationCode = Guid.NewGuid().ToString().Replace("-", string.Empty).Substring(0, RequiredVerificationDigits).ToUpper();
                 var rewardInfo = dctx.Tickets.Where(it => it.SelectedRewardId.HasValue);
                 if (rewardInfo != null)
                 {
                     rewardInfo.ToList().ForEach(it => {
                         var selectedTicket = dctx.Tickets.FirstOrDefault(ticket => ticket.Id == it.Id);
                         var accountInfo = dctx.Accounts.FirstOrDefault(account => account.Id == selectedTicket.AccountId);
+                        selectedTicket.ApproveWinnerDate = approveDate;
                         dctx.Winners.Add(new Winner
                         {
                             AccountId = accountInfo.Id,
                             RewardId = rewardId,
-                            ReferenceCode = "A25R468"
+                            ReferenceCode = verificationCode
                         });
                         dctx.SaveChanges();
                     });
