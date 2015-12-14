@@ -26,6 +26,7 @@
         }
 
         public BuyTicket(amount: number): void {
+            amount = Math.floor(amount);
             var accountInformation = this.accountSvc.GetAccountInformation();
             const MinimumAmount = 1;
             var canBuyTicket = (amount >= MinimumAmount) && (accountInformation.Points >= amount * this.accountSvc.CurrentTicketCost);
