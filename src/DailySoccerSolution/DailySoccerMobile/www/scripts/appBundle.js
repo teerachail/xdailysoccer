@@ -148,6 +148,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'azure-mobile-service.
     })
         .state('history.historybymonth', {
         url: '/historybymonth',
+        cache: false,
         views: {
             'MainContent': {
                 controller: 'starter.history.HistoryController as historyCtrl',
@@ -1196,7 +1197,7 @@ var starter;
         var QueryRemoteDataService = (function () {
             function QueryRemoteDataService($http) {
                 this.$http = $http;
-                this.serviceURL = 'http://localhost:3728/api/';
+                this.serviceURL = 'https://dailysoccer.azurewebsites.net/api/';
             }
             QueryRemoteDataService.prototype.RemoteQuery = function (baseUrl) {
                 return this.$http({ method: 'GET', url: this.serviceURL + baseUrl })
