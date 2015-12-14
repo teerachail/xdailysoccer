@@ -95,6 +95,7 @@
             if (!isTieWithFacaebookAlready) {
                 if (this.buyTicketProcessingSvc.isFirstTimeRequestFacaebookLogin) {
                     this.buyTicketProcessingSvc.isFirstTimeRequestFacaebookLogin = false;
+                    this.accountSvc.IsRequestFacebookLoginFromBuyTicket = true;
                     this.$scope.TieFacebookPopup.show();
                 }
                 else this.$ionicHistory.goBack();

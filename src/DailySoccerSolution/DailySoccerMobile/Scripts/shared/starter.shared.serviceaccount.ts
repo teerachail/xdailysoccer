@@ -21,6 +21,7 @@
         public OAuthId: string;
 
         public CurrentTicketCost: number;
+        public IsRequestFacebookLoginFromBuyTicket: boolean;
 
         static $inject = ['$location', 'starter.account.AccountServices', 'Azureservice', '$window'];
         constructor(
@@ -201,7 +202,12 @@
                             memoryAccountInfo.OAuthId = this.OAuthId;
                             memoryAccountInfo.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber != null ? 'true' : null;
                             this.SetAccountInformation(memoryAccountInfo);
-                            this.$location.path('/matches/todaymatches');
+
+                            if (this.IsRequestFacebookLoginFromBuyTicket) {
+                                this.IsRequestFacebookLoginFromBuyTicket = false;
+                                this.$location.path('/ticket/buyticket');
+                            }
+                            else this.$location.path('/matches/todaymatches');
                         });
                 });
         }
@@ -215,7 +221,12 @@
                             memoryAccountInfo.OAuthId = this.OAuthId;
                             memoryAccountInfo.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber != null ? 'true' : null;
                             this.SetAccountInformation(memoryAccountInfo);
-                            this.$location.path('/matches/todaymatches');
+                            
+                            if (this.IsRequestFacebookLoginFromBuyTicket) {
+                                this.IsRequestFacebookLoginFromBuyTicket = false;
+                                this.$location.path('/ticket/buyticket');
+                            }
+                            else this.$location.path('/matches/todaymatches');
                         });
                 });
         }
@@ -228,7 +239,12 @@
                         var memoryAccountInfo = this.GetAccountInformation();
                         memoryAccountInfo.OAuthId = oAuthId;
                         this.SetAccountInformation(memoryAccountInfo);
-                        this.$location.path('/ticket/buyticket');
+                        
+                        if (this.IsRequestFacebookLoginFromBuyTicket) {
+                            this.IsRequestFacebookLoginFromBuyTicket = false;
+                            this.$location.path('/ticket/buyticket');
+                        }
+                        else this.$location.path('/matches/todaymatches');
                     }
                 });
         }
