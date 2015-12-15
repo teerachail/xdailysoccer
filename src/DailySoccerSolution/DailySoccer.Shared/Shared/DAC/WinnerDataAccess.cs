@@ -10,57 +10,6 @@ namespace DailySoccer.Shared.DAC
 {
     public class WinnerDataAccess : IWinnerDataAccess
     {
-        public GetSelectedTicketRespond GetSelectedTicket(int rewardId)
-        {
-            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
-            {
-                var selectedReward = dctx.Rewards.FirstOrDefault(it => it.Id == rewardId);
-                var selectedTicket = dctx.Tickets.Where(it => it.RewardGroupId == selectedReward.RewardGroupId);
-                var selectedWinner = dctx.Tickets.Where(it => it.SelectedRewardId == rewardId);
-               
-
-                var rewardRemainingAmount = selectedReward.Amount - selectedWinner.Count();
-                var ticketAmount = selectedTicket.Count() - selectedWinner.Count();
-
-                var ticketInfo = new List<TicketInformation>();
-                var allowSelectTicket = new List<TicketInformation>();
-                if (selectedTicket != null)
-                {
-                    var allTicketUnSelected = selectedTicket.Where(it => it.SelectedRewardId == null && it.Account.GuestAccounts.Any());
-                    ticketInfo = (from ticket in selectedWinner.OrderBy(it => it.ApproveWinnerDate)
-                                  let account = dctx.Accounts.FirstOrDefault(it => it.Id == ticket.AccountId)
-                                  select new TicketInformation
-                                  {
-                                      Id = ticket.Id,
-                                      DisplayName = account.VerifiedPhoneNumber,
-                                      IsManualSelected = ticket.ManualSelectedDate.HasValue,
-                                      IsRandomSelected = ticket.RandomSelectedDate.HasValue,
-                                      IsApproveWinner = ticket.ApproveWinnerDate.HasValue
-                                  }).ToList();
-                    
-                    allowSelectTicket = (from ticket in allTicketUnSelected
-                                         let account = dctx.Accounts.FirstOrDefault(it => it.Id == ticket.AccountId)
-                                        select new TicketInformation
-                                        {
-                                            Id = ticket.Id,
-                                            DisplayName = account.VerifiedPhoneNumber,
-                                            IsManualSelected = ticket.ManualSelectedDate.HasValue,
-                                            IsRandomSelected = ticket.RandomSelectedDate.HasValue
-                                        }).ToList();
-                }
-                
-                 
-
-                return new GetSelectedTicketRespond()
-                {
-                    RewardRemainingAmount = rewardRemainingAmount,
-                    TicketAmount = ticketAmount,
-                    SelectedTicket = ticketInfo,
-                    AllTicket = allowSelectTicket,
-                };
-            }
-        }
-
         public void SelectTicket(int rewardId, int ticketId, DateTime selectedDate)
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())

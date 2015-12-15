@@ -994,47 +994,59 @@ var starter;
     (function (shared) {
         'use strict';
         var AccountManagementService = (function () {
-            function AccountManagementService($location, accountSvc, Azureservice) {
+            function AccountManagementService($location, accountSvc, Azureservice, $window) {
                 this.$location = $location;
                 this.accountSvc = accountSvc;
                 this.Azureservice = Azureservice;
+                this.$window = $window;
             }
+            AccountManagementService.prototype.getStringData = function (key) {
+                var result = this.$window.localStorage[key] || null;
+                return result;
+            };
+            AccountManagementService.prototype.getNumberData = function (key) {
+                var result = this.$window.localStorage[key] || 0;
+                return result;
+            };
+            AccountManagementService.prototype.setData = function (key, value) {
+                if (value == null)
+                    this.$window.localStorage.removeItem(key);
+                else
+                    this.$window.localStorage[key] = value;
+            };
             AccountManagementService.prototype.GetAccountInformation = function () {
-                var user = Ionic.User.current();
                 var accountInfo = new starter.account.AccountInformation();
-                accountInfo.SecretCode = user.id;
-                accountInfo.Points = user.get('points', 0);
-                accountInfo.OAuthId = user.get('OAuthId', null);
-                accountInfo.IsSkiped = user.get('IsSkiped', null);
-                accountInfo.VerifiedPhoneNumber = user.get('PhoneVerified', null);
+                accountInfo.SecretCode = this.getStringData('SecretCode');
+                accountInfo.Points = this.getNumberData('Points');
+                accountInfo.OAuthId = this.getStringData('OAuthId');
+                accountInfo.IsSkiped = this.getStringData('IsSkiped');
+                accountInfo.VerifiedPhoneNumber = this.getStringData('VerifiedPhoneNumber');
+                accountInfo.CurrentOrderedCoupon = this.getNumberData('CurrentOrderedCoupon');
                 return accountInfo;
             };
             AccountManagementService.prototype.SetAccountInformation = function (accountInfo) {
-                var user = Ionic.User.current();
-                user.id = accountInfo.SecretCode;
-                user.set('points', accountInfo.Points);
-                user.set('OAuthId', accountInfo.OAuthId);
-                user.set('IsSkiped', accountInfo.IsSkiped);
-                user.set('PhoneVerified', accountInfo.VerifiedPhoneNumber);
-                user.save(function () { console.log('saved user data'); }, function () { console.log('fail to save user data'); });
+                this.setData('SecretCode', accountInfo.SecretCode);
+                this.$window.localStorage['Points'] = accountInfo.Points;
+                this.setData('OAuthId', accountInfo.OAuthId);
+                this.setData('IsSkiped', accountInfo.IsSkiped);
+                this.setData('VerifiedPhoneNumber', accountInfo.VerifiedPhoneNumber);
+                this.$window.localStorage['CurrentOrderedCoupon'] = accountInfo.CurrentOrderedCoupon;
             };
             AccountManagementService.prototype.Logout = function () {
-                var user = Ionic.User.current();
-                user.id = 'empty';
-                user.unset('OAuthId');
-                user.unset('points');
-                user.unset('PhoneVerified');
-                user.save(function () { console.log('saved user data'); }, function () { console.log('fail to save user data'); });
+                this.$window.localStorage['SecretCode'] = 'empty';
+                this.$window.localStorage.removeItem('Points');
+                this.$window.localStorage.removeItem('OAuthId');
+                this.$window.localStorage.removeItem('VerifiedPhoneNumber');
+                this.$window.localStorage.removeItem('CurrentOrderedCoupon');
             };
             //For test only (remove when run on production)
             AccountManagementService.prototype.ClearGuestData = function () {
-                var user = Ionic.User.current();
-                user.id = 'empty';
-                user.unset('points');
-                user.unset('IsSkiped');
-                user.unset('PhoneVerified');
-                user.unset('OAuthId');
-                user.save();
+                this.$window.localStorage['SecretCode'] = 'empty';
+                this.$window.localStorage.removeItem('Points');
+                this.$window.localStorage.removeItem('OAuthId');
+                this.$window.localStorage.removeItem('VerifiedPhoneNumber');
+                this.$window.localStorage.removeItem('IsSkiped');
+                this.$window.localStorage.removeItem('CurrentOrderedCoupon');
             };
             //Set phone be verified
             AccountManagementService.prototype.SetPhoneVerified = function () {
@@ -1051,8 +1063,8 @@ var starter;
                     _this.accountSvc.GetAccountByOAuthId(oAuthId)
                         .then(function (respond) {
                         if (respond == null) {
-                            var user = Ionic.User.current();
-                            if (!user.id || user.id == 'empty') {
+                            var memoryAccountInfo = _this.GetAccountInformation();
+                            if (memoryAccountInfo.SecretCode == null || memoryAccountInfo.SecretCode == 'empty') {
                                 // ทำการ login ด้วย facebook ที่ยังไม่เคยใช้งานระบบมาก่อน
                                 _this.CreateNewGuestWithFacebook(oAuthId);
                             }
@@ -1073,14 +1085,14 @@ var starter;
             //สร้าง guestuser ใหม่
             AccountManagementService.prototype.CreateNewGuestUser = function () {
                 var _this = this;
-                var user = Ionic.User.current();
                 this.accountSvc.CreateNewGuest()
                     .then(function (respond) {
-                    user.id = respond.AccountInfo.SecretCode;
-                    user.set('IsSkiped', 'true');
-                    user.set('PhoneVerified', 'false');
-                    user.save();
-                    console.log('Create new guest complete. #UserId: ' + user.id);
+                    var memoryAccountInfo = _this.GetAccountInformation();
+                    memoryAccountInfo.SecretCode = respond.AccountInfo.SecretCode;
+                    memoryAccountInfo.IsSkiped = 'true';
+                    memoryAccountInfo.VerifiedPhoneNumber = null;
+                    _this.SetAccountInformation(memoryAccountInfo);
+                    console.log('Create new guest complete. #UserId: ' + memoryAccountInfo.SecretCode);
                     _this.$location.path('/account/favorite');
                 });
             };
@@ -1089,25 +1101,24 @@ var starter;
                 var _this = this;
                 this.accountSvc.CreateNewGuestWithFacebook(oAuthId)
                     .then(function (respond) {
-                    var user = Ionic.User.current();
-                    user.id = respond.AccountInfo.SecretCode;
-                    user.set('IsSkiped', 'true');
-                    user.set('PhoneVerified', 'false');
-                    user.set('OAuthId', respond.AccountInfo.OAuthId);
-                    user.save();
-                    console.log('Login with Facebook complete. #UserId: ' + user.id);
+                    var memoryAccountInfo = _this.GetAccountInformation();
+                    memoryAccountInfo.SecretCode = respond.AccountInfo.SecretCode;
+                    memoryAccountInfo.IsSkiped = 'true';
+                    memoryAccountInfo.VerifiedPhoneNumber = null;
+                    memoryAccountInfo.OAuthId = respond.AccountInfo.OAuthId;
+                    _this.SetAccountInformation(memoryAccountInfo);
+                    console.log('Login with Facebook complete. #UserId: ' + memoryAccountInfo.SecretCode);
                     _this.$location.path('/account/favorite');
                 });
             };
             // ดึงข้อมูลจาก facebook มาเก็บไว้ที่ storage account
             AccountManagementService.prototype.UpdateLocalStorageAccountWithFacebookData = function (accountInfo) {
-                var user = Ionic.User.current();
-                user.id = accountInfo.SecretCode;
-                var PhoneVerified = accountInfo.VerifiedPhoneNumber != null;
-                user.set('OAuthId', accountInfo.OAuthId);
-                user.set('IsSkiped', 'true');
-                user.set('PhoneVerified', PhoneVerified);
-                user.save();
+                var memoryAccountInfo = this.GetAccountInformation();
+                memoryAccountInfo.SecretCode = accountInfo.SecretCode;
+                memoryAccountInfo.OAuthId = accountInfo.OAuthId;
+                memoryAccountInfo.IsSkiped = 'true';
+                memoryAccountInfo.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber != null ? 'true' : null;
+                this.SetAccountInformation(memoryAccountInfo);
             };
             //// Tie Facebook ////
             AccountManagementService.prototype.TieFacebook = function () {
@@ -1117,16 +1128,16 @@ var starter;
                     var oAuthId = _this.Azureservice.getCurrentUser().userId;
                     _this.accountSvc.GetAccountByOAuthId(oAuthId)
                         .then(function (respond) {
-                        var user = Ionic.User.current();
+                        var memoryAccountInfo = _this.GetAccountInformation();
                         if (respond == null) {
                             // TODO : tie facebook ที่ยังไม่เคยใช้งานระบบมาก่อน
-                            _this.TieAccoutWithNewFacebook(user.id, oAuthId);
+                            _this.TieAccoutWithNewFacebook(memoryAccountInfo.SecretCode, oAuthId);
                         }
                         else {
                             // facebook ที่เคยใช้งานระบบแล้ว ให้ผู้ใช้เลือกข้อมูล
                             _this.facebookPoint = respond.Points;
                             _this.OAuthId = oAuthId;
-                            _this.accountSvc.GetAccountBySecretCode(user.id)
+                            _this.accountSvc.GetAccountBySecretCode(memoryAccountInfo.SecretCode)
                                 .then(function (respond) {
                                 _this.localPoint = respond.Points;
                                 _this.$location.path('/account/tiefacebook');
@@ -1139,31 +1150,39 @@ var starter;
             };
             AccountManagementService.prototype.TieFacbookWithFacebookData = function () {
                 var _this = this;
-                var user = Ionic.User.current();
-                this.accountSvc.TieFacbookWithFacebookData(user.id, this.OAuthId)
+                var memoryAccountInfo = this.GetAccountInformation();
+                this.accountSvc.TieFacbookWithFacebookData(memoryAccountInfo.SecretCode, this.OAuthId)
                     .then(function (respond) {
                     _this.accountSvc.GetAccountByOAuthId(_this.OAuthId)
                         .then(function (accountInfo) {
-                        var PhoneVerified = accountInfo.VerifiedPhoneNumber != null;
-                        user.set('OAuthId', _this.OAuthId);
-                        user.set('PhoneVerified', PhoneVerified);
-                        user.save();
-                        _this.$location.path('/matches/todaymatches');
+                        memoryAccountInfo.OAuthId = _this.OAuthId;
+                        memoryAccountInfo.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber != null ? 'true' : null;
+                        _this.SetAccountInformation(memoryAccountInfo);
+                        if (_this.IsRequestFacebookLoginFromBuyTicket) {
+                            _this.IsRequestFacebookLoginFromBuyTicket = false;
+                            _this.$location.path('/ticket/buyticket');
+                        }
+                        else
+                            _this.$location.path('/matches/todaymatches');
                     });
                 });
             };
             AccountManagementService.prototype.TieFacbookWithLocalData = function () {
                 var _this = this;
-                var user = Ionic.User.current();
-                this.accountSvc.TieFacbookWithLocalData(user.id, this.OAuthId)
+                var memoryAccountInfo = this.GetAccountInformation();
+                this.accountSvc.TieFacbookWithLocalData(memoryAccountInfo.SecretCode, this.OAuthId)
                     .then(function (respond) {
                     _this.accountSvc.GetAccountByOAuthId(_this.OAuthId)
                         .then(function (accountInfo) {
-                        var PhoneVerified = accountInfo.VerifiedPhoneNumber != null;
-                        user.set('OAuthId', _this.OAuthId);
-                        user.set('PhoneVerified', PhoneVerified);
-                        user.save();
-                        _this.$location.path('/matches/todaymatches');
+                        memoryAccountInfo.OAuthId = _this.OAuthId;
+                        memoryAccountInfo.VerifiedPhoneNumber = accountInfo.VerifiedPhoneNumber != null ? 'true' : null;
+                        _this.SetAccountInformation(memoryAccountInfo);
+                        if (_this.IsRequestFacebookLoginFromBuyTicket) {
+                            _this.IsRequestFacebookLoginFromBuyTicket = false;
+                            _this.$location.path('/ticket/buyticket');
+                        }
+                        else
+                            _this.$location.path('/matches/todaymatches');
                     });
                 });
             };
@@ -1173,14 +1192,19 @@ var starter;
                 this.accountSvc.UpdateAccountWithFacebook(secretCode, oAuthId)
                     .then(function (respond) {
                     if (respond) {
-                        var user = Ionic.User.current();
-                        user.set('OAuthId', oAuthId);
-                        user.save();
-                        _this.$location.path('/ticket/buyticket');
+                        var memoryAccountInfo = _this.GetAccountInformation();
+                        memoryAccountInfo.OAuthId = oAuthId;
+                        _this.SetAccountInformation(memoryAccountInfo);
+                        if (_this.IsRequestFacebookLoginFromBuyTicket) {
+                            _this.IsRequestFacebookLoginFromBuyTicket = false;
+                            _this.$location.path('/ticket/buyticket');
+                        }
+                        else
+                            _this.$location.path('/matches/todaymatches');
                     }
                 });
             };
-            AccountManagementService.$inject = ['$location', 'starter.account.AccountServices', 'Azureservice'];
+            AccountManagementService.$inject = ['$location', 'starter.account.AccountServices', 'Azureservice', '$window'];
             return AccountManagementService;
         })();
         shared.AccountManagementService = AccountManagementService;
@@ -1310,6 +1334,7 @@ var starter;
                 return result;
             };
             TicketController.prototype.BuyTicket = function (amount) {
+                amount = Math.floor(amount);
                 var accountInformation = this.accountSvc.GetAccountInformation();
                 var MinimumAmount = 1;
                 var canBuyTicket = (amount >= MinimumAmount) && (accountInformation.Points >= amount * this.accountSvc.CurrentTicketCost);
@@ -1370,6 +1395,7 @@ var starter;
                 if (!isTieWithFacaebookAlready) {
                     if (this.buyTicketProcessingSvc.isFirstTimeRequestFacaebookLogin) {
                         this.buyTicketProcessingSvc.isFirstTimeRequestFacaebookLogin = false;
+                        this.accountSvc.IsRequestFacebookLoginFromBuyTicket = true;
                         this.$scope.TieFacebookPopup.show();
                     }
                     else

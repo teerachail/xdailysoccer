@@ -9,6 +9,8 @@ namespace DailySoccer.Shared.DAC
 {
     public interface IAccountDataAccess
     {
+        AccountInformation GetAccountById(int id);
+        IEnumerable<GuestAccountInformation> GetGuestAccountsByAccountId(int accountId);
         AccountInformation CreateAccount();
         AccountInformation CreateNewAccountWithFacebook(string OAuthId, string email);
         void UpdateAccount(AccountInformation accountInfo);

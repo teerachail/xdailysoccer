@@ -9,6 +9,47 @@ namespace DailySoccer.Shared.DAC
 {
     public class TicketDataAccess : ITicketDataAccess
     {
+        public IEnumerable<TicketInformation> GetTicketByRewardGroupId(int rewardGroupId)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedTicket = dctx.Tickets.Where(it => it.RewardGroupId == rewardGroupId);
+                if (selectedTicket == null) return null;
+                return selectedTicket.Select(it => new TicketInformation
+                {
+                    Id = it.Id,
+                    CreatedDate = it.CreatedDate,
+                    ManualSelectedDate = it.ManualSelectedDate,
+                    RandomSelectedDate = it.RandomSelectedDate,
+                    ApproveWinnerDate = it.ApproveWinnerDate,
+                    AccountId = it.AccountId,
+                    RewardGroupId = it.RewardGroupId,
+                    SelectedRewardId = it.SelectedRewardId
+                }).ToList();
+            }
+        }
+
+        public IEnumerable<TicketInformation> GetTicketBySelectedRewardId(int selectedRewardId)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedTicket = dctx.Tickets.Include("Account")
+                    .Where(it => it.SelectedRewardId == selectedRewardId).ToList();
+                if (selectedTicket == null) return null;
+                return selectedTicket.Select(it => new TicketInformation
+                {
+                    Id = it.Id,
+                    CreatedDate = it.CreatedDate,
+                    ManualSelectedDate = it.ManualSelectedDate,
+                    RandomSelectedDate = it.RandomSelectedDate,
+                    ApproveWinnerDate = it.ApproveWinnerDate,
+                    AccountId = it.AccountId,
+                    RewardGroupId = it.RewardGroupId,
+                    SelectedRewardId = it.SelectedRewardId
+                }).ToList();
+            }
+        }
+
         public void BuyTicket(string secrectCode, int amount, int rewardGroup)
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())

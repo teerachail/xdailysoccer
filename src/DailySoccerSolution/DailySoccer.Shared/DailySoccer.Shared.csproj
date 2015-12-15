@@ -79,8 +79,10 @@
     <Compile Include="Shared\Facades\WinnerFacade.cs" />
     <Compile Include="Shared\Facades\TicketFacade.cs" />
     <Compile Include="Shared\Facades\TwilioSMSSender.cs" />
+    <Compile Include="Shared\Models\GuestAccountInformation.cs" />
     <Compile Include="Shared\Models\GetSelectedTicketRespond.cs" />
     <Compile Include="Shared\Models\TicketInformation.cs" />
+    <Compile Include="Shared\Models\TicketRespond.cs" />
     <Compile Include="Shared\Models\AccountInformation.cs" />
     <Compile Include="Shared\Models\BuyTicketRequest.cs" />
     <Compile Include="Shared\Models\BuyTicketRespond.cs" />

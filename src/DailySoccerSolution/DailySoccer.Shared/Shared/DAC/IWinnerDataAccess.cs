@@ -9,7 +9,6 @@ namespace DailySoccer.Shared.DAC
 {
     public interface IWinnerDataAccess
     {
-        GetSelectedTicketRespond GetSelectedTicket(int rewarGroupId);
         void SelectTicket(int rewardId, int ticketId, DateTime selectedDate);
         void CancelSelectedTicket(int rewardId, int ticketId);
         void SubmitSelectedWinner(int rewardId, DateTime approveDate);

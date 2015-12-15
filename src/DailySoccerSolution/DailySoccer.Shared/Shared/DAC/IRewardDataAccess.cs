@@ -10,6 +10,7 @@ namespace DailySoccer.Shared.DAC
     public interface IRewardDataAccess
     {
         IEnumerable<RewardGroupInformation> GetRewardGroup();
+        RewardInformation GetRewardsById(int id);
         RewardGroupInformation GetRewardGroupById(int id);
         void CreateRewardGroup(RewardGroupInformation model);
         void EditRewardGroup(int id, RewardGroupInformation model);

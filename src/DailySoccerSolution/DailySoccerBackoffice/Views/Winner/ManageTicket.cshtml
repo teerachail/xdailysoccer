@@ -4,16 +4,29 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>จับรางวัล</h2>
 
 @using (Html.BeginForm("SubmitSelectedWinner", "Winner", FormMethod.Post))
 {
 
     <input type="hidden" name="rewardId" value="@ViewBag.RewardId" />
 <div>
-    <h4>GetSelectedTicketRespond</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            ชื่อรางวัล
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            รายละเอียด
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
         <dt>
             รางวัลที่เหลือ
         </dt>
@@ -23,7 +36,7 @@
         </dd>
 
         <dt>
-            จำนวนผู้ส่งชิงโชค
+            จำนวนผู้ส่งชิงโชคทั้งหมด
         </dt>
 
         <dd>
@@ -31,18 +44,19 @@
         </dd>
 
     </dl>
+    <div class="col-xs-12" style="text-align:center"><a class="btn btn-info pull-right">สุ่มจับรางวัล</a></div>
+    
+    <div class="clearfix"></div>
     <div class="col-xs-6">
-        รายชื่อผู้ส่งชิงโชคทั้งหมด
+        รายการผู้ส่งชิงโชค
         <table class="table table-bordered table-striped">
             <tr>
-                <th>Id</th>
                 <th>เบอร์โทรติดต่อ</th>
                 <th></th>
             </tr>
             @foreach (var ticket in Model.AllTicket)
             {
                 <tr>
-                    <td>@ticket.Id</td>
                     <td>@ticket.DisplayName</td>
                     <td><a class="btn btn-default pull-right" href="@Url.Action("SelectTicket", new { rewardId = ViewBag.RewardId, ticketId = ticket.Id })">เลือก</a></td>
                 </tr>
@@ -50,30 +64,31 @@
         </table>
     </div>
     <div class="col-xs-6">
-        รายชื่อผู้ได้รับรางวัล
+        รายการผู้ได้รับรางวัล
                 <table class="table table-bordered table-striped" >
                     <tr>
-                        <th>Id</th>
                         <th>เบอร์โทรติดต่อ</th>
                         <th></th>
                     </tr>
                     @foreach (var ticket in Model.SelectedTicket)
                     {
                         <tr>
-                            <td>@ticket.Id</td>
                             <td>@ticket.DisplayName</td>
                             <td>
                             @if (!ticket.IsApproveWinner)
                             {
                                 <a class="btn btn-default pull-right" href="@Url.Action("CalcelSelectedTicket", new { rewardId = ViewBag.RewardId, ticketId = ticket.Id })">ยกเลิก</a>
-                            }
+                            }else
+	                        {
+	                            <div class="pull-right" style="color:limegreen">ยืนยันแล้ว</div>
+	                        }      
                             </td>
     
                         </tr>
                     }
                 </table>
 
-                <button type="submit" class="btn btn-success">ยืนยัน</button>
+                <button type="submit" class="btn btn-success pull-right">ยืนยัน</button>
         <div></div>
     </div>
     <div class="clearfix"></div>

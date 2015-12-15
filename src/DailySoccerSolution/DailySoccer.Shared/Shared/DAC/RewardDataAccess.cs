@@ -150,6 +150,27 @@ namespace DailySoccer.Shared.DAC
                 return result;
             }
         }
+
+        public RewardInformation GetRewardsById(int id)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var result = dctx.Rewards.FirstOrDefault(it => it.Id == id);
+                if (result == null) return null;
+                return new RewardInformation
+                {
+                    Id = result.Id,
+                    Amount = result.Amount,
+                    Description = result.Description,
+                    ImagePath = result.ImagePath,
+                    Name = result.Name,
+                    RemainingAmount = result.RemainingAmount.HasValue ? result.RemainingAmount.Value : 0,
+                    RewardGroupId = result.RewardGroupId,
+                    ThumbnailPath = result.ThumbnailPath
+                };
+            }
+        }
+
         public IEnumerable<RewardInformation> GetRewardsByIds(IEnumerable<int> ids)
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())

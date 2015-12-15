@@ -10,6 +10,40 @@ namespace DailySoccer.Shared.DAC
 {
     public class AccountDataAccess : IAccountDataAccess
     {
+        public AccountInformation GetAccountById(int id)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedAccount = dctx.Accounts.Include("GuestAccounts").FirstOrDefault(it => it.Id == id && it.GuestAccounts.Any());
+                if (selectedAccount == null) return null;
+
+                return new AccountInformation
+                {
+                    Points = selectedAccount.Points,
+                    OAuthId = selectedAccount.OAuthId,
+                    Email = selectedAccount.Email,
+                    VerifiedPhoneNumber = selectedAccount.VerifiedPhoneNumber,
+                    SecretCode = selectedAccount.GuestAccounts.First().SecretCode
+                };
+            }
+        }
+
+        public IEnumerable<GuestAccountInformation> GetGuestAccountsByAccountId(int accountId)
+        {
+            using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())
+            {
+                var selectedAccount = dctx.GuestAccounts.Where(it => it.AccountId == accountId);
+                if (selectedAccount == null) return null;
+
+                return selectedAccount.Select(it => new GuestAccountInformation
+                {
+                     Id = it.Id,
+                     SecretCode = it.SecretCode,
+                     AccountId = it.AccountId
+                }).ToList();
+            }
+        }
+
         public AccountInformation CreateAccount()
         {
             using (var dctx = new DailySoccer.DAC.EF.DailySoccerModelContainer())

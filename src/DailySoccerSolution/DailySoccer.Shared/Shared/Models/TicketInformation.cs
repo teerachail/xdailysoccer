@@ -9,9 +9,12 @@ namespace DailySoccer.Shared.Models
     public class TicketInformation
     {
         public int Id { get; set; }
-        public string DisplayName { get; set; }
-        public bool IsManualSelected { get; set; }
-        public bool IsRandomSelected { get; set; }
-        public bool IsApproveWinner { get; set; }
+        public Nullable<DateTime> ManualSelectedDate { get; set; }
+        public Nullable<DateTime> RandomSelectedDate { get; set; }
+        public Nullable<DateTime> ApproveWinnerDate { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int RewardGroupId { get; set; }
+        public int AccountId { get; set; }
+        public Nullable<int> SelectedRewardId { get; set; }
     }
 }

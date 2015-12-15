@@ -11,8 +11,55 @@ namespace DailySoccer.Shared.Facades
     {
         public GetSelectedTicketRespond GetSelectedTicket(int rewardId)
         {
-            var winnerdDac = FacadeRepository.Instance.WinnerDataAccess;
-            return winnerdDac.GetSelectedTicket(rewardId);
+            var ticketDac = FacadeRepository.Instance.TicketDataAccess;
+            var rewardDac = FacadeRepository.Instance.RewardDataAccess;
+            var accountDac = FacadeRepository.Instance.AccountDataAccess;
+
+            var selectedReward = rewardDac.GetRewardsById(rewardId);
+            var selectedTicket = ticketDac.GetTicketByRewardGroupId(selectedReward.RewardGroupId);
+            var selectedWinner = ticketDac.GetTicketBySelectedRewardId(rewardId);
+
+
+            var rewardRemainingAmount = selectedReward.Amount - selectedWinner.Count();
+
+            var ticketInfo = new List<TicketRespond>();
+            var allowSelectTicket = new List<TicketRespond>();
+            if (selectedTicket != null)
+            {
+                var allTicketUnSelected = selectedTicket.Where(it => it.SelectedRewardId == null && accountDac.GetGuestAccountsByAccountId(it.AccountId).Any());
+                ticketInfo = (from ticket in selectedWinner.OrderBy(it => it.ApproveWinnerDate)
+                              let account = accountDac.GetAccountById(ticket.AccountId)
+                              select new TicketRespond
+                              {
+                                  Id = ticket.Id,
+                                  DisplayName = account.VerifiedPhoneNumber,
+                                  IsManualSelected = ticket.ManualSelectedDate.HasValue,
+                                  IsRandomSelected = ticket.RandomSelectedDate.HasValue,
+                                  IsApproveWinner = ticket.ApproveWinnerDate.HasValue
+                              }).ToList();
+
+                allowSelectTicket = (from ticket in allTicketUnSelected
+                                     let account = accountDac.GetAccountById(ticket.AccountId)
+                                     select new TicketRespond
+                                     {
+                                         Id = ticket.Id,
+                                         DisplayName = account.VerifiedPhoneNumber,
+                                         IsManualSelected = ticket.ManualSelectedDate.HasValue,
+                                         IsRandomSelected = ticket.RandomSelectedDate.HasValue
+                                     }).ToList();
+            }
+
+            var ticketAmount = ticketInfo.Count() + allowSelectTicket.Count();
+
+            return new GetSelectedTicketRespond()
+            {
+                Name = selectedReward.Name,
+                Description = selectedReward.Description,
+                RewardRemainingAmount = rewardRemainingAmount,
+                TicketAmount = ticketAmount,
+                SelectedTicket = ticketInfo,
+                AllTicket = allowSelectTicket,
+            };
         }
 
         public void SelectTicket(int rewardId, int ticketId, DateTime selectedDate)
